@@ -8,7 +8,7 @@
 ###### Will Severson: Severswa@mail.uc.edu
 #
 ##### Faculty Advisor:
-Tentative.
+Nan Niu
 ##### Project Description:
 The Bearcat Pantry is looking to create an app and associated website to function as a 'virtual pantry' for University of Cincinnati Students that are unable to afford food. 
 ##### Project Problem Statement:
