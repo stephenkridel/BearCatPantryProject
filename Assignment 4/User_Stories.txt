@@ -1,0 +1,11 @@
+User Stories
+
+As a student, I want to use a digital shopping cart to select food for pickup, to make it easy for me to choose from what’s available.
+
+As an administrator, I want to be able to set limits on how much a student can ‘check out’ with a shopping cart, this way the pantry can equally distribute food to more students. 
+
+As a student, I want to be able to login to the bearcat pantry website with my 6+2, to make it easy to login to the website. 
+
+As a student I want to be able to use my phone or computer to access the website, to make it easy to access the site from any device. 
+
+As a volunteer, I want to be able to add to the inventory on any device, to make it easy to add items to the database and make it more accessible volunteers. 
