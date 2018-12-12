@@ -59,7 +59,7 @@ Web Development, Database Design, Android Development, Algorithm Development, Ne
 ### Design Diagram: Level 0
 ![](https://i.imgur.com/mGXDEHY.png)
 
-This is design diagram level 0 which is the highest level overview of our design diagram.This shows three seprate workflows scanning items, shopping cart, and log-in.
+This is design diagram level 0 which is the highest level overview of our design diagram. This shows three seprate workflows scanning items, shopping cart, and log-in.
 ### Design Diagram: Level 1
 ![](https://i.imgur.com/MvZCRrA.png)
 
