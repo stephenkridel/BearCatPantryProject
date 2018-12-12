@@ -5,7 +5,7 @@
 1. [The Squad](https://github.uc.edu/severswa/BearCatPantryProject#team-members)
 2. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject#project-description)
 3. [User Stories and Design Diagrams](https://github.uc.edu/severswa/BearCatPantryProject#user-stories)
-4. [Project Tasks and Timeline]
+4. [Project Tasks and Timeline](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
     * [Task List](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
     * [Timeline](https://github.uc.edu/severswa/BearCatPantryProject#timeline)
     * [Effort Matrix](https://github.uc.edu/severswa/BearCatPantryProject#effort-matrix)
