@@ -12,7 +12,7 @@
     * Task List
     * Timeline
     * Effort Matrix
-5. ABET Concerns Essay
+5. [ABET Concerns Essay](https://github.uc.edu/severswa/BearCatPantryProject#abet)
 6. Slideshow
 7. Self-Assessment Essays
 8. Professional Biographies
