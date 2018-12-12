@@ -2,12 +2,9 @@
 # Bearcat Pantry Project
 
 ## Table of Contents 
-1. [Project Abstract with Team names and Advisor name]
+1. [The Squad](https://github.uc.edu/severswa/BearCatPantryProject#team-members)
 2. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject#project-description)
 3. [User Stories and Design Diagrams](https://github.uc.edu/severswa/BearCatPantryProject#user-stories)
-    * [User Stories]
-    * [Design Diagrams]
-    * [Description of the Diagrams]
 4. [Project Tasks and Timeline]
     * [Task List](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
     * [Timeline](https://github.uc.edu/severswa/BearCatPantryProject#timeline)
