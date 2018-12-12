@@ -19,8 +19,11 @@
 
 ## Team Members
 Christian Davidson: davidsc8@mail.uc.edu
+
 Adam Kowalski: Kowalsaj@mai.uc.edu
+
 Andrew Kump: Kumpaw@mail.uc.edu
+
 Will Severson: Severswa@mail.uc.edu
 
 **Faculty Advisor**
