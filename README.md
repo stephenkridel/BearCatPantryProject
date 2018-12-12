@@ -16,6 +16,8 @@
 9. [Budget](https://github.uc.edu/severswa/BearCatPantryProject#budget)
 10. [Appendix](https://github.uc.edu/severswa/BearCatPantryProject#appendix-for-the-team)
 
+![](https://i.imgur.com/Jm2tkKu.jpg)
+
 
 ## Team Members
 Christian Davidson: davidsc8@mail.uc.edu
