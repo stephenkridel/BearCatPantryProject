@@ -58,15 +58,15 @@ Web Development, Database Design, Android Development, Algorithm Development, Ne
 
 ### Design Diagram: Level 0
 ![](https://i.imgur.com/mGXDEHY.png)
-Description:
+
 This is design diagram level 0 which is the highest level overview of our design diagram.This shows three seprate workflows scanning items, shopping cart, and log-in.
 ### Design Diagram: Level 1
 ![](https://i.imgur.com/MvZCRrA.png)
-Description:
+
 This is the design diagram for level 1 which shows an elaboration of the previous diagram. This diagram shows the login system which will allow users to be authenticated and login to the shopping cart system. Users will be able to checkout items in the shopping cart and will recieve a notification upon the completion of a checkout. 
 ### Design Diagram: Level 2
 ![](https://i.imgur.com/Z38FCvh.png)
-Description:
+
 This is the design diagram for level 2 which shows a further elboration to the previous diagram. The login system will verify the user using UC's authentication system which is there 6+2. The shopping cart system will stored the data on the server and the front end will display the information to the user. The database will be updated upon the completio of a checkout. 
 
 
