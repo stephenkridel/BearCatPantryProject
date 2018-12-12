@@ -2,22 +2,22 @@
 # Bearcat Pantry Project
 
 ## Table of Contents 
-1. Project Abstract with Team names and Advisor name
-2. Project Description[](https://)
-3. User Stories and Design Diagrams
-    * User Stories
-    * Design Diagrams
-    * Description of the Diagrams
-4. Project Tasks and Timeline
-    * Task List
-    * Timeline
-    * Effort Matrix
+1. [roject Abstract with Team names and Advisor name]
+2. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject#project-description)
+3. [User Stories and Design Diagrams](https://github.uc.edu/severswa/BearCatPantryProject#user-stories)
+    * [User Stories]
+    * [Design Diagrams]
+    * [Description of the Diagrams]
+4. [Project Tasks and Timeline]
+    * [Task List](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
+    * [Timeline](https://github.uc.edu/severswa/BearCatPantryProject#timeline)
+    * [Effort Matrix](https://github.uc.edu/severswa/BearCatPantryProject#effort-matrix)
 5. [ABET Concerns Essay](https://github.uc.edu/severswa/BearCatPantryProject#abet)
-6. Slideshow
-7. Self-Assessment Essays
-8. Professional Biographies
-9. Budget
-10. Appendix
+6. [Slideshow](https://github.uc.edu/severswa/BearCatPantryProject#presenatation)
+7. [Self-Assessment Essays](https://github.uc.edu/severswa/BearCatPantryProject#self-assesment-essays)
+8. [Professional Biographies](https://github.uc.edu/severswa/BearCatPantryProject#professional-biography-adam-kowalski)
+9. [Budget](https://github.uc.edu/severswa/BearCatPantryProject#budget)
+10. [Appendix](https://github.uc.edu/severswa/BearCatPantryProject#appendix-for-the-team)
 
 
 ## Team Members
