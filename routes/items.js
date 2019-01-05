@@ -26,7 +26,6 @@ router.get('/addNewItem', function (req, res, next) {
 
 router.post("/addItem", (req, res) => {
     var myData = new item(req.body);
-    console.log(myData);
     myData.save()
         .then(item => {
             res.redirect("http://localhost:3000/items");
