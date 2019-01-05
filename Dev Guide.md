@@ -11,13 +11,13 @@ Open command prompt and head to your documents using `cd ` ie. "C:\Users\Andrew\
 
 `cd git`
 
-`git clone https://github.uc.edu/severswa/BearCatPantryProject.git`
+`git clone https://github.uc.edu/severswa/BearCatPantryProject.git` 
 
 `cd BearCatPantryProject`
 
 `code . `
 
-This will open Visual Studio Code. Add the project code in the explorer using file->Add Folder To Workspace and choose the project. I then save the project in /BearCatPantryProject as bearcat.code-workspace. In the future you can run `code bearcat.code-workspace` to pick up right where you left off.
+This will open Visual Studio Code. I then save the project in /BearCatPantryProject as bearcat.code-workspace. In the future you can run `code bearcat.code-workspace` to pick up right where you left off.
 
 Next, install all of the recommended extensions. Select the extension button the left-side wall and install everything.
 
