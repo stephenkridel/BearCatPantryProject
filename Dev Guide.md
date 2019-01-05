@@ -23,12 +23,14 @@ Next, install all of the recommended extensions. Select the extension button the
 
 Open the terminal in VSC using ctrl+alt+T and run  
 
-`npm install`
+`npm install` - If this fails, restart your computer
 
 To get to the website run use `npm start` 
 and go to `http://localhost:3000`
 
 When you make code changes, all you have to do is refresh the page to see your changes.
+
+You won't be able to add/view the database until your IP is whitelisted. I guess for security reasons cuz it's the free version.
 
 
 # Useful links
