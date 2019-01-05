@@ -1,0 +1,16 @@
+{{#if items}}
+<h4> Items in the database</h4>
+{{#each items}}
+<li>
+  Item Name: {{this.itemName}}
+  Price: {{this.itemName}}
+</li>
+<br></br>
+{{/each}}
+{{else}}
+<li class="list-group-item">
+  <h4 class="text-center">
+    No items found
+  </h4>
+</li>
+{{/if}}
