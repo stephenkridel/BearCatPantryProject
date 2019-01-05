@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mongoose = require("mongoose");
 let handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
+var helmet = require('helmet')
 
 
 // Routes
@@ -39,6 +40,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // setup the routes
