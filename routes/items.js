@@ -14,7 +14,6 @@ var item = mongoose.model("Item", itemSchema);
 router.get('/items', function (req, res, next) {
     item.find({}, 'itemName price', function (err, items) {
         if (err) return handleError(err);
-        console.log(items);
         res.render('items', {
             items: items
         });

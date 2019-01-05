@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 
 // Routes
 var itemsRouter = require('./routes/items');
+var aboutRouter = require('./routes/about');
+
 
 var app = express();
 
@@ -41,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // setup the routes
 app.use('/', itemsRouter);
+app.use('/', aboutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
