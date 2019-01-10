@@ -22,7 +22,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://bearcatAdmin:ferrari275@bearcatpantry-ahnj6.mongodb.net/test?retryWrites=true");
+mongoose.connect("mongodb+srv://bearcatAdmin:ferrari275@bearcatpantry-ahnj6.mongodb.net/test?retryWrites=true", {
+  useNewUrlParser: true
+}).then(
+  () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
+  err => { console.log(err) }
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, '/views'));
