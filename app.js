@@ -20,9 +20,6 @@ var mongo=require('mongodb');
 var db=mongoose.connection;
 
 
-
-
-
 // Routes
 var itemsRouter = require('./routes/items');
 var aboutRouter = require('./routes/about');

@@ -1,13 +1,14 @@
 {{#if items}}
 <h4> Items in the database</h4>
 {{#each items}}
-<li>
-  Item Name: {{this.itemName}}
-</li>
-<li>
-  quantity: {{this.quantity}}
-</li>
-<br></br>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header">{{this.itemName}}</div>
+  <div class="card-body">
+      quantity: {{this.quantity}}
+      <br>
+      weight: {{this.weight}}
+  </div>
+</div>
 {{/each}}
 {{else}}
 <li class="list-group-item">

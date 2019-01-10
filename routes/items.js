@@ -13,9 +13,8 @@ var itemSchema = new mongoose.Schema({
 var item = mongoose.model("Item", itemSchema);
 
 router.get('/items', function (req, res, next) {
-    item.find({}, 'itemName quantity', function (err, items) {
+    item.find({}, 'itemName quantity weight', function (err, items) {
         if (err) return handleError(err);
-        console.log(items);
         res.render('items', {
             items: items,
         });
@@ -32,29 +31,35 @@ router.get('/updateItem', function (req, res, next) {
 
 router.post("/addItem", (req, res) => {
     var myData = new item(req.body);
-    myData.save()
-        .then(item => {
-            res.redirect("http://localhost:3000/items");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
-});
+    item.countDocuments({
+        itemName: req.body.itemName
+    }, function (err, count) {
+        console.log(count)
+        if (count > 0) {
+            var update = {
+                itemName: req.body.itemName,
+                quantity: req.body.quantity,
+                weight: req.body.weight
+            }
+            item.updateOne(update)
+                .then(item => {
+                    res.redirect("http://localhost:3000/items");
+                })
+                .catch(err => {
+                    res.status(400).send("unable to save to database");
+                });
 
-router.post("/updateExistingItem", (req, res) => {
-    item.updateMany({
-            itemName: req.body.itemName
-        }, {
-            quantity: req.body.quantity
-        }, function (err) {
-            console.log("you messed up")
-        })
-        .then(() => {
-            res.redirect("http://localhost:3000/items");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
+        } else {
+            myData.save()
+                .then(item => {
+                    res.redirect("http://localhost:3000/items");
+                })
+                .catch(err => {
+                    res.status(400).send("unable to save to database");
+                });
+        }
+    });
+
 });
 
 module.exports = router;
