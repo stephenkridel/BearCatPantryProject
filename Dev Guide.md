@@ -45,7 +45,7 @@ You won't be able to add/view the database until your IP is whitelisted. I guess
 - https://github.com/barc/express-hbs
 - https://www.w3schools.com/ - Literally everything you need for front end
 - https://www.npmjs.com/package/pronto-email-service - email services exist
-- https://developers.google.com/vision/android/barcodes-overview
+- https://serratus.github.io/quaggaJS/ JS Barcode Scanner
 
 
 
