@@ -9,13 +9,13 @@
       <br>
       weight: {{this.weight}}
       <br>
-      <img src="data:image/png;base64,{{this.img.data}}" width="42" height="42">
+      <img src="data:{{this.img.contentType}};base64,{{this.actualImage}}" width="42" height="42">
       size: {{this.img.size}}
     </div>
   </div>
   {{/each}}
 </div>
-    <span class="loading-circle"></span>
+<span class="loading-circle"></span>
 
 {{else}}
 <li class="list-group-item">

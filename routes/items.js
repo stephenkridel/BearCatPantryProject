@@ -26,12 +26,20 @@ var item = mongoose.model("Item", itemSchema);
 router.get('/items', function (req, res, next) {
     item.find({}, 'itemName quantity weight img', function (err, items) {
         if (err) return handleError(err);
-        var pic = items[0].img.data.toString('utf8');
+        for (i in items) {
+            if (items[i].img) {
+                items[i].actualImage = Buffer.from(items[i].img.data).toString('base64');
+            }
+        }
         res.render('items', {
-            items: items,
+            items: items
         });
     })
 });
+
+var convertToImage = function (items) {
+
+};
 
 router.get('/addNewItem', function (req, res, next) {
     res.render("newItem")
@@ -46,18 +54,15 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
     item.countDocuments({
         itemName: req.body.itemName
     }, function (err, count) {
+        console.log("found an existing item")
         if (count > 0) {
-            var update = {
-                itemName: req.body.itemName,
-                quantity: req.body.quantity,
-                weight: req.body.weight,
-                img: {
-                    data: img,
-                    contentType: req.file.mimetype,
-                    size: req.file.size,
-                }
-            }
-            item.updateOne(update)
+            item.updateOne({
+                    "itemName": req.body.itemName
+                }, {
+                    "$inc": {
+                        'quantity': req.body.quantity
+                    }
+                })
                 .then(item => {
                     res.redirect("http://localhost:3000/items");
                 })
