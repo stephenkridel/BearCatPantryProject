@@ -1,15 +1,22 @@
 {{#if items}}
 <h4> Items in the database</h4>
-{{#each items}}
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-  <div class="card-header">{{this.itemName}}</div>
-  <div class="card-body">
+<div class="card-container">
+  {{#each items}}
+  <div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">{{this.itemName}}</div>
+    <div class="card-body">
       quantity: {{this.quantity}}
       <br>
       weight: {{this.weight}}
+      <br>
+      <img src="data:image/png;base64,{{this.img.data}}" width="42" height="42">
+      size: {{this.img.size}}
+    </div>
   </div>
+  {{/each}}
 </div>
-{{/each}}
+    <span class="loading-circle"></span>
+
 {{else}}
 <li class="list-group-item">
   <h4 class="text-center">
