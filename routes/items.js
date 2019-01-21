@@ -2,7 +2,6 @@ var express = require('express');
 var mongoose = require("mongoose");
 const multer = require("multer");
 var fs = require('fs-extra');
-var blob = require('blob');
 
 var router = express.Router();
 
@@ -25,20 +24,26 @@ var item = mongoose.model("Item", itemSchema);
 
 router.get('/items', function (req, res, next) {
     item.find({}, 'itemName quantity weight img', function (err, items) {
-        if (err) return handleError(err);
-        for (i in items) {
-            if (items[i].img) {
-                items[i].actualImage = Buffer.from(items[i].img.data).toString('base64');
-            }
-        }
+        convertToImage(items)
         res.render('items', {
             items: items
         });
     })
 });
 
-var convertToImage = function (items) {
+router.post('/setCookie', function (req, res, next) {
+    console.log(req.body.itemName)
+    res.cookie("cartItems", req.body.itemName);
+    res.redirect("http://localhost:3000/items");
+});
 
+var convertToImage = function (items) {
+    console.log(items)
+    for (i in items) {
+        if (items[i].img) {
+            items[i].actualImage = Buffer.from(items[i].img.data).toString('base64');
+        }
+    }
 };
 
 router.get('/addNewItem', function (req, res, next) {
@@ -54,7 +59,6 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
     item.countDocuments({
         itemName: req.body.itemName
     }, function (err, count) {
-        console.log("found an existing item")
         if (count > 0) {
             item.updateOne({
                     "itemName": req.body.itemName

@@ -24,6 +24,10 @@ var db=mongoose.connection;
 var itemsRouter = require('./routes/items');
 var aboutRouter = require('./routes/about');
 var registerRouter = require('./routes/register');
+var cartRouter = require('./routes/cart');
+var homeRouter = require('./routes/home');
+
+
 
 
 var app = express();
@@ -96,6 +100,10 @@ app.use(function (req, res, next) {
 app.use('/', itemsRouter);
 app.use('/', aboutRouter);
 app.use('/', registerRouter);
+app.use('/', cartRouter);
+app.use('/', homeRouter);
+
+
 
 
 // catch 404 and forward to error handler
