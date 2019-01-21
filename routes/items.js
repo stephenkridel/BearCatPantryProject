@@ -54,6 +54,10 @@ router.get('/manageItems', function (req, res, next) {
     })
 });
 
+router.post('/updateItem', function (req, res, next) {
+    // TODO update items
+});
+
 
 router.post("/addItem", upload.single('image'), function (req, res, next) {
     var img = fs.readFileSync(req.file.path);
