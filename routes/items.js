@@ -47,7 +47,6 @@ var convertToImage = function (items) {
 router.get('/manageItems', function (req, res, next) {
     item.find({}, 'itemName quantity weight img', function (err, items) {
         convertToImage(items)
-        console.log(items)
         res.render('manageItems', {
             items: items
         });
@@ -55,7 +54,30 @@ router.get('/manageItems', function (req, res, next) {
 });
 
 router.post('/updateItem', function (req, res, next) {
-    // TODO update items
+    item.updateOne({
+            "itemName": req.body.oldItemName
+        }, {
+            "$set": {
+                'itemName': req.body.newItemName,
+                'quantity': req.body.quantity,
+                "weight": req.body.weight
+            }
+        })
+        .then(item => {
+            // Find better way to close modal here rather than a redirect
+            res.redirect("http://localhost:3000/manageItems");
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+});
+
+router.post('/deleteItem', function (req, res, next) {
+    item.deleteOne({
+        itemName: req.body.itemName
+    }).then(item => {
+        res.redirect("http://localhost:3000/items");
+    })
 });
 
 
@@ -65,7 +87,6 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
     item.countDocuments({
         itemName: itemNameFormatted
     }, function (err, count) {
-        console.log(count);
         if (count > 0) {
             item.updateOne({
                     "itemName": itemNameFormatted

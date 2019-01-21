@@ -28,8 +28,6 @@ var cartRouter = require('./routes/cart');
 var homeRouter = require('./routes/home');
 
 
-
-
 var app = express();
 
 app.use(bodyParser.json());

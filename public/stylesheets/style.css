@@ -91,10 +91,14 @@
   color: white;
 }
 
-.tab-content {
+.main-container {
   margin: 0 10px 10px 10px;
 }
 
 .modal-backdrop {
   opacity:0.5 !important;
+}
+
+.modal-body{
+  padding-bottom: 0px;
 }
