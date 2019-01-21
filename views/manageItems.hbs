@@ -32,71 +32,73 @@
             <label class="custom-file-label" for="image">Choose file</label>
             <input type="file" name="image" class="custom-file-input" id="image">
           </div>
-          <input type="submit" class="btn btn-primary" value="Add Item">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Add Item">
       </form>
     </div>
   </div>
-</div>
-<div class="tab-pane fade" id="editItem">
-  {{#if items}}
-  <h4> Items in the database</h4>
-  <div class="card-container">
-    {{#each items}}
-    <div class="card border-secondary mb-3" style="max-width: 20rem;">
-      <div class="card-header">
-        <div class="item-header">
-          <div class="item-header-text">{{this.itemName}}</div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
-          <!-- The modal -->
-          <div class="modal" id="{{this.itemName}}Modal">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Edit {{this.itemName}}</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <!-- Form inside of modal -->
-                  <form method="post" action="/updateItem">
-                    <input type="hidden"  name="oldItemName" id="oldItemName" value={{this.itemName}}>
-                    <div class="form-group">
-                      <label for="itemName">Item Name</label>
-                      <input type="text" class="form-control" name="newItemName" id="newItemName" value={{this.itemName}}>
-                    </div>
-                    <div class="form-group">
-                      <label for="quantity">Quantity</label>
-                      <input type="text" class="form-control" name="quantity" id="quantity" value={{this.quantity}}>
-                    </div>
-                    <div class="form-group">
-                      <label for="weight">Weight Value</label>
-                      <input type="text" class="form-control" name="weight" id="weight" value={{this.weight}}>
-                    </div>
+  <div class="tab-pane fade" id="editItem">
+    {{#if items}}
+    <h4> Items in the database</h4>
+    <div class="card-container">
+      {{#each items}}
+      <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">
+          <div class="item-header">
+            <div class="item-header-text">{{this.itemName}}</div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
+            <!-- The modal -->
+            <div class="modal" id="{{this.itemName}}Modal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit {{this.itemName}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Form inside of modal -->
+                    <form method="post" action="/updateItem">
+                      <input type="hidden" name="oldItemName" id="oldItemName" value={{this.itemName}}>
+                      <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" class="form-control" name="newItemName" id="newItemName" value={{this.itemName}}>
+                      </div>
+                      <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" class="form-control" name="quantity" id="quantity" value={{this.quantity}}>
+                      </div>
+                      <div class="form-group">
+                        <label for="weight">Weight Value</label>
+                        <input type="text" class="form-control" name="weight" id="weight" value={{this.weight}}>
+                      </div>
 
-                    <div class="modal-footer">
-                      <input type="submit" class="btn btn-danger" formaction="/deleteItem" value="Delete {{this.itemName}}"></button>
-                      <input type="submit" class="btn btn-primary" value="Save change">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </form>
+                      <div class="modal-footer">
+                        <input type="submit" class="btn btn-danger" formaction="/deleteItem" value="Delete {{this.itemName}}"></button>
+                        <input type="submit" class="btn btn-primary" value="Save change">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
+          </div>
+        </div>
+        <div class="card-body">
+          <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
+          <br>
+          Total: {{this.quantity}}
+          <br>
+          Weight: {{this.weight}}
         </div>
       </div>
-      <div class="card-body">
-        <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
-        <br>
-        Total: {{this.quantity}}
-        <br>
-        Weight: {{this.weight}}
-      </div>
+      {{/each}}
     </div>
-    {{/each}}
   </div>
+
 
   {{else}}
   <li class="list-group-item">

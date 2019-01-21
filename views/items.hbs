@@ -7,8 +7,9 @@
     <div class="card-header">
       <div class="item-header">
         <div class="item-header-text">{{this.itemName}}</div>
-        <form method="post" action="/setCookie">
+        <form method="post" action="/addToCart">
           <input type="hidden" name="itemName" value={{this.itemName}}></input>
+          <input type="hidden" name="quantity" value={{this.quantity}}></input>
           <button type="submit" class="add-to-cart-button" title="Add to cart">
             <img src="images/plus-button.png"></img>
           </button>

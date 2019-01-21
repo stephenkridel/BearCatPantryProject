@@ -1,26 +1,15 @@
 var express = require('express');
-var mongoose = require("mongoose");
 const multer = require("multer");
 var fs = require('fs-extra');
+var item = require('../models/itemModel');
+var cart = require('../models/cartModel')
+
 
 var router = express.Router();
 
 const upload = multer({
     dest: 'public/images/uploads' // this saves your file into a directory called "uploads"
 });
-
-var itemSchema = new mongoose.Schema({
-    itemName: String,
-    quantity: Number,
-    weight: Number,
-    img: {
-        data: Buffer,
-        contentType: String,
-        size: Number
-    }
-});
-
-var item = mongoose.model("Item", itemSchema);
 
 router.get('/items', function (req, res, next) {
     item.find({}, 'itemName quantity weight img', function (err, items) {
@@ -31,9 +20,44 @@ router.get('/items', function (req, res, next) {
     })
 });
 
-router.post('/setCookie', function (req, res, next) {
-    res.cookie("cartItems", req.body.itemName);
-    res.redirect("http://localhost:3000/items");
+
+// WIP
+router.post('/addToCart', function (req, res, next) {
+    // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
+    cart.countDocuments({
+        user: "testUser"
+    }, function (err, count) {
+        if (count > 0) {
+            cart.update({
+                    "user": "testUser"
+                }, {
+                    "$push": {
+                        items: {
+                            'itemName': req.body.itemName,
+                            'quantity': 1,
+                        }
+                    }
+                })
+                .then(item => {
+                    res.redirect("http://localhost:3000/cart");
+                })
+        } else {
+            var myData = new cart({
+                user: "testUser",
+                items: [{
+                    itemName: req.body.itemName,
+                    quantity: 1
+                }]
+            });
+            myData.save()
+                .then(item => {
+                    res.redirect("http://localhost:3000/cart");
+                })
+                .catch(err => {
+                    res.status(400).send("unable to save to database");
+                });
+        }
+    });
 });
 
 var convertToImage = function (items) {
@@ -74,7 +98,7 @@ router.post('/updateItem', function (req, res, next) {
 
 router.post('/deleteItem', function (req, res, next) {
     item.deleteOne({
-        itemName: req.body.itemName
+        itemName: req.body.oldItemName
     }).then(item => {
         res.redirect("http://localhost:3000/items");
     })
@@ -88,20 +112,7 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
         itemName: itemNameFormatted
     }, function (err, count) {
         if (count > 0) {
-            item.updateOne({
-                    "itemName": itemNameFormatted
-                }, {
-                    "$inc": {
-                        'quantity': req.body.quantity
-                    }
-                })
-                .then(item => {
-                    res.redirect("http://localhost:3000/items");
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
-
+            res.send("Item is already in DB");
         } else {
             var myData = new item({
                 itemName: itemNameFormatted,
