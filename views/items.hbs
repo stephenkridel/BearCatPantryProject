@@ -2,19 +2,23 @@
 <h4> Items in the database</h4>
 <div class="card-container">
   {{#each items}}
-  <div class="card border-primary mb-3" style="max-width: 20rem;">
-    <div class="card-header">{{this.itemName}}</div>
+  <div class="card border-secondary mb-3" style="max-width: 20rem;">
+    <div class="card-header">
+      <div class="item-header">
+        <div class="item-header-text">{{this.itemName}}</div>
+        <form method="post" action="/setCookie">
+          <input type="hidden" name="itemName" value={{this.itemName}}></input>
+          <button type="submit" class="add-to-cart-button" title="Add to cart">
+            <img src="images/plus-button.png"></img>
+          </button>
+        </form>
+      </div>
+
+    </div>
     <div class="card-body">
-      quantity: {{this.quantity}}
+      <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
       <br>
-      weight: {{this.weight}}
-      <br>
-      <img src="data:{{this.img.contentType}};base64,{{this.actualImage}}" width="42" height="42">
-      size: {{this.img.size}}
-      <form method="post" action="/setCookie">
-        <input type="text" name="itemName" value={{this.itemName}}></input>
-        <input type="submit" class="btn btn-primary" value="Add to cart"></input>
-      </form>
+      Amount left: {{this.quantity}}
     </div>
   </div>
   {{/each}}

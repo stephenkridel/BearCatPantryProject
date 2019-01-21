@@ -32,13 +32,11 @@ router.get('/items', function (req, res, next) {
 });
 
 router.post('/setCookie', function (req, res, next) {
-    console.log(req.body.itemName)
     res.cookie("cartItems", req.body.itemName);
     res.redirect("http://localhost:3000/items");
 });
 
 var convertToImage = function (items) {
-    console.log(items)
     for (i in items) {
         if (items[i].img) {
             items[i].actualImage = Buffer.from(items[i].img.data).toString('base64');
@@ -46,22 +44,27 @@ var convertToImage = function (items) {
     }
 };
 
-router.get('/addNewItem', function (req, res, next) {
-    res.render("newItem")
+router.get('/manageItems', function (req, res, next) {
+    item.find({}, 'itemName quantity weight img', function (err, items) {
+        convertToImage(items)
+        console.log(items)
+        res.render('manageItems', {
+            items: items
+        });
+    })
 });
 
-router.get('/updateItem', function (req, res, next) {
-    res.render("updateItem")
-});
 
 router.post("/addItem", upload.single('image'), function (req, res, next) {
     var img = fs.readFileSync(req.file.path);
+    var itemNameFormatted = req.body.itemName.replace(/\b\w/g, l => l.toUpperCase());
     item.countDocuments({
-        itemName: req.body.itemName
+        itemName: itemNameFormatted
     }, function (err, count) {
+        console.log(count);
         if (count > 0) {
             item.updateOne({
-                    "itemName": req.body.itemName
+                    "itemName": itemNameFormatted
                 }, {
                     "$inc": {
                         'quantity': req.body.quantity
@@ -76,7 +79,7 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
 
         } else {
             var myData = new item({
-                itemName: req.body.itemName,
+                itemName: itemNameFormatted,
                 quantity: req.body.quantity,
                 weight: req.body.weight,
                 img: {

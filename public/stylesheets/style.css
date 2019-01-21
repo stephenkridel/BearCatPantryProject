@@ -63,3 +63,30 @@
 .home-container {
   margin: 20px 20% 0 20%;
 }
+
+.item-image {
+  width: 100%;
+}
+
+.item-header {
+  display: flex;
+}
+
+.item-header-text {
+  width: 255px;
+}
+
+.add-to-cart-button{
+    all: unset;
+    cursor: pointer; 
+}
+
+ .badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
