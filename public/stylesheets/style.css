@@ -85,9 +85,9 @@
 }
 
 .badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: relative;
+  top: -14px;
+  right: 6px;
   padding: 5px;
   border-radius: 50%;
   background: red;
@@ -104,4 +104,7 @@
 
 .modal-body {
   padding-bottom: 0px;
+}
+.navbar .show {
+  height: 152px !important;
 }
