@@ -65,7 +65,9 @@
 }
 
 .item-image {
-  width: 100%;
+  width: 275px;
+  height: 275px;
+  object-fit: cover;
 }
 
 .item-header {
