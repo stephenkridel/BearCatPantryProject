@@ -8,10 +8,6 @@
   width: 100%;
 }
 
-.master-scheduler-header {
-  font-size: 150%;
-}
-
 .login-container .nav-link.active {
   color: #fff;
   background-color: #6CC3D5;
@@ -66,9 +62,8 @@
 }
 
 .item-image {
-  width: 275px;
-  height: 275px;
-  object-fit: cover;
+  width: 100%;
+  object-fit: contain;
 }
 
 .item-header {
