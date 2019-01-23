@@ -1,7 +1,7 @@
 //Require Mongoose
-var mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
 
-var itemSchema = new mongoose.Schema({
+var itemSchema = new mongoose.Schema( {
     itemName: String,
     quantity: Number,
     weight: Number,
@@ -10,7 +10,7 @@ var itemSchema = new mongoose.Schema({
         contentType: String,
         size: Number
     }
-});
+} );
 
 //Export function to create "SomeModel" model class
-module.exports = mongoose.model('Item', itemSchema);
+module.exports = mongoose.model( 'Item', itemSchema );

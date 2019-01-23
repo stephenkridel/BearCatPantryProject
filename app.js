@@ -7,6 +7,7 @@ var mongoose = require( "mongoose" );
 let handlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
+var compression = require( 'compression' );
 
 // Testing Adam Kowalski
 var session = require( 'express-session' );
@@ -64,6 +65,7 @@ app.use( express.urlencoded( {
 } ) );
 app.use( cookieParser() );
 app.use( helmet() );
+app.use( compression() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 //Handle Sessions by Kowalski
