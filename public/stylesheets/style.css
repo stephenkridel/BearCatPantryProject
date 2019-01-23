@@ -52,11 +52,12 @@
 .card-container {
   display: flex;
 }
-.card-container .card{
-    margin-right: 20px;
+
+.card-container .card {
+  margin-right: 20px;
 }
 
-.new-item-container{
+.new-item-container {
   width: 250px;
 }
 
@@ -78,12 +79,12 @@
   width: 255px;
 }
 
-.add-to-cart-button{
-    all: unset;
-    cursor: pointer; 
+.add-to-cart-button {
+  all: unset;
+  cursor: pointer;
 }
 
- .badge {
+.badge {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -98,9 +99,9 @@
 }
 
 .modal-backdrop {
-  opacity:0.5 !important;
+  opacity: 0.5 !important;
 }
 
-.modal-body{
+.modal-body {
   padding-bottom: 0px;
 }

@@ -1,0 +1,9 @@
+{
+    "indent_size": 4,
+    "indent_char": " ",
+    "css": {
+        "indent_size": 2
+    },
+    "space_after_anon_function": false,
+    "space_in_paren": true
+}

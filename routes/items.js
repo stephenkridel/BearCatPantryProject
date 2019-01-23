@@ -1,34 +1,34 @@
-var express = require('express');
-const multer = require("multer");
-var fs = require('fs-extra');
-var item = require('../models/itemModel');
-var cart = require('../models/cartModel')
+var express = require( 'express' );
+const multer = require( "multer" );
+var fs = require( 'fs-extra' );
+var item = require( '../models/itemModel' );
+var cart = require( '../models/cartModel' )
 
 
 var router = express.Router();
 
-const upload = multer({
+const upload = multer( {
     dest: 'public/images/uploads' // this saves your file into a directory called "uploads"
-});
+} );
 
-router.get('/items', function (req, res, next) {
-    item.find({}, 'itemName quantity weight img', function (err, items) {
-        convertToImage(items)
-        res.render('items', {
+router.get( '/items', function( req, res, next ) {
+    item.find( {}, 'itemName quantity weight img', function( err, items ) {
+        convertToImage( items )
+        res.render( 'items', {
             items: items
-        });
-    })
-});
+        } );
+    } )
+} );
 
 
 // WIP
-router.post('/addToCart', function (req, res, next) {
+router.post( '/addToCart', function( req, res, next ) {
     // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
-    cart.countDocuments({
+    cart.countDocuments( {
         user: "testUser"
-    }, function (err, count) {
-        if (count > 0) {
-            cart.update({
+    }, function( err, count ) {
+        if ( count > 0 ) {
+            cart.update( {
                     "user": "testUser"
                 }, {
                     "$push": {
@@ -37,48 +37,48 @@ router.post('/addToCart', function (req, res, next) {
                             'quantity': 1,
                         }
                     }
-                })
-                .then(item => {
-                    res.redirect("http://localhost:3000/cart");
-                })
+                } )
+                .then( item => {
+                    res.redirect( "http://localhost:3000/cart" );
+                } )
         } else {
-            var myData = new cart({
+            var myData = new cart( {
                 user: "testUser",
-                items: [{
+                items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                }]
-            });
+                } ]
+            } );
             myData.save()
-                .then(item => {
-                    res.redirect("http://localhost:3000/cart");
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
+                .then( item => {
+                    res.redirect( "http://localhost:3000/cart" );
+                } )
+                .catch( err => {
+                    res.status( 400 ).send( "unable to save to database" );
+                } );
         }
-    });
-});
+    } );
+} );
 
-var convertToImage = function (items) {
-    for (i in items) {
-        if (items[i].img) {
-            items[i].actualImage = Buffer.from(items[i].img.data).toString('base64');
+var convertToImage = function( items ) {
+    for ( i in items ) {
+        if ( items[ i ].img ) {
+            items[ i ].actualImage = Buffer.from( items[ i ].img.data ).toString( 'base64' );
         }
     }
 };
 
-router.get('/manageItems', function (req, res, next) {
-    item.find({}, 'itemName quantity weight img', function (err, items) {
-        convertToImage(items)
-        res.render('manageItems', {
+router.get( '/manageItems', function( req, res, next ) {
+    item.find( {}, 'itemName quantity weight img', function( err, items ) {
+        convertToImage( items )
+        res.render( 'manageItems', {
             items: items
-        });
-    })
-});
+        } );
+    } )
+} );
 
-router.post('/updateItem', function (req, res, next) {
-    item.updateOne({
+router.post( '/updateItem', function( req, res, next ) {
+    item.updateOne( {
             "itemName": req.body.oldItemName
         }, {
             "$set": {
@@ -86,35 +86,35 @@ router.post('/updateItem', function (req, res, next) {
                 'quantity': req.body.quantity,
                 "weight": req.body.weight
             }
-        })
-        .then(item => {
+        } )
+        .then( item => {
             // Find better way to close modal here rather than a redirect
-            res.redirect("http://localhost:3000/manageItems");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
-});
+            res.redirect( "http://localhost:3000/manageItems" );
+        } )
+        .catch( err => {
+            res.status( 400 ).send( "unable to save to database" );
+        } );
+} );
 
-router.post('/deleteItem', function (req, res, next) {
-    item.deleteOne({
+router.post( '/deleteItem', function( req, res, next ) {
+    item.deleteOne( {
         itemName: req.body.oldItemName
-    }).then(item => {
-        res.redirect("http://localhost:3000/items");
-    })
-});
+    } ).then( item => {
+        res.redirect( "http://localhost:3000/items" );
+    } )
+} );
 
 
-router.post("/addItem", upload.single('image'), function (req, res, next) {
-    var img = fs.readFileSync(req.file.path);
-    var itemNameFormatted = req.body.itemName.replace(/\b\w/g, l => l.toUpperCase());
-    item.countDocuments({
+router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
+    var img = fs.readFileSync( req.file.path );
+    var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
+    item.countDocuments( {
         itemName: itemNameFormatted
-    }, function (err, count) {
-        if (count > 0) {
-            res.send("Item is already in DB");
+    }, function( err, count ) {
+        if ( count > 0 ) {
+            res.send( "Item is already in DB" );
         } else {
-            var myData = new item({
+            var myData = new item( {
                 itemName: itemNameFormatted,
                 quantity: req.body.quantity,
                 weight: req.body.weight,
@@ -123,17 +123,17 @@ router.post("/addItem", upload.single('image'), function (req, res, next) {
                     contentType: req.file.mimetype,
                     size: req.file.size,
                 }
-            });
+            } );
             myData.save()
-                .then(item => {
-                    res.redirect("http://localhost:3000/items");
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
+                .then( item => {
+                    res.redirect( "http://localhost:3000/items" );
+                } )
+                .catch( err => {
+                    res.status( 400 ).send( "unable to save to database" );
+                } );
         }
-    });
+    } );
 
-});
+} );
 
 module.exports = router;
