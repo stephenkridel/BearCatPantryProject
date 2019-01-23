@@ -1,25 +1,25 @@
 {{#if items}}
-<h4> Items in the database</h4>
-<div class="card-container">
-  {{#each items}}
-  <div class="card border-primary mb-3" style="max-width: 20rem;">
-    <div class="card-header">{{this.itemName}}</div>
-    <div class="card-body">
-      quantity: {{this.quantity}}
-      <br>
-      weight: {{this.weight}}
-      <br>
-      <img src="data:{{this.img.contentType}};base64,{{this.actualImage}}" width="42" height="42">
-      size: {{this.img.size}}
+    <h4> Items in the database</h4>
+    <div class="card-container">
+        {{#each items}}
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{this.itemName}}</div>
+                <div class="card-body">
+                    quantity: {{this.quantity}}
+                    <br>
+                    weight: {{this.weight}}
+                    <br>
+                    <img src="data:{{this.img.contentType}};base64,{{this.actualImage}}" width="42" height="42">
+                    size: {{this.img.size}}
+                </div>
+            </div>
+        {{/each}}
     </div>
-  </div>
-  {{/each}}
-</div>
 
 {{else}}
-<li class="list-group-item">
-  <h4 class="text-center">
-    No items in shopping cart
-  </h4>
-</li>
+    <li class="list-group-item">
+        <h4 class="text-center">
+            No items in shopping cart
+        </h4>
+    </li>
 {{/if}}
