@@ -27,21 +27,52 @@ router.post( '/addToCart', function( req, res, next ) {
     cart.countDocuments( {
         user: "testUser"
     }, function( err, count ) {
+        // Find out if a user already has a cart in mongoDB
         if ( count > 0 ) {
-            cart.update( {
-                    "user": "testUser"
-                }, {
-                    "$push": {
-                        items: {
-                            'itemName': req.body.itemName,
-                            'quantity': 1,
+            // Find out if the current user's cart already has the selected item in the cart.
+            cart.countDocuments( {
+                "user": "testUser",
+                "items.itemName": req.body.itemName,
+            }, function( err, count ) {
+                // If item doesnt exist in the cart, push it on
+                if ( count === 0 ) {
+                    // push new item to cart
+                    cart.update( {
+                        "user": "testUser"
+                    }, {
+                        "$push": {
+                            items: {
+                                'itemName': req.body.itemName,
+                                'quantity': 1,
+                            }
                         }
-                    }
-                } )
-                .then( item => {
-                    res.redirect( "http://localhost:3000/cart" );
-                } )
+                    } ).then( item => {
+                        res.redirect( "http://localhost:3000/cart" );
+                    } )
+                } else {
+                    // else, update existing shopping cart item to increment 1 time
+                    cart.findOneAndUpdate( {
+                            "user": "testUser",
+                        }, {
+                            $inc: {
+                                "items.$[elem].quantity": 1
+                            }
+                        }, {
+                            upsert: true,
+                            arrayFilters: [ {
+                                "elem.itemName": {
+                                    $eq: req.body.itemName
+                                }
+                            } ]
+                        } )
+                        .then( item => {
+                            res.redirect( "http://localhost:3000/cart" );
+                        } )
+                }
+            } )
+
         } else {
+            // Else, initialize a cart for the new user, and add the item
             var myData = new cart( {
                 user: "testUser",
                 items: [ {

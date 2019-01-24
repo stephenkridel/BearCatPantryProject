@@ -59,7 +59,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <!-- Form inside of modal -->
-                                                    <form method="post" action="/updateItem" enctype="multipart/form-data">
+                                                    <form method="post" action="/updateItem">
                                                         <input type="hidden" name="oldItemName" id="oldItemName" value={{this.itemName}}>
                                                         <div class="form-group">
                                                             <label for="itemName">Item Name</label>
@@ -74,16 +74,9 @@
                                                             <input type="text" onClick="this.select();" class="form-control" name="weight" id="weight" value={{this.weight}}>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="newImage">New Image</label>
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="newImage">Choose file</label>
-                                                                <input type="file" name="newImage" class="custom-file-input" id="newImage">
-                                                            </div>
-                                                        </div>
 
                                                         <div class="modal-footer">
-                                                            <input type="submit" class="btn btn-danger" name="delete" value="Delete {{this.itemName}}"></button>
+                                                            <input type="submit" class="btn btn-danger" formaction="/deleteItem" value="Delete {{this.itemName}}"></button>
                                                             <input type="submit" class="btn btn-primary" value="Save change">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         </div>
@@ -116,6 +109,4 @@
             </li>
             {{/if}}
     </div>
-</div>
-
 </div>
