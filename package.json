@@ -37,7 +37,8 @@
         "multer-storage-cloudinary": "^2.2.1",
         "passport": "^0.4.0",
         "passport-http": "*",
-        "passport-local": "*"
+        "passport-local": "*",
+        "quagga": "^0.12.1"
     },
     "devDependencies": {
         "nodemon": "^1.18.9"
