@@ -27,6 +27,7 @@ function order_by_occurrence(arr) {
       if (Quagga.initialized == undefined) {
         Quagga.onDetected(function(result) {
           var last_code = result.codeResult.code;
+          console.log(last_code)
           last_result.push(last_code);
           if (last_result.length > 20) {
             code = order_by_occurrence(last_result)[0];
