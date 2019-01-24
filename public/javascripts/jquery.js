@@ -6,116 +6,64 @@ $( document ).ready( function() {
     } );
 } );
 
-var _scannerIsRunning = false;
-
-function startScanner() {
-    Quagga.init( {
-        inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector( '#scanner-container' ),
-            constraints: {
-                width: 480,
-                height: 320,
-                facingMode: "environment"
-            },
+function order_by_occurrence(arr) {
+    var counts = {};
+    arr.forEach(function(value){
+        if(!counts[value]) {
+            counts[value] = 0;
+        }
+        counts[value]++;
+    });
+  
+    return Object.keys(counts).sort(function(curKey,nextKey) {
+        return counts[curKey] < counts[nextKey];
+    });
+  }
+  
+  function load_quagga(){
+    if ($('#barcode-scanner').length > 0 && navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
+  
+      var last_result = [];
+      if (Quagga.initialized == undefined) {
+        Quagga.onDetected(function(result) {
+          var last_code = result.codeResult.code;
+          last_result.push(last_code);
+          if (last_result.length > 20) {
+            code = order_by_occurrence(last_result)[0];
+            last_result = [];
+            Quagga.stop();
+            $.ajax({
+              type: "POST",
+              url: '/products/get_barcode',
+              data: { upc: code }
+            });
+          }
+        });
+      }
+  
+      Quagga.init({
+        inputStream : {
+          name : "Live",
+          type : "LiveStream",
+          numOfWorkers: navigator.hardwareConcurrency,
+          target: document.querySelector('#barcode-scanner')  
         },
         decoder: {
-            readers: [
-                "code_128_reader",
-                "ean_reader",
-                "ean_8_reader",
-                "code_39_reader",
-                "code_39_vin_reader",
-                "codabar_reader",
-                "upc_reader",
-                "upc_e_reader",
-                "i2of5_reader"
-            ],
-            debug: {
-                showCanvas: true,
-                showPatches: true,
-                showFoundPatches: true,
-                showSkeleton: true,
-                showLabels: true,
-                showPatchLabels: true,
-                showRemainingPatchLabels: true,
-                boxFromPatches: {
-                    showTransformed: true,
-                    showTransformedBox: true,
-                    showBB: true
-                }
-            }
-        },
-
-    }, function( err ) {
-        if ( err ) {
-            console.log( err );
-            return
+            readers : ['ean_reader','ean_8_reader','code_39_reader','code_39_vin_reader','codabar_reader','upc_reader','upc_e_reader']
         }
+      },function(err) {
+          if (err) { console.log(err); return }
+          Quagga.initialized = true;
+          Quagga.start();
+      });
+  
+    }
+  };
 
-        console.log( "Initialization finished. Ready to start" );
-        Quagga.start();
-
-        // Set flag to is running
-        _scannerIsRunning = true;
-    } );
-
-    Quagga.onProcessed( function( result ) {
-        var drawingCtx = Quagga.canvas.ctx.overlay,
-            drawingCanvas = Quagga.canvas.dom.overlay;
-
-        if ( result ) {
-            if ( result.boxes ) {
-                drawingCtx.clearRect( 0, 0, parseInt( drawingCanvas.getAttribute( "width" ) ), parseInt( drawingCanvas.getAttribute( "height" ) ) );
-                result.boxes.filter( function( box ) {
-                    return box !== result.box;
-                } ).forEach( function( box ) {
-                    Quagga.ImageDebug.drawPath( box, {
-                        x: 0,
-                        y: 1
-                    }, drawingCtx, {
-                        color: "green",
-                        lineWidth: 2
-                    } );
-                } );
-            }
-
-            if ( result.box ) {
-                Quagga.ImageDebug.drawPath( result.box, {
-                    x: 0,
-                    y: 1
-                }, drawingCtx, {
-                    color: "#00F",
-                    lineWidth: 2
-                } );
-            }
-
-            if ( result.codeResult && result.codeResult.code ) {
-                Quagga.ImageDebug.drawPath( result.line, {
-                    x: 'x',
-                    y: 'y'
-                }, drawingCtx, {
-                    color: 'red',
-                    lineWidth: 3
-                } );
-            }
-        }
-    } );
-
-
-    Quagga.onDetected( function( result ) {
-        console.log( "Barcode detected and processed : [" + result.codeResult.code + "]", result );
-    } );
-}
 
 
 $( document ).ready( function() {
     $( "#btn" ).click( function() {
-        if ( _scannerIsRunning ) {
-            Quagga.stop();
-        } else {
-            startScanner();
-        }
+            load_quagga();
     } );
 } );

@@ -91,7 +91,7 @@
 }
 
 .main-container {
-  margin: 71px 10px 10px 10px;
+  margin: 71px 10px 70px 10px;
 }
 
 .modal-backdrop {
@@ -119,4 +119,13 @@ footer {
   color: white;
   text-align: center;
   padding-top: 10px;
+}
+
+#barcode-scanner canvas.drawingBuffer, #barcode-scanner video.drawingBuffer {
+  display: none;
+}
+
+#barcode-scanner canvas, #barcode-scanner video {
+  width: 100%;
+  height: auto;
 }
