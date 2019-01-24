@@ -58,7 +58,7 @@
 }
 
 .home-container {
-  margin: 20px 20% 0 20%;
+  margin: 91px 20% 0 20%;
 }
 
 .item-image {
@@ -90,7 +90,7 @@
 }
 
 .main-container {
-  margin: 0 10px 10px 10px;
+  margin: 71px 10px 10px 10px;
 }
 
 .modal-backdrop {
@@ -100,6 +100,11 @@
 .modal-body {
   padding-bottom: 0px;
 }
-.navbar .show {
-  height: 152px !important;
+
+.navbar{
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
