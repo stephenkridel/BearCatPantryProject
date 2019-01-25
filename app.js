@@ -9,19 +9,6 @@ var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
 var compression = require( 'compression' );
 
-// Testing Adam Kowalski
-var session = require( 'express-session' );
-var passsport = require( 'passport' );
-var ExpressValidator = require( 'express-validator' );
-var LocalStratergy = require( 'passport-local' );
-var multer = require( 'multer' );
-var upload = multer( {
-    dest: './upload'
-} );
-var flash = require( 'connect-flash' );
-var mongo = require( 'mongodb' );
-var db = mongoose.connection;
-
 
 // Routes
 var itemsRouter = require( './routes/items' );
@@ -68,37 +55,6 @@ app.use( helmet() );
 app.use( compression() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
-//Handle Sessions by Kowalski
-
-app.use( session( {
-    secret: 'secret',
-    saveUninitialized: true,
-    resave: true
-} ) );
-//Passport authentication system by Kowalski
-app.use( passsport.initialize() );
-app.use( passsport.session() );
-//validator by Kowalski
-app.use( ExpressValidator( {
-    errorFormatter: function( param, msg, value ) {
-        var namespace = param.split( '.' ),
-            root = namespace.shift(),
-            formParam = root;
-        while ( namespace.length ) {
-            formParam += '[' + namespace.shift() + ']';
-        }
-        return {
-            param: formParam,
-            msg: msg,
-            value: value
-        };
-    }
-} ) );
-app.use( require( 'connect-flash' )() );
-app.use( function( req, res, next ) {
-    res.locals.messages = require( 'express-messages' )( req, res );
-    next();
-} );
 
 // setup the routes
 app.use( '/', itemsRouter );
