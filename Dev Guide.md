@@ -33,11 +33,19 @@ When you make code changes, all you have to do is refresh the page to see your c
 You won't be able to add/view the database until your IP is whitelisted. I guess for security reasons cuz it's the free version.
 
 # Testing
-To run the puppeteer tests, use
+### Run the puppeteer tests:
 
-`npm run tests`
+`npm run puppeteer`
 
 Puppeteer API: https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.md
+
+###  Run the unit tests:
+
+`npm test`
+
+How to use mocha: https://mochajs.org/#getting-started
+
+
 
 
 
@@ -56,8 +64,6 @@ Puppeteer API: https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.m
 - https://www.npmjs.com/package/pronto-email-service - email services exist
 - https://serratus.github.io/quaggaJS/ JS Barcode Scanner
 - https://github.com/LazarSoft/jsqrcode Barcode Scanner
-- https://github.com/GoogleChrome/puppeteer - How to automate our website for tests
-- https://mochajs.org/#getting-started - unit testing framework
 
 
 

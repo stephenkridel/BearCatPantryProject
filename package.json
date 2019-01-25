@@ -5,7 +5,8 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
-        "tests": "node ./tests/puppeteer/*.js"
+        "puppeteer": "node ./tests/puppeteer/*.js",
+        "test": "mocha ./tests/mocha/*.js" 
     },
     "repository": {
         "type": "git",
@@ -31,6 +32,7 @@
         "hbs": "^4.0.1",
         "helmet": "^3.15.0",
         "http-errors": "~1.6.2",
+        "mocha": "^5.2.0",
         "mongodb": "*",
         "mongoose": "^5.4.2",
         "morgan": "~1.9.0",
