@@ -47,6 +47,8 @@ You won't be able to add/view the database until your IP is whitelisted. I guess
 - https://www.npmjs.com/package/pronto-email-service - email services exist
 - https://serratus.github.io/quaggaJS/ JS Barcode Scanner
 - https://github.com/LazarSoft/jsqrcode Barcode Scanner
+- https://github.com/GoogleChrome/puppeteer - How to automate our website for tests
+- https://mochajs.org/#getting-started - unit testing framework
 
 
 
