@@ -32,6 +32,15 @@ When you make code changes, all you have to do is refresh the page to see your c
 
 You won't be able to add/view the database until your IP is whitelisted. I guess for security reasons cuz it's the free version.
 
+# Testing
+To run the puppeteer tests, use
+
+`npm run tests`
+
+Puppeteer API: https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.md
+
+
+
 
 # Useful links
 - https://www.npmjs.com/ - find cool 3rd party packages we can borrow
