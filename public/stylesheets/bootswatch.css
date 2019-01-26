@@ -4914,7 +4914,7 @@
    -webkit-box-flex: 1;
        -ms-flex: 1 1 auto;
            flex: 1 1 auto;
-   padding: 1.25rem;
+   padding-left: 10px;
  }
  
  .card-title {
@@ -5445,10 +5445,6 @@
  
  .alert-link {
    font-weight: 700;
- }
- 
- .alert-dismissible {
-   padding-right: 3.90625rem;
  }
  
  .alert-dismissible .close {

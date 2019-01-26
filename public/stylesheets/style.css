@@ -64,8 +64,12 @@
 
 .item-image {
   width: 100%;
-  object-fit: contain;
+  height: 200px;
+  object-fit: cover;
+
 }
+
+
 
 .item-header {
   display: flex;
@@ -73,6 +77,18 @@
 
 .item-header-text {
   width: 255px;
+}
+
+.item-container {
+  flex-basis: 300px;
+}
+
+.card-body {
+  height: 25px;
+}
+
+.card-submit {
+  height: 45px;
 }
 
 .add-to-cart-button {
@@ -186,4 +202,42 @@ footer {
     display: block;
   }
 
+}
+
+.alert-success{
+  width: 300px;;
+}
+
+.intro-text {
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: .3px;
+  font-weight: 300;
+}
+
+.text-container {
+  margin-bottom: 20px;
+}
+.formatted-h1{
+  font-size: 1.8em;
+  font-weight: 800;
+}
+.formatted-h2 {
+  font-size: 1.602em;
+  font-weight: 600;
+}
+
+.formatted-h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.formatted-h4 {
+  font-size: 1.266em;
+}
+
+.cart-alert {
+  position: fixed;
+  bottom: 50px;
+  left: 25%;
 }

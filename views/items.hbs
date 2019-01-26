@@ -3,24 +3,19 @@
     <h4> Items in the database</h4>
     <div class="card-container">
         {{#each items}}
-        <div class="card border-secondary mb-3" style="max-width: 20rem;">
-            <div class="card-header">
-                <div class="item-header">
-                    <div class="item-header-text">{{this.itemName}}</div>
-                    <form method="post" action="/addToCart">
-                        <input type="hidden" name="itemName" value={{this.itemName}}></input>
-                        <input type="hidden" name="quantity" value={{this.quantity}}></input>
-                        <button type="submit" class="add-to-cart-button" title="Add to cart">
-                            <img src="images/plus-button.png"></img>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
+        <div class="card mb-3 item-container">
+            <h4 class="card-header">{{this.itemName}}</h4>
+            <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}" alt="Card image">
             <div class="card-body">
-                <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
-                <br>
-                Amount left: {{this.quantity}}
+                <p class="card-text">Amount left: {{this.quantity}}</p>
+            </div>
+            <div class="card-body card-submit">
+                <form method="post" action="/addToCart">
+                    <input type="hidden" name="itemName" value={{this.itemName}}></input>
+                    <input type="hidden" name="quantity" value={{this.quantity}}></input>
+                    <button type="submit" class="btn btn-primary" title="Add to cart">Add to cart
+                    </button>
+                </form>
             </div>
         </div>
         {{/each}}
