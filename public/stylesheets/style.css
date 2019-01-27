@@ -84,11 +84,16 @@
 }
 
 .card-body {
-  height: 25px;
+  height: 50px;
+  display: flex;
 }
 
-.card-submit {
-  height: 45px;
+.add-button {
+  margin: auto;
+}
+
+.card-text {
+  margin-top: 13px;
 }
 
 .add-to-cart-button {
