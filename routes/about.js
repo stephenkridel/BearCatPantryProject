@@ -22,6 +22,9 @@ router.get( '/about', function( req, res, next ) {
     res.render( "about" );
 } );
 
+
+
+
 router.post( '/sendMail', function( req, res, next ) {
     transporter.sendMail( mailOptions, function( error, info ) {
         if ( error ) {
