@@ -148,6 +148,7 @@ router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
         } else {
             var myData = new item( {
                 itemName: itemNameFormatted,
+                barcode: req.body.barcode,
                 quantity: req.body.quantity,
                 weight: req.body.weight,
                 img: {
