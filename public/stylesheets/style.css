@@ -245,3 +245,7 @@ footer {
   bottom: 50px;
   left: 25%;
 }
+
+.nav-bar-search {
+  flex: 1 1 auto;
+}
