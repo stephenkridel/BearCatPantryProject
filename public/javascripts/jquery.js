@@ -81,3 +81,42 @@ $( document ).ready( function() {
         $( "#success-alert" ).slideUp( 500 );
     } );
 } );
+
+$( document ).ready( function() {
+    $( '#sendTestEmail' ).on( 'click', function( e ) {
+        e.preventDefault();
+        $.ajax( {
+                method: 'POST',
+                url: '/sendMail'
+            } )
+            .done( function( msg ) {
+                console.log( "email sent" )
+            } )
+            .fail( function( msg ) {
+                console.log( "email failed" )
+            } );
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '#addItem' ).submit( function( e ) {
+        e.preventDefault();
+        var itemName = $( `#itemName` ).value;
+
+        popupS.window( {
+            mode: 'alert',
+            content: "New item created"
+        } );
+        $( this ).ajaxSubmit( {
+            data: {
+                itemName: itemName,
+                quantity: $( `#quantity` ).value,
+                weight: $( `#weight` ).value
+            },
+            contentType: 'application/json'
+        } );
+
+        return false;
+
+    } );
+} );

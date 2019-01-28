@@ -143,6 +143,7 @@ router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
         itemName: itemNameFormatted
     }, function( err, count ) {
         if ( count > 0 ) {
+            // use popupS instead of this things
             res.send( "Item is already in DB" );
         } else {
             var myData = new item( {
@@ -157,7 +158,7 @@ router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
             } );
             myData.save()
                 .then( item => {
-                    res.redirect( "http://localhost:3000/items" );
+                    console.log( "item created" )
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );
