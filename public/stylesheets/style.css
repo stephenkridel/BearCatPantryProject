@@ -269,3 +269,7 @@ footer {
   border-bottom-left-radius: 0;
   height: 100%;
 }
+
+.hidden {
+  visibility: hidden;
+}
