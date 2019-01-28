@@ -207,7 +207,6 @@ $( function() {
 
 var updateShoppingCartTotal = function() {
     $.get( "/totalCartItems" ).done( function( data ) {
-        console.log( data.totalQuantity );
         $( '.shopping-cart-toal' ).html( data.totalQuantity );
     } );
 };
