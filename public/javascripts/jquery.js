@@ -201,6 +201,10 @@ $( document ).ready( function() {
     } );
 } );
 
+$( function() {
+    updateShoppingCartTotal();
+} );
+
 var updateShoppingCartTotal = function() {
     $.get( "/totalCartItems" ).done( function( data ) {
         console.log( data.totalQuantity );
