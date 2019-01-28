@@ -132,7 +132,7 @@ router.post( '/deleteItem', function( req, res, next ) {
     item.deleteOne( {
         itemName: req.body.oldItemName
     } ).then( item => {
-        res.redirect( "http://localhost:3000/items" );
+        res.redirect( "http://localhost:3000/manageItems" );
     } )
 } );
 
