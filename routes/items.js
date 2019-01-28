@@ -15,7 +15,8 @@ router.get( '/items', function( req, res, next ) {
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'items', {
-            items: items
+            items: items,
+            title: "Bearcat Pantry - Items"
         } );
     } )
 } );
@@ -104,7 +105,8 @@ router.get( '/manageItems', function( req, res, next ) {
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'manageItems', {
-            items: items
+            items: items,
+            title: "Bearcat Pantry - Manage Items"
         } );
     } )
 } );

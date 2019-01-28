@@ -14,7 +14,9 @@ router.get( '/cart', function( req, res, next ) {
                 itemInCart: itemInCart[ 0 ].items
             } );
         } else {
-            res.render( 'cart' );
+            res.render( 'cart', {
+                title: "Bearcat Pantry - About"
+            } );
         }
 
     } )

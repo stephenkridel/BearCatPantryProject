@@ -19,7 +19,7 @@ var mailOptions = {
 var router = express.Router();
 
 router.get( '/about', function( req, res, next ) {
-    res.render( "about" );
+    res.render( "about", {title: "Bearcat Pantry - About"} );
 } );
 
 
