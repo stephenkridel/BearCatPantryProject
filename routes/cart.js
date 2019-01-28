@@ -11,11 +11,13 @@ router.get( '/cart', function( req, res, next ) {
     }, 'items', function( err, itemInCart ) {
         if ( itemInCart && itemInCart.length > 0 ) {
             res.render( 'cart', {
-                itemInCart: itemInCart[ 0 ].items
+                itemInCart: itemInCart[ 0 ].items,
+                title: "Bearcat Pantry - Shopping Cart"
+
             } );
         } else {
             res.render( 'cart', {
-                title: "Bearcat Pantry - About"
+                title: "Bearcat Pantry - Shopping Cart"
             } );
         }
 

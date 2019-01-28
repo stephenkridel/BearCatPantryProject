@@ -1,7 +1,7 @@
 <div class="main-container">
     {{#if itemInCart}}
     <h4> Items in your cart</h4>
-    <table class="table table-hover">
+    <table class="table table-hover cart-table">
         <thead>
             <tr>
                 <th scope="col">Item Name</th>
@@ -12,7 +12,27 @@
             {{#each itemInCart}}
             <tr>
                 <th scope="row">{{this.itemName}}</th>
-                <td>{{this.quantity}}</td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus"
+                                data-field="">
+                                <span class="glyphicon glyphicon-minus">-</span>
+                            </button>
+                        </span>
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number cart-quantity-input" value={{this.quantity}}
+                            min="1" max="100">
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus"
+                                data-field="">
+                                <span class="glyphicon glyphicon-plus">
+                                    +
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+
+                </td>
             </tr>
             {{/each}}
         </tbody>

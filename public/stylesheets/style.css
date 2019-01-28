@@ -208,8 +208,9 @@ footer {
 
 }
 
-.alert-success{
-  width: 300px;;
+.alert-success {
+  width: 300px;
+  ;
 }
 
 .intro-text {
@@ -222,10 +223,12 @@ footer {
 .text-container {
   margin-bottom: 20px;
 }
-.formatted-h1{
+
+.formatted-h1 {
   font-size: 1.8em;
   font-weight: 800;
 }
+
 .formatted-h2 {
   font-size: 1.602em;
   font-weight: 600;
@@ -248,4 +251,21 @@ footer {
 
 .nav-bar-search {
   flex: 1 1 auto;
+}
+
+.cart-quantity-input.input-number {
+  flex: 0 0 100px;
+}
+
+.cart-table .quantity-left-minus {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 100%;
+
+}
+
+.cart-table .quantity-right-plus {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
 }
