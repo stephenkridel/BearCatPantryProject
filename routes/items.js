@@ -47,7 +47,7 @@ router.post( '/addToCart', function( req, res, next ) {
                             }
                         }
                     } ).then( item => {
-                        res.redirect( "http://localhost:3000/cart" );
+                        console.log( "added to cart" );
                     } )
                 } else {
                     // else, update existing shopping cart item to increment 1 time
@@ -66,7 +66,8 @@ router.post( '/addToCart', function( req, res, next ) {
                             } ]
                         } )
                         .then( item => {
-                            res.redirect( "http://localhost:3000/cart" );
+                            console.log( "added to cart" );
+
                         } )
                 }
             } )
@@ -82,7 +83,7 @@ router.post( '/addToCart', function( req, res, next ) {
             } );
             myData.save()
                 .then( item => {
-                    res.redirect( "http://localhost:3000/cart" );
+                    console.log( "added to cart" );
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );

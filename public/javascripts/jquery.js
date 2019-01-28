@@ -152,7 +152,7 @@ $( document ).ready( function() {
         $( this ).ajaxSubmit( {
             data: {
                 itemName: itemName,
-                barcode: $(`#barcode`).value,
+                barcode: $( `#barcode` ).value,
                 quantity: $( `#quantity` ).value,
                 weight: $( `#weight` ).value
             },
@@ -161,6 +161,26 @@ $( document ).ready( function() {
 
         return false;
 
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '.add-to-cart-button' ).submit( function( e ) {
+        e.preventDefault();
+        var itemName = $( `#itemName` ).value;
+        popupS.window( {
+            mode: 'alert',
+            content: "Added item to cart"
+        } );
+        $( this ).ajaxSubmit( {
+            data: {
+                itemName: itemName,
+                success: function() {
+                    updateShoppingCartTotal();
+                }
+            }
+        } );
+        return false;
     } );
 } );
 
@@ -180,3 +200,10 @@ $( document ).ready( function() {
             } );
     } );
 } );
+
+var updateShoppingCartTotal = function() {
+    $.get( "/totalCartItems" ).done( function( data ) {
+        console.log( data.totalQuantity );
+        $( '.shopping-cart-toal' ).html( data.totalQuantity );
+    } );
+};

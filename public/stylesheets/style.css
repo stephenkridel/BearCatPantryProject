@@ -88,7 +88,7 @@
   display: flex;
 }
 
-.add-button {
+.add-to-cart-button {
   margin: auto;
 }
 
@@ -97,7 +97,6 @@
 }
 
 .add-to-cart-button {
-  all: unset;
   cursor: pointer;
 }
 
