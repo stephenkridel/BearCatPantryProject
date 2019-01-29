@@ -58,11 +58,12 @@
 
 .badge {
   position: relative;
+  width: 21px;
   top: -14px;
   right: 6px;
   padding: 5px;
   border-radius: 50%;
-  background: red;
+  background: #2C3E50;
   color: white;
 }
 
@@ -224,4 +225,8 @@ footer {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
 }

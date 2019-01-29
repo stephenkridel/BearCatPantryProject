@@ -208,5 +208,6 @@ $( function() {
 var updateShoppingCartTotal = function() {
     $.get( "/totalCartItems" ).done( function( data ) {
         $( '.shopping-cart-toal' ).html( data.totalQuantity );
+        $( '.shopping-cart-toal' ).removeClass( "hidden" );
     } );
 };
