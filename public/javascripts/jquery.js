@@ -236,10 +236,27 @@ $( document ).ready( function() {
                 .fail( function( msg ) {
                     console.log( "Cart update failed" )
                 } );
-        } else {
-            $( this ).removeClass( 'is-valid' );
-            $( this ).addClass( 'is-invalid' );
-            $( "#badQuantity" ).css( 'display', 'inline' );
-        }
+            } else{
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
+            }
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '.remove-from-cart' ).change( function() {
+        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        $.ajax( {
+            method: 'POST',
+            url: '/removeItemFromCart',
+            data: {
+                itemName: itemName,
+            }
+        } ).done( function( msg ) {
+                updateShoppingCartTotal();
+        } ).fail( function( msg ) {
+                console.log( "Could not delete item" )
+        } );
     } );
 } );

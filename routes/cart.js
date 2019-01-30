@@ -113,4 +113,14 @@ router.post('/updateCartItemQuantities', function( req, res, next){
     } );
 } );
 
+router.post('/removeItemFromCart', function( req, res, next){
+    cart.deleteOne( {
+        "user": "testUser", 
+        'itemName': req.body.itemName
+    }, function(err, obj){})
+    .then( item => {
+        res.sendStatus( 200 );
+    } )
+} );
+
 module.exports = router;
