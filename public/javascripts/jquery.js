@@ -159,8 +159,8 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '.quantity-left-minus' ).on('click', function( ) {
-        var cartItemInput = $(this).closest('.input-group').find("#quantity");
+    $( '.quantity-left-minus' ).on( 'click', function() {
+        var cartItemInput = $( this ).closest( '.input-group' ).find( "#quantity" );
         var cartItemInputValue = cartItemInput.val();
 
         if(cartItemInputValue - 1 > 0){ 
@@ -171,36 +171,35 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '.quantity-right-plus' ).on('click', function( ) {
-        var cartItemInput = $(this).closest('.input-group').find("#quantity");
+    $( '.quantity-right-plus' ).on( 'click', function() {
+        var cartItemInput = $( this ).closest( '.input-group' ).find( "#quantity" );
         var cartItemInputValue = cartItemInput.val();
-        cartItemInput.val(parseInt(cartItemInputValue) + 1);
+        cartItemInput.val( parseInt( cartItemInputValue ) + 1 );
         cartItemInput.change();
     } );
 } );
 
 $( document ).ready( function() {
-    $( '#quantity' ).change( function( ) {
-
-        if($(this).val() > 0){
-            var itemName = $(this).closest("tr").find('th').html();
-            $.ajax( {
+    $( '.cart-quantity-input' ).change( function() {
+        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        if( $(this).val() > 0 ){
+        $.ajax( {
                 method: 'POST',
                 url: '/updateCartItemQuantities',
-                data:{
+                data: {
                     itemName: itemName,
-                    quantity: $(this).val()
+                    quantity: $( this ).val()
                 }
             } )
             .done( function( msg ) {
-                console.log( "Cart updated" )
+                updateShoppingCartTotal();
             } )
             .fail( function( msg ) {
                 console.log( "Cart update failed" )
             } );
         } else{
-            cartItemInput.removeClass( 'is-valid' );
-            cartItemInput.addClass( 'is-invalid' );
+            $(this).removeClass( 'is-valid' );
+            $(this).addClass( 'is-invalid' );
             $( "#badQuantity" ).css('display', 'inline');
         }
     } );
