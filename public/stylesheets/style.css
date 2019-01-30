@@ -236,3 +236,7 @@ footer {
 .hidden {
   visibility: hidden;
 }
+
+.remove-from-cart {
+  margin-left: 50px;
+}
