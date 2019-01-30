@@ -65,7 +65,7 @@ router.post( '/addToCart', function( req, res, next ) {
                             }
                         }
                     } ).then( item => {
-                        console.log( "added to cart" );
+                        res.sendStatus( 200 );
                     } )
                 } else {
                     // else, update existing shopping cart item to increment 1 time
@@ -84,8 +84,7 @@ router.post( '/addToCart', function( req, res, next ) {
                             } ]
                         } )
                         .then( item => {
-                            console.log( "added to cart" );
-
+                            res.sendStatus( 200 );
                         } )
                 }
             } )
@@ -101,7 +100,8 @@ router.post( '/addToCart', function( req, res, next ) {
             } );
             myData.save()
                 .then( item => {
-                    console.log( "added to cart" );
+                    res.sendStatus( 200 );
+
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );
@@ -119,11 +119,15 @@ var convertToImage = function( items ) {
 };
 
 router.get( '/manageItems', function( req, res, next ) {
-    item.find( {}, 'itemName quantity weight img', function( err, items ) {
+    var scripts = [ {
+        script: '/javascripts/barcodeScanner.js'
+    } ];
+    item.find( {}, 'itemName barcode quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'manageItems', {
             items: items,
-            title: "Bearcat Pantry - Manage Items"
+            title: "Bearcat Pantry - Manage Items",
+            scripts: scripts
         } );
     } )
 } );
@@ -156,7 +160,7 @@ router.post( '/deleteItem', function( req, res, next ) {
 } );
 
 
-router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
+router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
     var img = fs.readFileSync( req.file.path );
     var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
     item.countDocuments( {

@@ -8,11 +8,8 @@
             <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}" alt="Card image">
             <div class="card-body">
                 <p class="card-text">Amount left: {{this.quantity}}</p>
-                <form method="post" action="/addToCart" class="add-to-cart-button">
-                    <input type="hidden" name="itemName" value={{this.itemName}}></input>
-                    <button type="submit" class="btn btn-primary" title="Add to cart">Add to cart
-                    </button>
-                </form>
+                <button type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Add to cart
+                </button>
             </div>
         </div>
         {{/each}}

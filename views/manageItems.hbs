@@ -11,27 +11,35 @@
         <div class="tab-pane fade active focus show" id="newItem">
             <h1>Add an item to the pantry</h1>
             <div class="new-item-container">
-                <form name="form_one" method="post" action="/addItem" enctype="multipart/form-data" id="addItem">
+                <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
                     <div class="form-group">
                         <label for="itemName">Item name</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
                             required>
+                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
+                            item name id is between four and fifteen  characters.</div>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..."
                             required>
+                        <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
+                            quantity number is between one to three digits.</div>
                     </div>
                     <div class="form-group">
                         <label for="weight">Weight</label>
                         <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight..."
                             required>
+                        <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
+                            weight number is between one to three digits.</div>
                     </div>
                     <div class="form-group">
                         <div id='barcode-scanner'></div>
                         <label for="barcode">Barcode</label>
                         <input id="barcode" class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
                             type="text" />
+                        <div id="badBarcodeNumber" class="invalid-feedback" style="display: none">A valid
+                            Barcode number is between eight to twelve digits.</div>
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
                             Scanner</button>
                     </div>
@@ -106,12 +114,12 @@
                                                     <input type="text" onClick="this.select();" class="form-control"
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
-                                                    <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-danger" formaction="/deleteItem"
-                                                            value="Delete {{this.itemName}}"></button>
-                                                        <input type="submit" class="btn btn-primary" value="Save change">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-danger" formaction="/deleteItem"
+                                                        value="Delete {{this.itemName}}"></button>
+                                                    <input type="submit" class="btn btn-primary" value="Save change">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -121,7 +129,9 @@
                         </div>
                     </div>
                     <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
-
+                    <div class="card-body">
+                        <p class="card-text">Barcode: {{this.barcode}}</p>
+                    </div>
                     <div class="card-body">
                         <p class="card-text">Total: {{this.quantity}}</p>
                     </div>
