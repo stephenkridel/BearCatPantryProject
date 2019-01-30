@@ -13,7 +13,6 @@ var compression = require( 'compression' );
 // Routes
 var itemsRouter = require( './routes/items' );
 var aboutRouter = require( './routes/about' );
-var registerRouter = require( './routes/register' );
 var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
 var testRouter = require( './routes/test' );
@@ -61,7 +60,6 @@ app.use( express.static( path.join( __dirname, 'public' ) ) );
 // setup the routes
 app.use( '/', itemsRouter );
 app.use( '/', aboutRouter );
-app.use( '/', registerRouter );
 app.use( '/', cartRouter );
 app.use( '/', homeRouter );
 app.use( '/', testRouter );
