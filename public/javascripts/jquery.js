@@ -222,6 +222,7 @@ $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         if ( $( this ).val() > 0 ) {
+            $( this ).removeClass( 'is-invalid' )
             $.ajax( {
                     method: 'POST',
                     url: '/updateCartItemQuantities',
@@ -236,11 +237,11 @@ $( document ).ready( function() {
                 .fail( function( msg ) {
                     console.log( "Cart update failed" )
                 } );
-            } else{
-                $(this).removeClass( 'is-valid' );
-                $(this).addClass( 'is-invalid' );
-                $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
-            }
+        } else {
+            $( this ).removeClass( 'is-valid' );
+            $( this ).addClass( 'is-invalid' );
+            $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
+        }
     } );
 } );
 
@@ -254,9 +255,9 @@ $( document ).ready( function() {
                 itemName: itemName,
             }
         } ).done( function( msg ) {
-                updateShoppingCartTotal();
+            updateShoppingCartTotal();
         } ).fail( function( msg ) {
-                console.log( "Could not delete item" )
+            console.log( "Could not delete item" )
         } );
     } );
 } );
