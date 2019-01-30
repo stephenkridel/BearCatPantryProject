@@ -15,16 +15,18 @@ const upload = multer( {
 } );
 
 router.get( '/items', function( req, res, next ) {
-    var search = req.query.searchBar;
-    if  (search.length > 0){
+    //var search = req.query.searchBar;
+    var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
+    if  (search && search.length > 0){
         console.log("Search string:"+ search)
-        item.find( {"itemName": search}, 'itemName quantity weight img', function( err, items ) {
-            convertToImage( items )
+        item.find( {"itemName": { "$regex": search, "$options": "i"}}, 'itemName quantity weight img', function( err, items ) {
+            convertToImage( items );
             res.render( 'items', {
                 items: items,
-                title: "Bearcat Pantry - Items"
+                title: "Bearcat Pantry - Items",
+                searchText: search
             } );
-        } )
+        } );
     }
     else{
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
@@ -33,7 +35,7 @@ router.get( '/items', function( req, res, next ) {
             items: items,
             title: "Bearcat Pantry - Items"
         } );
-    } )
+    } );
     }
     
 } );
