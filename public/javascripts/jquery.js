@@ -186,7 +186,7 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '#quantity' ).change( function() {
+    $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         $.ajax( {
                 method: 'POST',
