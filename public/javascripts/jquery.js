@@ -228,7 +228,7 @@ $( document ).ready( function() {
             } else{
                 $(this).removeClass( 'is-valid' );
                 $(this).addClass( 'is-invalid' );
-                $( "#badQuantity" ).css('display', 'inline');
+                $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
             }
     } );
 } );
@@ -237,22 +237,15 @@ $( document ).ready( function() {
     $( '.remove-from-cart' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         $.ajax( {
-                method: 'POST',
-                url: '/removeItemFromCart',
-                data: {
-                    itemName: itemName,
-                }
-            } )
-            .done( function( msg ) {
+            method: 'POST',
+            url: '/removeItemFromCart',
+            data: {
+                itemName: itemName,
+            }
+        } ).done( function( msg ) {
                 updateShoppingCartTotal();
-            } )
-            .fail( function( msg ) {
+        } ).fail( function( msg ) {
                 console.log( "Could not delete item" )
-            } );
-        } else {
-            $( this ).removeClass( 'is-valid' );
-            $( this ).addClass( 'is-invalid' );
-            $( "#badQuantity" ).css( 'display', 'inline' );
-        }
+        } );
     } );
 } );
