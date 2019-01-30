@@ -16,6 +16,8 @@
                         <label for="itemName">Item name</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
                             required>
+                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
+                            item name id is at least 4 characters.</div>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
@@ -106,12 +108,12 @@
                                                     <input type="text" onClick="this.select();" class="form-control"
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
-                                                    <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-danger" formaction="/deleteItem"
-                                                            value="Delete {{this.itemName}}"></button>
-                                                        <input type="submit" class="btn btn-primary" value="Save change">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-danger" formaction="/deleteItem"
+                                                        value="Delete {{this.itemName}}"></button>
+                                                    <input type="submit" class="btn btn-primary" value="Save change">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>

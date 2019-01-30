@@ -6,6 +6,25 @@ $( document ).ready( function() {
     } );
 } );
 
+// Form validators
+$( document ).ready( function() {
+    $( '#itemName' ).focusout( function() {
+        var value = $( "#itemName" ).val();
+        if ( value.length >= 4 ) {
+            $( "#itemName" ).addClass( 'is-valid' );
+            $( "#itemName" ).removeClass( 'is-invalid' );
+            $( "#badItemName" ).hide();
+        } else {
+            $( "#itemName" ).removeClass( 'is-valid' );
+            $( "#itemName" ).addClass( 'is-invalid' );
+            $( "#badItemName" ).show();
+
+        }
+    } );
+} );
+
+
+
 $( function() {
     // Create the QuaggaJS config object for the live stream
     var liveStreamConfig = {
@@ -207,7 +226,13 @@ $( function() {
 
 var updateShoppingCartTotal = function() {
     $.get( "/totalCartItems" ).done( function( data ) {
-        $( '.shopping-cart-toal' ).html( data.totalQuantity );
-        $( '.shopping-cart-toal' ).removeClass( "hidden" );
+        $( '#shoppingCartTotal' ).html( data.totalQuantity );
+        $( '#shoppingCartTotal' ).removeClass( "hidden" );
     } );
 };
+
+$( document ).ready( function() {
+    $( '.navbar-toggler' ).on( 'click', function() {
+        updateShoppingCartTotal();
+    } );
+} );
