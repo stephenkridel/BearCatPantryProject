@@ -20,8 +20,8 @@
                                 <span class="glyphicon glyphicon-minus">-</span>
                             </button>
                         </span>
-                        <input type="text" id="quantity" name="quantity" class="form-control input-number cart-quantity-input" value={{this.quantity}}
-                            min="1" max="100">
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number cart-quantity-input"
+                            value={{this.quantity}} min="1" max="100">
                         <span class="input-group-btn">
                             <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus"
                                 data-field="">
@@ -31,8 +31,10 @@
                             </button>
                         </span>
                         {{!-- <div id="badQuantity" class="invalid-feedback" style="display: none">Item quantity must be greater than 0.</div> --}}
+                        <button type="button" class="btn btn-danger remove-from-cart">
+                            Remove
+                        </button>
                     </div>
-
                 </td>
             </tr>
             {{/each}}

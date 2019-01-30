@@ -3,7 +3,10 @@ const multer = require( "multer" );
 var fs = require( 'fs-extra' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' )
+var bodyParser = require('body-parser');
 
+var app = express();
+app.use(bodyParser());
 
 var router = express.Router();
 
@@ -12,13 +15,29 @@ const upload = multer( {
 } );
 
 router.get( '/items', function( req, res, next ) {
+    //var search = req.query.searchBar;
+    var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
+    if  (search && search.length > 0){
+        console.log("Search string:"+ search)
+        item.find( {"itemName": { "$regex": search, "$options": "i"}}, 'itemName quantity weight img', function( err, items ) {
+            convertToImage( items );
+            res.render( 'items', {
+                items: items,
+                title: "Bearcat Pantry - Items",
+                searchText: search
+            } );
+        } );
+    }
+    else{
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'items', {
             items: items,
             title: "Bearcat Pantry - Items"
         } );
-    } )
+    } );
+    }
+    
 } );
 
 
