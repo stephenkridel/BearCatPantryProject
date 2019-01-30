@@ -183,24 +183,43 @@ $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         if( $(this).val() > 0 ){
+            $.ajax( {
+                    method: 'POST',
+                    url: '/updateCartItemQuantities',
+                    data: {
+                        itemName: itemName,
+                        quantity: $( this ).val()
+                    }
+                } )
+                .done( function( msg ) {
+                    updateShoppingCartTotal();
+                } )
+                .fail( function( msg ) {
+                    console.log( "Cart update failed" )
+                } );
+            } else{
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                $( "#badQuantity" ).css('display', 'inline');
+            }
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '.remove-from-cart' ).change( function() {
+        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         $.ajax( {
                 method: 'POST',
-                url: '/updateCartItemQuantities',
+                url: '/removeItemFromCart',
                 data: {
                     itemName: itemName,
-                    quantity: $( this ).val()
                 }
             } )
             .done( function( msg ) {
                 updateShoppingCartTotal();
             } )
             .fail( function( msg ) {
-                console.log( "Cart update failed" )
+                console.log( "Could not delete item" )
             } );
-        } else{
-            $(this).removeClass( 'is-valid' );
-            $(this).addClass( 'is-invalid' );
-            $( "#badQuantity" ).css('display', 'inline');
-        }
     } );
 } );
