@@ -2,7 +2,6 @@
   display: inline;
 }
 
-
 .card-container {
   display: flex;
   flex-wrap: wrap
@@ -213,8 +212,6 @@ footer {
 .nav-bar-search {
   flex: 1 1 auto;
 }
-
-
 
 .cart-quantity-input.input-number {
   flex: 0 0 100px;

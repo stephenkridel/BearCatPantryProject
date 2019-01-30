@@ -1,5 +1,5 @@
 var express = require( 'express' );
-var cart = require( '../models/cartModel' )
+var cart = require( '../models/cartModel' );
 var _ = require( 'lodash' );
 
 
@@ -41,6 +41,76 @@ router.get( '/totalCartItems', function( req, res, next ) {
 
         res.json( ret );
     } )
+} );
+
+router.post('/updateCartItemQuantities', function( req, res, next){
+    // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
+    cart.countDocuments( {
+        user: "testUser"
+    }, function( err, count ) {
+        // Find out if a user already has a cart in mongoDB
+        if ( count > 0 ) {
+            // Find out if the current user's cart already has the selected item in the cart.
+            cart.countDocuments( {
+                "user": "testUser",
+                "items.itemName": req.body.itemName,
+            }, function( err, count ) {
+                // If item doesnt exist in the cart, push it on
+                if ( count === 0 ) {
+                    // push new item to cart
+                    cart.update( {
+                        "user": "testUser"
+                    }, {
+                        "$push": {
+                            items: {
+                                'itemName': req.body.itemName,
+                                'quantity': 1,
+                            }
+                        }
+                    } ).then( item => {
+                        res.sendStatus( 200 );
+                    } )
+                } else {
+                    // else, update existing shopping cart item to increment 1 time
+                    cart.findOneAndUpdate( {
+                            "user": "testUser",
+                        }, {
+                            $set: {
+                                "items.$[elem].quantity": req.body.quantity
+                            }
+                        }, {
+                            upsert: true,
+                            arrayFilters: [ {
+                                "elem.itemName": {
+                                    $eq: req.body.itemName
+                                }
+                            } ]
+                        } )
+                        .then( item => {
+                            res.sendStatus( 200 );
+                        } )
+                }
+            } )
+
+        } else {
+            // Else, initialize a cart for the new user, and add the item
+            var myData = new cart( {
+                user: "testUser",
+                items: [ {
+                    itemName: req.body.itemName,
+                    quantity: 1
+                } ]
+            } );
+            myData.save()
+                .then( item => {
+                    res.sendStatus( 200 );
+
+                } )
+                .catch( err => {
+                    res.status( 400 ).send( "unable to save to database" );
+                } );
+        }
+    } );
 } );
 
 module.exports = router;
