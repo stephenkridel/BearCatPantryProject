@@ -6,22 +6,73 @@ $( document ).ready( function() {
     } );
 } );
 
-// Form validators
-$( document ).ready( function() {
-    $( '#itemName' ).focusout( function() {
-        var value = $( "#itemName" ).val();
-        if ( value.length >= 4 ) {
-            $( "#itemName" ).addClass( 'is-valid' );
-            $( "#itemName" ).removeClass( 'is-invalid' );
-            $( "#badItemName" ).hide();
-        } else {
-            $( "#itemName" ).removeClass( 'is-valid' );
-            $( "#itemName" ).addClass( 'is-invalid' );
-            $( "#badItemName" ).show();
 
-        }
-    } );
-} );
+
+$(document).ready(function() {
+    $('#itemName').each(function() {
+        $(this).on('keyup', function() {
+            var value = $( "#itemName" ).val();
+            if ( value.length >= 4 && value.length<=15) {
+                $( "#itemName" ).addClass( 'is-valid' );
+                $( "#itemName" ).removeClass( 'is-invalid' );
+                $( "#badItemName" ).hide();
+            } else {
+                $( "#itemName" ).removeClass( 'is-valid' );
+                $( "#itemName" ).addClass( 'is-invalid' );
+                $( "#badItemName" ).show();
+            }
+        });
+    });
+});
+$(document).ready(function() {
+    $('#quantity').each(function() {
+        $(this).on('keyup', function() {
+            var value = $( "#quantity" ).val();
+            if ( value.length >= 1 && value.length<=3) {
+                $( "#quantity" ).addClass( 'is-valid' );
+                $( "#quantity" ).removeClass( 'is-invalid' );
+                $( "#badQuantityNumber" ).hide();
+            } else {
+                $( "#quantity" ).removeClass( 'is-valid' );
+                $( "#quantity" ).addClass( 'is-invalid' );
+                $( "#badQuantityNumber" ).show();
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#weight').each(function() {
+        $(this).on('keyup', function() {
+            var value = $( "#weight" ).val();
+            if ( value.length >= 1 && value.length<=3) {
+                $( "#weight" ).addClass( 'is-valid' );
+                $( "#weight" ).removeClass( 'is-invalid' );
+                $( "#badWeightNumber" ).hide();
+            } else {
+                $( "#weight" ).removeClass( 'is-valid' );
+                $( "#weight" ).addClass( 'is-invalid' );
+                $( "#badWeightNumber" ).show();
+            }
+        });
+    });
+});
+$(document).ready(function() {
+    $('#barcode').each(function() {
+        $(this).on('keyup', function() {
+            var value = $( "#barcode" ).val();
+            if ( value.length >= 8 && value.length<=12) {
+                $( "#barcode" ).addClass( 'is-valid' );
+                $( "#barcode" ).removeClass( 'is-invalid' );
+                $( "#badBarcodeNumber" ).hide();
+            } else {
+                $( "#barcode" ).removeClass( 'is-valid' );
+                $( "#barcode" ).addClass( 'is-invalid' );
+                $( "#badBarcodeNumber" ).show();
+            }
+        });
+    });
+});
 
 
 $( document ).ready( function() {
