@@ -13,6 +13,9 @@
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/popupS.js"></script>
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+    {{#each scripts}}
+    <script src="{{script}}"></script>
+    {{/each}}
     <meta name="viewport" content="width=device-width , initial-scale=1" />
     <meta charset="UTF-8">
     <title>{{title}}</title>
@@ -51,7 +54,7 @@
     </nav>
     {{{body}}}
     <footer>
-        <p>Made by Andrew Kump, Adam Kowalski, Will Severson, and Christian Davidson</p>
+        <p>This is the official website of the University of Cincinnati Bearcat Pantry</p>
     </footer>
 </body>
 

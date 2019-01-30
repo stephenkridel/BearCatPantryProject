@@ -11,7 +11,7 @@
         <div class="tab-pane fade active focus show" id="newItem">
             <h1>Add an item to the pantry</h1>
             <div class="new-item-container">
-                <form name="form_one" method="post" action="/addItem" enctype="multipart/form-data" id="addItem">
+                <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
                     <div class="form-group">
                         <label for="itemName">Item name</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
@@ -129,7 +129,9 @@
                         </div>
                     </div>
                     <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
-
+                    <div class="card-body">
+                        <p class="card-text">Barcode: {{this.barcode}}</p>
+                    </div>
                     <div class="card-body">
                         <p class="card-text">Total: {{this.quantity}}</p>
                     </div>
