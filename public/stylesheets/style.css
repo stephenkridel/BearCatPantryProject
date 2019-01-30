@@ -237,3 +237,11 @@ footer {
 .remove-from-cart {
   margin-left: 50px;
 }
+
+.input-group {
+  flex-wrap: nowrap;
+}
+
+.first-row {
+  width: 150px;
+}
