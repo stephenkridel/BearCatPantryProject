@@ -139,7 +139,7 @@ router.post( '/deleteItem', function( req, res, next ) {
 } );
 
 
-router.post( "/addItem", upload.single( 'image' ), function( req, res, next ) {
+router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
     var img = fs.readFileSync( req.file.path );
     var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
     item.countDocuments( {

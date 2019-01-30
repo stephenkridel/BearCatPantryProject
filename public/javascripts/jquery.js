@@ -160,7 +160,7 @@ $( function() {
 
 
 $( document ).ready( function() {
-    $( '#addItem' ).submit( function( e ) {
+    $( '#createItem' ).submit( function( e ) {
         e.preventDefault();
         var itemName = $( `#itemName` ).value;
 
