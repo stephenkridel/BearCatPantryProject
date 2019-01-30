@@ -14,30 +14,26 @@
                 <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
                     <div class="form-group">
                         <label for="itemName">Item name</label>
-                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
-                            required>
+                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..." required>
                         <div id="badItemName" class="invalid-feedback" style="display: none">A valid
                             item name id is between 4 and 15 characters.</div>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
-                        <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..."
-                            required>
+                        <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..." required>
                         <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
                             quantity number is between 1 to 3 digits.</div>
                     </div>
                     <div class="form-group">
                         <label for="weight">Weight</label>
-                        <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight..."
-                            required>
+                        <input type="text" class="form-control" name="weight" id="weight" placeholder="Enter weight..." required>
                         <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
                             weight number is between 1 to 3 digits.</div>
                     </div>
                     <div class="form-group">
                         <div id='barcode-scanner'></div>
                         <label for="barcode">Barcode</label>
-                        <input id="barcode" class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
-                            type="text" />
+                        <input id="barcode" class="form-control" name="barcode" placeholder="Click the button to scan an EAN..." type="text" required/>
                         <div id="badBarcodeNumber" class="invalid-feedback" style="display: none">A valid
                             Barcode number is between 8 to 12 digits.</div>
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
@@ -50,7 +46,7 @@
                             <input type="file" name="image" class="custom-file-input" id="image">
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Add Item">
+                    <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
                 </form>
             </div>
         </div>
