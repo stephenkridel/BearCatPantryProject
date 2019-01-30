@@ -1,7 +1,6 @@
 <div class="main-container">
     {{#if items}}
-    <h3>Items in the Pantry</h3>
-<div>{{searchText}}</div>
+    <h5>{{items.length}} results found for "{{searchText}}"</h5>
     <div class="card-container">
         {{#each items}}
         <div class="card mb-3 item-container">
