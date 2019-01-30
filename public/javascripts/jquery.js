@@ -223,6 +223,7 @@ $( document ).ready( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         if ( $( this ).val() > 0 ) {
             $( this ).removeClass( 'is-invalid' )
+            $( this ).addClass( 'is-valid' )
             $.ajax( {
                     method: 'POST',
                     url: '/updateCartItemQuantities',
