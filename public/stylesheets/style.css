@@ -87,6 +87,10 @@
   z-index: 1000;
 }
 
+.nav-link:hover {
+  text-decoration: underline;
+}
+
 footer {
   position: fixed;
   bottom: 0;
@@ -209,6 +213,8 @@ footer {
 .nav-bar-search {
   flex: 1 1 auto;
 }
+
+
 
 .cart-quantity-input.input-number {
   flex: 0 0 100px;
