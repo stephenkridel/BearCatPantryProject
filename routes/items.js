@@ -3,7 +3,10 @@ const multer = require( "multer" );
 var fs = require( 'fs-extra' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' )
+var bodyParser = require('body-parser');
 
+var app = express();
+app.use(bodyParser());
 
 var router = express.Router();
 
@@ -12,6 +15,18 @@ const upload = multer( {
 } );
 
 router.get( '/items', function( req, res, next ) {
+    var search = req.query.searchBar;
+    if  (search.length > 0){
+        console.log("Search string:"+ search)
+        item.find( {"itemName": search}, 'itemName quantity weight img', function( err, items ) {
+            convertToImage( items )
+            res.render( 'items', {
+                items: items,
+                title: "Bearcat Pantry - Items"
+            } );
+        } )
+    }
+    else{
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'items', {
@@ -19,6 +34,8 @@ router.get( '/items', function( req, res, next ) {
             title: "Bearcat Pantry - Items"
         } );
     } )
+    }
+    
 } );
 
 
