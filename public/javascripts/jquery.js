@@ -40,7 +40,6 @@ $( document ).ready( function() {
         } );
     } );
 } );
-//$('#register').removeAttr('disabled');
 
 $( document ).ready( function() {
     $( '#quantity' ).each( function() {
