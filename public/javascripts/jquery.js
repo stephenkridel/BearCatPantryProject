@@ -162,17 +162,11 @@ $( document ).ready( function() {
     $( '.quantity-left-minus' ).on('click', function( ) {
         var cartItemInput = $(this).closest('.input-group').find("#quantity");
         var cartItemInputValue = cartItemInput.val();
-        cartItemInput.val(parseInt(cartItemInputValue) - 1);
-        cartItemInput.change();
-        
-        // if(cartItemInputValue - 1 > 1){ 
-        //     cartItemInput.val(parseInt(cartItemInputValue) - 1);
-        //     cartItemInput.change();
-        // } else{
-        //     $( "#itemName" ).removeClass( 'is-valid' );
-        //     $( "#itemName" ).addClass( 'is-invalid' );
-        //     $( "#badQuantity" ).show();
-        // }
+
+        if(cartItemInputValue - 1 > 0){ 
+            cartItemInput.val(parseInt(cartItemInputValue) - 1);
+            cartItemInput.change();
+        }
     } );
 } );
 
@@ -187,20 +181,27 @@ $( document ).ready( function() {
 
 $( document ).ready( function() {
     $( '#quantity' ).change( function( ) {
-        var itemName = $(this).closest("tr").find('th').html();
-        $.ajax( {
-            method: 'POST',
-            url: '/updateCartItemQuantities',
-            data:{
-                itemName: itemName,
-                quantity: $(this).val()
-            }
-        } )
-        .done( function( msg ) {
-            console.log( "Cart updated" )
-        } )
-        .fail( function( msg ) {
-            console.log( "Cart update failed" )
-        } );
+
+        if($(this).val() > 0){
+            var itemName = $(this).closest("tr").find('th').html();
+            $.ajax( {
+                method: 'POST',
+                url: '/updateCartItemQuantities',
+                data:{
+                    itemName: itemName,
+                    quantity: $(this).val()
+                }
+            } )
+            .done( function( msg ) {
+                console.log( "Cart updated" )
+            } )
+            .fail( function( msg ) {
+                console.log( "Cart update failed" )
+            } );
+        } else{
+            cartItemInput.removeClass( 'is-valid' );
+            cartItemInput.addClass( 'is-invalid' );
+            $( "#badQuantity" ).css('display', 'inline');
+        }
     } );
 } );
