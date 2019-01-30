@@ -163,8 +163,8 @@ $( document ).ready( function() {
         var cartItemInput = $( this ).closest( '.input-group' ).find( "#quantity" );
         var cartItemInputValue = cartItemInput.val();
 
-        if(cartItemInputValue - 1 > 0){ 
-            cartItemInput.val(parseInt(cartItemInputValue) - 1);
+        if ( cartItemInputValue - 1 > 0 ) {
+            cartItemInput.val( parseInt( cartItemInputValue ) - 1 );
             cartItemInput.change();
         }
     } );
@@ -182,25 +182,25 @@ $( document ).ready( function() {
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
-        if( $(this).val() > 0 ){
-        $.ajax( {
-                method: 'POST',
-                url: '/updateCartItemQuantities',
-                data: {
-                    itemName: itemName,
-                    quantity: $( this ).val()
-                }
-            } )
-            .done( function( msg ) {
-                updateShoppingCartTotal();
-            } )
-            .fail( function( msg ) {
-                console.log( "Cart update failed" )
-            } );
-        } else{
-            $(this).removeClass( 'is-valid' );
-            $(this).addClass( 'is-invalid' );
-            $( "#badQuantity" ).css('display', 'inline');
+        if ( $( this ).val() > 0 ) {
+            $.ajax( {
+                    method: 'POST',
+                    url: '/updateCartItemQuantities',
+                    data: {
+                        itemName: itemName,
+                        quantity: $( this ).val()
+                    }
+                } )
+                .done( function( msg ) {
+                    updateShoppingCartTotal();
+                } )
+                .fail( function( msg ) {
+                    console.log( "Cart update failed" )
+                } );
+        } else {
+            $( this ).removeClass( 'is-valid' );
+            $( this ).addClass( 'is-invalid' );
+            $( "#badQuantity" ).css( 'display', 'inline' );
         }
     } );
 } );
