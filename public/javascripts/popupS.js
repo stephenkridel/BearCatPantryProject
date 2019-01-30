@@ -254,8 +254,7 @@
                     tag: 'nav.' + this.options.baseClassName + '-buttons' + ( this.options.additionalButtonHolderClass ? this.options.additionalButtonHolderClass : '' ),
                     children: (
                         ( mode == 'prompt' || mode == 'confirm' ) ?
-                        ( !this.options.flagButtonReverse ? [ btnCancel, btnOk ] : [ btnOk, btnCancel ] ) :
-                        [ btnOk ]
+                        ( !this.options.flagButtonReverse ? [ btnCancel, btnOk ] : [ btnOk, btnCancel ] ) : [ btnOk ]
                     )
                 }
             ];

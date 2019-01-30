@@ -105,7 +105,7 @@ router.get( '/manageItems', function( req, res, next ) {
     var scripts = [ {
         script: '/javascripts/barcodeScanner.js'
     } ];
-    item.find( {}, 'itemName quantity weight img', function( err, items ) {
+    item.find( {}, 'itemName barcode quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'manageItems', {
             items: items,
