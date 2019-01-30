@@ -49,22 +49,27 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '.add-to-cart-button' ).submit( function( e ) {
+    $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
-        var itemName = $( `#itemName` ).value;
-        popupS.window( {
-            mode: 'alert',
-            content: "Added item to cart"
-        } );
-        $( this ).ajaxSubmit( {
-            data: {
-                itemName: itemName,
-                success: function() {
-                    updateShoppingCartTotal();
+        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' )[ 0 ].innerHTML;
+
+        $.ajax( {
+                method: 'POST',
+                url: '/addToCart',
+                data: {
+                    itemName: itemName
                 }
-            }
-        } );
-        return false;
+            } )
+            .done( function() {
+                popupS.window( {
+                    mode: 'alert',
+                    content: "Added item to cart"
+                } );
+                updateShoppingCartTotal();
+            } )
+            .fail( function() {
+                console.log( "Add to cart failed" )
+            } )
     } );
 } );
 
