@@ -5,9 +5,6 @@ $( document ).ready( function() {
         $( this ).prev( 'label' ).text( file );
     } );
 } );
-
-
-
 $( document ).ready( function() {
     $( '#itemName' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -15,15 +12,25 @@ $( document ).ready( function() {
             if ( value.length >= 4 && value.length <= 15 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
+                if (($("#badItemName").is(':hidden')) && 
+                ($("#badQuantityNumber").is(':hidden')) && 
+                ($("#badWeightNumber").is(':hidden')) && 
+                ($("#badBarcodeNumber").is(':hidden'))){
+                $('#addButton').removeAttr('disabled');   
+                 }
                 $( "#badItemName" ).hide();
+                
             } else {
                 $( "#itemName" ).removeClass( 'is-valid' );
                 $( "#itemName" ).addClass( 'is-invalid' );
                 $( "#badItemName" ).show();
-            }
+                $( "#addButton").attr('disabled', 'disabled');
+            }     
         } );
     } );
 } );
+//$('#register').removeAttr('disabled');
+
 $( document ).ready( function() {
     $( '#quantity' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -32,10 +39,17 @@ $( document ).ready( function() {
                 $( "#quantity" ).addClass( 'is-valid' );
                 $( "#quantity" ).removeClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).hide();
+                if (($("#badItemName").is(':hidden')) && 
+                ($("#badQuantityNumber").is(':hidden')) && 
+                ($("#badWeightNumber").is(':hidden')) && 
+                ($("#badBarcodeNumber").is(':hidden'))){
+                $('#addButton').removeAttr('disabled');   
+                 }
             } else {
                 $( "#quantity" ).removeClass( 'is-valid' );
                 $( "#quantity" ).addClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).show();
+                $( "#addButton").attr('disabled', 'disabled');
             }
         } );
     } );
@@ -49,10 +63,17 @@ $( document ).ready( function() {
                 $( "#weight" ).addClass( 'is-valid' );
                 $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
+                if (($("#badItemName").is(':hidden')) && 
+                ($("#badQuantityNumber").is(':hidden')) && 
+                ($("#badWeightNumber").is(':hidden')) && 
+                ($("#badBarcodeNumber").is(':hidden'))){
+                $('#addButton').removeAttr('disabled');   
+                 }
             } else {
                 $( "#weight" ).removeClass( 'is-valid' );
                 $( "#weight" ).addClass( 'is-invalid' );
                 $( "#badWeightNumber" ).show();
+                $( "#addButton").attr('disabled', 'disabled');
             }
         } );
     } );
@@ -65,10 +86,17 @@ $( document ).ready( function() {
                 $( "#barcode" ).addClass( 'is-valid' );
                 $( "#barcode" ).removeClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).hide();
+                if (($("#badItemName").is(':hidden')) && 
+                ($("#badQuantityNumber").is(':hidden')) && 
+                ($("#badWeightNumber").is(':hidden')) && 
+                ($("#badBarcodeNumber").is(':hidden'))){
+                $('#addButton').removeAttr('disabled');   
+                 }
             } else {
                 $( "#barcode" ).removeClass( 'is-valid' );
                 $( "#barcode" ).addClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).show();
+                $( "#addButton").attr('disabled', 'disabled');
             }
         } );
     } );
@@ -119,8 +147,8 @@ $( document ).ready( function() {
                 updateShoppingCartTotal();
             } )
             .fail( function() {
-                console.log( "Add to cart failed" )
-            } )
+                console.log( "Add to cart failed" );
+            } );
     } );
 } );
 
@@ -133,10 +161,10 @@ $( document ).ready( function() {
                 url: '/sendMail'
             } )
             .done( function( msg ) {
-                console.log( "email sent" )
+                console.log( "email sent" );
             } )
             .fail( function( msg ) {
-                console.log( "email failed" )
+                console.log( "email failed" );
             } );
     } );
 } );
