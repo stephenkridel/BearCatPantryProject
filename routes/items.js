@@ -102,11 +102,15 @@ var convertToImage = function( items ) {
 };
 
 router.get( '/manageItems', function( req, res, next ) {
+    var scripts = [ {
+        script: '/javascripts/barcodeScanner.js'
+    } ];
     item.find( {}, 'itemName quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'manageItems', {
             items: items,
-            title: "Bearcat Pantry - Manage Items"
+            title: "Bearcat Pantry - Manage Items",
+            scripts: scripts
         } );
     } )
 } );
