@@ -8,11 +8,11 @@ $( document ).ready( function() {
 
 
 
-$(document).ready(function() {
-    $('#itemName').each(function() {
-        $(this).on('keyup', function() {
+$( document ).ready( function() {
+    $( '#itemName' ).each( function() {
+        $( this ).on( 'keyup', function() {
             var value = $( "#itemName" ).val();
-            if ( value.length >= 4 && value.length<=15) {
+            if ( value.length >= 4 && value.length <= 15 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
                 $( "#badItemName" ).hide();
@@ -21,14 +21,14 @@ $(document).ready(function() {
                 $( "#itemName" ).addClass( 'is-invalid' );
                 $( "#badItemName" ).show();
             }
-        });
-    });
-});
-$(document).ready(function() {
-    $('#quantity').each(function() {
-        $(this).on('keyup', function() {
+        } );
+    } );
+} );
+$( document ).ready( function() {
+    $( '#quantity' ).each( function() {
+        $( this ).on( 'keyup', function() {
             var value = $( "#quantity" ).val();
-            if ( value.length >= 1 && value.length<=3) {
+            if ( value.length >= 1 && value.length <= 3 ) {
                 $( "#quantity" ).addClass( 'is-valid' );
                 $( "#quantity" ).removeClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).hide();
@@ -37,15 +37,15 @@ $(document).ready(function() {
                 $( "#quantity" ).addClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).show();
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-$(document).ready(function() {
-    $('#weight').each(function() {
-        $(this).on('keyup', function() {
+$( document ).ready( function() {
+    $( '#weight' ).each( function() {
+        $( this ).on( 'keyup', function() {
             var value = $( "#weight" ).val();
-            if ( value.length >= 1 && value.length<=3) {
+            if ( value.length >= 1 && value.length <= 3 ) {
                 $( "#weight" ).addClass( 'is-valid' );
                 $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
@@ -54,14 +54,14 @@ $(document).ready(function() {
                 $( "#weight" ).addClass( 'is-invalid' );
                 $( "#badWeightNumber" ).show();
             }
-        });
-    });
-});
-$(document).ready(function() {
-    $('#barcode').each(function() {
-        $(this).on('keyup', function() {
+        } );
+    } );
+} );
+$( document ).ready( function() {
+    $( '#barcode' ).each( function() {
+        $( this ).on( 'keyup', function() {
             var value = $( "#barcode" ).val();
-            if ( value.length >= 8 && value.length<=12) {
+            if ( value.length >= 8 && value.length <= 12 ) {
                 $( "#barcode" ).addClass( 'is-valid' );
                 $( "#barcode" ).removeClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).hide();
@@ -70,9 +70,9 @@ $(document).ready(function() {
                 $( "#barcode" ).addClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).show();
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
 
 $( document ).ready( function() {
@@ -100,22 +100,27 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '.add-to-cart-button' ).submit( function( e ) {
+    $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
-        var itemName = $( `#itemName` ).value;
-        popupS.window( {
-            mode: 'alert',
-            content: "Added item to cart"
-        } );
-        $( this ).ajaxSubmit( {
-            data: {
-                itemName: itemName,
-                success: function() {
-                    updateShoppingCartTotal();
+        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' )[ 0 ].innerHTML;
+
+        $.ajax( {
+                method: 'POST',
+                url: '/addToCart',
+                data: {
+                    itemName: itemName
                 }
-            }
-        } );
-        return false;
+            } )
+            .done( function() {
+                popupS.window( {
+                    mode: 'alert',
+                    content: "Added item to cart"
+                } );
+                updateShoppingCartTotal();
+            } )
+            .fail( function() {
+                console.log( "Add to cart failed" )
+            } )
     } );
 } );
 
