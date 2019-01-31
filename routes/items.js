@@ -3,11 +3,6 @@ const multer = require( "multer" );
 var fs = require( 'fs-extra' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' )
-var bodyParser = require('body-parser');
-
-var app = express();
-app.use(bodyParser());
-
 var router = express.Router();
 
 const upload = multer( {
