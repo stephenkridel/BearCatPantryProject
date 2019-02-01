@@ -151,8 +151,13 @@ $( document ).ready( function() {
             } )
             .done( function() {
                 popupS.window( {
-                    mode: 'alert',
-                    content: "Added item to cart"
+                    mode: 'confirm',
+                    content: "Added item to cart",
+                    labelOk: 'View Cart',
+                    labelCancel: 'Close',
+                    onSubmit: function() {
+                        window.location.href = "/cart";
+                    },
                 } );
                 updateShoppingCartTotal();
             } )

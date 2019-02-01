@@ -4,13 +4,13 @@ var router = express.Router();
 
 router.get( '/home', function( req, res, next ) {
     res.render( "home", {
-        title: "Bearcat Pantry - Home"
+        title: "Home - Bearcat Pantry"
     } );
 } );
 
 router.get( '/', function( req, res ) {
     res.render( "home", {
-        title: "Bearcat Pantry - Home"
+        title: "Home - Bearcat Pantry"
     } );
 } );
 
