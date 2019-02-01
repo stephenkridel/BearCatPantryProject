@@ -234,7 +234,7 @@ $( document ).ready( function() {
 } );
 
 $( document ).ready( function() {
-    $( '.remove-from-cart' ).change( function() {
+    $( '.remove-from-cart' ).on("click", function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
         $.ajax( {
             method: 'POST',
