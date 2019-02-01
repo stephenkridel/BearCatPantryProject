@@ -235,7 +235,8 @@ $( document ).ready( function() {
 
 $( document ).ready( function() {
     $( '.remove-from-cart' ).on("click", function() {
-        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        var itemRow = $( this ).closest( "tr" );
+        var itemName = itemRow.find( 'th' ).html();
         $.ajax( {
             method: 'POST',
             url: '/removeItemFromCart',
@@ -244,6 +245,7 @@ $( document ).ready( function() {
             }
         } ).done( function( msg ) {
                 updateShoppingCartTotal();
+                itemRow.remove();
         } ).fail( function( msg ) {
                 console.log( "Could not delete item" )
         } );
