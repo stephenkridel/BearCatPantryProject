@@ -211,6 +211,7 @@ footer {
 
 .nav-bar-search {
   flex: 1 1 auto;
+  flex-wrap: nowrap;
 }
 
 .cart-quantity-input.input-number {

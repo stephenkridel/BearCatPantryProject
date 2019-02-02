@@ -22,17 +22,4 @@ router.get( '/about', function( req, res, next ) {
     res.render( "about", {title: "Bearcat Pantry - About"} );
 } );
 
-
-
-
-router.post( '/sendMail', function( req, res, next ) {
-    transporter.sendMail( mailOptions, function( error, info ) {
-        if ( error ) {
-            console.log( error );
-        } else {
-            console.log( 'Email sent: ' + info.response );
-        }
-    } );
-} );
-
 module.exports = router;

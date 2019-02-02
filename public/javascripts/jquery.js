@@ -225,7 +225,7 @@ $( document ).ready( function() {
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
-        if ( $( this ).val() > 0 ) {
+        if ( parseInt( $( this ).val() ) > 0 ) {
             $( this ).removeClass( 'is-invalid' )
             $( this ).addClass( 'is-valid' )
             $.ajax( {
