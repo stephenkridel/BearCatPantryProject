@@ -15,7 +15,13 @@ $( document ).ready( function() {
         }
     } );
 } );
-
+$( document ).ready( function() {
+    $( "#itemName" ).keypress( function( e ) {
+        if ( String.fromCharCode( e.which ).match( /[^A-Za-z ]/ ) ) {
+            e.preventDefault()
+        }
+    } );
+} );
 $( document ).ready( function() {
     $( '#itemName' ).each( function() {
         $( this ).on( 'keyup', function() {

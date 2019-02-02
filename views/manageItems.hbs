@@ -14,9 +14,10 @@
                 <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
                     <div class="form-group">
                         <label for="itemName">Item name</label>
-                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..." required>
+                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
+                            required>
                         <div id="badItemName" class="invalid-feedback" style="display: none">A valid
-                            item name id is between 4 and 15 characters.</div>
+                            item name id is between 4 and 15 characters with no special characters.</div>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
