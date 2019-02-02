@@ -96,7 +96,8 @@ router.post( '/addToCart', function( req, res, next ) {
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ]
+                } ],
+                status: 0
             } );
             myData.save()
                 .then( item => {

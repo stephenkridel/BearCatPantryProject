@@ -43,7 +43,7 @@ router.get( '/totalCartItems', function( req, res, next ) {
     } )
 } );
 
-router.post('/updateCartItemQuantities', function( req, res, next){
+router.post( '/updateCartItemQuantities', function( req, res, next ) {
     // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
     cart.countDocuments( {
         user: process.env.USERNAME
@@ -99,12 +99,12 @@ router.post('/updateCartItemQuantities', function( req, res, next){
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ]
+                } ],
+                status: 0
             } );
             myData.save()
                 .then( item => {
                     res.sendStatus( 200 );
-
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );
@@ -113,14 +113,14 @@ router.post('/updateCartItemQuantities', function( req, res, next){
     } );
 } );
 
-router.post('/removeItemFromCart', function( req, res, next){
+router.post( '/removeItemFromCart', function( req, res, next ) {
     cart.deleteOne( {
-        "user": process.env.USERNAME, 
-        'itemName': req.body.itemName
-    }, function(err, obj){})
-    .then( item => {
-        res.sendStatus( 200 );
-    } )
+            "user": process.env.USERNAME,
+            'itemName': req.body.itemName
+        }, function( err, obj ) {} )
+        .then( item => {
+            res.sendStatus( 200 );
+        } )
 } );
 
 module.exports = router;
