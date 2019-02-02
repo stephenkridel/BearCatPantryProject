@@ -159,6 +159,9 @@ $( document ).ready( function() {
                 popupS.window( {
                     mode: 'confirm',
                     content: "Added item to cart",
+                    className: 'custom-popupS-class',
+                    additionalButtonOkClass: 'btn btn-primary',
+                    additionalButtonCancelClass: 'btn btn-primary',
                     labelOk: 'View Cart',
                     labelCancel: 'Close',
                     onSubmit: function() {
@@ -269,6 +272,36 @@ $( document ).ready( function() {
             updateShoppingCartTotal();
         } ).fail( function( msg ) {
             console.log( "Could not delete item" )
+        } );
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '#checkout' ).on( 'click', function() {
+        $.ajax( {
+            method: 'POST',
+            url: '/checkout'
+        } ).done( function( msg ) {
+            location.reload();
+            console.log( "Order created!" )
+        } ).fail( function( msg ) {
+            console.log( "Order failed!" );
+            s
+        } );
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '#cancelOrder' ).on( 'click', function() {
+        $.ajax( {
+            method: 'POST',
+            url: '/cancelOrder'
+        } ).done( function( msg ) {
+            location.reload();
+            console.log( "Order canceled!" )
+        } ).fail( function( msg ) {
+            console.log( "Order cancel failed!" );
+            s
         } );
     } );
 } );

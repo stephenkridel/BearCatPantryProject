@@ -247,8 +247,22 @@ footer {
   width: 150px;
 }
 
-.invalid-quantity{
+.invalid-quantity {
   text-align: center;
   padding-top: 10px;
   margin-top: 0;
+}
+
+.custom-popupS-class .popupS-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 15px;
+}
+
+.custom-popupS-class .popupS-button-ok {
+  height: 36px;
+}
+
+.custom-popupS-class #popupS-button-cancel {
+  margin-right: 15px;
 }

@@ -27,7 +27,7 @@ app.use( bodyParser.urlencoded( {
 } ) );
 
 mongoose.Promise = global.Promise;
-mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry-ahnj6.mongodb.net/test?retryWrites=true`, {
+mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry-ahnj6.mongodb.net/Pantry?retryWrites=true`, {
     useNewUrlParser: true
 } ).then(
     () => {

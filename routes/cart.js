@@ -1,26 +1,25 @@
 var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var _ = require( 'lodash' );
-
+var nodemailer = require( 'nodemailer' );
 
 var router = express.Router();
 
 router.get( '/cart', function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
-    }, 'items', function( err, itemInCart ) {
-        if ( itemInCart && itemInCart.length > 0 ) {
+    }, 'items status', function( err, cart ) {
+        if ( cart && cart.length > 0 ) {
             res.render( 'cart', {
-                itemInCart: itemInCart[ 0 ].items,
-                title: "Shopping Cart - Bearcat Pantry"
-
+                itemInCart: cart[ 0 ].items,
+                title: "Shopping Cart - Bearcat Pantry",
+                cartStatus: cart[ 0 ].status
             } );
         } else {
             res.render( 'cart', {
                 title: "Shopping Cart - Bearcat Pantry"
             } );
         }
-
     } )
 } );
 
@@ -121,6 +120,77 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
         .then( item => {
             res.sendStatus( 200 );
         } )
+} );
+
+var transporter = nodemailer.createTransport( {
+    service: 'gmail',
+    auth: {
+        user: 'bearcatpantry@gmail.com',
+        pass: process.env.EMAIL_PW
+    }
+} );
+
+
+router.post( '/checkout', function( req, res, next ) {
+    // checkout ie. change status from 0 -> 1
+    // May be better to made an orderModel obj
+    cart.updateOne( {
+        "user": process.env.USERNAME
+    }, {
+        $set: {
+            "status": 1
+        }
+    } ).then( () => {
+        cart.find( {
+            "user": process.env.USERNAME
+        }, 'items', function( err, cart ) {
+            if ( cart && cart.length > 0 ) {
+                var emailText = formatCartEmail( cart[ 0 ].items );
+                var mailOptions = {
+                    from: 'bearcatpantry@gmail.com',
+                    // Get user's email
+                    to: 'kumpaw@mail.uc.edu',
+                    subject: `${process.env.USERNAME}'s Pantry Order`,
+                    text: emailText
+                };
+                transporter.sendMail( mailOptions, function( error, info ) {
+                    if ( error ) {
+                        console.log( error );
+                    } else {
+                        res.sendStatus( 200 );
+                        console.log( 'Order created and email sent: ' + info.response );
+                    }
+                } );
+            } else {
+                console.log( "failed" );
+                res.sendStatus( 403 );
+            }
+        } )
+    } )
+} );
+
+var formatCartEmail = function( cart ) {
+    var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: \n";
+    var orderDetails = "";
+    _.forEach( cart, function( item ) {
+        if ( item ) {
+            orderDetails += `${item.itemName}x${item.quantity}\n`;
+        }
+    } );
+    var final = "\nPlease come to the Pantry to pick up your order.\n\n Thanks,\n The Bearcat Pantry Team"
+    return greeting + orderDetails + final
+}
+
+router.post( '/cancelOrder', function( req, res, next ) {
+    cart.update( {
+        "user": process.env.USERNAME
+    }, {
+        $set: {
+            "status": 0
+        }
+    } ).then( item => {
+        res.sendStatus( 200 );
+    } )
 } );
 
 module.exports = router;
