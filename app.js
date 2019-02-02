@@ -8,7 +8,7 @@ let handlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
 var compression = require( 'compression' );
-var dotenv = require('dotenv').config()
+var dotenv = require( 'dotenv' ).config()
 
 
 
@@ -31,7 +31,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry-ahnj6.mongodb.net/test?retryWrites=true`, {
     useNewUrlParser: true
 } ).then(
-    () => { /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ },
+    () => {
+        /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
+    },
     err => {
         console.log( err )
     }
@@ -64,7 +66,6 @@ app.use( '/', aboutRouter );
 app.use( '/', cartRouter );
 app.use( '/', homeRouter );
 app.use( '/', testRouter );
-
 
 
 // catch 404 and forward to error handler
