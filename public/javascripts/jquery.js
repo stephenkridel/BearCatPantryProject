@@ -126,7 +126,9 @@ $( document ).ready( function() {
 
         popupS.window( {
             mode: 'alert',
-            content: "New item created"
+            content: `${itemName} has been created`,
+            className: 'custom-popupS-class',
+            additionalButtonOkClass: 'btn btn-primary'
         } );
         $( this ).ajaxSubmit( {
             data: {
@@ -158,7 +160,7 @@ $( document ).ready( function() {
             .done( function() {
                 popupS.window( {
                     mode: 'confirm',
-                    content: "Added item to cart",
+                    content: `Added ${itemName} to cart`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
                     additionalButtonCancelClass: 'btn btn-primary',
@@ -278,12 +280,19 @@ $( document ).ready( function() {
 
 $( document ).ready( function() {
     $( '#checkout' ).on( 'click', function() {
+        popupS.window( {
+            mode: 'alert',
+            content: {
+                html: `<p>Generating order</p><br><div class="loader"></div>`
+            },
+            className: 'custom-popupS-class',
+            additionalButtonOkClass: 'btn btn-primary',
+        } );
         $.ajax( {
             method: 'POST',
             url: '/checkout'
         } ).done( function( msg ) {
             location.reload();
-            console.log( "Order created!" )
         } ).fail( function( msg ) {
             console.log( "Order failed!" );
             s

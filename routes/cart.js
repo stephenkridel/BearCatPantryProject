@@ -2,6 +2,7 @@ var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var _ = require( 'lodash' );
 var nodemailer = require( 'nodemailer' );
+var QRCode = require( 'qrcode' )
 
 var router = express.Router();
 
@@ -131,6 +132,8 @@ var transporter = nodemailer.createTransport( {
 } );
 
 
+
+// CLEAN ME UP. 
 router.post( '/checkout', function( req, res, next ) {
     // checkout ie. change status from 0 -> 1
     // May be better to made an orderModel obj
@@ -145,22 +148,38 @@ router.post( '/checkout', function( req, res, next ) {
             "user": process.env.USERNAME
         }, 'items', function( err, cart ) {
             if ( cart && cart.length > 0 ) {
-                var emailText = formatCartEmail( cart[ 0 ].items );
-                var mailOptions = {
-                    from: 'bearcatpantry@gmail.com',
-                    // Get user's email
-                    to: 'kumpaw@mail.uc.edu',
-                    subject: `${process.env.USERNAME}'s Pantry Order`,
-                    text: emailText
-                };
-                transporter.sendMail( mailOptions, function( error, info ) {
-                    if ( error ) {
-                        console.log( error );
-                    } else {
-                        res.sendStatus( 200 );
-                        console.log( 'Order created and email sent: ' + info.response );
+
+                var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br>";
+                var orderDetails = "";
+                _.forEach( cart[ 0 ].items, function( item ) {
+                    if ( item ) {
+                        orderDetails += `${item.itemName}x${item.quantity}<br>`;
                     }
                 } );
+                var final = "<br>Your order can be found at localhost:3000/cart<br>Please come to the Pantry to pick up your order.<br><br> Thanks,<br>The Bearcat Pantry Team"
+                var message = greeting + orderDetails + final;
+
+
+                QRCode.toDataURL( process.env.USERNAME, function( err, url ) {
+                    // var html = `<p>${message}</p><img src="${url}"></img>`;\
+                    var qrHtml = `<p>${message}</p><br><img src='${url}'></img>`;
+                    var mailOptions = {
+                        from: 'bearcatpantry@gmail.com',
+                        // Get user's email
+                        to: 'kumpaw@mail.uc.edu',
+                        subject: `${process.env.USERNAME}'s Pantry Order`,
+                        html: qrHtml
+                    };
+                    transporter.sendMail( mailOptions, function( error, info ) {
+                        if ( error ) {
+                            console.log( error );
+                        } else {
+                            res.sendStatus( 200 );
+                            console.log( 'Order created and email sent: ' + info.response );
+                        }
+                    } );
+                } )
+
             } else {
                 console.log( "failed" );
                 res.sendStatus( 403 );
@@ -169,17 +188,6 @@ router.post( '/checkout', function( req, res, next ) {
     } )
 } );
 
-var formatCartEmail = function( cart ) {
-    var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: \n";
-    var orderDetails = "";
-    _.forEach( cart, function( item ) {
-        if ( item ) {
-            orderDetails += `${item.itemName}x${item.quantity}\n`;
-        }
-    } );
-    var final = "\nPlease come to the Pantry to pick up your order.\n\n Thanks,\n The Bearcat Pantry Team"
-    return greeting + orderDetails + final
-}
 
 router.post( '/cancelOrder', function( req, res, next ) {
     cart.update( {

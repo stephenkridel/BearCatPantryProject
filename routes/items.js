@@ -27,8 +27,8 @@ router.get( '/items', function( req, res, next ) {
             } );
         } );
     } else {
-        item.find( {}, 'itemName quantity weight img', function( err, items ) {
-            convertToImage( items )
+        item.find( {}, 'itemName quantity img', function( err, items ) {
+            convertToImage( items );
             res.render( 'items', {
                 items: items,
                 title: "Items - Bearcat Pantry"
