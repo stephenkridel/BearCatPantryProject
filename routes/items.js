@@ -12,9 +12,13 @@ const upload = multer( {
 router.get( '/items', function( req, res, next ) {
     //var search = req.query.searchBar;
     var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
-    if  (search && search.length > 0){
-        console.log("Search string:"+ search)
-        item.find( {"itemName": { "$regex": search, "$options": "i"}}, 'itemName quantity weight img', function( err, items ) {
+    if ( search && search.length > 0 ) {
+        item.find( {
+            "itemName": {
+                "$regex": search,
+                "$options": "i"
+            }
+        }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
             res.render( 'items', {
                 items: items,
@@ -22,17 +26,16 @@ router.get( '/items', function( req, res, next ) {
                 searchText: search
             } );
         } );
-    }
-    else{
-    item.find( {}, 'itemName quantity weight img', function( err, items ) {
-        convertToImage( items )
-        res.render( 'items', {
-            items: items,
-            title: "Items - Bearcat Pantry"
+    } else {
+        item.find( {}, 'itemName quantity weight img', function( err, items ) {
+            convertToImage( items )
+            res.render( 'items', {
+                items: items,
+                title: "Items - Bearcat Pantry"
+            } );
         } );
-    } );
     }
-    
+
 } );
 
 
