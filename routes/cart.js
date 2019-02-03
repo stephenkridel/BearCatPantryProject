@@ -149,7 +149,7 @@ router.post( '/checkout', function( req, res, next ) {
         }, 'items', function( err, cart ) {
             if ( cart && cart.length > 0 ) {
 
-                var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br>";
+                var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br><br>";
                 var orderDetails = "";
                 _.forEach( cart[ 0 ].items, function( item ) {
                     if ( item ) {
@@ -161,8 +161,7 @@ router.post( '/checkout', function( req, res, next ) {
 
 
                 QRCode.toDataURL( process.env.USERNAME, function( err, url ) {
-                    // var html = `<p>${message}</p><img src="${url}"></img>`;\
-                    var qrHtml = `<p>${message}</p><br><img src='${url}'></img>`;
+                    var qrHtml = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
                     var mailOptions = {
                         from: 'bearcatpantry@gmail.com',
                         // Get user's email

@@ -283,7 +283,7 @@ $( document ).ready( function() {
         popupS.window( {
             mode: 'alert',
             content: {
-                html: `<p>Generating order</p><br><div class="loader"></div>`
+                html: `<p>Generating order</p><div class="loader"></div>`
             },
             className: 'custom-popupS-class',
             additionalButtonOkClass: 'btn btn-primary',
