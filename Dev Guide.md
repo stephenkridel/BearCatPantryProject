@@ -1,31 +1,32 @@
 # Setup
 
 Download this:
+
 - https://code.visualstudio.com/
 - https://nodejs.org/en/
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-Open command prompt and head to your documents using `cd ` ie. "C:\Users\Andrew\Documents"
+Open command prompt and head to your documents using `cd` ie. "C:\Users\Andrew\Documents"
 
 `mkdir git`
 
 `cd git`
 
-`git clone https://github.uc.edu/severswa/BearCatPantryProject.git` 
+`git clone https://github.uc.edu/severswa/BearCatPantryProject.git`
 
 `cd BearCatPantryProject`
 
-`code . `
+`code .`
 
 This will open Visual Studio Code. I then save the project in /BearCatPantryProject as bearcat.code-workspace. In the future you can run `code bearcat.code-workspace` to pick up right where you left off.
 
 Next, install all of the recommended extensions. Select the extension button the left-side wall and install everything.
 
-Open the terminal in VSC using ctrl+alt+T and run  
+Open the terminal in VSC using ctrl+alt+T and run
 
 `npm install` - If this fails, restart your computer
 
-To get to the website run use `npm start` 
+To get to the website run use `npm start`
 and go to `http://localhost:3000`
 
 When you make code changes, all you have to do is refresh the page to see your changes.
@@ -33,29 +34,26 @@ When you make code changes, all you have to do is refresh the page to see your c
 You won't be able to add/view the database until your IP is whitelisted. I guess for security reasons cuz it's the free version.
 
 # Testing
+
 ### Run the puppeteer tests:
 
 `npm run puppeteer`
 
 Puppeteer API: https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.md
 
-###  Run the unit tests:
+### Run the unit tests:
 
 `npm test`
 
 How to use mocha: https://mochajs.org/#getting-started
 
-
-
-
-
-
 # Useful links
+
 - https://www.npmjs.com/ - find cool 3rd party packages we can borrow
-- https://expressjs.com/ 
+- https://expressjs.com/
 - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
 - https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters?fastPoll=true
-  - Admin login: 
+  - Admin login:
   - Username: bearcatAdmin
   - PW: secret
 - https://bootswatch.com/flatly/ - May want to find an agreed upon stylesheet
@@ -65,13 +63,9 @@ How to use mocha: https://mochajs.org/#getting-started
 - https://serratus.github.io/quaggaJS/ JS Barcode Scanner
 - https://github.com/LazarSoft/jsqrcode Barcode Scanner
 
-
-
 # Production environment links/concerns
+
 - [PM2 Production Environment Process Manager](https://github.com/Unitech/pm2)
 - [MongoDB Costs](https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters/edit/BearcatPantry)
-
-
-
-
-
+- [EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
+- [Deployment guide](https://medium.com/@Keithweaver_/setting-up-mern-stack-on-aws-ec2-6dc599be4737)
