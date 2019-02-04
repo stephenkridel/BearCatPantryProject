@@ -5,6 +5,23 @@ $( document ).ready( function() {
         $( this ).prev( 'label' ).text( file );
     } );
 } );
+
+$( document ).ready( function() {
+    $( document ).click( function( event ) {
+        var clickover = $( event.target );
+        var _opened = $( ".navbar-collapse" ).hasClass( "show" );
+        if ( _opened === true && !clickover.hasClass( "navbar-toggle" ) && !clickover.hasClass( "form-control" ) ) {
+            $( "button.navbar-toggler" ).click();
+        }
+    } );
+} );
+$( document ).ready( function() {
+    $( "#itemName" ).keypress( function( e ) {
+        if ( String.fromCharCode( e.which ).match( /[^A-Za-z ]/ ) ) {
+            e.preventDefault()
+        }
+    } );
+} );
 $( document ).ready( function() {
     $( '#itemName' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -12,24 +29,23 @@ $( document ).ready( function() {
             if ( value.length >= 4 && value.length <= 15 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
-                if (($("#badItemName").is(':hidden')) && 
-                ($("#badQuantityNumber").is(':hidden')) && 
-                ($("#badWeightNumber").is(':hidden')) && 
-                ($("#badBarcodeNumber").is(':hidden'))){
-                $('#addButton').removeAttr('disabled');   
-                 }
+                if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
+                    ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
+                    $( '#addButton' ).removeAttr( 'disabled' );
+                }
                 $( "#badItemName" ).hide();
-                
+
             } else {
                 $( "#itemName" ).removeClass( 'is-valid' );
                 $( "#itemName" ).addClass( 'is-invalid' );
                 $( "#badItemName" ).show();
-                $( "#addButton").attr('disabled', 'disabled');
-            }     
+                $( "#addButton" ).attr( 'disabled', 'disabled' );
+            }
         } );
     } );
 } );
-//$('#register').removeAttr('disabled');
 
 $( document ).ready( function() {
     $( '#quantity' ).each( function() {
@@ -39,17 +55,17 @@ $( document ).ready( function() {
                 $( "#quantity" ).addClass( 'is-valid' );
                 $( "#quantity" ).removeClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).hide();
-                if (($("#badItemName").is(':hidden')) && 
-                ($("#badQuantityNumber").is(':hidden')) && 
-                ($("#badWeightNumber").is(':hidden')) && 
-                ($("#badBarcodeNumber").is(':hidden'))){
-                $('#addButton').removeAttr('disabled');   
-                 }
+                if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
+                    ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
+                    $( '#addButton' ).removeAttr( 'disabled' );
+                }
             } else {
                 $( "#quantity" ).removeClass( 'is-valid' );
                 $( "#quantity" ).addClass( 'is-invalid' );
                 $( "#badQuantityNumber" ).show();
-                $( "#addButton").attr('disabled', 'disabled');
+                $( "#addButton" ).attr( 'disabled', 'disabled' );
             }
         } );
     } );
@@ -63,17 +79,17 @@ $( document ).ready( function() {
                 $( "#weight" ).addClass( 'is-valid' );
                 $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
-                if (($("#badItemName").is(':hidden')) && 
-                ($("#badQuantityNumber").is(':hidden')) && 
-                ($("#badWeightNumber").is(':hidden')) && 
-                ($("#badBarcodeNumber").is(':hidden'))){
-                $('#addButton').removeAttr('disabled');   
-                 }
+                if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
+                    ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
+                    $( '#addButton' ).removeAttr( 'disabled' );
+                }
             } else {
                 $( "#weight" ).removeClass( 'is-valid' );
                 $( "#weight" ).addClass( 'is-invalid' );
                 $( "#badWeightNumber" ).show();
-                $( "#addButton").attr('disabled', 'disabled');
+                $( "#addButton" ).attr( 'disabled', 'disabled' );
             }
         } );
     } );
@@ -86,17 +102,17 @@ $( document ).ready( function() {
                 $( "#barcode" ).addClass( 'is-valid' );
                 $( "#barcode" ).removeClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).hide();
-                if (($("#badItemName").is(':hidden')) && 
-                ($("#badQuantityNumber").is(':hidden')) && 
-                ($("#badWeightNumber").is(':hidden')) && 
-                ($("#badBarcodeNumber").is(':hidden'))){
-                $('#addButton').removeAttr('disabled');   
-                 }
+                if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
+                    ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
+                    ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
+                    $( '#addButton' ).removeAttr( 'disabled' );
+                }
             } else {
                 $( "#barcode" ).removeClass( 'is-valid' );
                 $( "#barcode" ).addClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).show();
-                $( "#addButton").attr('disabled', 'disabled');
+                $( "#addButton" ).attr( 'disabled', 'disabled' );
             }
         } );
     } );
@@ -110,7 +126,9 @@ $( document ).ready( function() {
 
         popupS.window( {
             mode: 'alert',
-            content: "New item created"
+            content: `${itemName} has been created`,
+            className: 'custom-popupS-class',
+            additionalButtonOkClass: 'btn btn-primary'
         } );
         $( this ).ajaxSubmit( {
             data: {
@@ -141,8 +159,16 @@ $( document ).ready( function() {
             } )
             .done( function() {
                 popupS.window( {
-                    mode: 'alert',
-                    content: "Added item to cart"
+                    mode: 'confirm',
+                    content: `Added ${itemName} to cart`,
+                    className: 'custom-popupS-class',
+                    additionalButtonOkClass: 'btn btn-primary',
+                    additionalButtonCancelClass: 'btn btn-primary',
+                    labelOk: 'View Cart',
+                    labelCancel: 'Close',
+                    onSubmit: function() {
+                        window.location.href = "/cart";
+                    },
                 } );
                 updateShoppingCartTotal();
             } )
@@ -210,7 +236,9 @@ $( document ).ready( function() {
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
         var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
-        if ( $( this ).val() > 0 ) {
+        if ( parseInt( $( this ).val() ) > 0 ) {
+            $( this ).removeClass( 'is-invalid' )
+            $( this ).addClass( 'is-valid' )
             $.ajax( {
                     method: 'POST',
                     url: '/updateCartItemQuantities',
@@ -225,11 +253,11 @@ $( document ).ready( function() {
                 .fail( function( msg ) {
                     console.log( "Cart update failed" )
                 } );
-            } else{
-                $(this).removeClass( 'is-valid' );
-                $(this).addClass( 'is-invalid' );
-                $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
-            }
+        } else {
+            $( this ).removeClass( 'is-valid' );
+            $( this ).addClass( 'is-invalid' );
+            $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
+        }
     } );
 } );
 
@@ -246,8 +274,46 @@ $( document ).ready( function() {
         } ).done( function( msg ) {
                 updateShoppingCartTotal();
                 itemRow.remove();
+            updateShoppingCartTotal();
         } ).fail( function( msg ) {
-                console.log( "Could not delete item" )
+            console.log( "Could not delete item" )
+        } );
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '#checkout' ).on( 'click', function() {
+        popupS.window( {
+            mode: 'alert',
+            content: {
+                html: `<p>Generating order</p><div class="loader"></div>`
+            },
+            className: 'custom-popupS-class',
+            additionalButtonOkClass: 'btn btn-primary',
+        } );
+        $.ajax( {
+            method: 'POST',
+            url: '/checkout'
+        } ).done( function( msg ) {
+            location.reload();
+        } ).fail( function( msg ) {
+            console.log( "Order failed!" );
+            s
+        } );
+    } );
+} );
+
+$( document ).ready( function() {
+    $( '#cancelOrder' ).on( 'click', function() {
+        $.ajax( {
+            method: 'POST',
+            url: '/cancelOrder'
+        } ).done( function( msg ) {
+            location.reload();
+            console.log( "Order canceled!" )
+        } ).fail( function( msg ) {
+            console.log( "Order cancel failed!" );
+            s
         } );
     } );
 } );

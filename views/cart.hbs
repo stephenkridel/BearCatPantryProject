@@ -1,4 +1,12 @@
 <div class="main-container">
+    {{#if cartStatus}}
+    <h4>Your Order Information:</h4>
+    {{#each itemInCart}}
+    {{this.itemName}}x{{this.quantity}}
+    <br>
+    {{/each}}
+    <button type="button" class="btn btn-primary" id="cancelOrder">Cancel Your Order(Only for testing)</button>
+    {{else}}
     {{#if itemInCart}}
     <h4> Items in your cart</h4>
     <table class="table table-hover cart-table">
@@ -21,7 +29,7 @@
                             </button>
                         </span>
                         <input type="text" id="quantity" name="quantity" class="form-control input-number cart-quantity-input"
-                            value={{this.quantity}} min="1" max="100">
+                            value={{this.quantity}}>
                         <span class="input-group-btn">
                             <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus"
                                 data-field="">
@@ -33,7 +41,8 @@
                         <button type="button" class="btn btn-danger remove-from-cart">
                             Remove
                         </button>
-                        <div id="badQuantity" class="invalid-feedback" style="display: none">Item quantity must be greater than 0.</div>
+                        <div id="badQuantity" class="invalid-feedback invalid-quantity" style="display: none">Item
+                            quantity must be greater than 0.</div>
                     </div>
                 </td>
             </tr>
@@ -41,8 +50,7 @@
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-primary">Checkout</button>
-
+    <button type="button" class="btn btn-primary" id="checkout">Checkout</button>
 
     {{else}}
     <li class="list-group-item">
@@ -50,5 +58,6 @@
             No items in shopping cart
         </h4>
     </li>
+    {{/if}}
     {{/if}}
 </div>

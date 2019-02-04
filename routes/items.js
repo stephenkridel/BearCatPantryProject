@@ -3,11 +3,6 @@ const multer = require( "multer" );
 var fs = require( 'fs-extra' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' )
-var bodyParser = require('body-parser');
-
-var app = express();
-app.use(bodyParser());
-
 var router = express.Router();
 
 const upload = multer( {
@@ -17,27 +12,30 @@ const upload = multer( {
 router.get( '/items', function( req, res, next ) {
     //var search = req.query.searchBar;
     var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
-    if  (search && search.length > 0){
-        console.log("Search string:"+ search)
-        item.find( {"itemName": { "$regex": search, "$options": "i"}}, 'itemName quantity weight img', function( err, items ) {
+    if ( search && search.length > 0 ) {
+        item.find( {
+            "itemName": {
+                "$regex": search,
+                "$options": "i"
+            }
+        }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
             res.render( 'items', {
                 items: items,
-                title: "Bearcat Pantry - Items",
+                title: "Items - Bearcat Pantry",
                 searchText: search
             } );
         } );
-    }
-    else{
-    item.find( {}, 'itemName quantity weight img', function( err, items ) {
-        convertToImage( items )
-        res.render( 'items', {
-            items: items,
-            title: "Bearcat Pantry - Items"
+    } else {
+        item.find( {}, 'itemName quantity img', function( err, items ) {
+            convertToImage( items );
+            res.render( 'items', {
+                items: items,
+                title: "Items - Bearcat Pantry"
+            } );
         } );
-    } );
     }
-    
+
 } );
 
 
@@ -45,20 +43,20 @@ router.get( '/items', function( req, res, next ) {
 router.post( '/addToCart', function( req, res, next ) {
     // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
     cart.countDocuments( {
-        user: "testUser"
+        user: process.env.USERNAME
     }, function( err, count ) {
         // Find out if a user already has a cart in mongoDB
         if ( count > 0 ) {
             // Find out if the current user's cart already has the selected item in the cart.
             cart.countDocuments( {
-                "user": "testUser",
+                "user": process.env.USERNAME,
                 "items.itemName": req.body.itemName,
             }, function( err, count ) {
                 // If item doesnt exist in the cart, push it on
                 if ( count === 0 ) {
                     // push new item to cart
                     cart.update( {
-                        "user": "testUser"
+                        "user": process.env.USERNAME
                     }, {
                         "$push": {
                             items: {
@@ -72,7 +70,7 @@ router.post( '/addToCart', function( req, res, next ) {
                 } else {
                     // else, update existing shopping cart item to increment 1 time
                     cart.findOneAndUpdate( {
-                            "user": "testUser",
+                            "user": process.env.USERNAME,
                         }, {
                             $inc: {
                                 "items.$[elem].quantity": 1
@@ -94,11 +92,12 @@ router.post( '/addToCart', function( req, res, next ) {
         } else {
             // Else, initialize a cart for the new user, and add the item
             var myData = new cart( {
-                user: "testUser",
+                user: process.env.USERNAME,
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ]
+                } ],
+                status: 0
             } );
             myData.save()
                 .then( item => {
@@ -128,7 +127,7 @@ router.get( '/manageItems', function( req, res, next ) {
         convertToImage( items )
         res.render( 'manageItems', {
             items: items,
-            title: "Bearcat Pantry - Manage Items",
+            title: "Manage Items - Bearcat Pantry",
             scripts: scripts
         } );
     } )

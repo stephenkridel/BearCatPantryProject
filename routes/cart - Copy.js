@@ -94,9 +94,9 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
 
         } else {
             // Else, initialize a cart for the new user, and add the item
-
+<<<<<<< HEAD
             var myData = new cart({
-                user: process.env.USERNAME,
+                user: "testUser",
                 items: [{
                     itemName: req.body.itemName,
                     quantity: 1
@@ -129,7 +129,7 @@ function IterateCart(userCart) {
 
 router.post('/removeItemFromCart', function (req, res, next) {
 
-    cart.update({ "user": process.env.USERNAME }, {
+    cart.update({ "user": "testUser" }, {
         $pull: {
             items: {
                 itemName: req.body.itemName
@@ -140,6 +140,35 @@ router.post('/removeItemFromCart', function (req, res, next) {
     });
 
 });
+=======
+            var myData = new cart( {
+                user: process.env.USERNAME,
+                items: [ {
+                    itemName: req.body.itemName,
+                    quantity: 1
+                } ],
+                status: 0
+            } );
+            myData.save()
+                .then( item => {
+                    res.sendStatus( 200 );
+                } )
+                .catch( err => {
+                    res.status( 400 ).send( "unable to save to database" );
+                } );
+        }
+    } );
+} );
+
+router.post( '/removeItemFromCart', function( req, res, next ) {
+    cart.deleteOne( {
+            "user": process.env.USERNAME,
+            'itemName': req.body.itemName
+        }, function( err, obj ) {} )
+        .then( item => {
+            res.sendStatus( 200 );
+        } )
+} );
 
 var transporter = nodemailer.createTransport( {
     service: 'gmail',
@@ -217,5 +246,6 @@ router.post( '/cancelOrder', function( req, res, next ) {
         res.sendStatus( 200 );
     } )
 } );
+>>>>>>> e3e44fc4c915402f13fd9c7ae6dd436d32a3c7b9
 
 module.exports = router;

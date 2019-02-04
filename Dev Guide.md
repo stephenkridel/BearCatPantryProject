@@ -67,6 +67,11 @@ How to use mocha: https://mochajs.org/#getting-started
 
 
 
+# Production environment links/concerns
+- [PM2 Production Environment Process Manager](https://github.com/Unitech/pm2)
+- [MongoDB Costs](https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters/edit/BearcatPantry)
+
+
 
 
 
