@@ -1,5 +1,10 @@
 import $ from 'jquery'
 
+/*
+Service defines all functionality related to validating user input
+whether that be text boxes, files, or disabliing of buttons
+*/
+
 $( document ).ready( function() {
     $( "#itemName" ).keypress( function( e ) {
         if ( String.fromCharCode( e.which ).match( /[^A-Za-z ]/ ) ) {

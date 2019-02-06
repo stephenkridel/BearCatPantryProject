@@ -1,6 +1,10 @@
 import $ from 'jquery'
 import Quagga from 'quagga'
 
+/*
+Service implments the barcode scanner functionality
+*/
+
 $( function() {
     // Create the QuaggaJS config object for the live stream
     var liveStreamConfig = {
