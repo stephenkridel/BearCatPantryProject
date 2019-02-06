@@ -75,6 +75,11 @@ How to use mocha: https://mochajs.org/#getting-started
 
 # Production environment links/concerns
 
+When running in production use the following instead:
+
+`npm run prod-build`
+`npm run prod-start` - Look into pm2 more
+
 - [PM2 Production Environment Process Manager](https://github.com/Unitech/pm2)
 - [MongoDB Costs](https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters/edit/BearcatPantry)
 - [EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
