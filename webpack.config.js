@@ -3,6 +3,8 @@ const webpack = require( 'webpack' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
 const glob = require( 'glob' );
 const PurgecssPlugin = require( 'purgecss-webpack-plugin' );
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+
 
 const PATHS = {
     views: path.join( __dirname, '/views/' )
@@ -31,7 +33,7 @@ const config = {
     },
     resolve: {
         alias: {
-            $: "jquery/src/jquery",
+            $: "jquery/src/jquery"
         }
     },
     optimization: {
@@ -81,13 +83,13 @@ const config = {
             } ),
             whitelist: collectWhitelist,
             whitelistPatterns: collectWhitelistPatterns
-        }, )
+        }, ),
+        // new BundleAnalyzerPlugin()
     ]
 };
 
 if ( process.env.NODE_ENV === 'production' ) {
     config.optimization.minimize = true
-
 } else {
     config.devtool = "inline-source-map"
     config.plugins.push(
