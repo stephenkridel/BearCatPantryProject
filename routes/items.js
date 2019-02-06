@@ -102,7 +102,6 @@ router.post( '/addToCart', function( req, res, next ) {
             myData.save()
                 .then( () => {
                     res.sendStatus( 200 );
-
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );
@@ -139,7 +138,7 @@ router.post( '/updateItem', function( req, res, next ) {
                 "weight": req.body.weight
             }
         } )
-        .then( item => {
+        .then( () => {
             // Find better way to close modal here rather than a redirect
             res.redirect( "http://localhost:3000/manageItems" );
         } )
@@ -157,8 +156,8 @@ router.post( '/deleteItem', function( req, res, next ) {
 } );
 
 router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
-    var img = fs.readFileSync( req.file.path );
     var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
+    var img = fs.readFileSync( req.file.path );
     item.countDocuments( {
         itemName: itemNameFormatted
     }, function( err, count ) {
@@ -180,7 +179,6 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
             myData.save()
                 .then( () => {
                     res.sendStatus( 200 );
-                    console.log( "item created" )
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );

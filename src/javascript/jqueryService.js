@@ -29,25 +29,29 @@ $( document ).ready( function() {
 $( document ).ready( function() {
     $( '#createItem' ).submit( function( e ) {
         e.preventDefault();
-        var itemName = $( `#itemName` ).value;
+        var itemName = $( '#itemName' )[ 0 ].value;
 
-        popupS.window( {
-            mode: 'alert',
-            content: `${itemName} has been created`,
-            className: 'custom-popupS-class',
-            additionalButtonOkClass: 'btn btn-primary'
-        } );
         $( this ).ajaxSubmit( {
             data: {
-                itemName: itemName,
+                itemName: $( `#itemName` ).value,
                 barcode: $( `#barcode` ).value,
                 quantity: $( `#quantity` ).value,
                 weight: $( `#weight` ).value
             },
-            contentType: 'application/json'
+            contentType: 'application/json',
+            success: function( res ) {
+                popupS.window( {
+                    mode: 'alert',
+                    content: `${itemName} has been created`,
+                    className: 'custom-popupS-class',
+                    additionalButtonOkClass: 'btn btn-primary',
+                    onSubmit: function(){
+                        location.reload();
+                    } 
+                } );
+            }
         } );
         return false;
-
     } );
 } );
 
