@@ -83,7 +83,7 @@ router.post( '/addToCart', function( req, res, next ) {
                                 }
                             } ]
                         } )
-                        .then( item => {
+                        .then( () => {
                             res.sendStatus( 200 );
                         } )
                 }
@@ -100,7 +100,7 @@ router.post( '/addToCart', function( req, res, next ) {
                 status: 0
             } );
             myData.save()
-                .then( item => {
+                .then( () => {
                     res.sendStatus( 200 );
 
                 } )
@@ -151,7 +151,7 @@ router.post( '/updateItem', function( req, res, next ) {
 router.post( '/deleteItem', function( req, res, next ) {
     item.deleteOne( {
         itemName: req.body.oldItemName
-    } ).then( item => {
+    } ).then( () => {
         res.redirect( "http://localhost:3000/manageItems" );
     } )
 } );
@@ -178,7 +178,8 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
                 }
             } );
             myData.save()
-                .then( item => {
+                .then( () => {
+                    res.sendStatus( 200 );
                     console.log( "item created" )
                 } )
                 .catch( err => {
