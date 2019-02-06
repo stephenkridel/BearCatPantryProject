@@ -13,7 +13,7 @@ const cssOutput = 'main.css';
 
 //Whitelist css rules with exact class
 function collectWhitelist() {
-    return [ 'loader' ];
+    return [ 'loader', 'is-invalid', 'is-valid' ];
 }
 
 // Whitelist css rules with classes containing these
