@@ -18,7 +18,7 @@ function collectWhitelist() {
 
 // Whitelist css rules with classes containing these
 function collectWhitelistPatterns() {
-    return [ /popupS-/, /modal-/ ];
+    return [ /popupS-/, /modal-/, /disabled-/ ];
 }
 
 console.log( process.env.NODE_ENV )
