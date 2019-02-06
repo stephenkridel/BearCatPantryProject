@@ -33,6 +33,16 @@ and go to `http://localhost:3000`
 
 When you make code changes, you must rerun `npm run build`, and then restart your server
 
+### Environment variable
+
+Create a .env file at the root with the following text:
+
+USERNAME=
+
+DB_PW=
+
+EMAIL_PW=
+
 # Testing
 
 ### Run the puppeteer tests:
