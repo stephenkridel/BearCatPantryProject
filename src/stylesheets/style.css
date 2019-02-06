@@ -209,9 +209,13 @@ footer {
   left: 25%;
 }
 
-.nav-bar-search {
+.navbar-collapse .nav-bar-search {
   flex: 1 1 auto;
   flex-wrap: nowrap;
+}
+
+.navbar-collapse .nav-bar-search .form-control {
+  margin-right: 0.5rem !important;
 }
 
 .table .cart-quantity-input.input-number {
