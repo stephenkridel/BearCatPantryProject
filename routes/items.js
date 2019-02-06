@@ -155,37 +155,67 @@ router.post( '/deleteItem', function( req, res, next ) {
     } )
 } );
 
-router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
-    var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
-    var img = fs.readFileSync( req.file.path );
+router.post( "/addItem", function( req, res, next ) {
+    var itemName = "NOITEMNAME";
+    var barcode = -99999999999;
+    if(req.body.itemName){
+        var itemName = req.body.itemName;
+    }
+    else if(req.body.barcode){
+        var barcode = req.body.barcode;
+    }
     item.countDocuments( {
-        itemName: itemNameFormatted
-    }, function( err, count ) {
-        if ( count > 0 ) {
-            // use popupS instead of this things
-            res.send( "Item is already in DB" );
-        } else {
-            var myData = new item( {
-                itemName: itemNameFormatted,
-                barcode: req.body.barcode,
-                quantity: req.body.quantity,
-                weight: req.body.weight,
-                img: {
-                    data: img,
-                    contentType: req.file.mimetype,
-                    size: req.file.size,
-                }
-            } );
-            myData.save()
-                .then( () => {
-                    res.sendStatus( 200 );
-                } )
-                .catch( err => {
-                    res.status( 400 ).send( "unable to save to database" );
-                } );
+        $or:{
+            barcode: barcode,
+            itemName: itemName
         }
-    } );
+    }, function( err, count ){
+        if(count > 0){
+            res.render('createItem', {
+                barcode: barcode,
+                itemName: itemName
+            });
+        } else{
+            res.render('incrementExistingItem', {
+                barcode: barcode,
+                itemName: itemName
+            });
+        }
+    });
+});
 
-} );
+
+
+// router.post( "/createItem", /*upload.single( 'image' ),*/ function( req, res, next ) {
+//     var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
+//     var img = fs.readFileSync( req.file.path );
+//     item.countDocuments( {
+//         itemName: itemNameFormatted
+//     }, function( err, count ) {
+//         if ( count > 0 ) {
+//             // use popupS instead of this things
+//             res.send( "Item is already in DB" );
+//         } else {
+//             var myData = new item( {
+//                 itemName: itemNameFormatted,
+//                 barcode: req.body.barcode,
+//                 quantity: req.body.quantity,
+//                 weight: req.body.weight,
+//                 img: {
+//                     data: img,
+//                     contentType: req.file.mimetype,
+//                     size: req.file.size,
+//                 }
+//             } );
+//             myData.save()
+//                 .then( () => {
+//                     res.sendStatus( 200 );
+//                 } )
+//                 .catch( err => {
+//                     res.status( 400 ).send( "unable to save to database" );
+//                 } );
+//         }
+//     } );
+//} );
 
 module.exports = router;

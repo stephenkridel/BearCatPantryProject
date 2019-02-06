@@ -8,7 +8,7 @@ let handlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
 var compression = require( 'compression' );
-var dotenv = require( 'dotenv' ).config()
+var dotenv = require( 'dotenv' ).config();
 
 
 // Routes

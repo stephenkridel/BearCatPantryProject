@@ -1,7 +1,10 @@
 <div class="main-container">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link focus active" data-toggle="tab" href="#newItem">Add New Item</a>
+            <a class="nav-link focus active" data-toggle="tab" href="#newItem">Add Item With Barcode</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#newItemBarcodeless">Add Item Without Barcode</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#editItem">Edit Existing Items</a>
@@ -9,10 +12,10 @@
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active focus show" id="newItem">
-            <h1>Add an item to the pantry</h1>
+            <h1>Add an item with a barcode</h1>
             <div class="new-item-container">
-                <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
-                    <div class="form-group">
+                <form method="post" action="/addItem" enctype="multipart/form-data" id="createItem">
+                    {{!-- <div class="form-group">
                         <label for="itemName">Item name</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
                             required>
@@ -32,7 +35,7 @@
                             required>
                         <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
                             weight number is between 1 to 3 digits.</div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <div id='barcode-scanner'></div>
                         <label for="barcode">Barcode</label>
@@ -43,13 +46,13 @@
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
                             Scanner</button>
                     </div>
-                    <div class="form-group">
+                    {{!-- <div class="form-group">
                         <label for="image">Image</label>
                         <div class="custom-file">
                             <label class="custom-file-label" for="image">Choose file</label>
                             <input type="file" name="image" class="custom-file-input" id="image">
                         </div>
-                    </div>
+                    </div> --}}
                     <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
                 </form>
             </div>
@@ -70,6 +73,21 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div class="tab-pane fade" id="newItemBarcodeless">
+            <h1>Add an item without a barcode</h1>
+            <div class="new-item-container">
+                <form method="post" action="/addItem" enctype="multipart/form-data" id="createItem">
+                    <div class="form-group">
+                        <label for="itemName">Item name</label>
+                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
+                            required>
+                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
+                            item name id is between 4 and 15 characters with no special characters.</div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
+                </form>
+            </div>
+        </div>
         <style>
             #interactive.viewport {position: relative; width: 100%; height: auto; overflow: hidden; text-align: center;}
             #interactive.viewport > canvas, #interactive.viewport > video {max-width: 100%;width: 100%;}
