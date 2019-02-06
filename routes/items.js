@@ -42,10 +42,7 @@ router.get( '/items', function( req, res, next ) {
 } );
 
 
-// WIP
 router.post( '/addToCart', function( req, res, next ) {
-    // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
-
     // Get the cart status cookie
     var pendingOrder = req.cookies.pendingOrder;
 
@@ -54,7 +51,6 @@ router.post( '/addToCart', function( req, res, next ) {
         res.sendStatus( 403 );
         return;
     }
-
 
     cart.countDocuments( {
         user: process.env.USERNAME

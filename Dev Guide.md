@@ -43,6 +43,10 @@ DB_PW=
 
 EMAIL_PW=
 
+EMAIL_TO=
+
+^If you want to recieve the email when you checkout
+
 # Testing
 
 ### Run the puppeteer tests:

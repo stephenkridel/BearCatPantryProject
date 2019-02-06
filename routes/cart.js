@@ -103,7 +103,6 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
 
         } else {
             // Else, initialize a cart for the new user, and add the item
-
             var myData = new cart( {
                 user: process.env.USERNAME,
                 items: [ {
@@ -135,7 +134,6 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
     } ).then( () => {
         res.sendStatus( 200 );
     } );
-
 } );
 
 var transporter = nodemailer.createTransport( {
@@ -148,8 +146,6 @@ var transporter = nodemailer.createTransport( {
 
 // CLEAN ME UP. 
 router.post( '/checkout', function( req, res, next ) {
-    // checkout ie. change status from 0 -> 1
-    // May be better to made an orderModel obj
     cart.updateOne( {
         "user": process.env.USERNAME
     }, {
@@ -160,8 +156,10 @@ router.post( '/checkout', function( req, res, next ) {
         cart.find( {
             "user": process.env.USERNAME
         }, 'items', function( err, cart ) {
+            // This chunk of code is responsible for:
+            // 1: Generating the html content of the email to send
+            // 2: Creating a QR code for the emai
             if ( cart && cart.length > 0 ) {
-
                 var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br><br>";
                 var orderDetails = "";
                 _.forEach( cart[ 0 ].items, function( item ) {
@@ -177,8 +175,7 @@ router.post( '/checkout', function( req, res, next ) {
                     var qrHtml = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
                     var mailOptions = {
                         from: 'bearcatpantry@gmail.com',
-                        // Get user's email
-                        to: 'kumpaw@mail.uc.edu',
+                        to: process.env.EMAIL_TO,
                         subject: `${process.env.USERNAME}'s Pantry Order`,
                         html: qrHtml
                     };
@@ -190,7 +187,6 @@ router.post( '/checkout', function( req, res, next ) {
                                 maxAge: 900000
                             } );
                             res.sendStatus( 200 );
-                            console.log( 'Order created and email sent: ' + info.response );
                         }
                     } );
                 } )
