@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 
-.badge {
+.navbar .badge {
   position: relative;
   width: 21px;
   top: -14px;
@@ -67,7 +67,7 @@
 }
 
 .main-container {
-  margin: 71px 10px 70px 10px;
+  margin: 10px 10px 70px 10px;
 }
 
 .modal-backdrop {
@@ -86,7 +86,7 @@
   z-index: 1000;
 }
 
-.nav-link:hover {
+.navbar .nav-link:hover {
   text-decoration: underline;
 }
 
@@ -214,7 +214,7 @@ footer {
   flex-wrap: nowrap;
 }
 
-.cart-quantity-input.input-number {
+.table .cart-quantity-input.input-number {
   flex: 0 0 100px;
 }
 
@@ -239,7 +239,7 @@ footer {
   margin-left: 50px;
 }
 
-.input-group {
+.main-container .input-group {
   flex-wrap: nowrap;
 }
 
@@ -287,4 +287,4 @@ footer {
   100% {
     transform: rotate(360deg);
   }
-} 
+}

@@ -6,7 +6,7 @@ var cart = require( '../models/cartModel' )
 var router = express.Router();
 
 const upload = multer( {
-    dest: 'public/images/uploads' // this saves your file into a directory called "uploads"
+    dest: 'build/uploads' // this saves your file into a directory called "uploads"
 } );
 
 router.get( '/items', function( req, res, next ) {
@@ -120,15 +120,11 @@ var convertToImage = function( items ) {
 };
 
 router.get( '/manageItems', function( req, res, next ) {
-    var scripts = [ {
-        script: '/javascripts/barcodeScanner.js'
-    } ];
     item.find( {}, 'itemName barcode quantity weight img', function( err, items ) {
         convertToImage( items )
         res.render( 'manageItems', {
             items: items,
-            title: "Manage Items - Bearcat Pantry",
-            scripts: scripts
+            title: "Manage Items - Bearcat Pantry"
         } );
     } )
 } );
@@ -159,7 +155,6 @@ router.post( '/deleteItem', function( req, res, next ) {
         res.redirect( "http://localhost:3000/manageItems" );
     } )
 } );
-
 
 router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
     var img = fs.readFileSync( req.file.path );

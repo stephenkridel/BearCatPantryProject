@@ -14,11 +14,13 @@ const numCPUs = require( 'os' ).cpus().length;
  * Get port from environment and store in Express.
  */
 
+
 var port = normalizePort( process.env.PORT || '3000' );
 app.set( 'port', port );
 
 
-if ( cluster.isMaster && process.env.NODE_ENV !== "development" ) {
+console.log( `${process.env.NODE_ENV} - WWW` )
+if ( cluster.isMaster && process.env.NODE_ENV === "production" ) {
     // Fork workers.
     for ( var i = 0; i < numCPUs; i++ ) {
         cluster.fork();

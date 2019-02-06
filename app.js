@@ -11,7 +11,6 @@ var compression = require( 'compression' );
 var dotenv = require( 'dotenv' ).config()
 
 
-
 // Routes
 var itemsRouter = require( './routes/items' );
 var aboutRouter = require( './routes/about' );
@@ -56,7 +55,7 @@ app.use( express.urlencoded( {
 app.use( cookieParser() );
 app.use( helmet() );
 app.use( compression() );
-app.use( express.static( path.join( __dirname, 'public' ) ) );
+app.use( express.static( path.join( __dirname, 'build' ) ) );
 
 
 // setup the routes
