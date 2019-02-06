@@ -29,19 +29,19 @@ router.get( '/totalCartItems', function( req, res, next ) {
         "user": process.env.USERNAME
     }, 'items', function( err, itemInCart ) {
         var totalQuantity = 0;
-        if (itemInCart && itemInCart.length > 0) {
-            _.forEach(itemInCart[0].items, function (item) {
+        if ( itemInCart && itemInCart.length > 0 ) {
+            _.forEach( itemInCart[ 0 ].items, function( item ) {
                 totalQuantity += item.quantity;
-            });
+            } );
         }
 
         var ret = {
             totalQuantity: totalQuantity
         }
 
-        res.json(ret);
-    })
-});
+        res.json( ret );
+    } )
+} );
 
 router.post( '/updateCartItemQuantities', function( req, res, next ) {
     // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
@@ -49,27 +49,27 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
         user: process.env.USERNAME
     }, function( err, count ) {
         // Find out if a user already has a cart in mongoDB
-        if (count > 0) {
+        if ( count > 0 ) {
             // Find out if the current user's cart already has the selected item in the cart.
             cart.countDocuments( {
                 "user": process.env.USERNAME,
                 "items.itemName": req.body.itemName,
-            }, function (err, count) {
+            }, function( err, count ) {
                 // If item doesnt exist in the cart, push it on
-                if (count === 0) {
+                if ( count === 0 ) {
                     // push new item to cart
                     cart.update( {
                         "user": process.env.USERNAME
                     }, {
-                            "$push": {
-                                items: {
-                                    'itemName': req.body.itemName,
-                                    'quantity': 1,
-                                }
+                        "$push": {
+                            items: {
+                                'itemName': req.body.itemName,
+                                'quantity': 1,
                             }
-                        }).then(item => {
-                            res.sendStatus(200);
-                        })
+                        }
+                    } ).then( () => {
+                        res.sendStatus( 200 );
+                    } )
                 } else {
                     // else, update existing shopping cart item to increment 1 time
                     cart.findOneAndUpdate( {
@@ -80,66 +80,54 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                             }
                         }, {
                             upsert: true,
-                            arrayFilters: [{
+                            arrayFilters: [ {
                                 "elem.itemName": {
                                     $eq: req.body.itemName
                                 }
-                            }]
-                        })
-                        .then(item => {
-                            res.sendStatus(200);
-                        })
+                            } ]
+                        } )
+                        .then( () => {
+                            res.sendStatus( 200 );
+                        } )
                 }
-            })
+            } )
 
         } else {
             // Else, initialize a cart for the new user, and add the item
 
-            var myData = new cart({
+            var myData = new cart( {
                 user: process.env.USERNAME,
-                items: [{
+                items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                }]
-            });
+                } ]
+            } );
             myData.save()
-                .then(item => {
-                    res.sendStatus(200);
+                .then( () => {
+                    res.sendStatus( 200 );
 
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
+                } )
+                .catch( err => {
+                    res.status( 400 ).send( "unable to save to database" );
+                } );
         }
-    });
-});
+    } );
+} );
 
-function IterateCart(userCart) {
-    var items = userCart.items;
-
-    for (curItem in items) {
-        if (items[curItem].itemName == req.body.itemName) {
-            delete (items[curItem])
-        }
-    }
-
-    cart.save(userCart)
-
-}
-
-router.post('/removeItemFromCart', function (req, res, next) {
-
-    cart.update({ "user": process.env.USERNAME }, {
+router.post( '/removeItemFromCart', function( req, res, next ) {
+    cart.update( {
+        "user": process.env.USERNAME
+    }, {
         $pull: {
             items: {
                 itemName: req.body.itemName
             }
         }
-    }).then(cart => {
-        res.sendStatus(200);
-    });
+    } ).then( () => {
+        res.sendStatus( 200 );
+    } );
 
-});
+} );
 
 var transporter = nodemailer.createTransport( {
     service: 'gmail',
@@ -148,8 +136,6 @@ var transporter = nodemailer.createTransport( {
         pass: process.env.EMAIL_PW
     }
 } );
-
-
 
 // CLEAN ME UP. 
 router.post( '/checkout', function( req, res, next ) {
@@ -198,7 +184,6 @@ router.post( '/checkout', function( req, res, next ) {
                 } )
 
             } else {
-                console.log( "failed" );
                 res.sendStatus( 403 );
             }
         } )
@@ -213,7 +198,7 @@ router.post( '/cancelOrder', function( req, res, next ) {
         $set: {
             "status": 0
         }
-    } ).then( item => {
+    } ).then( () => {
         res.sendStatus( 200 );
     } )
 } );
