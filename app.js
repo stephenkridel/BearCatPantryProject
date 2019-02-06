@@ -52,7 +52,26 @@ app.use( express.json() );
 app.use( express.urlencoded( {
     extended: false
 } ) );
+
 app.use( cookieParser() );
+// This is where we would set cookies on login?
+app.use( function( req, res, next ) {
+    // check if client sent cookie
+    var cookie = req.cookies.cookieName;
+    if ( cookie === undefined ) {
+        // no: set a new cookie
+        var randomNumber = Math.random().toString();
+        randomNumber = randomNumber.substring( 2, randomNumber.length );
+        res.cookie( 'cookieName', randomNumber, {
+            maxAge: 900000
+        } );
+        console.log( 'Initial login cookie created successfully' );
+    } else {
+        // yes, cookie was already present 
+    }
+    next(); // <-- important!
+} );
+
 app.use( helmet() );
 app.use( compression() );
 app.use( express.static( path.join( __dirname, 'build' ) ) );

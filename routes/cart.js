@@ -44,7 +44,16 @@ router.get( '/totalCartItems', function( req, res, next ) {
 } );
 
 router.post( '/updateCartItemQuantities', function( req, res, next ) {
-    // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
+    /////// Theoritically this use case should never happen, but just in case putting it here /////////
+    // Get the cart status cookie
+    var pendingOrder = req.cookies.pendingOrder;
+
+    // Throw an error because user already has active order in progress
+    if ( pendingOrder ) {
+        res.sendStatus( 403 );
+        return;
+    }
+
     cart.countDocuments( {
         user: process.env.USERNAME
     }, function( err, count ) {
@@ -177,6 +186,9 @@ router.post( '/checkout', function( req, res, next ) {
                         if ( error ) {
                             console.log( error );
                         } else {
+                            res.cookie( 'pendingOrder', true, {
+                                maxAge: 900000
+                            } );
                             res.sendStatus( 200 );
                             console.log( 'Order created and email sent: ' + info.response );
                         }
@@ -199,6 +211,7 @@ router.post( '/cancelOrder', function( req, res, next ) {
             "status": 0
         }
     } ).then( () => {
+        res.clearCookie( "pendingOrder" );
         res.sendStatus( 200 );
     } )
 } );
