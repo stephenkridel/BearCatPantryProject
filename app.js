@@ -10,6 +10,10 @@ var helmet = require( 'helmet' );
 var compression = require( 'compression' );
 var dotenv = require( 'dotenv' ).config()
 
+var webpack = require( 'webpack' );
+var webpackConfig = require( './webpack.config' );
+var compiler = webpack( webpackConfig );
+
 
 // Routes
 var itemsRouter = require( './routes/items' );
@@ -24,6 +28,11 @@ var app = express();
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( {
     extended: true
+} ) );
+
+app.use( require( "webpack-dev-middleware" )( compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
 } ) );
 
 mongoose.Promise = global.Promise;
