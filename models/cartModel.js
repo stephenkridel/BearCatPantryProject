@@ -10,7 +10,11 @@ var cartSchema = new mongoose.Schema( {
         itemName: String,
         quantity: Number
     } ],
-    status: Number
+    status: Number,
+    lastModDate: {
+        type: Date,
+        default: Date.now
+    }
 } );
 
 //Export function to create "SomeModel" model class

@@ -73,6 +73,9 @@ router.post( '/addToCart', function( req, res, next ) {
                                 'itemName': req.body.itemName,
                                 'quantity': 1,
                             }
+                        },
+                        $set: {
+                            "lastModDate": new Date()
                         }
                     } ).then( item => {
                         res.sendStatus( 200 );
@@ -84,6 +87,9 @@ router.post( '/addToCart', function( req, res, next ) {
                         }, {
                             $inc: {
                                 "items.$[elem].quantity": 1
+                            },
+                            $set: {
+                                "lastModDate": new Date()
                             }
                         }, {
                             upsert: true,

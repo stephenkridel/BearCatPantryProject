@@ -75,6 +75,9 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                                 'itemName': req.body.itemName,
                                 'quantity': 1,
                             }
+                        },
+                        $set: {
+                            "lastModDate": new Date()
                         }
                     } ).then( () => {
                         res.sendStatus( 200 );
@@ -85,7 +88,8 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                             "user": process.env.USERNAME,
                         }, {
                             $set: {
-                                "items.$[elem].quantity": req.body.quantity
+                                "items.$[elem].quantity": req.body.quantity,
+                                "lastModDate": new Date()
                             }
                         }, {
                             upsert: true,
@@ -108,7 +112,7 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ]
+                } ],
             } );
             myData.save()
                 .then( () => {
@@ -130,6 +134,9 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
             items: {
                 itemName: req.body.itemName
             }
+        },
+        $set: {
+            "lastModDate": new Date()
         }
     } ).then( () => {
         res.sendStatus( 200 );
@@ -150,8 +157,9 @@ router.post( '/checkout', function( req, res, next ) {
         "user": process.env.USERNAME
     }, {
         $set: {
-            "status": 1
-        }
+            "status": 1,
+            "lastModDate": new Date()
+        },
     } ).then( () => {
         cart.find( {
             "user": process.env.USERNAME
