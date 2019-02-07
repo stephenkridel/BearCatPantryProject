@@ -1,11 +1,13 @@
 <div class="main-container">
     {{#if cartStatus}}
-    <h4>Your Order Information:</h4>
+    <h4>Order Information:</h4>
     {{#each itemInCart}}
-    {{this.itemName}}x{{this.quantity}}
+    {{this.itemName}} - {{this.quantity}}
     <br>
     {{/each}}
-    <button type="button" class="btn btn-primary" id="cancelOrder">Cancel Your Order(Only for testing)</button>
+    <br>
+    <p>Please come to the pantry to pick up your order. You will have 3 days to pick up your order. Someone good at writing write this.</p>
+    <button type="button" class="btn btn-primary" id="cancelOrder">Cancel Your Order</button>
     {{else}}
     {{#if itemInCart}}
     <h4> Items in your cart</h4>
