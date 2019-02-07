@@ -1,4 +1,3 @@
-//Require Mongoose
 var mongoose = require( 'mongoose' );
 
 // 0 = User is still adding items
@@ -11,11 +10,7 @@ var cartSchema = new mongoose.Schema( {
         quantity: Number
     } ],
     status: Number,
-    lastModDate: {
-        type: Date,
-        default: Date.now
-    }
+    lastModDate: String
 } );
 
-//Export function to create "SomeModel" model class
 module.exports = mongoose.model( 'Cart', cartSchema );

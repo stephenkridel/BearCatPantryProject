@@ -2,7 +2,9 @@ var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var _ = require( 'lodash' );
 var nodemailer = require( 'nodemailer' );
-var QRCode = require( 'qrcode' )
+var QRCode = require( 'qrcode' );
+var util = require( '../src/javascript/util.js' );
+
 
 var router = express.Router();
 
@@ -77,7 +79,7 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                             }
                         },
                         $set: {
-                            "lastModDate": new Date()
+                            "lastModDate": util.formatDate( new Date() )
                         }
                     } ).then( () => {
                         res.sendStatus( 200 );
@@ -89,7 +91,7 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                         }, {
                             $set: {
                                 "items.$[elem].quantity": req.body.quantity,
-                                "lastModDate": new Date()
+                                "lastModDate": util.formatDate( new Date() )
                             }
                         }, {
                             upsert: true,
@@ -113,6 +115,8 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                     itemName: req.body.itemName,
                     quantity: 1
                 } ],
+                status: 0,
+                lastModDate: util.formatDate( new Date() )
             } );
             myData.save()
                 .then( () => {
@@ -136,7 +140,7 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
             }
         },
         $set: {
-            "lastModDate": new Date()
+            "lastModDate": util.formatDate( new Date() )
         }
     } ).then( () => {
         res.sendStatus( 200 );
@@ -158,7 +162,7 @@ router.post( '/checkout', function( req, res, next ) {
     }, {
         $set: {
             "status": 1,
-            "lastModDate": new Date()
+            "lastModDate": util.formatDate( new Date() )
         },
     } ).then( () => {
         cart.find( {
