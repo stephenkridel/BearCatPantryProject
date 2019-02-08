@@ -87,4 +87,6 @@ When running in production use the following instead:
 - [PM2 Production Environment Process Manager](https://github.com/Unitech/pm2)
 - [MongoDB Costs](https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters/edit/BearcatPantry)
 - [EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
+- [Azure Pricing](https://azure.microsoft.com/en-us/pricing/details/cloud-services/)
+- [Domain Names](https://domains.google.com/m/registrar/search?searchTerm=bearcatpantry&hl=en#)
 - [Deployment guide](https://medium.com/@Keithweaver_/setting-up-mern-stack-on-aws-ec2-6dc599be4737)
