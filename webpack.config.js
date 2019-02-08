@@ -25,7 +25,7 @@ console.log( process.env.NODE_ENV )
 
 const config = {
     entry: {
-        main: './src/main.js',
+        main: [ './src/main.js', 'webpack-hot-middleware/client' ]
     },
     output: {
         filename: '[name].bundle.js',

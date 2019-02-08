@@ -63,7 +63,12 @@ $( document ).ready( function() {
                 updateShoppingCartTotal();
             } )
             .fail( function() {
-                console.log( "Add to cart failed" );
+                popupS.window( {
+                    mode: 'alert',
+                    content: 'You already have an active order. Please complete the existing order before creating a new one.',
+                    className: 'custom-popupS-class',
+                    additionalButtonOkClass: 'btn btn-primary',
+                } );
             } );
     } );
 } );

@@ -10,6 +10,10 @@ var helmet = require( 'helmet' );
 var compression = require( 'compression' );
 var dotenv = require( 'dotenv' ).config()
 
+var webpack = require( 'webpack' );
+var webpackConfig = require( './webpack.config' );
+var compiler = webpack( webpackConfig );
+
 
 // Routes
 var itemsRouter = require( './routes/items' );
@@ -17,12 +21,18 @@ var aboutRouter = require( './routes/about' );
 var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
 var testRouter = require( './routes/test' );
+var adminRouter = require( './routes/admin' );
 
 var app = express();
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( {
     extended: true
+} ) );
+
+app.use( require( "webpack-dev-middleware" )( compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
 } ) );
 
 mongoose.Promise = global.Promise;
@@ -52,7 +62,26 @@ app.use( express.json() );
 app.use( express.urlencoded( {
     extended: false
 } ) );
+
 app.use( cookieParser() );
+// This is where we would set cookies on login?
+app.use( function( req, res, next ) {
+    // check if client sent cookie
+    var cookie = req.cookies.cookieName;
+    if ( cookie === undefined ) {
+        // no: set a new cookie
+        var randomNumber = Math.random().toString();
+        randomNumber = randomNumber.substring( 2, randomNumber.length );
+        res.cookie( 'cookieName', randomNumber, {
+            maxAge: 900000
+        } );
+        console.log( 'Initial login cookie created successfully' );
+    } else {
+        // yes, cookie was already present 
+    }
+    next(); // <-- important!
+} );
+
 app.use( helmet() );
 app.use( compression() );
 app.use( express.static( path.join( __dirname, 'build' ) ) );
@@ -64,6 +93,7 @@ app.use( '/', aboutRouter );
 app.use( '/', cartRouter );
 app.use( '/', homeRouter );
 app.use( '/', testRouter );
+app.use( '/', adminRouter );
 
 
 // catch 404 and forward to error handler

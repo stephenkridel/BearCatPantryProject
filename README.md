@@ -88,7 +88,7 @@ When running in production use the following instead:
 
 - [PM2 Production Environment Process Manager](https://github.com/Unitech/pm2)
 - [MongoDB Costs](https://cloud.mongodb.com/v2/5c30423dd5ec131335d8eaab#clusters/edit/BearcatPantry)
-- [AWS Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
+- [EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
 - [Azure Pricing](https://azure.microsoft.com/en-us/pricing/details/cloud-services/)
 - [Google Cloud Pricing](https://cloud.google.com/appengine/pricing)
 - [Domain Names](https://domains.google.com/m/registrar/search?searchTerm=bearcatpantry&hl=en#)

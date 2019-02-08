@@ -1,12 +1,17 @@
 var express = require( 'express' );
-const multer = require( "multer" );
+var multer = require( "multer" );
 var fs = require( 'fs-extra' );
 var item = require( '../models/itemModel' );
-var cart = require( '../models/cartModel' )
+var cart = require( '../models/cartModel' );
+var util = require( '../src/javascript/util.js' );
+
 var router = express.Router();
 
 const upload = multer( {
-    dest: 'build/uploads' // this saves your file into a directory called "uploads"
+    dest: 'build/uploads', // this saves your file into a directory called "uploads"
+    limits: {
+        fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
+    }
 } );
 
 router.get( '/items', function( req, res, next ) {
@@ -39,9 +44,16 @@ router.get( '/items', function( req, res, next ) {
 } );
 
 
-// WIP
 router.post( '/addToCart', function( req, res, next ) {
-    // Use a cookie to get user info & should probs auto create a cart for every user upon initial login or something
+    // Get the cart status cookie
+    var pendingOrder = req.cookies.pendingOrder;
+
+    // Throw an error because user already has active order in progress
+    if ( pendingOrder ) {
+        res.sendStatus( 403 );
+        return;
+    }
+
     cart.countDocuments( {
         user: process.env.USERNAME
     }, function( err, count ) {
@@ -63,6 +75,9 @@ router.post( '/addToCart', function( req, res, next ) {
                                 'itemName': req.body.itemName,
                                 'quantity': 1,
                             }
+                        },
+                        $set: {
+                            "lastModDate": util.formatDate( new Date() )
                         }
                     } ).then( item => {
                         res.sendStatus( 200 );
@@ -74,6 +89,9 @@ router.post( '/addToCart', function( req, res, next ) {
                         }, {
                             $inc: {
                                 "items.$[elem].quantity": 1
+                            },
+                            $set: {
+                                "lastModDate": util.formatDate( new Date() )
                             }
                         }, {
                             upsert: true,
@@ -97,7 +115,8 @@ router.post( '/addToCart', function( req, res, next ) {
                     itemName: req.body.itemName,
                     quantity: 1
                 } ],
-                status: 0
+                status: 0,
+                lastModDate: util.formatDate( new Date() )
             } );
             myData.save()
                 .then( () => {
