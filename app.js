@@ -8,7 +8,7 @@ let handlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
 var compression = require( 'compression' );
-var dotenv = require( 'dotenv' ).config()
+var dotenv = require( 'dotenv' ).config();
 
 var webpack = require( 'webpack' );
 var webpackConfig = require( './webpack.config' );
@@ -51,12 +51,23 @@ mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry
 
 // view engine setup
 app.set( 'views', path.join( __dirname, '/views' ) );
-app.engine( 'hbs', handlebars( {
+var hbsObj = handlebars.create({
+    helpers: {
+        hasBarcode: function(barcode, options){
+            if (barcode != -99999999999){
+                return options.fn();
+            }
+            else{
+                return options.inverse();
+            }
+        }
+    },
     extname: 'hbs',
     layoutsDir: path.join( __dirname, 'views', 'layouts' ),
     defaultLayout: 'layout.hbs',
     partialsDir: [ path.join( __dirname, 'views' ) ]
-} ) );
+});
+app.engine( 'hbs', hbsObj.engine );
 app.set( 'view engine', 'hbs' );
 
 app.use( logger( 'dev' ) );
