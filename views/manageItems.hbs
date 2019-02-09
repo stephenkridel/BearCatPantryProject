@@ -14,46 +14,18 @@
         <div class="tab-pane fade active focus show" id="newItem">
             <h1>Add an item with a barcode</h1>
             <div class="new-item-container">
-                <form method="post" action="/addItem" enctype="multipart/form-data" id="createItem">
-                    {{!-- <div class="form-group">
-                        <label for="itemName">Item name</label>
-                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
-                            required>
-                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
-                            item name id is between 4 and 15 characters with no special characters.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type='number' class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..."
-                            required>
-                        <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
-                            quantity number is between 1 to 3 digits.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type='number' class="form-control" name="weight" id="weight" placeholder="Enter weight..."
-                            required>
-                        <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
-                            weight number is between 1 to 3 digits.</div>
-                    </div> --}}
+                <form method="post" action="/addItemByBarcode" id="addItemByBarcode">
                     <div class="form-group">
                         <div id='barcode-scanner'></div>
                         <label for="barcode">Barcode</label>
-                        <input id="barcode" input type='number' class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
+                        <input id="barcode" type='text' class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
                             type="text" />
                         <div id="badBarcodeNumber" class="invalid-feedback" style="display: none">A valid
                             Barcode number is between 8 to 12 digits.</div>
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
                             Scanner</button>
                     </div>
-                    {{!-- <div class="form-group">
-                        <label for="image">Image</label>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                            <input type="file" name="image" class="custom-file-input" id="image">
-                        </div>
-                    </div> --}}
-                    <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
+                    <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
                 </form>
             </div>
         </div>
@@ -76,7 +48,7 @@
         <div class="tab-pane fade" id="newItemBarcodeless">
             <h1>Add an item without a barcode</h1>
             <div class="new-item-container">
-                <form method="post" action="/addItem" enctype="multipart/form-data" id="createItem">
+                <form method="post" action="/addItemByName" id="addItemByName">
                     <div class="form-group">
                         <label for="itemName">Item name</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
@@ -84,7 +56,7 @@
                         <div id="badItemName" class="invalid-feedback" style="display: none">A valid
                             item name id is between 4 and 15 characters with no special characters.</div>
                     </div>
-                    <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
+                    <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
                 </form>
             </div>
         </div>

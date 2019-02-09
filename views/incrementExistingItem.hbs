@@ -1,0 +1,15 @@
+<div class="main-container">
+    <h1>Item Found!</h1>
+    <form method="post" action="/incrementItem" id="incrementItem">
+        <div class="form-group">
+            <label for="quantity">Add Quantity</label>
+            <input type='number' class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..."
+                required>
+            <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
+                quantity number is between 1 to 3 digits.</div>
+        </div>
+        <input type="hidden" class="form-control" name="barcode" id="barcode" value={{barcode}}>
+        <input type="hidden" class="form-control" name="itemName" id="itemName" value={{itemName}}>
+        <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
+    </form>
+</div>

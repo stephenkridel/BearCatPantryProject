@@ -155,28 +155,55 @@ router.post( '/deleteItem', function( req, res, next ) {
     } )
 } );
 
-router.post( "/addItem", function( req, res, next ) {
+router.post( "/addItemByBarcode", function( req, res, next ) {
+    item.countDocuments({
+        barcode: req.body.barcode
+    }, function(err, count){
+        if(err){
+            console.log(err);
+        }
+        if(count > 0){
+            res.render('incrementExistingItem', {
+                barcode: req.body.barcode,
+                itemName: undefined
+            });
+        }
+        else{
+            res.render('barcodeNotFound', {
+                barcode: req.body.barcode
+            });
+        }
+    })
+});
+
+router.post( "/addItemByName", function( req, res, next ) {
+    //Initialize itemName and barcode to "none" value
     var itemName = "NOITEMNAME";
     var barcode = -99999999999;
+    //If itemName or barcode are in the request, change our values to these
     if(req.body.itemName){
         var itemName = req.body.itemName;
+        itemName.replace( /\b\w/g, l => l.toUpperCase() );
+        itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1).toLowerCase();
+        console.log(itemName);
     }
-    else if(req.body.barcode){
+    if(req.body.barcode){
         var barcode = req.body.barcode;
     }
+    //Search for barcode or itemName
     item.countDocuments( {
-        $or:{
-            barcode: barcode,
-            itemName: itemName
-        }
+        itemName: itemName
     }, function( err, count ){
+        if(err){
+            console.log(err);
+        }
         if(count > 0){
-            res.render('createItem', {
-                barcode: barcode,
-                itemName: itemName
+            res.render('incrementExistingItem', {
+                itemName: itemName,
+                barcode: barcode
             });
         } else{
-            res.render('incrementExistingItem', {
+            res.render('createItem', {
                 barcode: barcode,
                 itemName: itemName
             });
@@ -185,37 +212,69 @@ router.post( "/addItem", function( req, res, next ) {
 });
 
 
+router.post( "/createItem", upload.single( 'image' ), function( req, res, next ) {
+    var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
+    var img = fs.readFileSync( req.file.path );
+    var myData = new item( {
+        itemName: itemNameFormatted,
+        barcode: req.body.barcode,
+        quantity: req.body.quantity,
+        weight: req.body.weight,
+        img: {
+            data: img,
+            contentType: req.file.mimetype,
+            size: req.file.size,
+        }
+    } );
+    myData.save()
+        .then( () => {
+            res.redirect( "http://localhost:3000/manageItems" );
+        } )
+        .catch( err => {
+            res.status( 400 ).send( "unable to save to database" );
+        } );
+} );
 
-// router.post( "/createItem", /*upload.single( 'image' ),*/ function( req, res, next ) {
-//     var itemNameFormatted = req.body.itemName.replace( /\b\w/g, l => l.toUpperCase() );
-//     var img = fs.readFileSync( req.file.path );
-//     item.countDocuments( {
-//         itemName: itemNameFormatted
-//     }, function( err, count ) {
-//         if ( count > 0 ) {
-//             // use popupS instead of this things
-//             res.send( "Item is already in DB" );
-//         } else {
-//             var myData = new item( {
-//                 itemName: itemNameFormatted,
-//                 barcode: req.body.barcode,
-//                 quantity: req.body.quantity,
-//                 weight: req.body.weight,
-//                 img: {
-//                     data: img,
-//                     contentType: req.file.mimetype,
-//                     size: req.file.size,
-//                 }
-//             } );
-//             myData.save()
-//                 .then( () => {
-//                     res.sendStatus( 200 );
-//                 } )
-//                 .catch( err => {
-//                     res.status( 400 ).send( "unable to save to database" );
-//                 } );
-//         }
-//     } );
-//} );
+router.post( "/incrementItem", function( req, res, next ) {
+    if(req.body.barcode != -99999999999){ //If we had a valid barcode, update the item quantity 
+        //and set the barcode to the valid barcode (in case it didn't exist before)
+        
+        item.updateOne( {
+            "$or":[{
+                "barcode": req.body.barcode
+            },{
+                "itemName": req.body.itemName
+            }]
+        }, {
+            "$set":{
+                'barcode': req.body.barcode
+            },
+            "$inc": {
+                'quantity': req.body.quantity
+            }
+        } )
+        .then( () => {
+            res.redirect( "http://localhost:3000/manageItems" );
+        } )
+        .catch( err => {
+            res.status( 400 ).send( "unable to save to database" );
+        } );
+    }
+    else{
+        item.updateOne( {
+            "itemName": req.body.itemName
+        }, {
+            "$inc": {
+                'quantity': req.body.quantity
+            }
+        } )
+        .then( () => {
+            res.redirect( "http://localhost:3000/manageItems" );
+        } )
+        .catch( err => {
+            res.status( 400 ).send( "unable to save to database" );
+        } );
+    }
+});
 
 module.exports = router;
