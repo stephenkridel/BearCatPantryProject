@@ -64,27 +64,24 @@ app.use( express.urlencoded( {
 } ) );
 
 app.use( cookieParser() );
-// This is where we would set cookies on login?
-app.use( function( req, res, next ) {
-    // check if client sent cookie
-    var cookie = req.cookies.cookieName;
-    if ( cookie === undefined ) {
-        // no: set a new cookie
-        var randomNumber = Math.random().toString();
-        randomNumber = randomNumber.substring( 2, randomNumber.length );
-        res.cookie( 'cookieName', randomNumber, {
-            maxAge: 900000
-        } );
-        console.log( 'Initial login cookie created successfully' );
-    } else {
-        // yes, cookie was already present 
-    }
-    next(); // <-- important!
-} );
+
 
 app.use( helmet() );
-app.use( compression() );
+app.use( compression() );   
 app.use( express.static( path.join( __dirname, 'build' ) ) );
+
+// This is where we would set cookies on login?
+// This sets a cookie everytime you route. As route definition order matters. 
+// Will need to be refactored once login works
+app.use( function( req, res, next ) {
+    if ( process.env.USERNAME === 'admin' || process.env.USERNAME === 'kump' ) {
+        res.cookie( 'isAdmin', true );
+    } else {
+        res.clearCookie( "isAdmin" );
+    }
+
+    next();
+} );
 
 
 // setup the routes
