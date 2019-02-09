@@ -247,7 +247,7 @@ footer {
   flex-wrap: nowrap;
 }
 
-.first-row {
+.fixed-row {
   width: 150px;
 }
 
@@ -291,4 +291,9 @@ footer {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.uc-logo {
+  height: 30px;
+  margin-right: 5px;
 }

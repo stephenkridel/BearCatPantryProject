@@ -43,17 +43,7 @@ router.get( '/items', function( req, res, next ) {
 
 } );
 
-
 router.post( '/addToCart', function( req, res, next ) {
-    // Get the cart status cookie
-    var pendingOrder = req.cookies.pendingOrder;
-
-    // Throw an error because user already has active order in progress
-    if ( pendingOrder ) {
-        res.sendStatus( 403 );
-        return;
-    }
-
     cart.countDocuments( {
         user: process.env.USERNAME
     }, function( err, count ) {
@@ -67,7 +57,7 @@ router.post( '/addToCart', function( req, res, next ) {
                 // If item doesnt exist in the cart, push it on
                 if ( count === 0 ) {
                     // push new item to cart
-                    cart.update( {
+                    cart.updateOne( {
                         "user": process.env.USERNAME
                     }, {
                         "$push": {
@@ -75,11 +65,8 @@ router.post( '/addToCart', function( req, res, next ) {
                                 'itemName': req.body.itemName,
                                 'quantity': 1,
                             }
-                        },
-                        $set: {
-                            "lastModDate": util.formatDate( new Date() )
                         }
-                    } ).then( item => {
+                    } ).then( () => {
                         res.sendStatus( 200 );
                     } )
                 } else {
@@ -89,9 +76,6 @@ router.post( '/addToCart', function( req, res, next ) {
                         }, {
                             $inc: {
                                 "items.$[elem].quantity": 1
-                            },
-                            $set: {
-                                "lastModDate": util.formatDate( new Date() )
                             }
                         }, {
                             upsert: true,
@@ -106,7 +90,6 @@ router.post( '/addToCart', function( req, res, next ) {
                         } )
                 }
             } )
-
         } else {
             // Else, initialize a cart for the new user, and add the item
             var myData = new cart( {
@@ -114,9 +97,7 @@ router.post( '/addToCart', function( req, res, next ) {
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ],
-                status: 0,
-                lastModDate: util.formatDate( new Date() )
+                } ]
             } );
             myData.save()
                 .then( () => {
@@ -158,7 +139,6 @@ router.post( '/updateItem', function( req, res, next ) {
             }
         } )
         .then( () => {
-            // Find better way to close modal here rather than a redirect
             res.redirect( "http://localhost:3000/manageItems" );
         } )
         .catch( err => {

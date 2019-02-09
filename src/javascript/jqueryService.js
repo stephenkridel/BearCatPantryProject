@@ -6,8 +6,6 @@ Services defines various UI tweaks using jquery
 */
 
 $( document ).ready( function() {
-    $( 'head' ).append( `<link href="${favicon}" rel="shortcut icon" type="image/png" />` );
-
     $( '#image' ).change( function() {
         var i = $( this ).prev( 'label' ).clone();
         var file = $( '#image' )[ 0 ].files[ 0 ].name;

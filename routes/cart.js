@@ -1,7 +1,9 @@
 var express = require( 'express' );
 var cart = require( '../models/cartModel' );
-var _ = require( 'lodash' );
+var order = require( '../models/orderModel' );
+
 var nodemailer = require( 'nodemailer' );
+var _ = require( 'lodash' );
 var QRCode = require( 'qrcode' );
 var util = require( '../src/javascript/util.js' );
 
@@ -11,12 +13,11 @@ var router = express.Router();
 router.get( '/cart', function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
-    }, 'items status', function( err, cart ) {
+    }, 'items', function( err, cart ) {
         if ( cart && cart.length > 0 ) {
             res.render( 'cart', {
                 itemInCart: cart[ 0 ].items,
                 title: "Shopping Cart - Bearcat Pantry",
-                cartStatus: cart[ 0 ].status
             } );
         } else {
             res.render( 'cart', {
@@ -46,16 +47,6 @@ router.get( '/totalCartItems', function( req, res, next ) {
 } );
 
 router.post( '/updateCartItemQuantities', function( req, res, next ) {
-    /////// Theoritically this use case should never happen, but just in case putting it here /////////
-    // Get the cart status cookie
-    var pendingOrder = req.cookies.pendingOrder;
-
-    // Throw an error because user already has active order in progress
-    if ( pendingOrder ) {
-        res.sendStatus( 403 );
-        return;
-    }
-
     cart.countDocuments( {
         user: process.env.USERNAME
     }, function( err, count ) {
@@ -77,9 +68,6 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                                 'itemName': req.body.itemName,
                                 'quantity': 1,
                             }
-                        },
-                        $set: {
-                            "lastModDate": util.formatDate( new Date() )
                         }
                     } ).then( () => {
                         res.sendStatus( 200 );
@@ -90,8 +78,7 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                             "user": process.env.USERNAME,
                         }, {
                             $set: {
-                                "items.$[elem].quantity": req.body.quantity,
-                                "lastModDate": util.formatDate( new Date() )
+                                "items.$[elem].quantity": req.body.quantity
                             }
                         }, {
                             upsert: true,
@@ -114,14 +101,11 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
-                } ],
-                status: 0,
-                lastModDate: util.formatDate( new Date() )
+                } ]
             } );
             myData.save()
                 .then( () => {
                     res.sendStatus( 200 );
-
                 } )
                 .catch( err => {
                     res.status( 400 ).send( "unable to save to database" );
@@ -147,66 +131,59 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
     } );
 } );
 
-var transporter = nodemailer.createTransport( {
-    service: 'gmail',
-    auth: {
-        user: 'bearcatpantry@gmail.com',
-        pass: process.env.EMAIL_PW
-    }
-} );
-
-// CLEAN ME UP. 
-router.post( '/checkout', function( req, res, next ) {
-    cart.updateOne( {
+router.post( '/createNewOrder', function( req, res, next ) {
+    cart.find( {
         "user": process.env.USERNAME
-    }, {
-        $set: {
-            "status": 1,
-            "lastModDate": util.formatDate( new Date() )
-        },
-    } ).then( () => {
-        cart.find( {
-            "user": process.env.USERNAME
-        }, 'items', function( err, cart ) {
-            // This chunk of code is responsible for:
-            // 1: Generating the html content of the email to send
-            // 2: Creating a QR code for the emai
-            if ( cart && cart.length > 0 ) {
+    }, 'user items', function( err, foundCart ) {
+        if ( foundCart && foundCart.length > 1 ) {
+            res.status( 400 ).send( "Somehow found 2 carts for this user" );
+        }
+        // Create a new order schema 
+        var usersCart = foundCart[ 0 ];
+        var newCart = new order( {
+            cart: new cart( usersCart ),
+            status: 0,
+            creationDate: util.formatDate( new Date() )
+        } );
+        newCart.save()
+            .then( ( order ) => {
+                // Send an email to the user the contents of their cart
                 var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br><br>";
                 var orderDetails = "";
-                _.forEach( cart[ 0 ].items, function( item ) {
-                    if ( item ) {
-                        orderDetails += `${item.itemName}x${item.quantity}<br>`;
-                    }
-                } );
+                var itemsInCart = order.cart.items;
+                for ( var i = 0; i < itemsInCart.length; i++ ) {
+                    orderDetails += `${itemsInCart[i].itemName} - ${itemsInCart[i].quantity}<br>`;
+                }
                 var final = "<br>Your order can be found at localhost:3000/cart<br>Please come to the Pantry to pick up your order.<br><br> Thanks,<br>The Bearcat Pantry Team"
                 var message = greeting + orderDetails + final;
 
-
+                // Create a QRCode with the username as it's data
                 QRCode.toDataURL( process.env.USERNAME, function( err, url ) {
-                    var qrHtml = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
-                    var mailOptions = {
-                        from: 'bearcatpantry@gmail.com',
-                        to: process.env.EMAIL_TO,
-                        subject: `${process.env.USERNAME}'s Pantry Order`,
-                        html: qrHtml
-                    };
-                    transporter.sendMail( mailOptions, function( error, info ) {
-                        if ( error ) {
-                            console.log( error );
-                        } else {
-                            res.cookie( 'pendingOrder', true, {
-                                maxAge: 900000
-                            } );
-                            res.sendStatus( 200 );
-                        }
-                    } );
+                    var html = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
+                    var subject = `${process.env.USERNAME}'s Bearcat Pantry Order`
+                    // Send to 6+2 email! TODO
+                    util.sendEmail( res, nodemailer, process.env.EMAIL_TO, subject, html );
                 } )
+            } )
+            .catch( err => {
+                res.status( 400 ).send( "unable to save to database" );
+            } );
 
-            } else {
-                res.sendStatus( 403 );
-            }
-        } )
+
+        // Take away that many items from itmes quantity
+    } )
+} );
+
+// Empty out a user's cart
+router.post( '/clearCart', function( req, res, next ) {
+    cart.update( {
+        "user": process.env.USERNAME
+    }, {
+        $set: {
+            "items": []
+        }
+    } ).then( () => {
+        res.sendStatus( 200 );
     } )
 } );
 
@@ -219,7 +196,6 @@ router.post( '/cancelOrder', function( req, res, next ) {
             "status": 0
         }
     } ).then( () => {
-        res.clearCookie( "pendingOrder" );
         res.sendStatus( 200 );
     } )
 } );

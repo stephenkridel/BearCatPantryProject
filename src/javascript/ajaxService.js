@@ -186,14 +186,31 @@ $( document ).ready( function() {
             className: 'custom-popupS-class',
             additionalButtonOkClass: 'btn btn-primary',
         } );
+
+        // Create the Order Model/Sends the Email
+        // Substracts the items checkedout from the DB
+        // Clears out the user's cart to create new order
         $.ajax( {
             method: 'POST',
-            url: '/checkout'
-        } ).done( function( msg ) {
-            location.reload();
-        } ).fail( function( msg ) {
+            url: '/createNewOrder'
+        } ).done( function() {
+            // $.ajax( {
+            //     method: 'POST',
+            //     url: '/subtractItemQuantities'
+            // } ).done( function() {
+            $.ajax( {
+                method: 'POST',
+                url: '/clearCart'
+            } ).done( function() {
+                window.location.href = "/postCheckout";
+            } ).fail( function() {
+                console.log( "Order failed!" );
+            } );
+            // } ).fail( function( msg ) {
+            //     console.log( "Order failed!" );
+            // } );
+        } ).fail( function() {
             console.log( "Order failed!" );
-            s
         } );
     } );
 } );

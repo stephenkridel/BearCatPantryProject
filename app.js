@@ -22,6 +22,8 @@ var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
 var testRouter = require( './routes/test' );
 var adminRouter = require( './routes/admin' );
+var postCheckoutRouter = require( './routes/postCheckout' );
+
 
 var app = express();
 
@@ -91,6 +93,7 @@ app.use( '/', cartRouter );
 app.use( '/', homeRouter );
 app.use( '/', testRouter );
 app.use( '/', adminRouter );
+app.use( '/', postCheckoutRouter );
 
 
 // catch 404 and forward to error handler

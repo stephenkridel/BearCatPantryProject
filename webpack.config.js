@@ -62,7 +62,7 @@ const config = {
         }, {
             test: /\.(png|svg|jpg|gif)$/,
             use: [
-                'file-loader'
+                'file-loader?name=[name].[ext]'
             ]
         } ]
     },
