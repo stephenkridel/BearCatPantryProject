@@ -7,6 +7,11 @@ const opts = {
     timeout: 10000
 };
 
+var desktop = {
+    width: 1920,
+    height: 1080
+}
+
 
 
 describe( 'All Bearcat Pantry Tests', function() {
@@ -17,10 +22,7 @@ describe( 'All Bearcat Pantry Tests', function() {
         browser = await puppeteer.launch( opts );
         page = await browser.newPage();
         await page.goto( 'http://localhost:3000/home' );
-        await page.setViewport( {
-            width: 1920,
-            height: 1080
-        } );
+        await page.setViewport( desktop );
     } );
 
     after( async function() {
