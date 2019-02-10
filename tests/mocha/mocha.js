@@ -5,7 +5,7 @@ const puppeteer = require( 'puppeteer' );
 const opts = {
     headless: false,
     timeout: 10000
-};
+}
 
 var desktop = {
     width: 1920,
@@ -14,7 +14,7 @@ var desktop = {
 
 
 
-describe( 'All Bearcat Pantry Tests', function() {
+describe( 'All Bearcat Pantry Tests', async function() {
     let page;
     let browser
 
@@ -26,6 +26,7 @@ describe( 'All Bearcat Pantry Tests', function() {
     } );
 
     after( async function() {
+        console.log( 'here' )
         await page.close();
     } );
 
@@ -37,7 +38,7 @@ describe( 'All Bearcat Pantry Tests', function() {
 
             // Get the search box, type cookies, and then click search button
             var searchBar = await page.$( '#globalSearchBar' );
-            await searchBar.type( "t" );
+            await searchBar.type( "cookies" );
             var seachButton = await page.$( '.nav-bar-search .btn' );
             await seachButton.click();
 
@@ -45,14 +46,17 @@ describe( 'All Bearcat Pantry Tests', function() {
             await page.waitForNavigation();
 
             // Verify search worked
-            var cookies = await page.$x( "//*[contains(text(),'Cookies')]" )[ 0 ];
+            var cookies = await page.$x( "//*[contains(text(),'Cookies')]" );
             if ( cookies ) {
-                console.log( "found" )
+                assert.ok( true, 'found cookies' );
+                await page.screenshot( {
+                    path: 'tests/puppeteer-runs/foundCookies.png'
+                } );
             } else {
-                assert.fail( "Cookies not found!" );
                 await page.screenshot( {
                     path: 'tests/puppeteer-runs/example.png'
                 } );
+                assert.fail( "Cookies not found!" );
             }
         } );
     } );
