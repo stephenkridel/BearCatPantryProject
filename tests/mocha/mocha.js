@@ -18,9 +18,22 @@ var desktop = {
 
 describe( 'All Bearcat Pantry Tests', async function() {
     let page;
-    let browser
+    let browser;
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var dateString = `${hours}:${minutes}:${seconds}/`;
+    var out_dir = 'tests/out/' + dateString;
 
     before( async function() {
+        // With Promises:
+
+
+        fs.ensureDir( out_dir )
+            .then( () => {
+                console.log( 'success!' )
+            } )
         browser = await puppeteer.launch( opts );
     } );
 
@@ -58,11 +71,11 @@ describe( 'All Bearcat Pantry Tests', async function() {
             if ( cookies ) {
                 assert.ok( true, 'found cookies' );
                 await page.screenshot( {
-                    path: 'tests/out/foundCookies.png'
+                    path: out_dir + 'foundCookies.png'
                 } );
             } else {
                 await page.screenshot( {
-                    path: 'tests/out/example.png'
+                    path: out_dir + 'example.png'
                 } );
                 assert.fail( "Cookies not found!" );
             }
