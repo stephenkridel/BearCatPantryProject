@@ -2,7 +2,7 @@ var mongoose = require( 'mongoose' );
 
 var itemSchema = new mongoose.Schema( {
     itemName: String,
-    barcode: Number,
+    barcodes: [ Number ],
     quantity: Number,
     weight: Number,
     img: {
