@@ -10,8 +10,8 @@ var cartSchema = new mongoose.Schema( {
 } );
 
 
-// 0 = User is still adding items
-// 1 = User clicked checkout and admin needs to physically get the items for the order 
+// 0 = Order has just been created
+// 1 = Order has been recieved by user
 
 var orderSchema = new mongoose.Schema( {
     cart: cartSchema,
