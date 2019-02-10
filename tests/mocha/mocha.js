@@ -17,8 +17,11 @@ var desktop = {
 
 
 describe( 'All Bearcat Pantry Tests', async function() {
+    // Setup global page/browser
     let page;
     let browser;
+    
+    // Setup output directory
     var date = new Date();
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -27,9 +30,6 @@ describe( 'All Bearcat Pantry Tests', async function() {
     var out_dir = 'tests/out/' + dateString;
 
     before( async function() {
-        // With Promises:
-
-
         fs.ensureDir( out_dir )
             .then( () => {
                 console.log( 'success!' )
