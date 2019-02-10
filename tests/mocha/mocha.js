@@ -1,5 +1,7 @@
-var assert = require( 'assert' );
-const puppeteer = require( 'puppeteer' );
+var assert = require( 'assert' )
+var puppeteer = require( 'puppeteer' )
+var fs = require( 'fs-extra' )
+
 
 // puppeteer options
 const opts = {
@@ -20,13 +22,19 @@ describe( 'All Bearcat Pantry Tests', async function() {
 
     before( async function() {
         browser = await puppeteer.launch( opts );
+    } );
+
+    beforeEach( async function() {
         page = await browser.newPage();
         await page.goto( 'http://localhost:3000/home' );
         await page.setViewport( desktop );
     } );
 
     after( async function() {
-        console.log( 'here' )
+        await browser.close();
+    } );
+
+    afterEach( async function() {
         await page.close();
     } );
 
@@ -50,11 +58,11 @@ describe( 'All Bearcat Pantry Tests', async function() {
             if ( cookies ) {
                 assert.ok( true, 'found cookies' );
                 await page.screenshot( {
-                    path: 'tests/puppeteer-runs/foundCookies.png'
+                    path: 'tests/out/foundCookies.png'
                 } );
             } else {
                 await page.screenshot( {
-                    path: 'tests/puppeteer-runs/example.png'
+                    path: 'tests/out/example.png'
                 } );
                 assert.fail( "Cookies not found!" );
             }
