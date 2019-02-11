@@ -30,10 +30,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
     var out_dir = 'tests/out/' + dateString;
 
     before( async function() {
-        fs.ensureDir( out_dir )
-            .then( () => {
-                console.log( 'success!' )
-            } )
+        fs.ensureDir( out_dir );
         browser = await puppeteer.launch( opts );
     } );
 
