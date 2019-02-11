@@ -104,7 +104,21 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await quantity.type("500");
                 var weight = await page.$('#weight');
                 await weight.type("4");
+                var imageButton = await page.$('#image');
+                //await imageButton.click();
+                //var filePath = path.relative(process.cwd(), __dirname + '/testFile.jpg');
+                const filePath=(process.cwd()+"/testFile.jpg");
+                await imageButton.uploadFile(filePath);
+                var addButton = await page.$('#addButton');
+                await addButton.click()
+                //const filePath = path.relative(process.cwd(), "/testFile.jpg")
+                //const fileInput = await page.$('.messsage-container .messsage-form__upload-attachment input[type=file]');
+                //const input = await page.$('input[name=something]');
+                //await input.imageButton(filnpePath);
+                //var addButton = await page.$('#addButton');
+                //await addButton.click();
                 console.log("I got here")
+
             } );
         } );
     } );
