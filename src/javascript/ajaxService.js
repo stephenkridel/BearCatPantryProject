@@ -194,21 +194,21 @@ $( document ).ready( function() {
             method: 'POST',
             url: '/createNewOrder'
         } ).done( function() {
-            // $.ajax( {
-            //     method: 'POST',
-            //     url: '/subtractItemQuantities'
-            // } ).done( function() {
             $.ajax( {
                 method: 'POST',
-                url: '/clearCart'
+                url: '/decrementItemQuantity'
             } ).done( function() {
-                window.location.href = "/postCheckout";
-            } ).fail( function() {
+                $.ajax( {
+                    method: 'POST',
+                    url: '/clearCart'
+                } ).done( function() {
+                    window.location.href = "/postCheckout";
+                } ).fail( function() {
+                    console.log( "Order failed!" );
+                } );
+            } ).fail( function( msg ) {
                 console.log( "Order failed!" );
             } );
-            // } ).fail( function( msg ) {
-            //     console.log( "Order failed!" );
-            // } );
         } ).fail( function() {
             console.log( "Order failed!" );
         } );
