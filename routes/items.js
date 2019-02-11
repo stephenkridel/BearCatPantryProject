@@ -45,6 +45,18 @@ router.get( '/items', function( req, res, next ) {
 
 } );
 
+router.get( '/getItem', function( req, res, next ) {
+    // Does not return img currently for performance reasons
+    item.find( {
+        "itemName": req.query.itemName
+    }, 'itemName barcode quantity weight', function( err, item ) {
+        var ret = {
+            item: item
+        }
+        res.json( ret );
+    } )
+} );
+
 router.post( '/addToCart', function( req, res, next ) {
     cart.countDocuments( {
         user: process.env.USERNAME

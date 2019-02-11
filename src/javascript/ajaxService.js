@@ -53,7 +53,7 @@ $( document ).ready( function() {
                     content: `Added ${itemName} to cart`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
-                    additionalButtonCancelClass: 'btn btn-primary',
+                    additionalButtonCancelClass: 'btn btn-info',
                     labelOk: 'View Cart',
                     labelCancel: 'Close',
                     onSubmit: function() {
@@ -128,33 +128,67 @@ $( document ).ready( function() {
     } );
 } );
 
+
+var knownItemQuantities = [];
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
-        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
-        if ( parseInt( $( this ).val() ) > 0 ) {
-            $( this ).removeClass( 'is-invalid' )
-            $( this ).addClass( 'is-valid' )
+        let itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        let inputQuantity = parseInt( $( this ).val() );
+        var _this = this;
+        var amtInPantry;
+
+        // If we know the quantity already, dont query DB for it again
+        if ( knownItemQuantities.filter( e => e.itemName === itemName ).length === 1 ) {
+            amtInPantry = knownItemQuantities.filter( e => e.itemName === itemName )[ 0 ].quantity
+            validateAndUpdateCartRow( _this, itemName, amtInPantry, inputQuantity );
+        }
+        // Else, get the amount in the pantry from the DB and save it 
+        else {
             $.ajax( {
-                    method: 'POST',
-                    url: '/updateCartItemQuantities',
+                    method: 'GET',
+                    url: '/getItem',
                     data: {
                         itemName: itemName,
-                        quantity: $( this ).val()
                     }
                 } )
-                .done( function( msg ) {
-                    updateShoppingCartTotal();
+                .done( function( ret ) {
+                    knownItemQuantities.push( ret.item[ 0 ] );
+                    amtInPantry = ret.item[ 0 ].quantity;
+                    validateAndUpdateCartRow( _this, itemName, amtInPantry, inputQuantity );
                 } )
-                .fail( function( msg ) {
-                    console.log( "Cart update failed" )
+                .fail( function() {
+                    console.log( "Failed to get item" )
                 } );
-        } else {
-            $( this ).removeClass( 'is-valid' );
-            $( this ).addClass( 'is-invalid' );
-            $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
         }
     } );
 } );
+
+var validateAndUpdateCartRow = function( _this, itemName, amtInPantry, inputQuantity ) {
+    if ( inputQuantity > 0 && inputQuantity <= amtInPantry ) {
+        $( _this ).removeClass( 'is-invalid' )
+        $( _this ).addClass( 'is-valid' )
+        $.ajax( {
+                method: 'POST',
+                url: '/updateCartItemQuantities',
+                data: {
+                    itemName: itemName,
+                    quantity: inputQuantity
+                }
+            } )
+            .done( function() {
+                updateShoppingCartTotal();
+            } )
+            .fail( function( msg ) {
+                console.log( "Cart update failed" )
+            } );
+    } else {
+        $( _this ).removeClass( 'is-valid' );
+        $( _this ).addClass( 'is-invalid' );
+        var invalidFeedback = $( _this ).closest( '.input-group' ).find( ".invalid-feedback" )
+        invalidFeedback.show();
+        invalidFeedback.html( `Item quantity must be greater than 0, and less than the amount in the pantry(${amtInPantry})` );
+    }
+}
 
 $( document ).ready( function() {
     $( '.remove-from-cart' ).on( "click", function() {
