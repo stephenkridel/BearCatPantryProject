@@ -80,5 +80,32 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 assert.fail( "Cookies not found!" );
             }
         } );
+        describe( 'Item Tests', function() {
+            it( 'Verify Adding New Item', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+    
+                // Get the search box, type cookies, and then click search button
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var barcodeNumber = await page.$('#barcode');
+                await barcodeNumber.type( "80808080" );
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var itemName = await page.$('#itemName');
+                await itemName.type("Test");
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var quantity = await page.$('#quantity');
+                await quantity.type("500");
+                var weight = await page.$('#weight');
+                await weight.type("4");
+                console.log("I got here")
+            } );
+        } );
     } );
 } );
