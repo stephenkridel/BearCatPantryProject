@@ -229,7 +229,7 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
     var img = fs.readFileSync( req.file.path );
     var myData = new item( {
         itemName: itemNameFormatted,
-        barcode: req.body.barcode,
+        barcode: [ req.body.barcode ],
         quantity: req.body.quantity,
         weight: req.body.weight,
         img: {
@@ -292,7 +292,7 @@ router.post( "/incrementItem", function( req, res, next ) {
                     "itemName": req.body.itemName
                 } ]
             }, {
-                "$set": {
+                "$addToSet": {
                     'barcode': req.body.barcode
                 },
                 "$inc": {
