@@ -6,7 +6,7 @@ var fs = require( 'fs-extra' )
 // puppeteer options
 const opts = {
     headless: false,
-    timeout: 10000
+    timeout: 100000
 }
 
 var desktop = {
@@ -136,6 +136,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await page.waitForNavigation();
                 var EditItemTab = await page.$('#Tab');
                 await EditItemTab.click()
+                await page.waitForNavigation();
                 var Test = await page.$x( "//*[contains(text(),'Norman')]" );
                 if (Test.length<1) {
                    assert.ok(true, 'Deleted Norman' );
