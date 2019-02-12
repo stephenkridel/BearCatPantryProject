@@ -133,6 +133,15 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await EditTestTab.click();
                 var DeleteButton = await page.$('#DeleteNorman');
                 await DeleteButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var Test = await page.$x( "//*[contains(text(),'Norman')]" );
+                if (Test) {
+                   // assert.ok(false, 'Deleted Norman' );
+                } else {
+                    //assert.fail( "Item Not Deleted!" );
+                }
             } );
         } );
 } );
