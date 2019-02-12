@@ -74,7 +74,7 @@
                     <div class="card-header">
                         <div class="item-header">
                             <div class="item-header-text">{{this.itemName}}</div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
+                            <button type="button" id={{this.itemName}} class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
                             <!-- The modal -->
                             <div class="modal" id="{{this.itemName}}Modal">
                                 <div class="modal-dialog" role="document">
@@ -105,7 +105,7 @@
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="submit" class="btn btn-danger" formaction="/deleteItem"
+                                                    <input type="submit" id="Delete{{this.itemName}}"}} class="btn btn-danger" formaction="/deleteItem"
                                                         value="Delete {{this.itemName}}"></button>
                                                     <input type="submit" class="btn btn-primary" value="Save change">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

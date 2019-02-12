@@ -77,7 +77,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 assert.fail( "Cookies not found!" );
             }
         } );
-        describe( 'Item Tests', function() {
+    } );
+        describe( 'Item Tests With Barcode', function() {
             it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -117,5 +118,21 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-    } );
+        describe( 'Editing Existing Item', function() {
+            it( 'Verify Editing Existing Item Works', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditTestTab = await page.$('#Norman');
+                await EditTestTab.click();
+                var DeleteButton = await page.$('#DeleteNorman');
+                await DeleteButton.click()
+            } );
+        } );
 } );
