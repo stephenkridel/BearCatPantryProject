@@ -78,7 +78,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
             }
         } );
         describe( 'Item Tests', function() {
-            it( 'Verify Adding New Item', async function() {
+            it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
                 await page.waitFor( BODY_SELECTOR );
@@ -93,7 +93,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await addButton.click();
                 await page.waitForNavigation();
                 var itemName = await page.$('#itemName');
-                await itemName.type("Test");
+                await itemName.type("Norman");
                 var addButton = await page.$('#addButton');
                 await addButton.click();
                 await page.waitForNavigation();
@@ -109,20 +109,12 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await page.waitForNavigation();
                 var EditItemTab = await page.$('#Tab');
                 await EditItemTab.click()
-                var Test = await page.$x( "//*[contains(text(),'Test')]" );
-                if ( Test ) {
-                    assert.ok( true, 'found Test' );
-                    await page.screenshot( {
-                        path: out_dir + 'foundTest.png'
-                    } );
+                var Test = await page.$x( "//*[contains(text(),'Norman')]" );
+                if (Test) {
+                    assert.ok( true, 'found Norman' );
                 } else {
-                    await page.screenshot( {
-                        path: out_dir + 'example.png'
-                    } );
                     assert.fail( "Item not Created!" );
                 }
-                console.log("I got here")
-                
             } );
         } );
     } );
