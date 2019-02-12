@@ -137,10 +137,10 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 var EditItemTab = await page.$('#Tab');
                 await EditItemTab.click()
                 var Test = await page.$x( "//*[contains(text(),'Norman')]" );
-                if (Test) {
-                   // assert.ok(false, 'Deleted Norman' );
+                if (Test.length<1) {
+                   assert.ok(true, 'Deleted Norman' );
                 } else {
-                    //assert.fail( "Item Not Deleted!" );
+                    assert.fail( "Item Not Deleted!" );
                 }
             } );
         } );
