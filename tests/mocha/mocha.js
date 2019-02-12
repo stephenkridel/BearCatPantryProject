@@ -106,13 +106,9 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await imageButton.uploadFile(filePath);
                 var addButton = await page.$('#addButton');
                 await addButton.click()
-
-                /*var Browse = await page.$('.nav-link.show');
-
-
-
-
-                await Browse.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
                 var Test = await page.$x( "//*[contains(text(),'Test')]" );
                 if ( Test ) {
                     assert.ok( true, 'found Test' );
@@ -126,7 +122,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                     assert.fail( "Item not Created!" );
                 }
                 console.log("I got here")
-                */
+                
             } );
         } );
     } );
