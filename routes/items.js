@@ -84,24 +84,42 @@ router.post( '/addToCart', function( req, res, next ) {
                         res.sendStatus( 200 );
                     } )
                 } else {
-                    // else, update existing shopping cart item to increment 1 time
-                    cart.findOneAndUpdate( {
-                            "user": process.env.USERNAME,
-                        }, {
-                            $inc: {
-                                "items.$[elem].quantity": 1
+                    // First, validate adding this item to the cart wont put it over the amount available
+                    item.find( {
+                        "itemName": req.body.itemName
+                    }, 'quantity', function( err, found ) {
+                        let foundItem = found[ 0 ];
+                        cart.find( {
+                            "user": process.env.USERNAME
+                        }, 'user items', function( err, foundCart ) {
+                            if ( foundCart && foundCart.length > 1 ) {
+                                res.status( 400 ).send( "Somehow found 2 carts for this user" );
                             }
-                        }, {
-                            upsert: true,
-                            arrayFilters: [ {
-                                "elem.itemName": {
-                                    $eq: req.body.itemName
-                                }
-                            } ]
+                            var usersCart = foundCart[ 0 ];
+                            var amtInCart = usersCart.items.filter( e => e.itemName === req.body.itemName )[ 0 ].quantity
+                            if ( amtInCart + 1 <= foundItem.quantity ) {
+                                cart.findOneAndUpdate( {
+                                        "user": process.env.USERNAME,
+                                    }, {
+                                        $inc: {
+                                            "items.$[elem].quantity": 1
+                                        }
+                                    }, {
+                                        upsert: true,
+                                        arrayFilters: [ {
+                                            "elem.itemName": {
+                                                $eq: req.body.itemName
+                                            }
+                                        } ]
+                                    } )
+                                    .then( () => {
+                                        res.sendStatus( 200 );
+                                    } )
+                            } else {
+                                res.sendStatus( 500 );
+                            }
                         } )
-                        .then( () => {
-                            res.sendStatus( 200 );
-                        } )
+                    } )
                 }
             } )
         } else {

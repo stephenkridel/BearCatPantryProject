@@ -39,7 +39,6 @@ $( document ).ready( function() {
     $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
         var itemName = $( this ).closest( '.item-container' ).find( '.card-header' )[ 0 ].innerHTML;
-
         $.ajax( {
                 method: 'POST',
                 url: '/addToCart',
@@ -65,7 +64,7 @@ $( document ).ready( function() {
             .fail( function() {
                 popupS.window( {
                     mode: 'alert',
-                    content: 'You already have an active order. Please complete the existing order before creating a new one.',
+                    content: `${itemName} was not added. Max amount already in cart.`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
                 } );
@@ -177,6 +176,7 @@ var validateAndUpdateCartRow = function( _this, itemName, amtInPantry, inputQuan
             } )
             .done( function() {
                 updateShoppingCartTotal();
+                validateCheckoutButton();
             } )
             .fail( function( msg ) {
                 console.log( "Cart update failed" )
@@ -187,8 +187,29 @@ var validateAndUpdateCartRow = function( _this, itemName, amtInPantry, inputQuan
         var invalidFeedback = $( _this ).closest( '.input-group' ).find( ".invalid-feedback" )
         invalidFeedback.show();
         invalidFeedback.html( `Item quantity must be greater than 0, and less than the amount in the pantry(${amtInPantry})` );
+        validateCheckoutButton();
     }
 }
+
+var validateCheckoutButton = function() {
+    var foundError = false
+    $( ".invalid-feedback" ).each( function() {
+        if ( $( this ).is( ':visible' ) ) {
+            foundError = true;
+        }
+    } );
+    if ( foundError ) {
+        $( "#checkout" ).attr( "disabled", true );
+
+    } else {
+        $( "#checkout" ).attr( "disabled", false );
+
+    }
+}
+
+$( function() {
+    validateCheckoutButton();
+} );
 
 $( document ).ready( function() {
     $( '.remove-from-cart' ).on( "click", function() {
