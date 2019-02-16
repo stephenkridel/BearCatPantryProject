@@ -12,8 +12,6 @@
 
 ## Bearcat Pantry Users
 ### Browsing items
-<br><br>
-
 ![](https://i.imgur.com/jQeZl4s.png)
 <br><br>
 
@@ -50,16 +48,12 @@ Once a user is happy with the contents of their shopping cart, they can finishg 
 
 ## Bearcat Pantry Volunteers/Administrators
 ### Adding items
-<br><br>
-
 ![](https://i.imgur.com/ucW40l4.png)
 <br><br>
 
 To add items to the pantry, pantry volunteers can navigate to the "Manage Pantry Items" page located within the toolbar at the top of every page.
 
 #### Adding by item name
-<br><br>
-
 ![](https://i.imgur.com/oq1ZoEL.png)
 <br><br>
 
@@ -72,8 +66,6 @@ Items without barcodes can be added within the "Add Item Without Barcode" tab on
 If the item is found, the pantry volunteer will be prompted for a quantity of the item to be added to the database. If not, they will be prompted to [create the item](#creating-new-items)
 
 #### Adding by barcode
-<br><br>
-
 ![](https://i.imgur.com/jOpEZTK.png)
 <br><br>
 
@@ -90,8 +82,6 @@ If the item is not found, the user will then be prompted for the name of the ite
 If neither the barcode nor the item name can be found within the pantry, the user will be prompted to [create the item](#creating-new-items)
 
 #### Creating new items
-<br><br>
-
 ![](https://i.imgur.com/qc6lPEm.png)
 <br><br>
 
@@ -100,8 +90,6 @@ If an existing item cannot be identified while adding an item to the pantry, the
 After selecting the "Add Item" button, a new listing will be added to the pantry for this item.
 
 ### Editing existing items
-<br><br>
-
 ![](https://i.imgur.com/cUJ7paO.png)
 <br><br>
 
