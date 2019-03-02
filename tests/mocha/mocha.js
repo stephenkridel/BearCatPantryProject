@@ -121,7 +121,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-        /*describe( 'Item Tests Without Barcode', function() {
+        describe( 'Item Tests Without Barcode', function() {
             it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -158,9 +158,9 @@ describe( 'All Bearcat Pantry Tests', async function() {
                     assert.fail( "Item Without Barcode not Created!" );
                 }
             } );
-        } );*/
-        describe( 'Editing Existing Item', function() {
-            it( 'Verify Editing Existing Item Works', async function() {
+        } );
+        describe( 'Delete Existing Item', function() {
+            it( 'Verify Deleting Existing Item Works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
                 await page.waitFor( BODY_SELECTOR );
@@ -171,7 +171,9 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 var EditItemTab = await page.$('#Tab');
                 await EditItemTab.click()
                 var EditTestTab = await page.$('#Norman');
+                await delay(500)
                 await EditTestTab.click();
+                await delay(500)
                 var DeleteButton = await page.$('#DeleteNorman');
                 await DeleteButton.click()
                 await page.waitForNavigation();
@@ -185,9 +187,38 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
+        describe( 'Editing Deleting Item', function() {
+            it( 'Verify Deleting Existing Item Works', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditTestTab = await page.$('#Bangrang');
+                await delay(500)
+                await EditTestTab.click();
+                await delay(500)
+                var DeleteButton = await page.$('#DeleteBangrang');
+                await DeleteButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var Test = await page.$x( "//*[contains(text(),'Bangrang')]" );
+                if (Test<1) {
+                   assert.ok(true, 'Deleted Bangrang' );
+                } else {
+                    assert.fail( "Item Not Deleted!" );
+                }
+            } );
+        } );
 } );
+
 function delay(time) {
     return new Promise(function(resolve) { 
         setTimeout(resolve, time)
     });
- }
+ };
