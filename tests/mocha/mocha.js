@@ -172,7 +172,6 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await EditItemTab.click()
                 var EditTestTab = await page.$('#Norman');
                 await EditTestTab.click();
-                await delay(500)
                 var DeleteButton = await page.$('#DeleteNorman');
                 await DeleteButton.click()
                 await page.waitForNavigation();
