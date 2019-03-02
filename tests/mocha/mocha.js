@@ -136,9 +136,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await page.waitForNavigation();
                 var EditItemTab = await page.$('#Tab');
                 await EditItemTab.click()
-                await page.waitForNavigation();
                 var Test = await page.$x( "//*[contains(text(),'Norman')]" );
-                if (Test.length<1) {
+                if (Test<1) {
                    assert.ok(true, 'Deleted Norman' );
                 } else {
                     assert.fail( "Item Not Deleted!" );
