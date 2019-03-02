@@ -304,3 +304,9 @@ footer {
   text-overflow: ellipsis;
   max-width: 260px;
 }
+
+.pageination{
+  position:relative;
+align-content: center;
+vertical-align: bottom;
+}

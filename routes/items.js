@@ -15,8 +15,16 @@ const upload = multer( {
 } );
 
 router.get( '/items', function( req, res, next ) {
-    //var search = req.query.searchBar;
+    //var search = req.query.searchBar; 
+    //var page = req.query.Page;
+    var num = 4;
+    var pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
+    if (pagenum < 1) pagenum = 1;
+    var prev = pagenum -1//pagenum > 1 ? pagenum-- : pagenum;
+    if (prev < 1) prev = 1;
+    var next = (pagenum -1) + 2 ;//+ parseInt(2)
     var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
+        //var skip = (page*num)-num;
     if ( search && search.length > 0 ) {
         item.find( {
             "itemName": {
@@ -25,20 +33,38 @@ router.get( '/items', function( req, res, next ) {
             }
         }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
+            var notFullPage = false;
+            if (items.length < num && items.length > 0) notFullPage = true;
+            var firstPage = true;
+            if (pagenum > 1) firstPage = false;
             res.render( 'items', {
                 items: items,
                 title: "Items - Bearcat Pantry",
-                searchText: search
+                searchText: search,
+                Page: pagenum,
+                PrevPage: prev,
+                NextPage: next,
+                count: notFullPage,
+                First: firstPage
             } );
-        } );
+        } ).skip(pagenum > 0 ? ((pagenum - 1) * num) : 0).limit(num);
     } else {
         item.find( {}, 'itemName quantity img', function( err, items ) {
             convertToImage( items );
+            var notFullPage = false;
+            if (Number(items.length) < num && Number(items.length) > 0) notFullPage = true;
+            var firstPage = true;
+            if (pagenum > 1) firstPage = false;
             res.render( 'items', {
                 items: items,
-                title: "Items - Bearcat Pantry"
+                title: "Items - Bearcat Pantry",
+                Page: pagenum,
+                PrevPage: prev,
+                NextPage: next,
+                count: notFullPage,
+                First: firstPage
             } );
-        } );
+        } ).skip(pagenum > 0 ? ((pagenum- 1) * num) : 0).limit(num);
     }
 
 } );
