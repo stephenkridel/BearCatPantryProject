@@ -2,11 +2,12 @@ var assert = require( 'assert' )
 var puppeteer = require( 'puppeteer' )
 var fs = require( 'fs-extra' )
 
-
+  
 // puppeteer options
 const opts = {
     headless: false,
-    timeout: 100000
+    timeout: 10000000
+    
 }
 
 var desktop = {
@@ -32,12 +33,14 @@ describe( 'All Bearcat Pantry Tests', async function() {
     before( async function() {
         fs.ensureDir( out_dir );
         browser = await puppeteer.launch( opts );
+        slowMo:250
     } );
 
     beforeEach( async function() {
         page = await browser.newPage();
         await page.goto( 'http://localhost:3000/home' );
         await page.setViewport( desktop );
+        
     } );
 
     after( async function() {
@@ -78,7 +81,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
             }
         } );
     } );
-        describe( 'Item Tests With Barcode', function() {
+       describe( 'Item Tests With Barcode', function() {
             it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -114,10 +117,48 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 if (Test) {
                     assert.ok( true, 'found Norman' );
                 } else {
-                    assert.fail( "Item not Created!" );
+                    assert.fail( "Item with Barcode not Created!" );
                 }
             } );
         } );
+        /*describe( 'Item Tests Without Barcode', function() {
+            it( 'Verify Adding New Item With Barcode', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+    
+                // Get the search box, type cookies, and then click search button
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#ItemWithoutBarcodeTab');
+                await EditItemTab.click()
+                await delay(500)
+                var itemName = await page.$('#itemName');
+                await itemName.type( "Bangrang" );
+                var addButton = await page.$('#addNoBarcodeButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var quantity = await page.$('#quantity');
+                await quantity.type("1000");
+                var weight = await page.$('#weight');
+                await weight.type("50");
+                var imageButton = await page.$('#image');
+                const filePath=(process.cwd()+"/tests/mocha/"+"/testFile.jpg");
+                await imageButton.uploadFile(filePath);
+                var addButton = await page.$('#addButton');
+                await addButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var Test = await page.$x( "//*[contains(text(),'Banrang')]" );
+                if (Test) {
+                    assert.ok( true, 'found Bangrang' );
+                } else {
+                    assert.fail( "Item Without Barcode not Created!" );
+                }
+            } );
+        } );*/
         describe( 'Editing Existing Item', function() {
             it( 'Verify Editing Existing Item Works', async function() {
                 // Wait for the page to load
@@ -131,6 +172,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await EditItemTab.click()
                 var EditTestTab = await page.$('#Norman');
                 await EditTestTab.click();
+                await delay(500)
                 var DeleteButton = await page.$('#DeleteNorman');
                 await DeleteButton.click()
                 await page.waitForNavigation();
@@ -145,3 +187,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
             } );
         } );
 } );
+function delay(time) {
+    return new Promise(function(resolve) { 
+        setTimeout(resolve, time)
+    });
+ }
