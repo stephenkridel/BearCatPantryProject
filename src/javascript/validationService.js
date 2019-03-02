@@ -12,50 +12,53 @@ $( document ).ready( function() {
     //     }
     // } );
 
-    // $( '#itemName' ).each( function() {
-    //     $( this ).on( 'keyup', function() {
-    //         var value = $( "#itemName" ).val();
-    //         if ( value.length >= 4 && value.length <= 15 ) {
-    //             $( "#itemName" ).addClass( 'is-valid' );
-    //             $( "#itemName" ).removeClass( 'is-invalid' );
-    //             if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
-    //                 $( '#addButton' ).removeAttr( 'disabled' );
-    //             }
-    //             $( "#badItemName" ).hide();
+    $( '#itemName' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#itemName" ).val();
+            if ( value.length >= 4 && value.length <= 15 ) {
+                $( "#itemName" ).addClass( 'is-valid' );
+                $( "#itemName" ).removeClass( 'is-invalid' );
+                $( "#badItemName" ).hide();
+                validateAddItemButton( _this );
 
-    //         } else {
-    //             $( "#itemName" ).removeClass( 'is-valid' );
-    //             $( "#itemName" ).addClass( 'is-invalid' );
-    //             $( "#badItemName" ).show();
-    //             $( "#addButton" ).attr( 'disabled', 'disabled' );
-    //         }
-    //     } );
-    // } );
+            } else {
+                $( "#itemName" ).removeClass( 'is-valid' );
+                $( "#itemName" ).addClass( 'is-invalid' );
+                $( "#badItemName" ).show();
+                validateAddItemButton( _this );
 
-    // $( '#quantity' ).each( function() {
-    //     $( this ).on( 'keyup', function() {
-    //         var value = $( "#quantity" ).val();
-    //         if ( value.length >= 1 && value.length <= 3 ) {
-    //             $( "#quantity" ).addClass( 'is-valid' );
-    //             $( "#quantity" ).removeClass( 'is-invalid' );
-    //             $( "#badQuantityNumber" ).hide();
-    //             if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
-    //                 $( '#addButton' ).removeAttr( 'disabled' );
-    //             }
-    //         } else {
-    //             $( "#quantity" ).removeClass( 'is-valid' );
-    //             $( "#quantity" ).addClass( 'is-invalid' );
-    //             $( "#badQuantityNumber" ).show();
-    //             $( "#addButton" ).attr( 'disabled', 'disabled' );
-    //         }
-    //     } );
-    // } );
+            }
+        } );
+    } );
+
+    $( '#quantity' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#quantity" ).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $( "#quantity" ).addClass( 'is-valid' );
+                $( "#quantity" ).removeClass( 'is-invalid' );
+                $( "#badQuantityNumber" ).hide();
+                validateAddItemButton( _this );
+            } else {
+                $( "#quantity" ).removeClass( 'is-valid' );
+                $( "#quantity" ).addClass( 'is-invalid' );
+                $( "#badQuantityNumber" ).show();
+                validateAddItemButton( _this );
+            }
+        } );
+    } );
+    var validateAddItemButton = function( _this ) {
+        var foundError = false
+        $( ".invalid-feedback" ).each( function() {
+            if ( $( this ).is( ':visible' ) ) {
+                foundError = true;
+            }
+        } );
+        $( _this ).closest( "form" ).find( "#addButton" ).attr( "disabled", foundError );
+    }
+
 
     // $( '#weight' ).each( function() {
     //     $( this ).on( 'keyup', function() {
@@ -100,4 +103,26 @@ $( document ).ready( function() {
     //         }
     //     } );
     // } );
+
+    $( '#barcode' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#barcode" ).val();
+            if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 12 ) {
+                $( "#barcode" ).addClass( 'is-valid' );
+                $( "#barcode" ).removeClass( 'is-invalid' );
+                $( "#badBarcodeNumber" ).hide();
+                validateAddItemButton( _this );
+
+
+            } else {
+                $( "#barcode" ).removeClass( 'is-valid' );
+                $( "#barcode" ).addClass( 'is-invalid' );
+                $( "#badBarcodeNumber" ).show();
+                validateAddItemButton( _this );
+            }
+        } );
+    } );
+
+
 } );

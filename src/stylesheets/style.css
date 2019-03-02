@@ -218,21 +218,28 @@ footer {
   margin-right: 0.5rem !important;
 }
 
-.table .cart-quantity-input.input-number {
+.cart-table .cart-quantity-input.input-number {
   flex: 0 0 100px;
+}
+
+.cart-table .invalid-feedback {
+  margin-top: 0;
+}
+
+.cart-table .remove-from-cart {
+  height: calc(2.15625rem + 2px);
 }
 
 .cart-table .quantity-left-minus {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  height: 100%;
-
+  height: calc(2.15625rem + 2px);
 }
 
 .cart-table .quantity-right-plus {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  height: 100%;
+  height: calc(2.15625rem + 2px);
 }
 
 .hidden {
@@ -261,6 +268,11 @@ footer {
   display: flex;
   flex-wrap: nowrap;
   margin-top: 15px;
+}
+
+#popupS-button-ok {
+  background-color: #3498DB;
+  border-color: #3498DB;
 }
 
 .custom-popupS-class .popupS-button-ok {
