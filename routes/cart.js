@@ -123,9 +123,6 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
                 itemName: req.body.itemName
             }
         },
-        $set: {
-            "lastModDate": util.formatDate( new Date() )
-        }
     } ).then( () => {
         res.sendStatus( 200 );
     } );

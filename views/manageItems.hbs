@@ -25,7 +25,7 @@
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
                             Scanner</button>
                     </div>
-                    <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
+                    <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
                 </form>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     </div>
                     <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
                     <div class="card-body">
-                        <p class="card-text">Barcode: {{this.barcode}}</p>
+                        <p class="card-text barcode-text">Barcode: {{this.barcode}}</p>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Total: {{this.quantity}}</p>
