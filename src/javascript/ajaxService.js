@@ -64,7 +64,7 @@ $( document ).ready( function() {
             .fail( function() {
                 popupS.window( {
                     mode: 'alert',
-                    content: `${itemName} was not added. Max amount already in cart.`,
+                    content: `${itemName} was not added.`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
                 } );
@@ -233,40 +233,63 @@ $( document ).ready( function() {
 
 $( document ).ready( function() {
     $( '#checkout' ).on( 'click', function() {
-        popupS.window( {
-            mode: 'alert',
-            content: {
-                html: `<p>Generating order</p><div class="loader"></div>`
-            },
-            className: 'custom-popupS-class',
-            additionalButtonOkClass: 'btn btn-primary',
-        } );
 
+
+        // Validate if this cart actually has the items
         // Create the Order Model/Sends the Email
         // Substracts the items checkedout from the DB
         // Clears out the user's cart to create new order
         $.ajax( {
-            method: 'POST',
-            url: '/createNewOrder'
+            method: 'GET',
+            url: '/validateOrder'
         } ).done( function() {
+            popupS.window( {
+                mode: 'alert',
+                content: {
+                    html: `<p>Generating order</p><div class="loader"></div>`
+                },
+                className: 'custom-popupS-class',
+                additionalButtonOkClass: 'btn btn-primary',
+            } );
             $.ajax( {
                 method: 'POST',
-                url: '/decrementItemQuantity'
+                url: '/createNewOrder'
             } ).done( function() {
                 $.ajax( {
                     method: 'POST',
-                    url: '/clearCart'
+                    url: '/decrementItemQuantity'
                 } ).done( function() {
-                    window.location.href = "/postCheckout";
-                } ).fail( function() {
+                    $.ajax( {
+                        method: 'POST',
+                        url: '/clearCart'
+                    } ).done( function() {
+                        window.location.href = "/postCheckout";
+                    } ).fail( function() {
+                        console.log( "Order failed!" );
+                    } );
+                } ).fail( function( msg ) {
                     console.log( "Order failed!" );
                 } );
             } ).fail( function( msg ) {
                 console.log( "Order failed!" );
             } );
-        } ).fail( function() {
-            console.log( "Order failed!" );
+        } ).fail( function( xhr, textStatus, errorThrown ) {
+            var errorMsg = 'There are existing errors in your cart: <br/>';
+            for ( var i = 0; i < xhr.responseJSON.length; i++ ) {
+                errorMsg += `${xhr.responseJSON[i]}<br/>`
+            }
+
+            popupS.window( {
+                mode: 'alert',
+                content: {
+                    html: `<p>${errorMsg}</p>`
+                },
+                className: 'custom-popupS-class',
+            } );
         } );
+
+
+
     } );
 } );
 
