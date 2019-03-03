@@ -111,7 +111,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await addButton.click();
                 await page.waitForNavigation();
                 var quantity = await page.$('#quantity');
-                await quantity.type("1000");
+                await quantity.type("700");
                 var weight = await page.$('#weight');
                 await weight.type("50");
                 var imageButton = await page.$('#image');
@@ -207,7 +207,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await addButton.click();
                 await page.waitForNavigation();
                 var quantity = await page.$('#quantity');
-                await quantity.type("500");
+                await quantity.type("200");
                 var weight = await page.$('#weight');
                 await weight.type("4");
                 var imageButton = await page.$('#image');
@@ -222,7 +222,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await addButton.click();
                 await page.waitForNavigation();
                 var quantity = await page.$('#quantity');
-                await quantity.type("500");
+                await quantity.type("200");
                 var addButton = await page.$('#addButton');
                 await addButton.click();
                 await page.waitForNavigation();
@@ -234,7 +234,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await delay(500)
                 var Test = await page.$x( "//*[contains(text(),'1000')]" );
                 if (Test) {
-                    assert.ok( true, 'Found 1000' );
+                    assert.ok( true, 'Found 400' );
                 } else {
                     assert.fail( "Item Number was incremented!" );
                 }
@@ -287,7 +287,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await addButton.click();
                 await page.waitForNavigation();
                 var quantity = await page.$('#quantity');
-                await quantity.type("1000");
+                await quantity.type("300");
                 var weight = await page.$('#weight');
                 await weight.type("50");
                 var imageButton = await page.$('#image');
@@ -306,7 +306,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await page.waitForNavigation();
                 await delay(500)
                 var quantity = await page.$('#quantity');
-                await quantity.type("1000");
+                await quantity.type("300");
                 var addButton = await page.$('#addButton');
                 await addButton.click();
                 await page.waitForNavigation();
@@ -318,7 +318,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await delay(500)
                 var Test = await page.$x( "//*[contains(text(),'1000')]" );
                 if (Test) {
-                    assert.ok( true, 'Found 2000' );
+                    assert.ok( true, 'Found 600' );
                 } else {
                     assert.fail( "Item Number was incremented!" );
                 }
