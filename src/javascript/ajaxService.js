@@ -6,40 +6,39 @@ import 'jquery-form'
 Service defines all jquery ajax requests
 */
 
-$( document ).ready( function() {
-    $( '#createItem' ).submit( function( e ) {
-        e.preventDefault();
-        var itemName = $( '#itemName' )[ 0 ].value;
+// $( document ).ready( function() {
+//     // $( '#createItem' ).submit( function( e ) {
+//     //     // e.preventDefault();
+//     //     var itemName = $( '#itemName' )[ 0 ].value;
 
-        $( this ).ajaxSubmit( {
-            data: {
-                itemName: $( `#itemName` ).value,
-                barcode: $( `#barcode` ).value,
-                quantity: $( `#quantity` ).value,
-                weight: $( `#weight` ).value
-            },
-            contentType: 'application/json',
-            success: function( res ) {
-                popupS.window( {
-                    mode: 'alert',
-                    content: `${itemName} has been created`,
-                    className: 'custom-popupS-class',
-                    additionalButtonOkClass: 'btn btn-primary',
-                    onSubmit: function() {
-                        location.reload();
-                    }
-                } );
-            }
-        } );
-        return false;
-    } );
-} );
+//     //     $( this ).ajaxSubmit( {
+//     //         data: {
+//     //             itemName: $( `#itemName` ).value,
+//     //             barcode: $( `#barcode` ).value,
+//     //             quantity: $( `#quantity` ).value,
+//     //             weight: $( `#weight` ).value
+//     //         },
+//     //         contentType: 'application/json',
+//     //         // success: function( res ) {
+//     //         //     popupS.window( {
+//     //         //         mode: 'alert',
+//     //         //         content: `${itemName} has been created`,
+//     //         //         className: 'custom-popupS-class',
+//     //         //         additionalButtonOkClass: 'btn btn-primary',
+//     //         //         // onSubmit: function() {
+//     //         //         //     location.reload();
+//     //         //         // }
+//     //         //     } );
+//     //         // }
+//     //     } );
+//     //     return false;
+//     // } );
+// } );
 
 $( document ).ready( function() {
     $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
         var itemName = $( this ).closest( '.item-container' ).find( '.card-header' )[ 0 ].innerHTML;
-
         $.ajax( {
                 method: 'POST',
                 url: '/addToCart',
@@ -53,7 +52,7 @@ $( document ).ready( function() {
                     content: `Added ${itemName} to cart`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
-                    additionalButtonCancelClass: 'btn btn-primary',
+                    additionalButtonCancelClass: 'btn btn-info',
                     labelOk: 'View Cart',
                     labelCancel: 'Close',
                     onSubmit: function() {
@@ -65,7 +64,7 @@ $( document ).ready( function() {
             .fail( function() {
                 popupS.window( {
                     mode: 'alert',
-                    content: 'You already have an active order. Please complete the existing order before creating a new one.',
+                    content: `${itemName} was not added. Max amount already in cart.`,
                     className: 'custom-popupS-class',
                     additionalButtonOkClass: 'btn btn-primary',
                 } );
@@ -128,32 +127,88 @@ $( document ).ready( function() {
     } );
 } );
 
+
+var knownItemQuantities = [];
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
-        var itemName = $( this ).closest( "tr" ).find( 'th' ).html();
-        if ( parseInt( $( this ).val() ) > 0 ) {
-            $( this ).removeClass( 'is-invalid' )
-            $( this ).addClass( 'is-valid' )
+        let itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        let inputQuantity = parseInt( $( this ).val() );
+        var _this = this;
+        var amtInPantry;
+
+        // If we know the quantity already, dont query DB for it again
+        if ( knownItemQuantities.filter( e => e.itemName === itemName ).length === 1 ) {
+            amtInPantry = knownItemQuantities.filter( e => e.itemName === itemName )[ 0 ].quantity
+            validateAndUpdateCartRow( _this, itemName, amtInPantry, inputQuantity );
+        }
+        // Else, get the amount in the pantry from the DB and save it 
+        else {
             $.ajax( {
-                    method: 'POST',
-                    url: '/updateCartItemQuantities',
+                    method: 'GET',
+                    url: '/getItem',
                     data: {
                         itemName: itemName,
-                        quantity: $( this ).val()
                     }
                 } )
-                .done( function( msg ) {
-                    updateShoppingCartTotal();
+                .done( function( ret ) {
+                    knownItemQuantities.push( ret.item[ 0 ] );
+                    amtInPantry = ret.item[ 0 ].quantity;
+                    validateAndUpdateCartRow( _this, itemName, amtInPantry, inputQuantity );
                 } )
-                .fail( function( msg ) {
-                    console.log( "Cart update failed" )
+                .fail( function() {
+                    console.log( "Failed to get item" )
                 } );
-        } else {
-            $( this ).removeClass( 'is-valid' );
-            $( this ).addClass( 'is-invalid' );
-            $( this ).closest( '.input-group' ).find( ".invalid-feedback" ).show();
         }
     } );
+} );
+
+var validateAndUpdateCartRow = function( _this, itemName, amtInPantry, inputQuantity ) {
+    if ( inputQuantity > 0 && inputQuantity <= amtInPantry ) {
+        $( _this ).removeClass( 'is-invalid' )
+        $( _this ).addClass( 'is-valid' )
+        $.ajax( {
+                method: 'POST',
+                url: '/updateCartItemQuantities',
+                data: {
+                    itemName: itemName,
+                    quantity: inputQuantity
+                }
+            } )
+            .done( function() {
+                updateShoppingCartTotal();
+                validateCheckoutButton();
+            } )
+            .fail( function( msg ) {
+                console.log( "Cart update failed" )
+            } );
+    } else {
+        $( _this ).removeClass( 'is-valid' );
+        $( _this ).addClass( 'is-invalid' );
+        var invalidFeedback = $( _this ).closest( '.input-group' ).find( ".invalid-feedback" )
+        invalidFeedback.show();
+        invalidFeedback.html( `Item quantity must be greater than 0, and less than the amount in the pantry(${amtInPantry})` );
+        validateCheckoutButton();
+    }
+}
+
+var validateCheckoutButton = function() {
+    var foundError = false
+    $( ".invalid-feedback" ).each( function() {
+        if ( $( this ).is( ':visible' ) ) {
+            foundError = true;
+        }
+    } );
+    if ( foundError ) {
+        $( "#checkout" ).attr( "disabled", true );
+
+    } else {
+        $( "#checkout" ).attr( "disabled", false );
+
+    }
+}
+
+$( function() {
+    validateCheckoutButton();
 } );
 
 $( document ).ready( function() {
@@ -186,14 +241,31 @@ $( document ).ready( function() {
             className: 'custom-popupS-class',
             additionalButtonOkClass: 'btn btn-primary',
         } );
+
+        // Create the Order Model/Sends the Email
+        // Substracts the items checkedout from the DB
+        // Clears out the user's cart to create new order
         $.ajax( {
             method: 'POST',
-            url: '/checkout'
-        } ).done( function( msg ) {
-            location.reload();
-        } ).fail( function( msg ) {
+            url: '/createNewOrder'
+        } ).done( function() {
+            $.ajax( {
+                method: 'POST',
+                url: '/decrementItemQuantity'
+            } ).done( function() {
+                $.ajax( {
+                    method: 'POST',
+                    url: '/clearCart'
+                } ).done( function() {
+                    window.location.href = "/postCheckout";
+                } ).fail( function() {
+                    console.log( "Order failed!" );
+                } );
+            } ).fail( function( msg ) {
+                console.log( "Order failed!" );
+            } );
+        } ).fail( function() {
             console.log( "Order failed!" );
-            s
         } );
     } );
 } );

@@ -21,7 +21,7 @@
         <tbody>
             {{#each itemInCart}}
             <tr>
-                <th scope="row" class="first-row">{{this.itemName}}</th>
+                <th scope="row" class="fixed-row">{{this.itemName}}</th>
                 <td>
                     <div class="input-group">
                         <span class="input-group-btn">
@@ -44,7 +44,7 @@
                             Remove
                         </button>
                         <div id="badQuantity" class="invalid-feedback invalid-quantity" style="display: none">Item
-                            quantity must be greater than 0.</div>
+                            quantity must be greater than 0, and less than the amount in the pantry.</div>
                     </div>
                 </td>
             </tr>

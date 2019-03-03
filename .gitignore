@@ -1,4 +1,15 @@
 node_modules/
 *.code-workspace
 .env
+<<<<<<< HEAD
+<<<<<<< HEAD
 build/
+tests/out/
+=======
+.DS_Store
+build/
+>>>>>>> 7f9036c448903ae2e14cea296ad27d2c64403176
+=======
+.DS_Store
+build/
+>>>>>>> be025db683b5cf20d560a41d80cc77b85c5a743f
