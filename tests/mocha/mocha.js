@@ -81,8 +81,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
             }
         } );
     } );
-       describe( 'Item Tests With Barcode', function() {
-            it( 'Verify Adding New Item With Barcode', async function() {
+       describe( 'Item test with Barcode and Item Name that does not exist', function() {
+            it( 'Verify adding new item with barcode and item name works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
                 await page.waitFor( BODY_SELECTOR );
@@ -115,13 +115,13 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await EditItemTab.click()
                 var Test = await page.$x( "//*[contains(text(),'Norman')]" );
                 if (Test) {
-                    assert.ok( true, 'found Norman' );
+                    assert.ok( true, 'Found Norman' );
                 } else {
-                    assert.fail( "Item with Barcode not Created!" );
+                    assert.fail( "Item with barcode and item name not created!" );
                 }
             } );
         } );
-        describe( 'Item Tests Without Barcode', function() {
+        describe( 'Item test with barcode that does not exist but item name does', function() {
             it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -153,9 +153,9 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await EditItemTab.click()
                 var Test = await page.$x( "//*[contains(text(),'Banrang')]" );
                 if (Test) {
-                    assert.ok( true, 'found Bangrang' );
+                    assert.ok( true, 'Found Bangrang' );
                 } else {
-                    assert.fail( "Item Without Barcode not Created!" );
+                    assert.fail( "Item without barcode not created!" );
                 }
             } );
         } );
@@ -187,7 +187,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-        describe( 'Editing Deleting Item', function() {
+        describe( 'Delete Existing Item', function() {
             it( 'Verify Deleting Existing Item Works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -215,8 +215,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-        describe( 'Editing Deleting Item', function() {
-            it( 'Verify Adding New Item With Barcode', async function() {
+        describe( 'Item test with barcode that does exist and item name exist', function() {
+            it( 'Verify adding existing item with barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
                 await page.waitFor( BODY_SELECTOR );
@@ -263,13 +263,13 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await delay(500)
                 var Test = await page.$x( "//*[contains(text(),'1000')]" );
                 if (Test) {
-                    assert.ok( true, 'found 1000' );
+                    assert.ok( true, 'Found 1000' );
                 } else {
                     assert.fail( "Item Number was incremented!" );
                 }
             } );
         } );
-        describe( 'Editing Deleting Item', function() {
+        describe( 'Delete Existing Item', function() {
             it( 'Verify Deleting Existing Item Works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -297,8 +297,8 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-        describe( 'Editing Deleting Item', function() {
-            it( 'Verify Deleting Existing Item Works', async function() {
+        describe( 'Item test with barcode that does not exist and item name exist', function() {
+            it( 'Verify incrementing existing item works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
                 await page.waitFor( BODY_SELECTOR );
@@ -347,14 +347,14 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 await delay(500)
                 var Test = await page.$x( "//*[contains(text(),'1000')]" );
                 if (Test) {
-                    assert.ok( true, 'found 2000' );
+                    assert.ok( true, 'Found 2000' );
                 } else {
                     assert.fail( "Item Number was incremented!" );
                 }
               
             } );
         } );
-        describe( 'Editing Deleting Item', function() {
+        describe( 'Delete Existing Item', function() {
             it( 'Verify Deleting Existing Item Works', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
