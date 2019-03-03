@@ -51,36 +51,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
         await page.close();
     } );
 
-    describe( 'Search Tests', function() {
-        it( 'Verify searching for cookies returns cookies', async function() {
-            // Wait for the page to load
-            const BODY_SELECTOR = '.main-container';
-            await page.waitFor( BODY_SELECTOR );
-
-            // Get the search box, type cookies, and then click search button
-            var searchBar = await page.$( '#globalSearchBar' );
-            await searchBar.type( "cookies" );
-            var seachButton = await page.$( '.nav-bar-search .btn' );
-            await seachButton.click();
-
-            // Page navigate on search, so wait
-            await page.waitForNavigation();
-
-            // Verify search worked
-            var cookies = await page.$x( "//*[contains(text(),'Cookies')]" );
-            if ( cookies ) {
-                assert.ok( true, 'found cookies' );
-                await page.screenshot( {
-                    path: out_dir + 'foundCookies.png'
-                } );
-            } else {
-                await page.screenshot( {
-                    path: out_dir + 'example.png'
-                } );
-                assert.fail( "Cookies not found!" );
-            }
-        } );
-    } );
+    
        describe( 'Item test with Barcode and Item Name that does not exist', function() {
             it( 'Verify adding new item with barcode and item name works', async function() {
                 // Wait for the page to load
@@ -382,8 +353,87 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-} );
+        
+       describe( 'Search Tests', function() {
+        it( 'Verify searching for cookies returns cookies', async function() {
+            // Wait for the page to load
+            const BODY_SELECTOR = '.main-container';
+            await page.waitFor( BODY_SELECTOR );
 
+            // Get the search box, type cookies, and then click search button
+            var itemPage = await page.$('#ManageItemsPage');
+            await itemPage.click();
+            await page.waitForNavigation();
+            var barcodeNumber = await page.$('#barcode');
+            await barcodeNumber.type( "50505050" );
+            var addButton = await page.$('#addButton');
+            await addButton.click();
+            await page.waitForNavigation();
+            var itemName = await page.$('#itemName');
+            await itemName.type("Cookies");
+            var addButton = await page.$('#addButton');
+            await addButton.click();
+            await page.waitForNavigation();
+            var quantity = await page.$('#quantity');
+            await quantity.type("600");
+            var weight = await page.$('#weight');
+            await weight.type("1");
+            var imageButton = await page.$('#image');
+            const filePath=(process.cwd()+"/tests/mocha/"+"/testFile.jpg");
+            await imageButton.uploadFile(filePath);
+            var addButton = await page.$('#addButton');
+            await addButton.click()
+            await page.waitForNavigation();
+            // Get the search box, type cookies, and then click search button
+            var searchBar = await page.$( '#globalSearchBar' );
+            await searchBar.type( "cookies" );
+            var seachButton = await page.$( '.nav-bar-search .btn' );
+            await seachButton.click();
+
+            // Page navigate on search, so wait
+            await page.waitForNavigation();
+
+            // Verify search worked
+            var cookies = await page.$x( "//*[contains(text(),'Cookies')]" );
+            if ( cookies ) {
+                assert.ok( true, 'found cookies' );
+                /*await page.screenshot( {
+                    path: out_dir + 'foundCookies.png'
+                } );*/
+            } else {
+                assert.fail( "Cookies not found!" );
+            }
+        } );
+    } );
+    describe( 'Delete Existing Item', function() {
+        it( 'Verify Deleting Existing Item Works', async function() {
+            // Wait for the page to load
+            const BODY_SELECTOR = '.main-container';
+            await page.waitFor( BODY_SELECTOR );
+
+            var itemPage = await page.$('#ManageItemsPage');
+            await itemPage.click();
+            await page.waitForNavigation();
+            var EditItemTab = await page.$('#Tab');
+            await EditItemTab.click()
+            var EditTestTab = await page.$('#Cookies');
+            await delay(500)
+            await EditTestTab.click();
+            await delay(500)
+            var DeleteButton = await page.$('#DeleteCookies');
+            await DeleteButton.click()
+            await page.waitForNavigation();
+            var EditItemTab = await page.$('#Tab');
+            await EditItemTab.click()
+            var Test = await page.$x( "//*[contains(text(),'Cookies')]" );
+            if (Test<1) {
+               assert.ok(true, 'Deleted Cookies' );
+            } else {
+                assert.fail( "Item Not Deleted!" );
+            }
+        } );
+    } );
+} );
 function delay(time) {
     return new Promise(function(resolve) { 
         setTimeout(resolve, time)
