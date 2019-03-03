@@ -1,54 +1,29 @@
 <div class="main-container">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link focus active" data-toggle="tab" href="#newItem">Add New Item</a>
+            <a class="nav-link focus active" data-toggle="tab" href="#newItem">Add Item With Barcode</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#editItem">Edit Existing Items</a>
+            <a class="nav-link" data-toggle="tab" id="ItemWithoutBarcodeTab"href="#newItemBarcodeless">Add Item Without Barcode</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" id="Tab" href="#editItem">Edit Existing Items</a>
         </li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active focus show" id="newItem">
-            <h1>Add an item to the pantry</h1>
+            <h1>Add an item with a barcode</h1>
             <div class="new-item-container">
-                <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
-                    <div class="form-group">
-                        <label for="itemName">Item name</label>
-                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
-                            required>
-                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
-                            item name id is between 4 and 15 characters with no special characters.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type='number' class="form-control" name="quantity" id="quantity" placeholder="Enter quantity..."
-                            required>
-                        <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
-                            quantity number is between 1 to 3 digits.</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type='number' class="form-control" name="weight" id="weight" placeholder="Enter weight..."
-                            required>
-                        <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
-                            weight number is between 1 to 3 digits.</div>
-                    </div>
+                <form method="post" action="/addItemByBarcode" id="addItemByBarcode">
                     <div class="form-group">
                         <div id='barcode-scanner'></div>
                         <label for="barcode">Barcode</label>
-                        <input id="barcode" input type='number' class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
+                        <input id="barcode" type='text' class="form-control" name="barcode" placeholder="Click the button to scan an EAN..."
                             type="text" />
                         <div id="badBarcodeNumber" class="invalid-feedback" style="display: none">A valid
                             Barcode number is between 8 to 12 digits.</div>
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#livestream_scanner">Open
                             Scanner</button>
-                    </div>
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                            <input type="file" name="image" class="custom-file-input" id="image">
-                        </div>
                     </div>
                     <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
                 </form>
@@ -70,6 +45,21 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div class="tab-pane fade" id="newItemBarcodeless">
+            <h1>Add an item without a barcode</h1>
+            <div class="new-item-container">
+                <form method="post" action="/addItemByName" id="addItemByName">
+                    <div class="form-group">
+                        <label for="itemName">Item name</label>
+                        <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
+                            required>
+                        <div id="badItemName" class="invalid-feedback" style="display: none">A valid
+                            item name id is between 4 and 15 characters with no special characters.</div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" id="addNoBarcodeButton" value="Add Item">
+                </form>
+            </div>
+        </div>
         <style>
             #interactive.viewport {position: relative; width: 100%; height: auto; overflow: hidden; text-align: center;}
             #interactive.viewport > canvas, #interactive.viewport > video {max-width: 100%;width: 100%;}
@@ -84,7 +74,7 @@
                     <div class="card-header">
                         <div class="item-header">
                             <div class="item-header-text">{{this.itemName}}</div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
+                            <button type="button" id={{this.itemName}} "class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
                             <!-- The modal -->
                             <div class="modal" id="{{this.itemName}}Modal">
                                 <div class="modal-dialog" role="document">
@@ -115,7 +105,7 @@
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="submit" class="btn btn-danger" formaction="/deleteItem"
+                                                    <input type="submit" id=Delete{{this.itemName}} class="btn btn-danger" formaction="/deleteItem"
                                                         value="Delete {{this.itemName}}"></button>
                                                     <input type="submit" class="btn btn-primary" value="Save change">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -130,7 +120,7 @@
                     </div>
                     <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
                     <div class="card-body">
-                        <p class="card-text">Barcode: {{this.barcode}}</p>
+                        <p class="card-text barcode-text">Barcode: {{this.barcode}}</p>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Total: {{this.quantity}}</p>

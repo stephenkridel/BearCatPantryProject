@@ -6,4 +6,4 @@ import './javascript/jqueryService.js'
 import './javascript/scannerService.js'
 import './javascript/validationService.js'
 import './javascript/ajaxService.js'
-
+import './images/UC-logo.png'

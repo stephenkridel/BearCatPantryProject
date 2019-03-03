@@ -8,7 +8,7 @@ let handlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var helmet = require( 'helmet' );
 var compression = require( 'compression' );
-var dotenv = require( 'dotenv' ).config()
+var dotenv = require( 'dotenv' ).config();
 
 var webpack = require( 'webpack' );
 var webpackConfig = require( './webpack.config' );
@@ -22,6 +22,8 @@ var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
 var testRouter = require( './routes/test' );
 var adminRouter = require( './routes/admin' );
+var postCheckoutRouter = require( './routes/postCheckout' );
+
 
 var app = express();
 
@@ -49,12 +51,23 @@ mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry
 
 // view engine setup
 app.set( 'views', path.join( __dirname, '/views' ) );
-app.engine( 'hbs', handlebars( {
+var hbsObj = handlebars.create({
+    helpers: {
+        hasBarcode: function(barcode, options){
+            if (barcode != -99999999999){
+                return options.fn();
+            }
+            else{
+                return options.inverse();
+            }
+        }
+    },
     extname: 'hbs',
     layoutsDir: path.join( __dirname, 'views', 'layouts' ),
     defaultLayout: 'layout.hbs',
     partialsDir: [ path.join( __dirname, 'views' ) ]
-} ) );
+});
+app.engine( 'hbs', hbsObj.engine );
 app.set( 'view engine', 'hbs' );
 
 app.use( logger( 'dev' ) );
@@ -91,6 +104,7 @@ app.use( '/', cartRouter );
 app.use( '/', homeRouter );
 app.use( '/', testRouter );
 app.use( '/', adminRouter );
+app.use( '/', postCheckoutRouter );
 
 
 // catch 404 and forward to error handler

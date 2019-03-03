@@ -15,4 +15,30 @@ module.exports = {
 
         return monthNames[ monthIndex ] + ' ' + day + ', ' + year + ' ' + hours + ':' + minutes;
     },
+
+    sendEmail: function( res, nodemailer, to, subject, html ) {
+        let emailSettings = {
+            service: 'gmail',
+            auth: {
+                user: 'bearcatpantry@gmail.com',
+                pass: process.env.EMAIL_PW
+            }
+        };
+
+        var mailOptions = {
+            from: 'bearcatpantry@gmail.com',
+            to: to,
+            subject: subject,
+            html: html
+        };
+
+        let transporter = nodemailer.createTransport( emailSettings );
+
+        transporter.sendMail( mailOptions, ( error, info ) => {
+            if ( error ) {
+                res.sendStatus( 403 );
+            }
+            res.sendStatus( 200 );
+        } );
+    }
 }

@@ -8,9 +8,7 @@ var cartSchema = new mongoose.Schema( {
     items: [ {
         itemName: String,
         quantity: Number
-    } ],
-    status: Number,
-    lastModDate: String
+    } ]
 } );
 
 module.exports = mongoose.model( 'Cart', cartSchema );
