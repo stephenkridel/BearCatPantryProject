@@ -215,6 +215,173 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
+        describe( 'Editing Deleting Item', function() {
+            it( 'Verify Adding New Item With Barcode', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+    
+                // Get the search box, type cookies, and then click search button
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var barcodeNumber = await page.$('#barcode');
+                await barcodeNumber.type( "80808080" );
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var itemName = await page.$('#itemName');
+                await itemName.type("Norman");
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var quantity = await page.$('#quantity');
+                await quantity.type("500");
+                var weight = await page.$('#weight');
+                await weight.type("4");
+                var imageButton = await page.$('#image');
+                const filePath=(process.cwd()+"/tests/mocha/"+"/testFile.jpg");
+                await imageButton.uploadFile(filePath);
+                var addButton = await page.$('#addButton');
+                await addButton.click()
+                await page.waitForNavigation();
+                var barcodeNumber = await page.$('#barcode');
+                await barcodeNumber.type( "80808080" );
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var quantity = await page.$('#quantity');
+                await quantity.type("500");
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditItemTab = await page.$('#Norman');
+                await delay(500)
+                await EditItemTab.click()
+                await delay(500)
+                var Test = await page.$x( "//*[contains(text(),'1000')]" );
+                if (Test) {
+                    assert.ok( true, 'found 1000' );
+                } else {
+                    assert.fail( "Item Number was incremented!" );
+                }
+            } );
+        } );
+        describe( 'Editing Deleting Item', function() {
+            it( 'Verify Deleting Existing Item Works', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditTestTab = await page.$('#Norman');
+                await delay(500)
+                await EditTestTab.click();
+                await delay(500)
+                var DeleteButton = await page.$('#DeleteNorman');
+                await DeleteButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var Test = await page.$x( "//*[contains(text(),'Norman')]" );
+                if (Test<1) {
+                   assert.ok(true, 'Deleted Norman' );
+                } else {
+                    assert.fail( "Item Not Deleted!" );
+                }
+            } );
+        } );
+        describe( 'Editing Deleting Item', function() {
+            it( 'Verify Deleting Existing Item Works', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+    
+                // Get the search box, type cookies, and then click search button
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#ItemWithoutBarcodeTab');
+                await EditItemTab.click()
+                await delay(500)
+                var itemName = await page.$('#itemName');
+                await itemName.type( "Bangrang" );
+                var addButton = await page.$('#addNoBarcodeButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var quantity = await page.$('#quantity');
+                await quantity.type("1000");
+                var weight = await page.$('#weight');
+                await weight.type("50");
+                var imageButton = await page.$('#image');
+                const filePath=(process.cwd()+"/tests/mocha/"+"/testFile.jpg");
+                await imageButton.uploadFile(filePath);
+                var addButton = await page.$('#addButton');
+                await addButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#ItemWithoutBarcodeTab');
+                await EditItemTab.click()
+                await delay(500)
+                var itemName = await page.$('#itemName');
+                await itemName.type( "Bangrang" );
+                var addButton = await page.$('#addNoBarcodeButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                await delay(500)
+                var quantity = await page.$('#quantity');
+                await quantity.type("1000");
+                var addButton = await page.$('#addButton');
+                await addButton.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditItemTab = await page.$('#Bangrang');
+                await delay(500)
+                await EditItemTab.click()
+                await delay(500)
+                var Test = await page.$x( "//*[contains(text(),'1000')]" );
+                if (Test) {
+                    assert.ok( true, 'found 2000' );
+                } else {
+                    assert.fail( "Item Number was incremented!" );
+                }
+              
+            } );
+        } );
+        describe( 'Editing Deleting Item', function() {
+            it( 'Verify Deleting Existing Item Works', async function() {
+                // Wait for the page to load
+                const BODY_SELECTOR = '.main-container';
+                await page.waitFor( BODY_SELECTOR );
+
+                var itemPage = await page.$('#ManageItemsPage');
+                await itemPage.click();
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var EditTestTab = await page.$('#Bangrang');
+                await delay(500)
+                await EditTestTab.click();
+                await delay(500)
+                var DeleteButton = await page.$('#DeleteBangrang');
+                await DeleteButton.click()
+                await page.waitForNavigation();
+                var EditItemTab = await page.$('#Tab');
+                await EditItemTab.click()
+                var Test = await page.$x( "//*[contains(text(),'Bangrang')]" );
+                if (Test<1) {
+                   assert.ok(true, 'Deleted Norman' );
+                } else {
+                    assert.fail( "Item Not Deleted!" );
+                }
+            } );
+        } );
 } );
 
 function delay(time) {
