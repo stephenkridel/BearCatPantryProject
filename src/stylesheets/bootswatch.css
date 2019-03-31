@@ -5666,7 +5666,7 @@ input[type="button"].btn-block {
   margin-left: 0;
   line-height: 1.25;
   color: #fff;
-  background-color: #18BC9C;
+  background-color: #3d3e3f;
   border: 0 solid transparent;
 }
 
@@ -5703,7 +5703,7 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #0f7864;
+  background-color: #797b7c;
   border-color: transparent;
 }
 
@@ -5711,7 +5711,7 @@ input[type="button"].btn-block {
   color: #ecf0f1;
   pointer-events: none;
   cursor: auto;
-  background-color: #3be6c4;
+  background-color: #797b7c;
   border-color: transparent;
 }
 

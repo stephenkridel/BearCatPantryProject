@@ -1,14 +1,18 @@
 var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var order = require( '../models/orderModel' );
+var item = require( '../models/itemModel' );
+
+
 
 var nodemailer = require( 'nodemailer' );
 var _ = require( 'lodash' );
 var QRCode = require( 'qrcode' );
 var util = require( '../src/javascript/util.js' );
 
-
 var router = express.Router();
+var globalCart;
+
 
 router.get( '/cart', function( req, res, next ) {
     cart.find( {
@@ -122,13 +126,44 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
             items: {
                 itemName: req.body.itemName
             }
-        },
-        $set: {
-            "lastModDate": util.formatDate( new Date() )
         }
     } ).then( () => {
         res.sendStatus( 200 );
     } );
+} );
+
+router.get( '/validateOrder', function( req, res, next ) {
+    cart.find( {
+        "user": process.env.USERNAME
+    }, 'items', function( err, cart ) {
+        var itemsToFind = [];
+        globalCart = cart[ 0 ];
+        _.forEach( globalCart.items, function( iteratedItem ) {
+            itemsToFind.push(
+                iteratedItem.itemName
+            )
+        } );
+        item.find( {
+            'itemName': {
+                $in: itemsToFind
+            }
+        }, 'itemName quantity', function( err, foundItems ) {
+            var errorsFound = [];
+            _.forEach( foundItems, function( iteratedItem ) {
+                var itemInCart = globalCart.items.find( function( element ) {
+                    return element.itemName === iteratedItem.itemName;
+                } );
+                if ( itemInCart.quantity > iteratedItem.quantity || itemInCart.quantity < 1 ) {
+                    errorsFound.push( `${itemInCart.itemName} in your cart: ${itemInCart.quantity}. Amount available: ${iteratedItem.quantity}` )
+                }
+            } );
+            if ( errorsFound.length > 0 ) {
+                res.status( 500 ).send( errorsFound )
+            } else {
+                res.sendStatus( 200 );
+            }
+        } );
+    } )
 } );
 
 router.post( '/createNewOrder', function( req, res, next ) {
@@ -140,6 +175,7 @@ router.post( '/createNewOrder', function( req, res, next ) {
         }
         // Create a new order schema 
         var usersCart = foundCart[ 0 ];
+
         var newCart = new order( {
             cart: new cart( usersCart ),
             status: 0,
