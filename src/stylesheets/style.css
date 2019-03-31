@@ -429,3 +429,9 @@ vertical-align: bottom;
   background-color: #1a252f;
   border-color: #151e27;
 }
+
+
+.dropdownItems {
+  display: block;
+  width: 100%;
+}
