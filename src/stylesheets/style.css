@@ -6,7 +6,9 @@
   display: flex;
   flex-wrap: wrap
 }
-
+.data{
+  display:none;
+}
 .card-container .card {
   margin-right: 20px;
 }
