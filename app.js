@@ -97,7 +97,7 @@ app.use( express.static( path.join( __dirname, 'build' ) ) );
 // This sets a cookie everytime you route. As route definition order matters. 
 // Will need to be refactored once login works
 app.use( function( req, res, next ) {
-    if ( process.env.USERNAME === 'admin' || process.env.USERNAME === 'kump' ) {
+    if ( process.env.USERNAME === 'admin' || process.env.USERNAME === 'kump' || process.env.USERNAME === "Felix-chan") {
         res.cookie( 'isAdmin', true );
     } else {
         res.clearCookie( "isAdmin" );

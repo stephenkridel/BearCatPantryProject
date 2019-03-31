@@ -226,6 +226,11 @@ $( document ).ready( function() {
             itemRow.remove();
             validateCheckoutButton()
             updateShoppingCartTotal();
+            var itemRowsRemain = $('.item-set').length;
+            if(itemRowsRemain === 0){
+                $('.main-container').hide();
+                $('.no-items').removeAttr("hidden");
+            }
         } ).fail( function( msg ) {
             console.log( "Could not delete item" )
         } );
@@ -308,3 +313,7 @@ $( document ).ready( function() {
         } );
     } );
 } );
+
+// $(document).ready(function(){
+//     $('#item-cost')
+// });
