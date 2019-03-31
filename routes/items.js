@@ -259,7 +259,8 @@ router.post( "/addItemByName", function( req, res, next ) {
     if ( req.body.itemName ) {
         var itemName = req.body.itemName;
         itemName.replace( /\b\w/g, l => l.toUpperCase() );
-        itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 ).toLowerCase();
+        itemName = itemName.replace(/\s/g, '_');
+        itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 );
         console.log( itemName );
     }
     if ( req.body.barcode ) {
