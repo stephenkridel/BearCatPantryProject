@@ -95,12 +95,17 @@
                                                         name="newItemName" id="newItemName" value={{this.itemName}}>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="barcode">Barcode</label>
+                                                    <input type="text" onClick="this.select();" class="form-control"
+                                                        name="barcode" id="barcodeEdit" value={{this.barcode}}>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="quantity">Quantity</label>
                                                     <input type="text" onClick="this.select();" class="form-control"
                                                         name="quantity" id="quantityEdit" value={{this.quantity}}>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="weight">Weight Value</label>
+                                                    <label for="weight">Bearcat Bucks</label>
                                                     <input type="text" onClick="this.select();" class="form-control"
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
@@ -118,7 +123,6 @@
 
                         </div>
                     </div>
-                    <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}">
                     <div class="card-body">
                         <p class="card-text barcode-text">Barcode: {{this.barcode}}</p>
                     </div>
@@ -126,7 +130,7 @@
                         <p class="card-text">Total: {{this.quantity}}</p>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Weight: {{this.weight}}</p>
+                        <p class="card-text">Bearcat Bucks: {{this.weight}}</p>
                     </div>
                 </div>
                 {{/each}}

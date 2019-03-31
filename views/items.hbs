@@ -4,19 +4,27 @@
     <div class="card-container">
         {{#each items}}
         <div class="card mb-3 item-container">
-            <h4 class="card-header">{{this.itemName}}</h4>
+            <div class="card-header">
+                <span class="item-title">{{this.itemName}}</span>
+                <span class="item-quantity">Quantity: {{this.quantity}}</span>
+            </div>
             <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}" alt="Card image">
             <div class="card-body">
-                <p class="card-text">Amount left: {{this.quantity}}</p>
-                <button type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Add to cart
-                </button>
+                {{#if this.weight}}
+                    <div class="card-text">Bearcat Bucks: {{this.weight}}</div>
+                    <button type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Reee
+                    </button>
+                {{else}}
+                    <button style="margin-right:0" type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Add to cart
+                    </button>
+                {{/if}}
             </div>
         </div>
         {{/each}}
     </div>
 
     {{else}}
-    <li class="list-group-item">
+    <li class="list-group-item"> 
         <h4 class="text-center">
             No items found
         </h4>

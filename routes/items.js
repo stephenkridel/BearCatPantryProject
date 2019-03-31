@@ -34,7 +34,7 @@ router.get( '/items', function( req, res, next ) {
             } );
         } );
     } else {
-        item.find( {}, 'itemName quantity img', function( err, items ) {
+        item.find( {}, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
             res.render( 'items', {
                 items: items,
@@ -151,8 +151,7 @@ var convertToImage = function( items ) {
 };
 
 router.get( '/manageItems', function( req, res, next ) {
-    item.find( {}, 'itemName barcode quantity weight img', function( err, items ) {
-        convertToImage( items )
+    item.find( {}, 'itemName barcode quantity weight', function( err, items ) {
         res.render( 'manageItems', {
             items: items,
             title: "Manage Items - Bearcat Pantry"
@@ -161,10 +160,13 @@ router.get( '/manageItems', function( req, res, next ) {
 } );
 
 router.post( '/updateItem', function( req, res, next ) {
+    var barcodes = req.body.barcode.split(',').map(Function.prototype.call, String.prototype.trim);
+    console.log(barcodes);
     item.updateOne( {
             "itemName": req.body.oldItemName
         }, {
             "$set": {
+                'barcode': barcodes,
                 'itemName': req.body.newItemName,
                 'quantity': req.body.quantity,
                 "weight": req.body.weight

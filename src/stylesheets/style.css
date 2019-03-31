@@ -316,3 +316,11 @@ footer {
   text-overflow: ellipsis;
   max-width: 260px;
 }
+
+.item-title{
+  float:left;
+}
+
+.item-quantity{
+  float:right;
+}

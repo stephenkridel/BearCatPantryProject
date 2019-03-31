@@ -122,7 +122,7 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
             items: {
                 itemName: req.body.itemName
             }
-        },
+        }
     } ).then( () => {
         res.sendStatus( 200 );
     } );
