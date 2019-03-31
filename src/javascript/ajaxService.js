@@ -38,7 +38,7 @@ Service defines all jquery ajax requests
 $( document ).ready( function() {
     $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
-        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' )[ 0 ].innerHTML;
+        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' ).find(".item-title")[ 0 ].innerHTML;
         $.ajax( {
                 method: 'POST',
                 url: '/addToCart',

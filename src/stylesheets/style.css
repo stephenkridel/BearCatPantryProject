@@ -45,14 +45,12 @@
 
 .add-to-cart-button {
   margin: auto;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .card-text {
   margin-top: 13px;
-}
-
-.add-to-cart-button {
-  cursor: pointer;
 }
 
 .navbar .badge {
