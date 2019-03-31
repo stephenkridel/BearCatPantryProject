@@ -92,7 +92,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 }
             } );
         } );
-        describe( 'Item test with barcode that does not exist but item name does', function() {
+        /*describe( 'Item test with barcode that does not exist but item name does', function() {
             it( 'Verify Adding New Item With Barcode', async function() {
                 // Wait for the page to load
                 const BODY_SELECTOR = '.main-container';
@@ -399,7 +399,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 assert.ok( true, 'found cookies' );
                 /*await page.screenshot( {
                     path: out_dir + 'foundCookies.png'
-                } );*/
+                } );
             } else {
                 assert.fail( "Cookies not found!" );
             }
@@ -432,7 +432,7 @@ describe( 'All Bearcat Pantry Tests', async function() {
                 assert.fail( "Item Not Deleted!" );
             }
         } );
-    } );
+    } );*/
 } );
 function delay(time) {
     return new Promise(function(resolve) { 

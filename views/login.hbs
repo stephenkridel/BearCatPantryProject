@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>
+      Google SignIn
+      </title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+     <script type="text/javascript" src="auth.js"></script>
+      <meta name="google-signin-client_id" content="39635603607-2jungqsvmbkg3emd35usggvh8lug6eh3.apps.googleusercontent.com">
+      <script src="https://apis.google.com/js/platform.js" async defer>
+      </script>    
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <style>
+        .g-signin2{
+          margin-left: 500px;
+          margin-top: 500px;
+        }
+        .data{
+          display:none;
+        }
+      </style>
+  </head>
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="data">
+      <p>Profile Details</p>
+      <img id="pic" class="img-circle" width="100" height="100"/>
+      <p>Email Address</p>
+      <p id="email" class="alert alert-danger"></p> 
+      <button onclick="signOut()" class="btn btn-danger">Signout</button>
+    </div>
+  </body>
+</html>
