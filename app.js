@@ -61,6 +61,16 @@ var hbsObj = handlebars.create({
             else{
                 return options.inverse();
             }
+        },
+        hasWeight: function(weight, options){
+            var intweight = parseInt(weight)
+            if (typeof intweight !== "undefined"){
+                return options.fn();
+            }
+            else{
+                return options.inverse();
+            }
+
         }
     },
     extname: 'hbs',
