@@ -224,6 +224,7 @@ $( document ).ready( function() {
         } ).done( function( msg ) {
             updateShoppingCartTotal();
             itemRow.remove();
+            validateCheckoutButton()
             updateShoppingCartTotal();
         } ).fail( function( msg ) {
             console.log( "Could not delete item" )
