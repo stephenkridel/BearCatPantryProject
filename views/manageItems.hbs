@@ -4,10 +4,10 @@
             <a class="nav-link focus active" data-toggle="tab" href="#newItem">Add Item With Barcode</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#newItemBarcodeless">Add Item Without Barcode</a>
+            <a class="nav-link" data-toggle="tab" id="ItemWithoutBarcodeTab"href="#newItemBarcodeless">Add Item Without Barcode</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#editItem">Edit Existing Items</a>
+            <a class="nav-link" data-toggle="tab" id="Tab" href="#editItem">Edit Existing Items</a>
         </li>
     </ul>
     <div id="myTabContent" class="tab-content">
@@ -56,7 +56,7 @@
                         <div id="badItemName" class="invalid-feedback" style="display: none">A valid
                             item name id is between 4 and 15 characters with no special characters.</div>
                     </div>
-                    <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
+                    <input type="submit" class="btn btn-primary" id="addNoBarcodeButton" value="Add Item">
                 </form>
             </div>
         </div>
@@ -74,7 +74,7 @@
                     <div class="card-header">
                         <div class="item-header">
                             <div class="item-header-text">{{this.itemName}}</div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
+                            <button type="button" id={{this.itemName}} "class="btn btn-primary" data-toggle="modal" data-target="#{{this.itemName}}Modal">Edit</button>
                             <!-- The modal -->
                             <div class="modal" id="{{this.itemName}}Modal">
                                 <div class="modal-dialog" role="document">
@@ -110,7 +110,7 @@
                                                         name="weight" id="weightEdit" value={{this.weight}}>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="submit" class="btn btn-danger" formaction="/deleteItem"
+                                                    <input type="submit" id=Delete{{this.itemName}} class="btn btn-danger" formaction="/deleteItem"
                                                         value="Delete {{this.itemName}}"></button>
                                                     <input type="submit" class="btn btn-primary" value="Save change">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

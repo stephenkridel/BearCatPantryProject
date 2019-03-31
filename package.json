@@ -9,7 +9,7 @@
         "prod-start": "NODE_ENV=production node ./bin/www",
         "prod-build": "NODE_ENV=production webpack",
         "puppeteer": "node ./tests/puppeteer/*.js",
-        "test": "mocha ./tests/mocha/*.js"
+        "test": "mocha ./tests/mocha/*.js --timeout 999999 --exit"
     },
     "repository": {
         "type": "git",

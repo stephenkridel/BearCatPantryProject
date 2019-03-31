@@ -17,8 +17,16 @@ const upload = multer( {
 } );
 
 router.get( '/items', function( req, res, next ) {
-    //var search = req.query.searchBar;
+    //var search = req.query.searchBar; 
+    //var page = req.query.Page;
+    var num = 4;
+    var pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
+    if (pagenum < 1) pagenum = 1;
+    var prev = pagenum -1//pagenum > 1 ? pagenum-- : pagenum;
+    if (prev < 1) prev = 1;
+    var next = (pagenum -1) + 2 ;//+ parseInt(2)
     var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
+        //var skip = (page*num)-num;
     if ( search && search.length > 0 ) {
         item.find( {
             "itemName": {
@@ -27,20 +35,38 @@ router.get( '/items', function( req, res, next ) {
             }
         }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
+            var notFullPage = false;
+            if (items.length < num && items.length > 0) notFullPage = true;
+            var firstPage = true;
+            if (pagenum > 1) firstPage = false;
             res.render( 'items', {
                 items: items,
                 title: "Items - Bearcat Pantry",
-                searchText: search
+                searchText: search,
+                Page: pagenum,
+                PrevPage: prev,
+                NextPage: next,
+                count: notFullPage,
+                First: firstPage
             } );
-        } );
+        } ).skip(pagenum > 0 ? ((pagenum - 1) * num) : 0).limit(num);
     } else {
         item.find( {}, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
+            var notFullPage = false;
+            if (Number(items.length) < num && Number(items.length) > 0) notFullPage = true;
+            var firstPage = true;
+            if (pagenum > 1) firstPage = false;
             res.render( 'items', {
                 items: items,
-                title: "Items - Bearcat Pantry"
+                title: "Items - Bearcat Pantry",
+                Page: pagenum,
+                PrevPage: prev,
+                NextPage: next,
+                count: notFullPage,
+                First: firstPage
             } );
-        } );
+        } ).skip(pagenum > 0 ? ((pagenum- 1) * num) : 0).limit(num);
     }
 
 } );
@@ -57,89 +83,99 @@ router.get( '/getItem', function( req, res, next ) {
     } )
 } );
 
+
 router.post( '/addToCart', function( req, res, next ) {
-    cart.countDocuments( {
-        user: process.env.USERNAME
-    }, function( err, count ) {
-        // Find out if a user already has a cart in mongoDB
-        if ( count > 0 ) {
-            // Find out if the current user's cart already has the selected item in the cart.
+    item.find( {
+        "itemName": req.body.itemName
+    }, 'quantity', function( err, item ) {
+        if ( item[ 0 ].quantity < 1 ) {
+            res.status( 400 ).send( "There are currently 0 of that item in the pantry" );
+        } else {
             cart.countDocuments( {
-                "user": process.env.USERNAME,
-                "items.itemName": req.body.itemName,
+                user: process.env.USERNAME
             }, function( err, count ) {
-                // If item doesnt exist in the cart, push it on
-                if ( count === 0 ) {
-                    // push new item to cart
-                    cart.updateOne( {
-                        "user": process.env.USERNAME
-                    }, {
-                        "$push": {
-                            items: {
-                                'itemName': req.body.itemName,
-                                'quantity': 1,
-                            }
+                // Find out if a user already has a cart in mongoDB
+                if ( count > 0 ) {
+                    // Find out if the current user's cart already has the selected item in the cart.
+                    cart.countDocuments( {
+                        "user": process.env.USERNAME,
+                        "items.itemName": req.body.itemName,
+                    }, function( err, count ) {
+                        // If item doesnt exist in the cart, push it on
+                        if ( count === 0 ) {
+                            // push new item to cart
+                            cart.updateOne( {
+                                "user": process.env.USERNAME
+                            }, {
+                                "$push": {
+                                    items: {
+                                        'itemName': req.body.itemName,
+                                        'quantity': 1,
+                                    }
+                                }
+                            } ).then( () => {
+                                res.sendStatus( 200 );
+                            } )
+                        } else {
+                            // First, validate adding this item to the cart wont put it over the amount available
+                            item.find( {
+                                "itemName": req.body.itemName
+                            }, 'quantity', function( err, found ) {
+                                let foundItem = found[ 0 ];
+                                cart.find( {
+                                    "user": process.env.USERNAME
+                                }, 'user items', function( err, foundCart ) {
+                                    if ( foundCart && foundCart.length > 1 ) {
+                                        res.status( 400 ).send( "Somehow found 2 carts for this user" );
+                                    }
+                                    var usersCart = foundCart[ 0 ];
+                                    var amtInCart = usersCart.items.filter( e => e.itemName === req.body.itemName )[ 0 ].quantity
+                                    if ( amtInCart + 1 <= foundItem.quantity ) {
+                                        cart.findOneAndUpdate( {
+                                                "user": process.env.USERNAME,
+                                            }, {
+                                                $inc: {
+                                                    "items.$[elem].quantity": 1
+                                                }
+                                            }, {
+                                                upsert: true,
+                                                arrayFilters: [ {
+                                                    "elem.itemName": {
+                                                        $eq: req.body.itemName
+                                                    }
+                                                } ]
+                                            } )
+                                            .then( () => {
+                                                res.sendStatus( 200 );
+                                            } )
+                                    } else {
+                                        res.sendStatus( 500 );
+                                    }
+                                } )
+                            } )
                         }
-                    } ).then( () => {
-                        res.sendStatus( 200 );
                     } )
                 } else {
-                    // First, validate adding this item to the cart wont put it over the amount available
-                    item.find( {
-                        "itemName": req.body.itemName
-                    }, 'quantity', function( err, found ) {
-                        let foundItem = found[ 0 ];
-                        cart.find( {
-                            "user": process.env.USERNAME
-                        }, 'user items', function( err, foundCart ) {
-                            if ( foundCart && foundCart.length > 1 ) {
-                                res.status( 400 ).send( "Somehow found 2 carts for this user" );
-                            }
-                            var usersCart = foundCart[ 0 ];
-                            var amtInCart = usersCart.items.filter( e => e.itemName === req.body.itemName )[ 0 ].quantity
-                            if ( amtInCart + 1 <= foundItem.quantity ) {
-                                cart.findOneAndUpdate( {
-                                        "user": process.env.USERNAME,
-                                    }, {
-                                        $inc: {
-                                            "items.$[elem].quantity": 1
-                                        }
-                                    }, {
-                                        upsert: true,
-                                        arrayFilters: [ {
-                                            "elem.itemName": {
-                                                $eq: req.body.itemName
-                                            }
-                                        } ]
-                                    } )
-                                    .then( () => {
-                                        res.sendStatus( 200 );
-                                    } )
-                            } else {
-                                res.sendStatus( 500 );
-                            }
+                    // Else, initialize a cart for the new user, and add the item
+                    var myData = new cart( {
+                        user: process.env.USERNAME,
+                        items: [ {
+                            itemName: req.body.itemName,
+                            quantity: 1
+                        } ]
+                    } );
+                    myData.save()
+                        .then( () => {
+                            res.sendStatus( 200 );
                         } )
-                    } )
+                        .catch( err => {
+                            res.status( 400 ).send( "unable to save to database" );
+                        } );
                 }
-            } )
-        } else {
-            // Else, initialize a cart for the new user, and add the item
-            var myData = new cart( {
-                user: process.env.USERNAME,
-                items: [ {
-                    itemName: req.body.itemName,
-                    quantity: 1
-                } ]
             } );
-            myData.save()
-                .then( () => {
-                    res.sendStatus( 200 );
-                } )
-                .catch( err => {
-                    res.status( 400 ).send( "unable to save to database" );
-                } );
         }
-    } );
+    } )
+
 } );
 
 var convertToImage = function( items ) {
@@ -304,7 +340,6 @@ router.post( "/decrementItemQuantity", function( req, res, next ) {
 router.post( "/incrementItem", function( req, res, next ) {
     if ( req.body.barcode != -99999999999 ) { //If we had a valid barcode, update the item quantity 
         //and set the barcode to the valid barcode (in case it didn't exist before)
-
         item.updateOne( {
                 "$or": [ {
                     "barcode": req.body.barcode
@@ -341,5 +376,7 @@ router.post( "/incrementItem", function( req, res, next ) {
             } );
     }
 } );
+
+
 
 module.exports = router;
