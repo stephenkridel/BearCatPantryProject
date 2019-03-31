@@ -1,7 +1,10 @@
 .tab-content>.active {
   display: inline;
 }
-
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
 .card-container {
   display: flex;
   flex-wrap: wrap
