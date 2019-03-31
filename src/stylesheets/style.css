@@ -317,6 +317,14 @@ footer {
   max-width: 260px;
 }
 
+.item-title{
+  float:left;
+}
+
+.item-quantity{
+  float:right;
+}
+
 .pageination{
   position:relative;
 align-content: center;

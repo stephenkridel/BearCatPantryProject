@@ -99,7 +99,7 @@ Items can be edited within the "Edit Existing Items" tab on the "Manage Pantry I
 ![](https://i.imgur.com/lvGBTfG.png)
 <br><br>
 
-Upon clicking the "Edit" button located at the top of an item, a popup will appear prompting volunteers to edit the item's name, the total item quantity in the pantry, and the item's weight/cost (barcodes may also be editable in the future). Changes can be saved by selecting the "Save" button at the bottom of the popup.
+Upon clicking the "Edit" button located at the top of an item, a popup will appear prompting volunteers to edit the item's name, list of barcodes (comma separated), the total item quantity in the pantry, and the item's weight/cost. Changes can be saved by selecting the "Save" button at the bottom of the popup. Note: If manually adding barcodes, be careful not to add the same barcode to multiple items. 
 
 Volunteers also have the option of deleting the item by clicking the "Delete" button at the bottom of the popup.
 
