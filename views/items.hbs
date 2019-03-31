@@ -10,14 +10,14 @@
             </div>
             <img class="item-image" src="data:{{this.img.contentType}};base64,{{this.actualImage}}" alt="Card image">
             <div class="card-body">
-                {{#if this.weight}}
+                {{!-- {{#if this.weight}}
                     <div class="card-text">Bearcat Bucks: {{this.weight}}</div>
-                    <button type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Reee
+                    <button type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart"> Add to Cart
                     </button>
-                {{else}}
-                    <button style="margin-right:0" type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Add to cart
-                    </button>
-                {{/if}}
+                {{else}} --}}
+                <button style="margin-right:10px" type="submit" class="btn btn-primary add-to-cart-button" title="Add to cart">Add to cart
+                </button>
+                {{!-- {{/if}} --}}
             </div>
         </div>
         {{/each}}
