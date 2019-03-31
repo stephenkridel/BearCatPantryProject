@@ -3,6 +3,7 @@
     <h5>{{items.length}} result(s) found: {{searchText}}</h5>
     <div class="card-container">
         {{#each items}}
+        {{#if this.quantity}}
         <div class="card mb-3 item-container">
             <div class="card-header">
                 <span class="item-title">{{this.itemName}}</span>
@@ -20,6 +21,7 @@
                 {{!-- {{/if}} --}}
             </div>
         </div>
+        {{/if}}
         {{/each}}
     </div>
     {{#if count}}

@@ -307,7 +307,3 @@ $( document ).ready( function() {
         } );
     } );
 } );
-
-// $(document).ready(function(){
-//     $('#item-cost')
-// });
