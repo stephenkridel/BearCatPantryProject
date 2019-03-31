@@ -87,8 +87,8 @@ router.get( '/getItem', function( req, res, next ) {
 router.post( '/addToCart', function( req, res, next ) {
     item.find( {
         "itemName": req.body.itemName
-    }, 'quantity', function( err, item ) {
-        if ( item[ 0 ].quantity < 1 ) {
+    }, 'quantity', function( err, foundItem ) {
+        if ( foundItem[ 0 ].quantity < 1 ) {
             res.status( 400 ).send( "There are currently 0 of that item in the pantry" );
         } else {
             cart.countDocuments( {
