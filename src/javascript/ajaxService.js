@@ -224,7 +224,13 @@ $( document ).ready( function() {
         } ).done( function( msg ) {
             updateShoppingCartTotal();
             itemRow.remove();
+            validateCheckoutButton()
             updateShoppingCartTotal();
+            var itemRowsRemain = $('.item-set').length;
+            if(itemRowsRemain === 0){
+                $('.main-container').hide();
+                $('.no-items').removeAttr("hidden");
+            }
         } ).fail( function( msg ) {
             console.log( "Could not delete item" )
         } );

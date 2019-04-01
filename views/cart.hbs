@@ -1,15 +1,18 @@
+{{#unless itemInCart}}
+<li class="list-group-item no-items">
+        <h4 class="text-center">
+            No items in shopping cart
+        </h4>
+</li>
+<div class="main-container" hidden>
+{{else}}
+<li class="list-group-item no-items" hidden>
+        <h4 class="text-center">
+            No items in shopping cart
+        </h4>
+</li>
 <div class="main-container">
-    {{#if cartStatus}}
-    <h4>Order Information:</h4>
-    {{#each itemInCart}}
-    {{this.itemName}} - {{this.quantity}}
-    <br>
-    {{/each}}
-    <br>
-    <p>Please come to the pantry to pick up your order. You will have 3 days to pick up your order. Someone good at writing write this.</p>
-    <button type="button" class="btn btn-primary" id="cancelOrder">Cancel Your Order</button>
-    {{else}}
-    {{#if itemInCart}}
+{{/unless}}
     <h4> Items in your cart</h4>
     <table class="table table-hover cart-table">
         <thead>
@@ -20,7 +23,7 @@
         </thead>
         <tbody>
             {{#each itemInCart}}
-            <tr>
+            <tr class="item-set">
                 <th scope="row" class="fixed-row">{{this.itemName}}</th>
                 <td>
                     <div class="input-group">
@@ -53,13 +56,4 @@
     </table>
 
     <button type="button" class="btn btn-primary" id="checkout">Checkout</button>
-
-    {{else}}
-    <li class="list-group-item">
-        <h4 class="text-center">
-            No items in shopping cart
-        </h4>
-    </li>
-    {{/if}}
-    {{/if}}
 </div>

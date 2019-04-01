@@ -32,6 +32,9 @@ router.get( '/items', function( req, res, next ) {
             "itemName": {
                 "$regex": search,
                 "$options": "i"
+            },
+            "quantity": {
+                "$gt": 0
             }
         }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
@@ -51,7 +54,11 @@ router.get( '/items', function( req, res, next ) {
             } );
         } ).skip(pagenum > 0 ? ((pagenum - 1) * num) : 0).limit(num);
     } else {
-        item.find( {}, 'itemName quantity weight img', function( err, items ) {
+        item.find( {
+            "quantity": {
+                "$gt": 0
+            }
+        }, 'itemName quantity weight img', function( err, items ) {
             convertToImage( items );
             var notFullPage = false;
             if (Number(items.length) < num && Number(items.length) > 0) notFullPage = true;
@@ -87,8 +94,8 @@ router.get( '/getItem', function( req, res, next ) {
 router.post( '/addToCart', function( req, res, next ) {
     item.find( {
         "itemName": req.body.itemName
-    }, 'quantity', function( err, item ) {
-        if ( item[ 0 ].quantity < 1 ) {
+    }, 'quantity', function( err, foundItem ) {
+        if ( foundItem[ 0 ].quantity < 1 ) {
             res.status( 400 ).send( "There are currently 0 of that item in the pantry" );
         } else {
             cart.countDocuments( {
@@ -252,7 +259,8 @@ router.post( "/addItemByName", function( req, res, next ) {
     if ( req.body.itemName ) {
         var itemName = req.body.itemName;
         itemName.replace( /\b\w/g, l => l.toUpperCase() );
-        itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 ).toLowerCase();
+        itemName = itemName.replace(/\s/g, '_');
+        itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 );
         console.log( itemName );
     }
     if ( req.body.barcode ) {

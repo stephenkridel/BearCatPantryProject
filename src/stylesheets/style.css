@@ -71,6 +71,8 @@ img.avatar {
 
 .main-container {
   margin: 10px 10px 70px 10px;
+  background-image: "University-of-Cincinnati-Main-Campus-Ofer-Wolberger-for-NYT.jpg";
+
 }
 
 .modal-backdrop {
@@ -431,4 +433,9 @@ vertical-align: bottom;
   color: #fff;
   background-color: #1a252f;
   border-color: #151e27;
+}
+
+.dropdownItems {
+  display: block;
+  width: 100%;
 }
