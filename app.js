@@ -22,6 +22,7 @@ var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
 var testRouter = require( './routes/test' );
 var adminRouter = require( './routes/admin' );
+var loginRouter = require( './routes/login' );
 var postCheckoutRouter = require( './routes/postCheckout' );
 
 
@@ -51,22 +52,20 @@ mongoose.connect( `mongodb+srv://bearcatAdmin:${process.env.DB_PW}@bearcatpantry
 
 // view engine setup
 app.set( 'views', path.join( __dirname, '/views' ) );
-var hbsObj = handlebars.create({
+var hbsObj = handlebars.create( {
     helpers: {
-        hasBarcode: function(barcode, options){
-            if (barcode != -99999999999){
+        hasBarcode: function( barcode, options ) {
+            if ( barcode != -99999999999 ) {
                 return options.fn();
-            }
-            else{
+            } else {
                 return options.inverse();
             }
         },
-        hasWeight: function(weight, options){
-            var intweight = parseInt(weight)
-            if (typeof intweight !== "undefined"){
+        hasWeight: function( weight, options ) {
+            var intweight = parseInt( weight )
+            if ( typeof intweight !== "undefined" ) {
                 return options.fn();
-            }
-            else{
+            } else {
                 return options.inverse();
             }
 
@@ -76,7 +75,7 @@ var hbsObj = handlebars.create({
     layoutsDir: path.join( __dirname, 'views', 'layouts' ),
     defaultLayout: 'layout.hbs',
     partialsDir: [ path.join( __dirname, 'views' ) ]
-});
+} );
 app.engine( 'hbs', hbsObj.engine );
 app.set( 'view engine', 'hbs' );
 
@@ -90,14 +89,14 @@ app.use( cookieParser() );
 
 
 app.use( helmet() );
-app.use( compression() );   
+app.use( compression() );
 app.use( express.static( path.join( __dirname, 'build' ) ) );
 
 // This is where we would set cookies on login?
 // This sets a cookie everytime you route. As route definition order matters. 
 // Will need to be refactored once login works
 app.use( function( req, res, next ) {
-    if ( process.env.USERNAME === 'admin' || process.env.USERNAME === 'kump' || process.env.USERNAME === "Felix-chan") {
+    if ( process.env.USERNAME === 'admin' || process.env.USERNAME === 'kump' || process.env.USERNAME === "Felix-chan" ) {
         res.cookie( 'isAdmin', true );
     } else {
         res.clearCookie( "isAdmin" );
@@ -109,6 +108,7 @@ app.use( function( req, res, next ) {
 
 // setup the routes
 app.use( '/', itemsRouter );
+app.use( '/', loginRouter );
 app.use( '/', aboutRouter );
 app.use( '/', cartRouter );
 app.use( '/', homeRouter );

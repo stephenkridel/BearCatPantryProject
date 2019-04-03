@@ -2,9 +2,18 @@
   display: inline;
 }
 
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap
+}
+
+.data {
+  display: none;
 }
 
 .card-container .card {
@@ -66,8 +75,6 @@
 
 .main-container {
   margin: 10px 10px 70px 10px;
-  background-image: "University-of-Cincinnati-Main-Campus-Ofer-Wolberger-for-NYT.jpg";
-
 }
 
 .modal-backdrop {
@@ -310,26 +317,27 @@ footer {
   margin-right: 5px;
 }
 
-.barcode-text{
+.barcode-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 260px;
 }
 
-.item-title{
-  float:left;
+.item-title {
+  float: left;
 }
 
-.item-quantity{
-  float:right;
+.item-quantity {
+  float: right;
 }
 
-.pageination{
-  position:relative;
-align-content: center;
-vertical-align: bottom;
+.pageination {
+  position: relative;
+  align-content: center;
+  vertical-align: bottom;
 }
+
 .dropdown-toggle {
   white-space: nowrap;
 }
@@ -348,6 +356,7 @@ vertical-align: bottom;
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -367,6 +376,7 @@ vertical-align: bottom;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
+
 .dropdown-item {
   display: block;
   width: 100%;
@@ -378,19 +388,23 @@ vertical-align: bottom;
   background-color: transparent;
   border: 0;
 }
-.dropdown-item:hover, .dropdown-item:focus {
+
+.dropdown-item:hover,
+.dropdown-item:focus {
   color: #fff;
   text-decoration: none;
   background-color: darkblue;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   color: #fff;
   text-decoration: none;
   background-color: darkblue;
 }
 
-.dropdown-item.disabled, .dropdown-item:disabled {
+.dropdown-item.disabled,
+.dropdown-item:disabled {
   color: grey;
   pointer-events: none;
   background-color: transparent;
@@ -414,17 +428,21 @@ vertical-align: bottom;
   padding: 0.25rem 1.5rem;
   color: grey;
 }
+
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 .navbar-nav .dropdown-menu {
   position: static;
   float: none;
 }
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #1a252f;
   border-color: #151e27;
@@ -435,6 +453,19 @@ vertical-align: bottom;
   width: 100%;
 }
 
-.dropdown {
-  margin-right: 0.5rem;
+.login-container {
+  background-color: rgba(0,0,0,0.8);
+  margin: 50px 25% 0 25%;
+  border-radius: 10px;
+  padding: 15px 25px 25px 25px;
+}
+
+.login-header{
+  text-align: center;
+  color: white;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
 }
