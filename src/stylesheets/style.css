@@ -434,3 +434,7 @@ vertical-align: bottom;
   display: block;
   width: 100%;
 }
+
+.dropdown {
+  margin-right: 0.5rem;
+}
