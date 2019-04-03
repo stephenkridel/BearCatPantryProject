@@ -453,10 +453,6 @@ footer {
   width: 100%;
 }
 
-<<<<<<< HEAD
-.dropdown {
-  margin-right: 0.5rem;
-=======
 .login-container {
   background-color: rgba(0,0,0,0.8);
   margin: 50px 25% 0 25%;
@@ -471,5 +467,4 @@ footer {
 
 .login-button {
   margin-left: 39%;
->>>>>>> f6cf13077d606bb097c9b605017813775a5d0ba2
 }
