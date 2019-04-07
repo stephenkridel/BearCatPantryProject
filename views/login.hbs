@@ -2,7 +2,7 @@
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var id_token = googleUser.getAuthResponse().id_token;
-    var xhr=new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open('POST', '/tokenvalidate');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.send(`idtoken=${id_token}`);
@@ -17,6 +17,7 @@
     var auth2 = gapi.auth2.getAuthInstance();
     document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     document.cookie = "isAdmin= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    document.cookie = "userEmail= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     auth2.signOut().then(function () {
       alert("You have been successfully signed out");
       $(".g-signin2").css("display", "block");
@@ -36,11 +37,10 @@
         <div class="login-page">
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
           <div class="data">
-            <p>Profile Details</p>
-            <img id="pic" class="img-circle" width="100" height="100" />
-            <p>Email Address</p>
             <p id="email" class="alert alert-danger"></p>
-            <button onclick="signOut()" class="btn btn-danger">SignOut</button>
+            <div class="signOutContainer">
+              <button onclick="signOut()" class="btn btn-danger">Sign Out</button>
+            </div>
           </div>
       </form>
     </div>
