@@ -15,6 +15,8 @@
 <script>
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
+    //document.cookie = "cookiename=userId ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    document.cookie = "username=userId; expires=Thu, 18 Dec 2013 12:00:00 UTC";
     auth2.signOut().then(function () {
       alert("You have been successfully signed out");
       $(".g-signin2").css("display", "block");
