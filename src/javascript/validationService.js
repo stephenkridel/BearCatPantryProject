@@ -123,6 +123,20 @@ $( document ).ready( function() {
             }
         } );
     } );
-
-
+    function isUser( req, res, next ) {
+        // Check if the user has authentication to see this page
+        if ( req.cookies.userId != "" ) {
+            return next();
+        }
+        // Else redirect to home
+        res.redirect( '/login' );
+    }
+    /*$(document).ready(function(){
+        if ( req.cookies.userId != "" ) {
+            $('mgmnt').show();
+        }
+        else{
+            $('mgmnt').hide();
+        }
+    });*/
 } );

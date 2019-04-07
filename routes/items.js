@@ -1,7 +1,7 @@
 var express = require( 'express' );
 var multer = require( "multer" );
 var fs = require( 'fs-extra' );
-var _ = require( 'lodash' )
+var _ = require( 'lodash' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' );
 var util = require( '../src/javascript/util.js' );
@@ -16,14 +16,6 @@ const upload = multer( {
     }
 } );
 
-function isAuthenticated( req, res, next ) {
-    // Check if the user has authentication to see this page
-    if ( req.cookies.isAdmin == "true" ) {
-        return next();
-    }
-    // Else redirect to home
-    res.redirect( '/' );
-}
 
 function isUser( req, res, next ) {
     if ( req.cookies.userId ) {
@@ -216,7 +208,7 @@ var convertToImage = function( items ) {
     }
 };
 
-router.get( '/manageItems', isAuthenticated, function( req, res, next ) {
+router.get( '/manageItems', isUser, function( req, res, next ) {
     item.find( {}, 'itemName barcode quantity weight', function( err, items ) {
         res.render( 'manageItems', {
             items: items,
