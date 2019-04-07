@@ -206,7 +206,7 @@ router.post( '/createNewOrder', isUser, function( req, res, next ) {
                     var html = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
                     var subject = `${req.cookies.userEmail}'s Bearcat Pantry Order`
                     // Send to 6+2 email! TODO
-                    util.sendEmail( res, nodemailer, process.env.EMAIL_TO, subject, html );
+                    util.sendEmail( res, nodemailer, req.cookies.userEmail, subject, html );
                 } )
             } )
             .catch( err => {
