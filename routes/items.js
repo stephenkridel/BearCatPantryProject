@@ -15,6 +15,23 @@ const upload = multer( {
         fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
     }
 } );
+function isAuthenticated( req, res, next ) {
+    // Check if the user has authentication to see this page
+    if ( req.cookies.isAdmin == "true" ) {
+        return next();
+    }
+    // Else redirect to home
+    res.redirect( '/' );
+}
+
+function isUser( req, res, next ) {
+    // Check if the user has authentication to see this page
+    if ( req.cookies.userId != "" ) {
+        return next();
+    }
+    // Else redirect to home
+    res.redirect( '/login' );
+}
 
 router.get( '/items', function( req, res, next ) {
     //var search = req.query.searchBar; 
@@ -82,7 +99,7 @@ router.get( '/items', function( req, res, next ) {
 
 } );
 
-router.get( '/getItem', function( req, res, next ) {
+router.get( '/getItem',  function( req, res, next ) {
     // Does not return img currently for performance reasons
     item.find( {
         "itemName": req.query.itemName
@@ -95,7 +112,7 @@ router.get( '/getItem', function( req, res, next ) {
 } );
 
 
-router.post( '/addToCart', function( req, res, next ) {
+router.post( '/addToCart',  function( req, res, next ) {
     item.find( {
         "itemName": req.body.itemName
     }, 'quantity', function( err, foundItem ) {
@@ -197,7 +214,7 @@ var convertToImage = function( items ) {
     }
 };
 
-router.get( '/manageItems', function( req, res, next ) {
+router.get( '/manageItems',isAuthenticated,  function( req, res, next ) {
     item.find( {}, 'itemName barcode quantity weight', function( err, items ) {
         res.render( 'manageItems', {
             items: items,
@@ -206,7 +223,7 @@ router.get( '/manageItems', function( req, res, next ) {
     } )
 } );
 
-router.post( '/updateItem', function( req, res, next ) {
+router.post( '/updateItem',  function( req, res, next ) {
     var barcodes = req.body.barcode.split(',').map(Function.prototype.call, String.prototype.trim);
     console.log(barcodes);
     item.updateOne( {
@@ -227,7 +244,7 @@ router.post( '/updateItem', function( req, res, next ) {
         } );
 } );
 
-router.post( '/deleteItem', function( req, res, next ) {
+router.post( '/deleteItem',  function( req, res, next ) {
     item.deleteOne( {
         itemName: req.body.oldItemName
     } ).then( () => {
@@ -235,7 +252,7 @@ router.post( '/deleteItem', function( req, res, next ) {
     } )
 } );
 
-router.post( "/addItemByBarcode", function( req, res, next ) {
+router.post( "/addItemByBarcode",  function( req, res, next ) {
     item.countDocuments( {
         barcode: req.body.barcode
     }, function( err, count ) {
@@ -255,7 +272,7 @@ router.post( "/addItemByBarcode", function( req, res, next ) {
     } )
 } );
 
-router.post( "/addItemByName", function( req, res, next ) {
+router.post( "/addItemByName",  function( req, res, next ) {
     //Initialize itemName and barcode to "none" value
     var itemName = "NOITEMNAME";
     var barcode = -99999999999;
