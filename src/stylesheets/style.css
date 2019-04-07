@@ -480,3 +480,8 @@ footer {
   display: flex;
   justify-content: center;
 }
+
+.signOutContainer {
+  display: flex;
+  justify-content: center;
+}
