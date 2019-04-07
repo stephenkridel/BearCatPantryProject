@@ -24,7 +24,7 @@ function isUser( req, res, next ) {
 }
 router.get( '/cart',isUser, function( req, res, next ) {
     cart.find( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, 'items', function( err, cart ) {
         if ( cart && cart.length > 0 ) {
             res.render( 'cart', {
@@ -41,7 +41,7 @@ router.get( '/cart',isUser, function( req, res, next ) {
 
 router.get( '/totalCartItems', isUser, function( req, res, next ) {
     cart.find( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, 'items', function( err, itemInCart ) {
         var totalQuantity = 0;
         if ( itemInCart && itemInCart.length > 0 ) {
@@ -60,20 +60,20 @@ router.get( '/totalCartItems', isUser, function( req, res, next ) {
 
 router.post( '/updateCartItemQuantities',isUser, function( req, res, next ) {
     cart.countDocuments( {
-        user: process.env.USERNAME
+        user: req.cookies.userId
     }, function( err, count ) {
         // Find out if a user already has a cart in mongoDB
         if ( count > 0 ) {
             // Find out if the current user's cart already has the selected item in the cart.
             cart.countDocuments( {
-                "user": process.env.USERNAME,
+                "user": req.cookies.userId,
                 "items.itemName": req.body.itemName,
             }, function( err, count ) {
                 // If item doesnt exist in the cart, push it on
                 if ( count === 0 ) {
                     // push new item to cart
                     cart.update( {
-                        "user": process.env.USERNAME
+                        "user": req.cookies.userId
                     }, {
                         "$push": {
                             items: {
@@ -87,7 +87,7 @@ router.post( '/updateCartItemQuantities',isUser, function( req, res, next ) {
                 } else {
                     // else, update existing shopping cart item to increment 1 time
                     cart.findOneAndUpdate( {
-                            "user": process.env.USERNAME,
+                            "user": req.cookies.userId,
                         }, {
                             $set: {
                                 "items.$[elem].quantity": req.body.quantity
@@ -109,7 +109,7 @@ router.post( '/updateCartItemQuantities',isUser, function( req, res, next ) {
         } else {
             // Else, initialize a cart for the new user, and add the item
             var myData = new cart( {
-                user: process.env.USERNAME,
+                user: req.cookies.userId,
                 items: [ {
                     itemName: req.body.itemName,
                     quantity: 1
@@ -128,7 +128,7 @@ router.post( '/updateCartItemQuantities',isUser, function( req, res, next ) {
 
 router.post( '/removeItemFromCart',isUser, function( req, res, next ) {
     cart.update( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, {
         $pull: {
             items: {
@@ -142,7 +142,7 @@ router.post( '/removeItemFromCart',isUser, function( req, res, next ) {
 
 router.get( '/validateOrder', isUser, function( req, res, next ) {
     cart.find( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, 'items', function( err, cart ) {
         var itemsToFind = [];
         globalCart = cart[ 0 ];
@@ -176,7 +176,7 @@ router.get( '/validateOrder', isUser, function( req, res, next ) {
 
 router.post( '/createNewOrder', isUser, function( req, res, next ) {
     cart.find( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, 'user items', function( err, foundCart ) {
         if ( foundCart && foundCart.length > 1 ) {
             res.status( 400 ).send( "Somehow found 2 carts for this user" );
@@ -202,9 +202,9 @@ router.post( '/createNewOrder', isUser, function( req, res, next ) {
                 var message = greeting + orderDetails + final;
 
                 // Create a QRCode with the username as it's data
-                QRCode.toDataURL( process.env.USERNAME, function( err, url ) {
+                QRCode.toDataURL( req.cookies.userEmail, function( err, url ) {
                     var html = `<p>${message}</p><br><img src='${url}' height='232px' width='232px'></img>`;
-                    var subject = `${process.env.USERNAME}'s Bearcat Pantry Order`
+                    var subject = `${req.cookies.userEmail}'s Bearcat Pantry Order`
                     // Send to 6+2 email! TODO
                     util.sendEmail( res, nodemailer, process.env.EMAIL_TO, subject, html );
                 } )
@@ -221,7 +221,7 @@ router.post( '/createNewOrder', isUser, function( req, res, next ) {
 // Empty out a user's cart
 router.post( '/clearCart', isUser, function( req, res, next ) {
     cart.update( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, {
         $set: {
             "items": []
@@ -234,7 +234,7 @@ router.post( '/clearCart', isUser, function( req, res, next ) {
 
 router.post( '/cancelOrder', isUser, function( req, res, next ) {
     cart.update( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userId
     }, {
         $set: {
             "status": 0

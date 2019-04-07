@@ -120,20 +120,20 @@ router.post( '/addToCart',  function( req, res, next ) {
             res.status( 400 ).send( "There are currently 0 of that item in the pantry" );
         } else {
             cart.countDocuments( {
-                user: process.env.USERNAME
+                user: req.cookies.userId
             }, function( err, count ) {
                 // Find out if a user already has a cart in mongoDB
                 if ( count > 0 ) {
                     // Find out if the current user's cart already has the selected item in the cart.
                     cart.countDocuments( {
-                        "user": process.env.USERNAME,
+                        "user": req.cookies.userId,
                         "items.itemName": req.body.itemName,
                     }, function( err, count ) {
                         // If item doesnt exist in the cart, push it on
                         if ( count === 0 ) {
                             // push new item to cart
                             cart.updateOne( {
-                                "user": process.env.USERNAME
+                                "user": req.cookies.userId
                             }, {
                                 "$push": {
                                     items: {
@@ -151,7 +151,7 @@ router.post( '/addToCart',  function( req, res, next ) {
                             }, 'quantity', function( err, found ) {
                                 let foundItem = found[ 0 ];
                                 cart.find( {
-                                    "user": process.env.USERNAME
+                                    "user": req.cookies.userId
                                 }, 'user items', function( err, foundCart ) {
                                     if ( foundCart && foundCart.length > 1 ) {
                                         res.status( 400 ).send( "Somehow found 2 carts for this user" );
@@ -160,7 +160,7 @@ router.post( '/addToCart',  function( req, res, next ) {
                                     var amtInCart = usersCart.items.filter( e => e.itemName === req.body.itemName )[ 0 ].quantity
                                     if ( amtInCart + 1 <= foundItem.quantity ) {
                                         cart.findOneAndUpdate( {
-                                                "user": process.env.USERNAME,
+                                                "user": req.cookies.userId,
                                             }, {
                                                 $inc: {
                                                     "items.$[elem].quantity": 1
@@ -186,7 +186,7 @@ router.post( '/addToCart',  function( req, res, next ) {
                 } else {
                     // Else, initialize a cart for the new user, and add the item
                     var myData = new cart( {
-                        user: process.env.USERNAME,
+                        user: req.cookies.userId,
                         items: [ {
                             itemName: req.body.itemName,
                             quantity: 1
@@ -334,7 +334,7 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
 
 router.post( "/decrementItemQuantity", function( req, res, next ) {
     cart.find( {
-        "user": process.env.USERNAME
+        "user": req.cookies.userIds
     }, 'user items', function( err, foundCart ) {
         if ( foundCart && foundCart.length > 1 ) {
             res.status( 400 ).send( "Somehow found 2 carts for this user" );

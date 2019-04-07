@@ -26,6 +26,7 @@ router.post( '/tokenvalidate', function( req, res, next ) {
         const userid = payload[ 'sub' ];
 
         if ( config.adminEmails.includes( payload.email ) ) {
+            res.cookie( 'userEmail', payload.email );
             res.cookie( 'isAdmin', true );
         }
 
