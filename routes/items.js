@@ -62,6 +62,8 @@ router.get( '/items', function( req, res, next ) {
                 if ( items.length < num && items.length > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
+                var incomplete = false;
+                if (firstPage && notFullPage) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -70,7 +72,8 @@ router.get( '/items', function( req, res, next ) {
                     PrevPage: prev,
                     NextPage: next,
                     count: notFullPage,
-                    First: firstPage
+                    First: firstPage,
+                    IncompletePage: incomplete
                 } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
         } else {
@@ -84,6 +87,8 @@ router.get( '/items', function( req, res, next ) {
                 if ( Number( items.length ) < num && Number( items.length ) > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
+                var incomplete = false;
+                if (firstPage && notFullPage) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -91,7 +96,8 @@ router.get( '/items', function( req, res, next ) {
                     PrevPage: prev,
                     NextPage: next,
                     count: notFullPage,
-                    First: firstPage
+                    First: firstPage,
+                    IncompletePage: incomplete
                 } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
         }
