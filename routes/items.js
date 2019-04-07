@@ -342,7 +342,7 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
 
 router.post( "/decrementItemQuantity", function( req, res, next ) {
     cart.find( {
-        "user": req.cookies.userIds
+        "user": req.cookies.userId
     }, 'user items', function( err, foundCart ) {
         if ( foundCart && foundCart.length > 1 ) {
             res.status( 400 ).send( "Somehow found 2 carts for this user" );
