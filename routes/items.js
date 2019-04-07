@@ -20,7 +20,11 @@ router.get( '/items', function( req, res, next ) {
     //var search = req.query.searchBar; 
     //var page = req.query.Page;
     var num = 4;
-    var pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
+    var pagenum = 1;
+    //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
+    if (req.query.Page != undefined){
+        pagenum = req.query.Page;
+    }
     if (pagenum < 1) pagenum = 1;
     var prev = pagenum -1//pagenum > 1 ? pagenum-- : pagenum;
     if (prev < 1) prev = 1;

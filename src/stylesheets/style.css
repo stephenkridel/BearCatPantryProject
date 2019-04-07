@@ -76,7 +76,10 @@ img.avatar {
 .main-container {
   margin: 10px 10px 70px 10px;
 }
-
+.home {
+  margin: 10px 10px 70px 10px;
+  background: url('../images/campus.jpg');
+}
 .modal-backdrop {
   opacity: 0.5 !important;
 }
