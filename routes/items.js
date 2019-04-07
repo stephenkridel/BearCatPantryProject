@@ -15,6 +15,7 @@ const upload = multer( {
         fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
     }
 } );
+
 function isAuthenticated( req, res, next ) {
     // Check if the user has authentication to see this page
     if ( req.cookies.isAdmin == "true" ) {
@@ -25,81 +26,82 @@ function isAuthenticated( req, res, next ) {
 }
 
 function isUser( req, res, next ) {
-    // Check if the user has authentication to see this page
-    if ( req.cookies.userId != "" ) {
+    if ( req.cookies.userId ) {
         return next();
     }
-    // Else redirect to home
+
     res.redirect( '/login' );
 }
 
 router.get( '/items', function( req, res, next ) {
-    //var search = req.query.searchBar; 
-    //var page = req.query.Page;
-    var num = 4;
-    var pagenum = 1;
-    //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
-    if (req.query.Page != undefined){
-        pagenum = req.query.Page;
-    }
-    if (pagenum < 1) pagenum = 1;
-    var prev = pagenum -1//pagenum > 1 ? pagenum-- : pagenum;
-    if (prev < 1) prev = 1;
-    var next = (pagenum -1) + 2 ;//+ parseInt(2)
-    var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
+    if ( req.cookies.userId ) {
+        var num = 4;
+        var pagenum = 1;
+        //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
+        if ( req.query.Page != undefined ) {
+            pagenum = req.query.Page;
+        }
+        if ( pagenum < 1 ) pagenum = 1;
+        var prev = pagenum - 1 //pagenum > 1 ? pagenum-- : pagenum;
+        if ( prev < 1 ) prev = 1;
+        var next = ( pagenum - 1 ) + 2; //+ parseInt(2)
+        var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
         //var skip = (page*num)-num;
-    if ( search && search.length > 0 ) {
-        item.find( {
-            "itemName": {
-                "$regex": search,
-                "$options": "i"
-            },
-            "quantity": {
-                "$gt": 0
-            }
-        }, 'itemName quantity weight img', function( err, items ) {
-            convertToImage( items );
-            var notFullPage = false;
-            if (items.length < num && items.length > 0) notFullPage = true;
-            var firstPage = true;
-            if (pagenum > 1) firstPage = false;
-            res.render( 'items', {
-                items: items,
-                title: "Items - Bearcat Pantry",
-                searchText: search,
-                Page: pagenum,
-                PrevPage: prev,
-                NextPage: next,
-                count: notFullPage,
-                First: firstPage
-            } );
-        } ).skip(pagenum > 0 ? ((pagenum - 1) * num) : 0).limit(num);
+        if ( search && search.length > 0 ) {
+            item.find( {
+                "itemName": {
+                    "$regex": search,
+                    "$options": "i"
+                },
+                "quantity": {
+                    "$gt": 0
+                }
+            }, 'itemName quantity weight img', function( err, items ) {
+                convertToImage( items );
+                var notFullPage = false;
+                if ( items.length < num && items.length > 0 ) notFullPage = true;
+                var firstPage = true;
+                if ( pagenum > 1 ) firstPage = false;
+                res.render( 'items', {
+                    items: items,
+                    title: "Items - Bearcat Pantry",
+                    searchText: search,
+                    Page: pagenum,
+                    PrevPage: prev,
+                    NextPage: next,
+                    count: notFullPage,
+                    First: firstPage
+                } );
+            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
+        } else {
+            item.find( {
+                "quantity": {
+                    "$gt": 0
+                }
+            }, 'itemName quantity weight img', function( err, items ) {
+                convertToImage( items );
+                var notFullPage = false;
+                if ( Number( items.length ) < num && Number( items.length ) > 0 ) notFullPage = true;
+                var firstPage = true;
+                if ( pagenum > 1 ) firstPage = false;
+                res.render( 'items', {
+                    items: items,
+                    title: "Items - Bearcat Pantry",
+                    Page: pagenum,
+                    PrevPage: prev,
+                    NextPage: next,
+                    count: notFullPage,
+                    First: firstPage
+                } );
+            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
+        }
     } else {
-        item.find( {
-            "quantity": {
-                "$gt": 0
-            }
-        }, 'itemName quantity weight img', function( err, items ) {
-            convertToImage( items );
-            var notFullPage = false;
-            if (Number(items.length) < num && Number(items.length) > 0) notFullPage = true;
-            var firstPage = true;
-            if (pagenum > 1) firstPage = false;
-            res.render( 'items', {
-                items: items,
-                title: "Items - Bearcat Pantry",
-                Page: pagenum,
-                PrevPage: prev,
-                NextPage: next,
-                count: notFullPage,
-                First: firstPage
-            } );
-        } ).skip(pagenum > 0 ? ((pagenum- 1) * num) : 0).limit(num);
+        res.redirect( '/login' );
     }
 
 } );
 
-router.get( '/getItem',  function( req, res, next ) {
+router.get( '/getItem', function( req, res, next ) {
     // Does not return img currently for performance reasons
     item.find( {
         "itemName": req.query.itemName
@@ -112,7 +114,7 @@ router.get( '/getItem',  function( req, res, next ) {
 } );
 
 
-router.post( '/addToCart',  function( req, res, next ) {
+router.post( '/addToCart', function( req, res, next ) {
     item.find( {
         "itemName": req.body.itemName
     }, 'quantity', function( err, foundItem ) {
@@ -214,7 +216,7 @@ var convertToImage = function( items ) {
     }
 };
 
-router.get( '/manageItems',isAuthenticated,  function( req, res, next ) {
+router.get( '/manageItems', isAuthenticated, function( req, res, next ) {
     item.find( {}, 'itemName barcode quantity weight', function( err, items ) {
         res.render( 'manageItems', {
             items: items,
@@ -223,9 +225,9 @@ router.get( '/manageItems',isAuthenticated,  function( req, res, next ) {
     } )
 } );
 
-router.post( '/updateItem',  function( req, res, next ) {
-    var barcodes = req.body.barcode.split(',').map(Function.prototype.call, String.prototype.trim);
-    console.log(barcodes);
+router.post( '/updateItem', function( req, res, next ) {
+    var barcodes = req.body.barcode.split( ',' ).map( Function.prototype.call, String.prototype.trim );
+    console.log( barcodes );
     item.updateOne( {
             "itemName": req.body.oldItemName
         }, {
@@ -244,7 +246,7 @@ router.post( '/updateItem',  function( req, res, next ) {
         } );
 } );
 
-router.post( '/deleteItem',  function( req, res, next ) {
+router.post( '/deleteItem', function( req, res, next ) {
     item.deleteOne( {
         itemName: req.body.oldItemName
     } ).then( () => {
@@ -252,7 +254,7 @@ router.post( '/deleteItem',  function( req, res, next ) {
     } )
 } );
 
-router.post( "/addItemByBarcode",  function( req, res, next ) {
+router.post( "/addItemByBarcode", function( req, res, next ) {
     item.countDocuments( {
         barcode: req.body.barcode
     }, function( err, count ) {
@@ -272,7 +274,7 @@ router.post( "/addItemByBarcode",  function( req, res, next ) {
     } )
 } );
 
-router.post( "/addItemByName",  function( req, res, next ) {
+router.post( "/addItemByName", function( req, res, next ) {
     //Initialize itemName and barcode to "none" value
     var itemName = "NOITEMNAME";
     var barcode = -99999999999;
@@ -280,7 +282,7 @@ router.post( "/addItemByName",  function( req, res, next ) {
     if ( req.body.itemName ) {
         var itemName = req.body.itemName;
         itemName.replace( /\b\w/g, l => l.toUpperCase() );
-        itemName = itemName.replace(/\s/g, '_');
+        itemName = itemName.replace( /\s/g, '_' );
         itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 );
         console.log( itemName );
     }
