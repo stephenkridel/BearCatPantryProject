@@ -6,7 +6,7 @@ var router = express.Router();
 
 function isAuthenticated( req, res, next ) {
     // Check if the user has authentication to see this page
-    if ( req.cookies.isAdmin === "true" ) {
+    if ( req.cookies.isAdmin == "true" ) {
         return next();
     }
     // Else redirect to home
