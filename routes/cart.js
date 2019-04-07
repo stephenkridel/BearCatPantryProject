@@ -14,7 +14,15 @@ var router = express.Router();
 var globalCart;
 
 
-router.get( '/cart', function( req, res, next ) {
+function isUser( req, res, next ) {
+    // Check if the user has authentication to see this page
+    if ( req.cookies.userId != null ) {
+        return next();
+    }
+    // Else redirect to home
+    res.redirect( '/login' );
+}
+router.get( '/cart',isUser, function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
     }, 'items', function( err, cart ) {
@@ -31,7 +39,7 @@ router.get( '/cart', function( req, res, next ) {
     } )
 } );
 
-router.get( '/totalCartItems', function( req, res, next ) {
+router.get( '/totalCartItems', isUser, function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
     }, 'items', function( err, itemInCart ) {
@@ -50,7 +58,7 @@ router.get( '/totalCartItems', function( req, res, next ) {
     } )
 } );
 
-router.post( '/updateCartItemQuantities', function( req, res, next ) {
+router.post( '/updateCartItemQuantities',isUser, function( req, res, next ) {
     cart.countDocuments( {
         user: process.env.USERNAME
     }, function( err, count ) {
@@ -118,7 +126,7 @@ router.post( '/updateCartItemQuantities', function( req, res, next ) {
     } );
 } );
 
-router.post( '/removeItemFromCart', function( req, res, next ) {
+router.post( '/removeItemFromCart',isUser, function( req, res, next ) {
     cart.update( {
         "user": process.env.USERNAME
     }, {
@@ -132,7 +140,7 @@ router.post( '/removeItemFromCart', function( req, res, next ) {
     } );
 } );
 
-router.get( '/validateOrder', function( req, res, next ) {
+router.get( '/validateOrder', isUser, function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
     }, 'items', function( err, cart ) {
@@ -166,7 +174,7 @@ router.get( '/validateOrder', function( req, res, next ) {
     } )
 } );
 
-router.post( '/createNewOrder', function( req, res, next ) {
+router.post( '/createNewOrder', isUser, function( req, res, next ) {
     cart.find( {
         "user": process.env.USERNAME
     }, 'user items', function( err, foundCart ) {
@@ -211,7 +219,7 @@ router.post( '/createNewOrder', function( req, res, next ) {
 } );
 
 // Empty out a user's cart
-router.post( '/clearCart', function( req, res, next ) {
+router.post( '/clearCart', isUser, function( req, res, next ) {
     cart.update( {
         "user": process.env.USERNAME
     }, {
@@ -224,7 +232,7 @@ router.post( '/clearCart', function( req, res, next ) {
 } );
 
 
-router.post( '/cancelOrder', function( req, res, next ) {
+router.post( '/cancelOrder', isUser, function( req, res, next ) {
     cart.update( {
         "user": process.env.USERNAME
     }, {
