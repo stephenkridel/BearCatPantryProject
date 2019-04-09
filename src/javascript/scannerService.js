@@ -115,6 +115,7 @@ $( function() {
             Quagga.stop();
             setTimeout( function() {
                 $( '#livestream_scanner' ).modal( 'hide' );
+                $('.modal-backdrop').remove();
             }, 1000 );
         }
     } );
