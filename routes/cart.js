@@ -198,7 +198,7 @@ router.post( '/createNewOrder', isUser, function( req, res, next ) {
                 for ( var i = 0; i < itemsInCart.length; i++ ) {
                     orderDetails += `${itemsInCart[i].itemName} - ${itemsInCart[i].quantity}<br>`;
                 }
-                var final = "<br>Your order can be found at localhost:3000/cart<br>Please come to the Pantry to pick up your order.<br><br> Thanks,<br>The Bearcat Pantry Team"
+                var final = "<br>Come to the Pantry to pick up your order as soon as possible. Present the QRCode below upon arrival.<br> The Pantry is located in Stratford Heights Building 16 Rm 007. If you have questions regarding directions or procedures, you may call 513-556-5064 or 556-3780 to speak with a respresentative regarding directions or procedures.<br><br> Thanks,<br>The Bearcat Pantry Team"
                 var message = greeting + orderDetails + final;
 
                 // Create a QRCode with the username as it's data
