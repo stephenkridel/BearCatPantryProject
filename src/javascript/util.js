@@ -20,13 +20,13 @@ module.exports = {
         let emailSettings = {
             service: 'gmail',
             auth: {
-                user: 'bearcatpantry@gmail.com',
+                user: process.env.EMAIL_NAME,
                 pass: process.env.EMAIL_PW
             }
         };
 
         var mailOptions = {
-            from: 'bearcatpantry@gmail.com',
+            from: process.env.EMAIL_NAME,
             to: to,
             subject: subject,
             html: html
