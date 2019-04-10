@@ -27,7 +27,7 @@ function isUser( req, res, next ) {
 
 router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
-        var num = 20;
+        var numberPerPage = 20;
         var pagenum = 1;
         //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
         if ( req.query.Page != undefined ) {
@@ -51,7 +51,7 @@ router.get( '/items', function( req, res, next ) {
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
                 var notFullPage = false;
-                if ( items.length < num && items.length > 0 ) notFullPage = true;
+                if ( items.length < numberPerPage && items.length > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
@@ -67,7 +67,7 @@ router.get( '/items', function( req, res, next ) {
                     First: firstPage,
                     IncompletePage: incomplete
                 } );
-            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
+            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         } else {
             item.find( {
                 "quantity": {
@@ -76,7 +76,7 @@ router.get( '/items', function( req, res, next ) {
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
                 var notFullPage = false;
-                if ( Number( items.length ) < num && Number( items.length ) > 0 ) notFullPage = true;
+                if ( Number( items.length ) < numberPerPage && Number( items.length ) > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
@@ -91,7 +91,7 @@ router.get( '/items', function( req, res, next ) {
                     First: firstPage,
                     IncompletePage: incomplete
                 } );
-            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
+            } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         }
     } else {
         res.redirect( '/login' );
