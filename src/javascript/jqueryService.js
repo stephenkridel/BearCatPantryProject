@@ -19,4 +19,11 @@ $( document ).ready( function() {
             $( "button.navbar-toggler" ).click();
         }
     } );
+
+    if ( Cookies.get( 'isAdmin' ) ) {
+        console.log( "Youre an adamin!" );
+        $( '#managementNavLink' ).removeClass( 'hidden' );
+    }
+
+
 } );

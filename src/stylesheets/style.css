@@ -78,7 +78,6 @@ img.avatar {
 }
 .home {
   margin: 10px 10px 70px 10px;
-  background: url('../images/campus.jpg');
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center; 
@@ -460,9 +459,9 @@ footer {
   width: 100%;
 }
 
-.dropdown {
+/* .dropdown {
   margin-right: .5rem;
-}
+} */
 
 .dropdown-menu {
   padding: 5px !IMPORTANT;
@@ -488,4 +487,8 @@ footer {
 .signOutContainer {
   display: flex;
   justify-content: center;
+}
+
+.hidden {
+  display: none !important;
 }

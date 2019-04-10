@@ -35,17 +35,11 @@ In dev mode, simply changing any static file should re-build webpack automatical
 
 ### Environment variable
 
-Create a .env file at the root with the following text:
-
-USERNAME=
+Create a file called '.env' at the root with the following text, and ask Andrew for the password:
 
 DB_PW=
 
 EMAIL_PW=
-
-EMAIL_TO=
-
-^If you want to recieve the email when you checkout
 
 # Testing
 

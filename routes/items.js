@@ -27,7 +27,7 @@ function isUser( req, res, next ) {
 
 router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
-        var num = 4;
+        var num = 20;
         var pagenum = 1;
         //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
         if ( req.query.Page != undefined ) {
@@ -54,6 +54,8 @@ router.get( '/items', function( req, res, next ) {
                 if ( items.length < num && items.length > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
+                var incomplete = false;
+                if (firstPage && notFullPage) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -62,7 +64,8 @@ router.get( '/items', function( req, res, next ) {
                     PrevPage: prev,
                     NextPage: next,
                     count: notFullPage,
-                    First: firstPage
+                    First: firstPage,
+                    IncompletePage: incomplete
                 } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
         } else {
@@ -76,6 +79,8 @@ router.get( '/items', function( req, res, next ) {
                 if ( Number( items.length ) < num && Number( items.length ) > 0 ) notFullPage = true;
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
+                var incomplete = false;
+                if (firstPage && notFullPage) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -83,7 +88,8 @@ router.get( '/items', function( req, res, next ) {
                     PrevPage: prev,
                     NextPage: next,
                     count: notFullPage,
-                    First: firstPage
+                    First: firstPage,
+                    IncompletePage: incomplete
                 } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * num ) : 0 ).limit( num );
         }
@@ -328,7 +334,7 @@ router.post( "/createItem", upload.single( 'image' ), function( req, res, next )
 
 router.post( "/decrementItemQuantity", function( req, res, next ) {
     cart.find( {
-        "user": req.cookies.userIds
+        "user": req.cookies.userId
     }, 'user items', function( err, foundCart ) {
         if ( foundCart && foundCart.length > 1 ) {
             res.status( 400 ).send( "Somehow found 2 carts for this user" );
