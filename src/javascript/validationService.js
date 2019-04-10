@@ -43,11 +43,15 @@ $( document ).ready( function() {
             }
         } );
     } );
-    
+
     var validateAddItemButton = function( _this ) {
         var foundError = false
-        $( ".invalid-feedback" ).each( function() {
-            if ( $( this ).is( ':visible' ) ) {
+
+
+        $( _this ).closest( "form" ).children( '.form-group' ).each( function() {
+            var input = $( this ).find( 'input' )[ 0 ];
+            var valid = input.classList.contains( "is-valid" );
+            if ( !valid || input.classList.contains( "is-invalid" ) ) {
                 foundError = true;
             }
         } );
@@ -73,6 +77,36 @@ $( document ).ready( function() {
                 validateAddItemButton( _this );
             }
         } );
+    } );
+
+    $( '#weight' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#weight" ).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $( "#weight" ).addClass( 'is-valid' );
+                $( "#weight" ).removeClass( 'is-invalid' );
+                $( "#badWeightNumber" ).hide();
+                validateAddItemButton( _this );
+
+
+            } else {
+                $( "#weight" ).removeClass( 'is-valid' );
+                $( "#weight" ).addClass( 'is-invalid' );
+                $( "#badWeightNumber" ).show();
+                validateAddItemButton( _this );
+            }
+        } );
+    } );
+
+    $( "input:file" ).change( function() {
+        var fileName = $( this ).val();
+        if ( fileNane ){
+            $( "#image" ).addClass( 'is-valid' );
+            $( "#image" ).removeClass( 'is-invalid' );
+        }
+            validateAddItemButton( _this );
+
     } );
 
 

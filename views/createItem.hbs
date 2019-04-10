@@ -45,7 +45,7 @@
     <form method="post" action="/createItem" enctype="multipart/form-data" id="createItem">
         <div class="form-group">
             <label for="itemName">Item name</label>
-            <input type="text" class="form-control" name="itemName" id="itemName" placeholder="Enter item name..."
+            <input type="text" class="form-control is-valid" name="itemName" id="itemName" placeholder="Enter item name..."
                 value={{@root.itemName}} required>
             <div id="badItemName" class="invalid-feedback" style="display: none">A valid
                 Item name should be between 4 and 15 characters with no special characters.</div>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <input type="hidden" class="form-control" name="barcode" id="barcode" value={{barcode}}>
-        <input type="submit" class="btn btn-primary" id="addButton" value="Add Item">
+        <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
     </form>
     {{/hasBarcode}}
 </div>
