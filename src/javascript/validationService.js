@@ -6,12 +6,6 @@ whether that be text boxes, files, or disabliing of buttons
 */
 
 $( document ).ready( function() {
-    // $( "#itemName" ).keypress( function( e ) {
-    //     if ( String.fromCharCode( e.which ).match( /[^A-Za-z ]/ ) ) {
-    //         e.preventDefault()
-    //     }
-    // } );
-
     $( '#itemName' ).each( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
@@ -49,60 +43,21 @@ $( document ).ready( function() {
             }
         } );
     } );
+
     var validateAddItemButton = function( _this ) {
         var foundError = false
-        $( ".invalid-feedback" ).each( function() {
-            if ( $( this ).is( ':visible' ) ) {
+
+
+        $( _this ).closest( "form" ).children( '.form-group' ).each( function() {
+            var input = $( this ).find( 'input' )[ 0 ];
+            var valid = input.classList.contains( "is-valid" );
+            if ( !valid || input.classList.contains( "is-invalid" ) ) {
                 foundError = true;
             }
         } );
-        $( _this ).closest( "form" ).find( "#addButton" ).attr( "disabled", foundError );
+        var form = $( _this ).closest( "form" );
+        form.find( "#addButton" ).attr( "disabled", foundError );
     }
-
-
-    // $( '#weight' ).each( function() {
-    //     $( this ).on( 'keyup', function() {
-    //         var value = $( "#weight" ).val();
-    //         if ( value.length >= 1 && value.length <= 3 ) {
-    //             $( "#weight" ).addClass( 'is-valid' );
-    //             $( "#weight" ).removeClass( 'is-invalid' );
-    //             $( "#badWeightNumber" ).hide();
-    //             if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
-    //                 $( '#addButton' ).removeAttr( 'disabled' );
-    //             }
-    //         } else {
-    //             $( "#weight" ).removeClass( 'is-valid' );
-    //             $( "#weight" ).addClass( 'is-invalid' );
-    //             $( "#badWeightNumber" ).show();
-    //             $( "#addButton" ).attr( 'disabled', 'disabled' );
-    //         }
-    //     } );
-    // } );
-
-    // $( '#barcode' ).each( function() {
-    //     $( this ).on( 'keyup', function() {
-    //         var value = $( "#barcode" ).val();
-    //         if ( value.length >= 8 && value.length <= 12 ) {
-    //             $( "#barcode" ).addClass( 'is-valid' );
-    //             $( "#barcode" ).removeClass( 'is-invalid' );
-    //             $( "#badBarcodeNumber" ).hide();
-    //             if ( ( $( "#badItemName" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badQuantityNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badWeightNumber" ).is( ':hidden' ) ) &&
-    //                 ( $( "#badBarcodeNumber" ).is( ':hidden' ) ) ) {
-    //                 $( '#addButton' ).removeAttr( 'disabled' );
-    //             }
-    //         } else {
-    //             $( "#barcode" ).removeClass( 'is-valid' );
-    //             $( "#barcode" ).addClass( 'is-invalid' );
-    //             $( "#badBarcodeNumber" ).show();
-    //             $( "#addButton" ).attr( 'disabled', 'disabled' );
-    //         }
-    //     } );
-    // } );
 
     $( '#barcode' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -123,20 +78,36 @@ $( document ).ready( function() {
             }
         } );
     } );
-    function isUser( req, res, next ) {
-        // Check if the user has authentication to see this page
-        if ( req.cookies.userId != "" ) {
-            return next();
+
+    $( '#weight' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#weight" ).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $( "#weight" ).addClass( 'is-valid' );
+                $( "#weight" ).removeClass( 'is-invalid' );
+                $( "#badWeightNumber" ).hide();
+                validateAddItemButton( _this );
+
+
+            } else {
+                $( "#weight" ).removeClass( 'is-valid' );
+                $( "#weight" ).addClass( 'is-invalid' );
+                $( "#badWeightNumber" ).show();
+                validateAddItemButton( _this );
+            }
+        } );
+    } );
+
+    $( "input:file" ).change( function() {
+        var fileName = $( this ).val();
+        if ( fileNane ){
+            $( "#image" ).addClass( 'is-valid' );
+            $( "#image" ).removeClass( 'is-invalid' );
         }
-        // Else redirect to home
-        res.redirect( '/login' );
-    }
-    /*$(document).ready(function(){
-        if ( req.cookies.userId != "" ) {
-            $('mgmnt').show();
-        }
-        else{
-            $('mgmnt').hide();
-        }
-    });*/
+            validateAddItemButton( _this );
+
+    } );
+
+
 } );
