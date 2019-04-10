@@ -27,67 +27,67 @@
         </div>
         {{/each}}
     </div>
-    {{#if count}}
-    <div>
-        <ul class="pagination" name="pagination">
-            <li class="page-item">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
-            </li>
-        </ul>
-    </div>
-    {{else}}
-    {{#if IncompletePage}}
-    <div>
-        <ul class="pagination" name="pagination">
-            <li class="page-item disabled">
-                <a class="page-link disabled" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
-            </li>
-        </ul>
-    </div>
-    {{else}}
-    {{#if First}}
-    <div>
-        <ul class="pagination" name="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
-            </li>
-        </ul>
-    </div>
-    {{else}}
-    <div>
-        <ul class="pagination" name="pagination">
-            <li class="page-item">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
-            </li>
-        </ul>
-    </div>
-    {{/if}}
-    {{/if}}
-    {{/if}}
+        {{#if count}}
+            <div>
+                <ul class="pagination" name="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link disabled" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        {{else}}
+            {{#if IncompletePage}}
+                <div>
+                <ul class="pagination" name="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+            {{else}}
+                {{#if First}}
+                <div>
+                    <ul class="pagination" name="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+                {{else}}
+                    <div>
+                        <ul class="pagination" name="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{PrevPage}}">&laquo;</a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{Page}}">{{Page}}</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/items?searchBar={{searchText}}&Page={{NextPage}}">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
+                {{/if}}
+            {{/if}}
+        {{/if}}
     {{else}}
     <li class="list-group-item">
         <h4 class="text-center">

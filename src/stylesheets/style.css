@@ -417,7 +417,7 @@ footer {
 }
 
 .dropdown-menu.show {
-  display: block;
+  display: block !important;
 }
 
 .dropdown-header {

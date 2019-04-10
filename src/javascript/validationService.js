@@ -60,10 +60,10 @@ $( document ).ready( function() {
     }
 
     $( '#barcode' ).each( function() {
-        $( this ).on( 'keyup', function() {
+        $( this ).on( 'input', function() {
             var _this = this;
             var value = $( "#barcode" ).val();
-            if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 12 ) {
+            if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 14 ) {
                 $( "#barcode" ).addClass( 'is-valid' );
                 $( "#barcode" ).removeClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).hide();
@@ -101,11 +101,13 @@ $( document ).ready( function() {
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
-        if ( fileNane ){
+        var _this = this;
+
+        if ( fileName ) {
             $( "#image" ).addClass( 'is-valid' );
             $( "#image" ).removeClass( 'is-invalid' );
         }
-            validateAddItemButton( _this );
+        validateAddItemButton( _this );
 
     } );
 
