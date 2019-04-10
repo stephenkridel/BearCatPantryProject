@@ -101,11 +101,13 @@ $( document ).ready( function() {
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
-        if ( fileNane ){
+        var _this = this;
+
+        if ( fileName ) {
             $( "#image" ).addClass( 'is-valid' );
             $( "#image" ).removeClass( 'is-invalid' );
         }
-            validateAddItemButton( _this );
+        validateAddItemButton( _this );
 
     } );
 
