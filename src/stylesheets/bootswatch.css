@@ -3894,7 +3894,8 @@ input[type="button"].btn-block {
 }
 
 .dropdown-menu.show {
-  display: block;
+  display: block !important;
+  position: absolute !important;
 }
 
 .dropdown-header {
