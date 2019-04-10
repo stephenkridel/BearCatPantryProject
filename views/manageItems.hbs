@@ -92,7 +92,9 @@
                                                 <div class="form-group">
                                                     <label for="itemName">Item Name</label>
                                                     <input type="text" onClick="this.select();" class="form-control"
-                                                        name="newItemName" id="newItemName" value={{this.itemName}}>
+                                                        name="newItemName" id="newItemName" value={{this.itemName}} required>
+                                                    <div id="badItemName" class="invalid-feedback" style="display: none">A valid
+                                                        Item name should be between 4 and 15 characters with no special characters.</div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="barcode">Barcode</label>
@@ -102,12 +104,16 @@
                                                 <div class="form-group">
                                                     <label for="quantity">Quantity</label>
                                                     <input type="text" onClick="this.select();" class="form-control"
-                                                        name="quantity" id="quantityEdit" value={{this.quantity}}>
+                                                        name="quantity" id="quantityEdit" value={{this.quantity}} required>
+                                                    <div id="badQuantityNumber" class="invalid-feedback" style="display: none">A valid
+                                                        Quantity number should be between 1 and 3 digits.</div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="weight">Bearcat Bucks</label>
                                                     <input type="text" onClick="this.select();" class="form-control"
-                                                        name="weight" id="weightEdit" value={{this.weight}}>
+                                                        name="weight" id="weightEdit" value={{this.weight}} required>
+                                                    <div id="badWeightNumber" class="invalid-feedback" style="display: none">A valid
+                                                        Weight number is between 1 and 3 digits.</div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input type="submit" id=Delete{{this.itemName}} class="btn btn-danger" formaction="/deleteItem"
