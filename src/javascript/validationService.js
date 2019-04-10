@@ -108,7 +108,7 @@ $( document ).ready( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
             var value = $( "#barcode" ).val();
-            if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 12 ) {
+            if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 14 ) {
                 $( "#barcode" ).addClass( 'is-valid' );
                 $( "#barcode" ).removeClass( 'is-invalid' );
                 $( "#badBarcodeNumber" ).hide();
