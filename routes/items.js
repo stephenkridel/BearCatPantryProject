@@ -35,7 +35,7 @@ function isUser( req, res, next ) {
 
 router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
-        var num = 4;
+        var num = 20;
         var pagenum = 1;
         //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
         if ( req.query.Page != undefined ) {
