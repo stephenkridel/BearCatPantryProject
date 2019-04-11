@@ -112,6 +112,9 @@ $( function() {
     Quagga.onDetected( function( result ) {
         if ( result.codeResult.code ) {
             $( '#barcode' ).val( result.codeResult.code );
+            $( '#barcode' ).addClass('is-valid');
+            $( '#barcode' ).trigger( "input" );
+
             Quagga.stop();
             setTimeout( function() {
                 $( '#livestream_scanner' ).modal( 'hide' );
