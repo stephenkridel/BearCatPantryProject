@@ -20,10 +20,11 @@ $( document ).ready( function() {
         }
     } );
 
-    if ( Cookies.get( 'isAdmin' ) ) {
-        console.log( "Youre an adamin!" );
-        $( '#managementNavLink' ).removeClass( 'hidden' );
-    }
-
 
 } );
+$( '#managementNavLink' ).ready( function() {
+    $( '#managementNavLink' ).removeClass( 'hidden' );
+    if ( Cookies.get( 'isAdmin' ) ) {
+        $( '#managementNavLink' ).removeClass( 'hidden' );
+    }
+} )
