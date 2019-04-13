@@ -231,6 +231,10 @@ footer {
   flex-wrap: nowrap;
 }
 
+#globalSearchBar{
+  width: 350px;
+}
+
 .navbar-collapse .nav-bar-search .form-control {
   margin-right: 0.5rem !important;
 }
