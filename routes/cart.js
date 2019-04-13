@@ -2,9 +2,6 @@ var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var order = require( '../models/orderModel' );
 var item = require( '../models/itemModel' );
-
-
-
 var nodemailer = require( 'nodemailer' );
 var _ = require( 'lodash' );
 var QRCode = require( 'qrcode' );

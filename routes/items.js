@@ -1,11 +1,9 @@
 var express = require( 'express' );
 var multer = require( "multer" );
 var fs = require( 'fs-extra' );
-var _ = require( 'lodash' )
+var _ = require( 'lodash' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' );
-var util = require( '../src/javascript/util.js' );
-
 
 var router = express.Router();
 
@@ -23,14 +21,6 @@ function isAuthenticated( req, res, next ) {
     }
     // Else redirect to home
     res.redirect( '/' );
-}
-
-function isUser( req, res, next ) {
-    if ( req.cookies.userId ) {
-        return next();
-    }
-
-    res.redirect( '/login' );
 }
 
 router.get( '/items', function( req, res, next ) {
