@@ -43,6 +43,25 @@ $( document ).ready( function() {
             }
         } );
     } );
+    $( document ).ready( function() {
+    $( '.quantityEditBox' ).on( 'keyup', function() {
+            var value = $(this).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $(this).addClass( 'is-valid' );
+                $(this).removeClass( 'is-invalid' );
+                $( ".badQuantityNumberBox" ).hide();
+                validateAddItemButton(this);
+
+
+            } else {
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                $( ".badQuantityNumberBox" ).show();
+                validateAddItemButton(this);
+            }
+        } );
+    });
+
 
     var validateAddItemButton = function( _this ) {
         var foundError = false
@@ -78,26 +97,60 @@ $( document ).ready( function() {
             }
         } );
     } );
+        $( '.quantityEditBox' ).on( 'keyup', function() {
+                var value = $(this).val();
+                if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                    $(this).addClass( 'is-valid' );
+                    $(this).removeClass( 'is-invalid' );
+                    validateAddItemButton(this);
+    
+    
+                } else {
+                    $(this).removeClass( 'is-valid' );
+                    $(this).addClass( 'is-invalid' );
+                    validateAddItemButton(this);
+                }
+            } );
 
-    $( '#weight' ).each( function() {
+    $( '.weightEditBox' ).each( function() {
         $( this ).on( 'keyup', function() {
-            var _this = this;
-            var value = $( "#weight" ).val();
+            var value = $(this).val();
             if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
-                $( "#weight" ).addClass( 'is-valid' );
-                $( "#weight" ).removeClass( 'is-invalid' );
-                $( "#badWeightNumber" ).hide();
-                validateAddItemButton( _this );
+                $(this).addClass( 'is-valid' );
+                $(this).removeClass( 'is-invalid' );
+                //$( ".badWeightNumberBox" ).hide();
+                validateAddItemButton(this);
 
 
             } else {
-                $( "#weight" ).removeClass( 'is-valid' );
-                $( "#weight" ).addClass( 'is-invalid' );
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                //$( ".badWeightNumberBox" ).show();
+                validateAddItemButton(this);
+            }
+        } );
+    } );
+    $( document ).ready( function() {
+    $( '#weightEdit' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var _this = this;
+            var value = $( "#weightEdit" ).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $( "#weightEditBox" ).addClass( 'is-valid' );
+                $( "#weightEditBox" ).removeClass( 'is-invalid' );
+                $( "#badWeightNumber" ).hide();
+                validateAddItemButton(_this);
+
+
+            } else {
+                $( "#weightEdit" ).removeClass( 'is-valid' );
+                $( "#weightEdit" ).addClass( 'is-invalid' );
                 $( "#badWeightNumber" ).show();
                 validateAddItemButton( _this );
             }
         } );
     } );
+});
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
