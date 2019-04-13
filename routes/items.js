@@ -83,7 +83,7 @@ router.get( '/items', function( req, res, next ) {
                 var incomplete = false;
                 if ( firstPage && notFullPage ) incomplete = true;
                 _.forEach( items, function( item ) {
-                    item.itemName = item.itemName.replace(/_/g, " ");
+                    item.itemName = item.itemName.replace(/_/g, " "); // uiValue
                 } );
                 res.render( 'items', {
                     items: items,
