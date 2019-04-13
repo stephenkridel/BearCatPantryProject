@@ -119,6 +119,7 @@ $( function() {
             setTimeout( function() {
                 $( '#livestream_scanner' ).modal( 'hide' );
                 $('.modal-backdrop').remove();
+                $('#scannerButton').remove();
             }, 1000 );
         }
     } );
