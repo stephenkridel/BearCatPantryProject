@@ -53,6 +53,9 @@ router.get( '/items', function( req, res, next ) {
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
                 if ( firstPage && notFullPage ) incomplete = true;
+                _.forEach( items, function( item ) {
+                    item.itemName = item.itemName.replace(/_/g, " ");
+                } );
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -78,6 +81,9 @@ router.get( '/items', function( req, res, next ) {
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
                 if ( firstPage && notFullPage ) incomplete = true;
+                _.forEach( items, function( item ) {
+                    item.itemName = item.itemName.replace(/_/g, " ");
+                } );
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
