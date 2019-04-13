@@ -2,9 +2,6 @@ var express = require( 'express' );
 var cart = require( '../models/cartModel' );
 var order = require( '../models/orderModel' );
 var item = require( '../models/itemModel' );
-
-
-
 var nodemailer = require( 'nodemailer' );
 var _ = require( 'lodash' );
 var QRCode = require( 'qrcode' );
@@ -22,6 +19,7 @@ function isUser( req, res, next ) {
     // Else redirect to home
     res.redirect( '/login' );
 }
+
 router.get( '/cart',isUser, function( req, res, next ) {
     cart.find( {
         "user": req.cookies.userId

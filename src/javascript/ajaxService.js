@@ -210,8 +210,6 @@ $( document ).ready( function() {
 
 $( document ).ready( function() {
     $( '#checkout' ).on( 'click', function() {
-
-
         // Validate if this cart actually has the items
         // Create the Order Model/Sends the Email
         // Substracts the items checkedout from the DB

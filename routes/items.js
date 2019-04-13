@@ -4,8 +4,6 @@ var fs = require( 'fs-extra' );
 var _ = require( 'lodash' );
 var item = require( '../models/itemModel' );
 var cart = require( '../models/cartModel' );
-var util = require( '../src/javascript/util.js' );
-
 
 var router = express.Router();
 
@@ -16,14 +14,6 @@ const upload = multer( {
     }
 } );
 
-
-function isUser( req, res, next ) {
-    if ( req.cookies.userId ) {
-        return next();
-    }
-
-    res.redirect( '/login' );
-}
 
 router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
@@ -55,7 +45,7 @@ router.get( '/items', function( req, res, next ) {
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
-                if (firstPage && notFullPage) incomplete = true;
+                if ( firstPage && notFullPage ) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -80,7 +70,7 @@ router.get( '/items', function( req, res, next ) {
                 var firstPage = true;
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
-                if (firstPage && notFullPage) incomplete = true;
+                if ( firstPage && notFullPage ) incomplete = true;
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -262,11 +252,14 @@ router.post( "/addItemByBarcode", function( req, res, next ) {
         if ( count > 0 ) {
             res.render( 'incrementExistingItem', {
                 barcode: req.body.barcode,
-                itemName: undefined
+                itemName: undefined,
+                title: "Increment Item - Bearcat Pantry"
+
             } );
         } else {
             res.render( 'barcodeNotFound', {
-                barcode: req.body.barcode
+                barcode: req.body.barcode,
+                title: "No Barcode - Bearcat Pantry",
             } );
         }
     } )
@@ -297,12 +290,15 @@ router.post( "/addItemByName", function( req, res, next ) {
         if ( count > 0 ) {
             res.render( 'incrementExistingItem', {
                 itemName: itemName,
-                barcode: barcode
+                barcode: barcode,
+                title: "Increment Existing - Bearcat Pantry",
+
             } );
         } else {
             res.render( 'createItem', {
                 barcode: barcode,
-                itemName: itemName
+                itemName: itemName,
+                title: "Create Item - Bearcat Pantry"
             } );
         }
     } );

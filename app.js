@@ -17,10 +17,8 @@ var compiler = webpack( webpackConfig );
 
 // Routes
 var itemsRouter = require( './routes/items' );
-var aboutRouter = require( './routes/about' );
 var cartRouter = require( './routes/cart' );
 var homeRouter = require( './routes/home' );
-var testRouter = require( './routes/test' );
 var adminRouter = require( './routes/admin' );
 var loginRouter = require( './routes/login' );
 var postCheckoutRouter = require( './routes/postCheckout' );
@@ -96,10 +94,8 @@ app.use( express.static( path.join( __dirname, 'build' ) ) );
 // setup the routes
 app.use( '/', itemsRouter );
 app.use( '/', loginRouter );
-app.use( '/', aboutRouter );
 app.use( '/', cartRouter );
 app.use( '/', homeRouter );
-app.use( '/', testRouter );
 app.use( '/', adminRouter );
 app.use( '/', postCheckoutRouter );
 
