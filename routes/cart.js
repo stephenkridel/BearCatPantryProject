@@ -25,6 +25,9 @@ router.get( '/cart',isUser, function( req, res, next ) {
         "user": req.cookies.userId
     }, 'items', function( err, cart ) {
         if ( cart && cart.length > 0 ) {
+            _.forEach( cart[ 0 ].items, function( item ) {
+                item.itemName = item.itemName.replace(/_/g, " ");
+            } );
             res.render( 'cart', {
                 itemInCart: cart[ 0 ].items,
                 title: "Shopping Cart - Bearcat Pantry",
