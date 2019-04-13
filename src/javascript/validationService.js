@@ -10,7 +10,7 @@ $( document ).ready( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
             var value = $( "#itemName" ).val();
-            if ( value.length >= 4 && value.length <= 15 ) {
+            if ( value.length >= 4 && value.length <= 25 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
                 $( "#badItemName" ).hide();
@@ -131,20 +131,20 @@ $( document ).ready( function() {
         } );
     } );
     $( document ).ready( function() {
-    $( '#weightEdit' ).each( function() {
+    $( '#weight' ).each( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
-            var value = $( "#weightEdit" ).val();
+            var value = $( "#weight" ).val();
             if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
-                $( "#weightEditBox" ).addClass( 'is-valid' );
-                $( "#weightEditBox" ).removeClass( 'is-invalid' );
+                $( "#weight" ).addClass( 'is-valid' );
+                $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
                 validateAddItemButton(_this);
 
 
             } else {
-                $( "#weightEdit" ).removeClass( 'is-valid' );
-                $( "#weightEdit" ).addClass( 'is-invalid' );
+                $( "#weight" ).removeClass( 'is-valid' );
+                $( "#weight" ).addClass( 'is-invalid' );
                 $( "#badWeightNumber" ).show();
                 validateAddItemButton( _this );
             }

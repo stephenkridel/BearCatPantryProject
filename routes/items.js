@@ -13,6 +13,13 @@ const upload = multer( {
         fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
     }
 } );
+function isUser( req, res, next ) {
+    if ( req.cookies.userId ) {
+        return next();
+    }
+
+    res.redirect( '/login' );
+}
 
 
 router.get( '/items', function( req, res, next ) {
