@@ -26,7 +26,7 @@ router.get( '/cart',isUser, function( req, res, next ) {
     }, 'items', function( err, cart ) {
         if ( cart && cart.length > 0 ) {
             _.forEach( cart[ 0 ].items, function( item ) {
-                item.itemName = item.itemName.replace(/_/g, " ");
+                item.itemName = item.itemName.replace(/_/g, " "); // uiValue
             } );
             res.render( 'cart', {
                 itemInCart: cart[ 0 ].items,
@@ -196,6 +196,9 @@ router.post( '/createNewOrder', isUser, function( req, res, next ) {
                 var greeting = "Hi. Thank you for your order with the Bearcat Pantry. Your order contains the following items: <br><br>";
                 var orderDetails = "";
                 var itemsInCart = order.cart.items;
+                _.forEach( itemsInCart, function( item ) {
+                    item.itemName = item.itemName.replace(/_/g, " "); // uiValue
+                } );
                 for ( var i = 0; i < itemsInCart.length; i++ ) {
                     orderDetails += `${itemsInCart[i].itemName} - ${itemsInCart[i].quantity}<br>`;
                 }

@@ -9,7 +9,7 @@ Service defines all jquery ajax requests
 $( document ).ready( function() {
     $( '.add-to-cart-button' ).on( 'click', function( e ) {
         e.preventDefault();
-        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' ).find(".item-title")[ 0 ].innerHTML;
+        var itemName = $( this ).closest( '.item-container' ).find( '.card-header' ).find(".item-title")[ 0 ].innerHTML.replace(/ /g,"_");// dbValue
         $.ajax( {
                 method: 'POST',
                 url: '/addToCart',
@@ -18,6 +18,7 @@ $( document ).ready( function() {
                 }
             } )
             .done( function() {
+                itemName = itemName.replace(/_/g, " "); // uiValue
                 popupS.window( {
                     mode: 'confirm',
                     content: `Added ${itemName} to cart`,
@@ -102,7 +103,7 @@ $( document ).ready( function() {
 var knownItemQuantities = [];
 $( document ).ready( function() {
     $( '.cart-quantity-input' ).change( function() {
-        let itemName = $( this ).closest( "tr" ).find( 'th' ).html();
+        let itemName = $( this ).closest( "tr" ).find( 'th' ).html().replace(/ /g,"_");;
         let inputQuantity = parseInt( $( this ).val() );
         var _this = this;
         var amtInPantry;
@@ -185,7 +186,7 @@ $( function() {
 $( document ).ready( function() {
     $( '.remove-from-cart' ).on( "click", function() {
         var itemRow = $( this ).closest( "tr" );
-        var itemName = itemRow.find( 'th' ).html();
+        var itemName = itemRow.find( 'th' ).html().replace(/ /g,"_");;
         $.ajax( {
             method: 'POST',
             url: '/removeItemFromCart',
