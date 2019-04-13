@@ -22,9 +22,13 @@ $( document ).ready( function() {
 
 
 } );
+
+// Hide management if youre not an admin. Currently bugged to flash. WIP
+/*
 $( '#managementNavLink' ).ready( function() {
     $( '#managementNavLink' ).removeClass( 'hidden' );
     if ( Cookies.get( 'isAdmin' ) ) {
         $( '#managementNavLink' ).removeClass( 'hidden' );
     }
 } )
+*/
