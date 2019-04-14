@@ -70,10 +70,15 @@ router.get( '/items', function( req, res, next ) {
                         backButton = false;
                         forwardButton = false;
                     }
+                    if (pageCount > 1 && pagenum < pageCount){
+                        backButton = true;
+                        forwardButton = true;
+                    }
                     res.render( 'items', {
                         items: items,
                         title: "Items - Bearcat Pantry",
                         Page: pagenum,
+                        searchText: search,
                         PrevPage: prev,
                         NextPage: next,
                         ForwardPage: forwardButton,
@@ -115,9 +120,14 @@ router.get( '/items', function( req, res, next ) {
                         backButton = false;
                         forwardButton = false;
                     }
+                    if (pageCount > 1 && pagenum < pageCount){
+                        backButton = true;
+                        forwardButton = true;
+                    }
                     res.render( 'items', {
                         items: items,
                         title: "Items - Bearcat Pantry",
+                        searchText: search,
                         Page: pagenum,
                         PrevPage: prev,
                         NextPage: next,
