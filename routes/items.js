@@ -129,8 +129,8 @@ router.get( '/items', function( req, res, next ) {
                         backButton = true;
                         forwardButton = true;
                     }
-                    if (pageCount > 1 && pagenum < pageCount){
-                        backButton = true;
+                    if (pageCount > 1 && pagenum == 1) {
+                        backButton = false;
                         forwardButton = true;
                     }
                     res.render( 'items', {
