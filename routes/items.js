@@ -228,6 +228,7 @@ router.get( '/manageItems', isUser, function( req, res, next ) {
 
 router.post( '/updateItem', function( req, res, next ) {
     var barcodes = req.body.barcode.split( ',' ).map( Function.prototype.call, String.prototype.trim );
+    req.body.newItemName = req.body.newItemName.replace(/ /g,"_"); //dbValue
     console.log( barcodes );
     item.updateOne( {
             "itemName": req.body.oldItemName
