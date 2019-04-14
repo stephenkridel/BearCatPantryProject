@@ -10,7 +10,7 @@ function isAuthenticated( req, res, next ) {
         return next();
     }
     // Else redirect to home
-    res.redirect( '/' );
+    res.redirect( '/login' );
 }
 
 router.get( '/admin', isAuthenticated, function( req, res, next ) {
