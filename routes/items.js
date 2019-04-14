@@ -13,6 +13,7 @@ const upload = multer( {
         fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
     }
 } );
+
 function isUser( req, res, next ) {
     if ( req.cookies.userId ) {
         return next();
@@ -30,9 +31,9 @@ router.get( '/items', function( req, res, next ) {
             pagenum = req.query.Page;
         }
         if ( pagenum < 1 ) pagenum = 1;
-        var prev = pagenum - 1; 
+        var prev = pagenum - 1;
         if ( prev < 1 ) prev = 1;
-        var next = ( pagenum - 1 ) + 2; 
+        var next = ( pagenum - 1 ) + 2;
         var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
         if ( search && search.length > 0 ) {
             item.find( {
@@ -46,7 +47,7 @@ router.get( '/items', function( req, res, next ) {
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
                 _.forEach( items, function( item ) {
-                    item.itemName = item.itemName.replace(/_/g, " ");
+                    item.itemName = item.itemName.replace( /_/g, " " );
                 } );
                 item.count( {
                     "itemName": {
@@ -60,13 +61,13 @@ router.get( '/items', function( req, res, next ) {
                     var forwardButton = true;
                     var backButton = false;
                     var itemCount = count;
-                    var pageCount = Math.ceil(itemCount / numberPerPage);
+                    var pageCount = Math.ceil( itemCount / numberPerPage );
 
-                    if (pagenum == pageCount) {
+                    if ( pagenum == pageCount ) {
                         backButton = true;
                         forwardButton = false;
                     }
-                    if (pageCount == 1){
+                    if ( pageCount == 1 ) {
                         backButton = false;
                         forwardButton = false;
                     }
@@ -82,10 +83,10 @@ router.get( '/items', function( req, res, next ) {
                         PrevPage: prev,
                         NextPage: next,
                         ForwardPage: forwardButton,
-                        BackPage: backButton, 
+                        BackPage: backButton,
                         Skip: itemCount
                     } );
-                });
+                } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         } else {
             item.find( {
@@ -94,9 +95,9 @@ router.get( '/items', function( req, res, next ) {
                 }
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
-                
+
                 _.forEach( items, function( item ) {
-                    item.itemName = item.itemName.replace(/_/g, " "); // uiValue
+                    item.itemName = item.itemName.replace( /_/g, " " ); // uiValue
                 } );
                 item.count( {
                     "itemName": {
@@ -110,13 +111,13 @@ router.get( '/items', function( req, res, next ) {
                     var forwardButton = true;
                     var backButton = false;
                     var itemCount = count;
-                    var pageCount = Math.ceil(itemCount / numberPerPage);
+                    var pageCount = Math.ceil( itemCount / numberPerPage );
 
-                    if (pagenum == pageCount) {
+                    if ( pagenum == pageCount ) {
                         backButton = true;
                         forwardButton = false;
                     }
-                    if (pageCount == 1){
+                    if ( pageCount == 1 ) {
                         backButton = false;
                         forwardButton = false;
                     }
@@ -132,10 +133,10 @@ router.get( '/items', function( req, res, next ) {
                         PrevPage: prev,
                         NextPage: next,
                         ForwardPage: forwardButton,
-                        BackPage: backButton, 
+                        BackPage: backButton,
                         Skip: itemCount
                     } );
-                });
+                } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         }
     } else {
@@ -270,7 +271,7 @@ router.get( '/manageItems', isUser, function( req, res, next ) {
 
 router.post( '/updateItem', function( req, res, next ) {
     var barcodes = req.body.barcode.split( ',' ).map( Function.prototype.call, String.prototype.trim );
-    req.body.newItemName = req.body.newItemName.replace(/ /g,"_"); //dbValue
+    req.body.newItemName = req.body.newItemName.replace( / /g, "_" ); //dbValue
     console.log( barcodes );
     item.updateOne( {
             "itemName": req.body.oldItemName
@@ -329,9 +330,17 @@ router.post( "/addItemByName", function( req, res, next ) {
     if ( req.body.itemName ) {
         var itemName = req.body.itemName;
         itemName.replace( /\b\w/g, l => l.toUpperCase() );
-        itemName = itemName.replace( /\s/g, '_' );
-        itemName = itemName.charAt( 0 ).toUpperCase() + itemName.slice( 1 );
-        console.log( itemName );
+        var itemSplitName = itemName.split( " " );
+        itemName = "";
+        //Capatalize the first letter of each word
+        for ( i = 0; i < itemSplitName.length; i++ ) {
+            if ( i === 0 ) {
+                itemName = itemSplitName[ i ].charAt( 0 ).toUpperCase() + itemSplitName[ i ].slice( 1 );
+            } else {
+                itemName = itemName + "_" + itemSplitName[ i ].charAt( 0 ).toUpperCase() + itemSplitName[ i ].slice( 1 );
+            }
+
+        }
     }
     if ( req.body.barcode ) {
         var barcode = req.body.barcode;
