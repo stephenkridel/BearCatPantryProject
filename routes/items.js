@@ -53,9 +53,23 @@ router.get( '/items', function( req, res, next ) {
                 if ( pagenum > 1 ) firstPage = false;
                 var incomplete = false;
                 if ( firstPage && notFullPage ) incomplete = true;
+                console.log(items.length);
                 _.forEach( items, function( item ) {
                     item.itemName = item.itemName.replace(/_/g, " ");
                 } );
+                totalItemCount = 0;
+                item.count( {
+                    "itemName": {
+                        "$regex": search,
+                        "$options": "i"
+                    },
+                    "quantity": {
+                        "$gt": 0
+                    }
+                }, function( err, count ) {
+                    totalItemCount = count;
+                    console.log(count);
+                });
                 res.render( 'items', {
                     items: items,
                     title: "Items - Bearcat Pantry",
@@ -228,6 +242,7 @@ router.get( '/manageItems', isUser, function( req, res, next ) {
 
 router.post( '/updateItem', function( req, res, next ) {
     var barcodes = req.body.barcode.split( ',' ).map( Function.prototype.call, String.prototype.trim );
+    req.body.newItemName = req.body.newItemName.replace(/ /g,"_"); //dbValue
     console.log( barcodes );
     item.updateOne( {
             "itemName": req.body.oldItemName

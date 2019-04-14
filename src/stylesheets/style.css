@@ -501,7 +501,7 @@ footer {
   display: none !important;
 }
 
-.testies {
+.tool-tip {
   display: inline-block;
   font-family: sans-serif;
   font-weight: bold;
@@ -518,10 +518,15 @@ footer {
   text-decoration: none;
 }
 
-.testies:hover {
+.tool-tip:hover {
   color: white;
   background: gray;
   border-color: white;
   text-decoration: none;
   cursor: pointer;
+}
+
+.logo {
+display: flex;
+justify-content: center;
 }
