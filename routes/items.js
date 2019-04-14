@@ -26,16 +26,14 @@ router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
         var numberPerPage = 20;
         var pagenum = 1;
-        //pagenum = req.query.Page;// > 0 ? 1 : req.query.Page;
         if ( req.query.Page != undefined ) {
             pagenum = req.query.Page;
         }
         if ( pagenum < 1 ) pagenum = 1;
-        var prev = pagenum - 1 //pagenum > 1 ? pagenum-- : pagenum;
+        var prev = pagenum - 1; 
         if ( prev < 1 ) prev = 1;
-        var next = ( pagenum - 1 ) + 2; //+ parseInt(2)
+        var next = ( pagenum - 1 ) + 2; 
         var search = req.query.searchBar.replace( /\b\w/g, l => l.toUpperCase() );
-        //var skip = (page*num)-num;
         if ( search && search.length > 0 ) {
             item.find( {
                 "itemName": {
@@ -47,17 +45,9 @@ router.get( '/items', function( req, res, next ) {
                 }
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
-                var notFullPage = false;
-                if ( items.length < numberPerPage && items.length > 0 ) notFullPage = true;
-                var firstPage = true;
-                if ( pagenum > 1 ) firstPage = false;
-                var incomplete = false;
-                if ( firstPage && notFullPage ) incomplete = true;
-                console.log(items.length);
                 _.forEach( items, function( item ) {
                     item.itemName = item.itemName.replace(/_/g, " ");
                 } );
-                totalItemCount = 0;
                 item.count( {
                     "itemName": {
                         "$regex": search,
@@ -67,20 +57,30 @@ router.get( '/items', function( req, res, next ) {
                         "$gt": 0
                     }
                 }, function( err, count ) {
-                    totalItemCount = count;
-                    console.log(count);
+                    var forwardButton = true;
+                    var backButton = false;
+                    var itemCount = count;
+                    var pageCount = Math.ceil(itemCount / numberPerPage);
+
+                    if (pagenum == pageCount) {
+                        backButton = true;
+                        forwardButton = false;
+                    }
+                    if (pageCount == 1){
+                        backButton = false;
+                        forwardButton = false;
+                    }
+                    res.render( 'items', {
+                        items: items,
+                        title: "Items - Bearcat Pantry",
+                        Page: pagenum,
+                        PrevPage: prev,
+                        NextPage: next,
+                        ForwardPage: forwardButton,
+                        BackPage: backButton, 
+                        Skip: itemCount
+                    } );
                 });
-                res.render( 'items', {
-                    items: items,
-                    title: "Items - Bearcat Pantry",
-                    searchText: search,
-                    Page: pagenum,
-                    PrevPage: prev,
-                    NextPage: next,
-                    count: notFullPage,
-                    First: firstPage,
-                    IncompletePage: incomplete
-                } );
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         } else {
             item.find( {
@@ -89,25 +89,43 @@ router.get( '/items', function( req, res, next ) {
                 }
             }, 'itemName quantity weight img', function( err, items ) {
                 convertToImage( items );
-                var notFullPage = false;
-                if ( Number( items.length ) < numberPerPage && Number( items.length ) > 0 ) notFullPage = true;
-                var firstPage = true;
-                if ( pagenum > 1 ) firstPage = false;
-                var incomplete = false;
-                if ( firstPage && notFullPage ) incomplete = true;
+                
                 _.forEach( items, function( item ) {
                     item.itemName = item.itemName.replace(/_/g, " "); // uiValue
                 } );
-                res.render( 'items', {
-                    items: items,
-                    title: "Items - Bearcat Pantry",
-                    Page: pagenum,
-                    PrevPage: prev,
-                    NextPage: next,
-                    count: notFullPage,
-                    First: firstPage,
-                    IncompletePage: incomplete
-                } );
+                item.count( {
+                    "itemName": {
+                        "$regex": search,
+                        "$options": "i"
+                    },
+                    "quantity": {
+                        "$gt": 0
+                    }
+                }, function( err, count ) {
+                    var forwardButton = true;
+                    var backButton = false;
+                    var itemCount = count;
+                    var pageCount = Math.ceil(itemCount / numberPerPage);
+
+                    if (pagenum == pageCount) {
+                        backButton = true;
+                        forwardButton = false;
+                    }
+                    if (pageCount == 1){
+                        backButton = false;
+                        forwardButton = false;
+                    }
+                    res.render( 'items', {
+                        items: items,
+                        title: "Items - Bearcat Pantry",
+                        Page: pagenum,
+                        PrevPage: prev,
+                        NextPage: next,
+                        ForwardPage: forwardButton,
+                        BackPage: backButton, 
+                        Skip: itemCount
+                    } );
+                });
             } ).skip( pagenum > 0 ? ( ( pagenum - 1 ) * numberPerPage ) : 0 ).limit( numberPerPage );
         }
     } else {
