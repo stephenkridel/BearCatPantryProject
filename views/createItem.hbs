@@ -7,7 +7,7 @@
             <input type="text" class="form-control is-valid" name="itemName" id="itemName" placeholder="Enter item name..."
                 value={{@root.itemName}} required>
             <div id="badItemName" class="invalid-feedback" style="display: none">A valid
-                Item name should be between 4 and 25 characters with no special characters.</div>
+                Item name should be between 4 and 20 characters with no special characters.</div>
         </div>
         <div class="form-group">
             <label for="quantity">Quantity</label>
@@ -38,6 +38,7 @@
             <label for="barcode">Barcode</label>
             <input type="number" class="form-control is-valid" name="barcode" id="barcode" value={{@root.barcode}}
                 readonly="readonly">
+                
         </div>
         <input type="submit" class="btn btn-primary" disabled="disabled" id="addButton" value="Add Item">
     </form>
@@ -48,7 +49,7 @@
             <input type="text" class="form-control is-valid" name="itemName" id="itemName" placeholder="Enter item name..."
                 value={{@root.itemName}} required>
             <div id="badItemName" class="invalid-feedback" style="display: none">A valid
-                Item name should be between 4 and 15 characters with no special characters.</div>
+                Item name should be between 4 and 20 characters with no special characters.</div>
         </div>
         <div class="form-group">
             <label for="quantity">Quantity</label>
