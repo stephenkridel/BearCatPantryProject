@@ -79,18 +79,26 @@ $( document ).ready( function() {
     };
     $( '.barcodeEditBox' ).on( 'keyup', function() {
         var value = $(this).val();
-        var badbarcodeTemp=this.parentElement.querySelector(".badBarcodeNumber");
-        if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 14 ) {
+        var barcodeList=value.split(",");
+        var badBarcodeText=this.parentElement.querySelector(".badBarcodeNumber");
+        var barcodeIsValid=true;
+        for(var i=0;i<barcodeList.length;i+1){
+            var barcode=barcodeList[i]
+            if(!( /^\d+$/.test( barcode ) && barcode.length >= 8 && barcode.length <= 14 )){
+                barcodeIsValid=false
+            }  
+        }
+        if (barcodeIsValid) {
             $(this).addClass( 'is-valid' );
             $(this).removeClass( 'is-invalid' );
-            $(badbarcodeTemp).hide();
+            $(badBarcodeText).hide();
             validateAddItemButton(this);
 
 
         } else {
             $(this).removeClass( 'is-valid' );
             $(this).addClass( 'is-invalid' );
-            $(badbarcodeTemp).show();
+            $(badBarcodeText).show();
             validateAddItemButton(this);
         }
     } );
