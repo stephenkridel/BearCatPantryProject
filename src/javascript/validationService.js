@@ -25,25 +25,25 @@ $( document ).ready( function() {
             }
         } );
     } );
-        $( '.newItemNameBox' ).each( function() {
-            $( this ).on( 'keyup', function() {
-                var value = $( this).val();
-                var badItemTemp=this.parentElement.querySelector(".badItemNameBox");
-                if ( value.length >= 4 && value.length <= 20 ) {
-                    $(this).addClass( 'is-valid' );
-                    $(this).removeClass( 'is-invalid' );
-                    $(badItemTemp).hide();
-                    validateAddItemButton(this);
-    
-                } else {
-                    $(this).removeClass( 'is-valid' );
-                    $(this).addClass( 'is-invalid' );
-                    $(badItemTemp).show();
-                    validateAddItemButton(this);
-    
-                }
-            } );
+    $( '.newItemNameBox' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var value = $( this ).val();
+            var badItemTemp = this.parentElement.querySelector( ".badItemNameBox" );
+            if ( value.length >= 4 && value.length <= 20 ) {
+                $( this ).addClass( 'is-valid' );
+                $( this ).removeClass( 'is-invalid' );
+                $( badItemTemp ).hide();
+                validateAddItemButton( this );
+
+            } else {
+                $( this ).removeClass( 'is-valid' );
+                $( this ).addClass( 'is-invalid' );
+                $( badItemTemp ).show();
+                validateAddItemButton( this );
+
+            }
         } );
+    } );
 
     $( '#quantity' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -78,28 +78,28 @@ $( document ).ready( function() {
         form.find( "#addButton" ).attr( "disabled", foundError );
     };
     $( '.barcodeEditBox' ).on( 'keyup', function() {
-        var value = $(this).val();
-        var barcodeList=value.split(",");
-        var badBarcodeText=this.parentElement.querySelector(".badBarcodeNumber");
-        var barcodeIsValid=true;
-        for(var i=0;i<barcodeList.length;i+1){
-            var barcode=barcodeList[i]
-            if(!( /^\d+$/.test( barcode ) && barcode.length >= 8 && barcode.length <= 14 )){
-                barcodeIsValid=false
-            }  
+        var value = $( this ).val();
+        var barcodeList = value.split( "," );
+        var badBarcodeText = this.parentElement.querySelector( ".badBarcodeNumber" );
+        var barcodeIsValid = true;
+        for ( var i = 0; i < barcodeList.length; i = i + 1 ) {
+            var barcode = barcodeList[ i ].trim();
+            if ( !( /^\d+$/.test( barcode ) && barcode.length >= 8 && barcode.length <= 14 ) ) {
+                barcodeIsValid = false
+            }
         }
-        if (barcodeIsValid) {
-            $(this).addClass( 'is-valid' );
-            $(this).removeClass( 'is-invalid' );
-            $(badBarcodeText).hide();
-            validateAddItemButton(this);
+        if ( barcodeIsValid ) {
+            $( this ).addClass( 'is-valid' );
+            $( this ).removeClass( 'is-invalid' );
+            $( badBarcodeText ).hide();
+            validateAddItemButton( this );
 
 
         } else {
-            $(this).removeClass( 'is-valid' );
-            $(this).addClass( 'is-invalid' );
-            $(badBarcodeText).show();
-            validateAddItemButton(this);
+            $( this ).removeClass( 'is-valid' );
+            $( this ).addClass( 'is-invalid' );
+            $( badBarcodeText ).show();
+            validateAddItemButton( this );
         }
     } );
     $( '#barcode' ).each( function() {
@@ -121,62 +121,62 @@ $( document ).ready( function() {
             }
         } );
     } );
-        $( '.quantityEditBox' ).on( 'keyup', function() {
-                var value = $(this).val();
-                var badQuantityTemp=this.parentElement.querySelector(".badQuantityNumberBox");
-                if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
-                    $(this).addClass( 'is-valid' );
-                    $(this).removeClass( 'is-invalid' );
-                    $(badQuantityTemp).hide();
-                    validateAddItemButton(this);
-                } else {
-                    $(this).removeClass( 'is-valid' );
-                    $(this).addClass( 'is-invalid' );
-                    $(badQuantityTemp).show();
-                    validateAddItemButton(this);
-                }
-            } );
+    $( '.quantityEditBox' ).on( 'keyup', function() {
+        var value = $( this ).val();
+        var badQuantityTemp = this.parentElement.querySelector( ".badQuantityNumberBox" );
+        if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+            $( this ).addClass( 'is-valid' );
+            $( this ).removeClass( 'is-invalid' );
+            $( badQuantityTemp ).hide();
+            validateAddItemButton( this );
+        } else {
+            $( this ).removeClass( 'is-valid' );
+            $( this ).addClass( 'is-invalid' );
+            $( badQuantityTemp ).show();
+            validateAddItemButton( this );
+        }
+    } );
 
     $( '.weightEditBox' ).each( function() {
         $( this ).on( 'keyup', function() {
-            var value = $(this).val();
-            var badWeightTemp=this.parentElement.querySelector(".badWeightNumberBox");
+            var value = $( this ).val();
+            var badWeightTemp = this.parentElement.querySelector( ".badWeightNumberBox" );
             if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
-                $(this).addClass( 'is-valid' );
-                $(this).removeClass( 'is-invalid' );
-                $(badWeightTemp).hide();
-                validateAddItemButton(this);
+                $( this ).addClass( 'is-valid' );
+                $( this ).removeClass( 'is-invalid' );
+                $( badWeightTemp ).hide();
+                validateAddItemButton( this );
 
 
             } else {
-                $(this).removeClass( 'is-valid' );
-                $(this).addClass( 'is-invalid' );
-                $(badWeightTemp).show();
-                validateAddItemButton(this);
+                $( this ).removeClass( 'is-valid' );
+                $( this ).addClass( 'is-invalid' );
+                $( badWeightTemp ).show();
+                validateAddItemButton( this );
             }
         } );
     } );
     $( document ).ready( function() {
-    $( '#weight' ).each( function() {
-        $( this ).on( 'keyup', function() {
-            var _this = this;
-            var value = $( "#weight" ).val();
-            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
-                $( "#weight" ).addClass( 'is-valid' );
-                $( "#weight" ).removeClass( 'is-invalid' );
-                $( "#badWeightNumber" ).hide();
-                validateAddItemButton(_this);
+        $( '#weight' ).each( function() {
+            $( this ).on( 'keyup', function() {
+                var _this = this;
+                var value = $( "#weight" ).val();
+                if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                    $( "#weight" ).addClass( 'is-valid' );
+                    $( "#weight" ).removeClass( 'is-invalid' );
+                    $( "#badWeightNumber" ).hide();
+                    validateAddItemButton( _this );
 
 
-            } else {
-                $( "#weight" ).removeClass( 'is-valid' );
-                $( "#weight" ).addClass( 'is-invalid' );
-                $( "#badWeightNumber" ).show();
-                validateAddItemButton( _this );
-            }
+                } else {
+                    $( "#weight" ).removeClass( 'is-valid' );
+                    $( "#weight" ).addClass( 'is-invalid' );
+                    $( "#badWeightNumber" ).show();
+                    validateAddItemButton( _this );
+                }
+            } );
         } );
     } );
-});
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
