@@ -10,7 +10,7 @@ $( document ).ready( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
             var value = $( "#itemName" ).val();
-            if ( value.length >= 4 && value.length <= 15 ) {
+            if ( value.length >= 4 && value.length <= 20 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
                 $( "#badItemName" ).hide();
@@ -25,6 +25,25 @@ $( document ).ready( function() {
             }
         } );
     } );
+        $( '.newItemNameBox' ).each( function() {
+            $( this ).on( 'keyup', function() {
+                var value = $( this).val();
+                var badItemTemp=this.parentElement.querySelector(".badItemNameBox");
+                if ( value.length >= 4 && value.length <= 20 ) {
+                    $(this).addClass( 'is-valid' );
+                    $(this).removeClass( 'is-invalid' );
+                    $(badItemTemp).hide();
+                    validateAddItemButton(this);
+    
+                } else {
+                    $(this).removeClass( 'is-valid' );
+                    $(this).addClass( 'is-invalid' );
+                    $(badItemTemp).show();
+                    validateAddItemButton(this);
+    
+                }
+            } );
+        } );
 
     $( '#quantity' ).each( function() {
         $( this ).on( 'keyup', function() {
@@ -58,7 +77,23 @@ $( document ).ready( function() {
         var form = $( _this ).closest( "form" );
         form.find( "#addButton" ).attr( "disabled", foundError );
     }
+    $( '.barcodeEditBox' ).on( 'keyup', function() {
+        var value = $(this).val();
+        var badbarcodeTemp=this.parentElement.querySelector(".badBarcodeNumber");
+        if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 14 ) {
+            $(this).addClass( 'is-valid' );
+            $(this).removeClass( 'is-invalid' );
+            $(badbarcodeTemp).hide();
+            validateAddItemButton(this);
 
+
+        } else {
+            $(this).removeClass( 'is-valid' );
+            $(this).addClass( 'is-invalid' );
+            $(badbarcodeTemp).show();
+            validateAddItemButton(this);
+        }
+    } );
     $( '#barcode' ).each( function() {
         $( this ).on( 'input', function() {
             var _this = this;
@@ -78,7 +113,42 @@ $( document ).ready( function() {
             }
         } );
     } );
+        $( '.quantityEditBox' ).on( 'keyup', function() {
+                var value = $(this).val();
+                var badQuantityTemp=this.parentElement.querySelector(".badQuantityNumberBox");
+                if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                    $(this).addClass( 'is-valid' );
+                    $(this).removeClass( 'is-invalid' );
+                    $(badQuantityTemp).hide();
+                    validateAddItemButton(this);
+                } else {
+                    $(this).removeClass( 'is-valid' );
+                    $(this).addClass( 'is-invalid' );
+                    $(badQuantityTemp).show();
+                    validateAddItemButton(this);
+                }
+            } );
 
+    $( '.weightEditBox' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var value = $(this).val();
+            var badWeightTemp=this.parentElement.querySelector(".badWeightNumberBox");
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $(this).addClass( 'is-valid' );
+                $(this).removeClass( 'is-invalid' );
+                $(badWeightTemp).hide();
+                validateAddItemButton(this);
+
+
+            } else {
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                $(badWeightTemp).show();
+                validateAddItemButton(this);
+            }
+        } );
+    } );
+    $( document ).ready( function() {
     $( '#weight' ).each( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
@@ -87,7 +157,7 @@ $( document ).ready( function() {
                 $( "#weight" ).addClass( 'is-valid' );
                 $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
-                validateAddItemButton( _this );
+                validateAddItemButton(_this);
 
 
             } else {
@@ -98,6 +168,7 @@ $( document ).ready( function() {
             }
         } );
     } );
+});
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
