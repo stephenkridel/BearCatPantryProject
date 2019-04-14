@@ -76,24 +76,7 @@ $( document ).ready( function() {
         } );
         var form = $( _this ).closest( "form" );
         form.find( "#addButton" ).attr( "disabled", foundError );
-    }
-    $( '.barcodeEditBox' ).on( 'keyup', function() {
-        var value = $(this).val();
-        var badbarcodeTemp=this.parentElement.querySelector(".badBarcodeNumber");
-        if ( /^\d+$/.test( value ) && value.length >= 8 && value.length <= 14 ) {
-            $(this).addClass( 'is-valid' );
-            $(this).removeClass( 'is-invalid' );
-            $(badbarcodeTemp).hide();
-            validateAddItemButton(this);
-
-
-        } else {
-            $(this).removeClass( 'is-valid' );
-            $(this).addClass( 'is-invalid' );
-            $(badbarcodeTemp).show();
-            validateAddItemButton(this);
-        }
-    } );
+    };
     $( '#barcode' ).each( function() {
         $( this ).on( 'input', function() {
             var _this = this;
