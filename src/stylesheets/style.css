@@ -525,3 +525,8 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
+
+.logo {
+display: flex;
+justify-content: center;
+}

@@ -8,3 +8,5 @@ import './javascript/validationService.js'
 import './javascript/ajaxService.js'
 import './images/UC-logo.png'
 import './images/campus.jpg'
+import './images/logo.png'
+
