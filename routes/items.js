@@ -13,15 +13,14 @@ const upload = multer( {
         fileSize: 1000 * 1000 * 1 // Limit file size to 1 mb - Decide on actual size eventually
     }
 } );
-
-function isAuthenticated( req, res, next ) {
-    // Check if the user has authentication to see this page
-    if ( req.cookies.isAdmin == "true" ) {
+function isUser( req, res, next ) {
+    if ( req.cookies.userId ) {
         return next();
     }
-    // Else redirect to home
-    res.redirect( '/' );
+
+    res.redirect( '/login' );
 }
+
 
 router.get( '/items', function( req, res, next ) {
     if ( req.cookies.userId ) {
@@ -218,7 +217,7 @@ var convertToImage = function( items ) {
     }
 };
 
-router.get( '/manageItems', isAuthenticated, function( req, res, next ) {
+router.get( '/manageItems', isUser, function( req, res, next ) {
     item.find( {}, 'itemName barcode quantity weight', function( err, items ) {
         res.render( 'manageItems', {
             items: items,

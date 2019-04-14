@@ -10,7 +10,7 @@ $( document ).ready( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
             var value = $( "#itemName" ).val();
-            if ( value.length >= 4 && value.length <= 15 ) {
+            if ( value.length >= 4 && value.length <= 25 ) {
                 $( "#itemName" ).addClass( 'is-valid' );
                 $( "#itemName" ).removeClass( 'is-invalid' );
                 $( "#badItemName" ).hide();
@@ -43,6 +43,25 @@ $( document ).ready( function() {
             }
         } );
     } );
+    $( document ).ready( function() {
+    $( '.quantityEditBox' ).on( 'keyup', function() {
+            var value = $(this).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $(this).addClass( 'is-valid' );
+                $(this).removeClass( 'is-invalid' );
+                $( ".badQuantityNumberBox" ).hide();
+                validateAddItemButton(this);
+
+
+            } else {
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                $( ".badQuantityNumberBox" ).show();
+                validateAddItemButton(this);
+            }
+        } );
+    });
+
 
     var validateAddItemButton = function( _this ) {
         var foundError = false
@@ -78,7 +97,40 @@ $( document ).ready( function() {
             }
         } );
     } );
+        $( '.quantityEditBox' ).on( 'keyup', function() {
+                var value = $(this).val();
+                if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                    $(this).addClass( 'is-valid' );
+                    $(this).removeClass( 'is-invalid' );
+                    validateAddItemButton(this);
+    
+    
+                } else {
+                    $(this).removeClass( 'is-valid' );
+                    $(this).addClass( 'is-invalid' );
+                    validateAddItemButton(this);
+                }
+            } );
 
+    $( '.weightEditBox' ).each( function() {
+        $( this ).on( 'keyup', function() {
+            var value = $(this).val();
+            if ( /^\d+$/.test( value ) && value.length >= 1 && value.length <= 3 ) {
+                $(this).addClass( 'is-valid' );
+                $(this).removeClass( 'is-invalid' );
+                //$( ".badWeightNumberBox" ).hide();
+                validateAddItemButton(this);
+
+
+            } else {
+                $(this).removeClass( 'is-valid' );
+                $(this).addClass( 'is-invalid' );
+                //$( ".badWeightNumberBox" ).show();
+                validateAddItemButton(this);
+            }
+        } );
+    } );
+    $( document ).ready( function() {
     $( '#weight' ).each( function() {
         $( this ).on( 'keyup', function() {
             var _this = this;
@@ -87,7 +139,7 @@ $( document ).ready( function() {
                 $( "#weight" ).addClass( 'is-valid' );
                 $( "#weight" ).removeClass( 'is-invalid' );
                 $( "#badWeightNumber" ).hide();
-                validateAddItemButton( _this );
+                validateAddItemButton(_this);
 
 
             } else {
@@ -98,6 +150,7 @@ $( document ).ready( function() {
             }
         } );
     } );
+});
 
     $( "input:file" ).change( function() {
         var fileName = $( this ).val();
