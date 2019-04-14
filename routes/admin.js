@@ -4,21 +4,22 @@ var order = require( '../models/orderModel' );
 
 var router = express.Router();
 
-function isUser( req, res, next ) {
-    if ( req.cookies.userId ) {
+function isAuthenticated( req, res, next ) {
+    // Check if the user has authentication to see this page
+    if ( req.cookies.isAdmin === "true" ) {
         return next();
     }
-
-    res.redirect( '/login' );
+    // Else redirect to home
+    res.redirect( '/' );
 }
 
-router.get( '/admin', isUser, function( req, res, next ) {
+router.get( '/admin', isAuthenticated, function( req, res, next ) {
     res.render( "admin", {
         title: "Admin - Bearcat Pantry"
     } );
 } );
 
-router.get( '/admin/carts', isUser, ( req, res, next ) => {
+router.get( '/admin/carts', isAuthenticated, ( req, res, next ) => {
     cart.find( {}, 'user items', function( err, carts ) {
         if ( carts && carts.length > 0 ) {
             res.render( 'allCarts', {
@@ -31,7 +32,7 @@ router.get( '/admin/carts', isUser, ( req, res, next ) => {
     } )
 } );
 
-router.get( '/admin/orders', isUser, ( req, res, next ) => {
+router.get( '/admin/orders', isAuthenticated, ( req, res, next ) => {
     order.find( {}, 'cart status creationDate', function( err, orders ) {
         if ( orders && orders.length > 0 ) {
             res.render( 'allOrders', {
