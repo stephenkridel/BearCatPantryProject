@@ -74,6 +74,10 @@ router.get( '/items', function( req, res, next ) {
                         backButton = true;
                         forwardButton = true;
                     }
+                    if (pageCount > 1 && pagenum == 1) {
+                        backButton = false;
+                        forwardButton = true;
+                    }
                     res.render( 'items', {
                         items: items,
                         title: "Items - Bearcat Pantry",
