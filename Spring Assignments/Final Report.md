@@ -5,7 +5,7 @@
 1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
 2. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 3. [Overall Test Plan](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
-5. [Spring Final Powerpoint Presentation] (https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
+5. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
 6. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
 
 ## Project Description
