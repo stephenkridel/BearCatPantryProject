@@ -19,8 +19,7 @@ The pantry currently does not track inventory in any aspect. The current system 
 
 
 ## Final Expo Poster
-https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf
-
+![](https://i.ibb.co/KW5YVty/Poster.jpg)
 ## Overall Test Plan & Results
 
 
