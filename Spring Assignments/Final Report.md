@@ -3,6 +3,7 @@
 
 ## Table of Contents 
 1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
+2.[User Interface Specification](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 6. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
 
 ## Project Description
