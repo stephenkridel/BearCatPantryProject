@@ -2,8 +2,7 @@
 # Bearcat Pantry Project
 
 ## Table of Contents 
-1. [Team Members](https://github.uc.edu/severswa/BearCatPantryProject#team-members)
-2. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject#project-description)
+1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
 3. [User Stories and Design Diagrams](https://github.uc.edu/severswa/BearCatPantryProject#user-stories)
 4. [Project Tasks and Timeline](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
     * [Task List](https://github.uc.edu/severswa/BearCatPantryProject#bearcat-pantry-tasks)
@@ -15,19 +14,6 @@
 8. [Professional Biographies](https://github.uc.edu/severswa/BearCatPantryProject#professional-biography-adam-kowalski)
 9. [Budget](https://github.uc.edu/severswa/BearCatPantryProject#budget)
 10. [Appendix](https://github.uc.edu/severswa/BearCatPantryProject#appendix-for-the-team)
-
-
-## Team Members
-Christian Davidson: davidsc8@mail.uc.edu
-
-Adam Kowalski: Kowalsaj@mai.uc.edu
-
-Andrew Kump: Kumpaw@mail.uc.edu
-
-Will Severson: Severswa@mail.uc.edu
-
-**Faculty Advisor**
-Nan Niu: niunn@ucmail.uc.edu
 
 ## Project Description
 
