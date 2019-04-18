@@ -3,7 +3,7 @@
 
 ## Table of Contents 
 1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
-2. [User Interface Specification](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
+2. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 3. [Overall Test Plan](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
 6. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
 
@@ -27,8 +27,8 @@ https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignm
 
 
 
-# User Interface Specification
-## Table of Contents for User Interface
+# User Manual
+## Table of Contents for User MManual
 * [Bearcat Pantry Users](#bearcat-pantry-users)
     * [Browsing items](#browsing-items)
     * [Checking out items](#checking-out-items)
