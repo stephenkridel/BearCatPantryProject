@@ -17,13 +17,21 @@
    Originally, the Bearcat Pantry manually kept track of Students and Inventory. As a result, Students using this service must call in to learn about the inventory of the food pantry. With the new website it allows to effortlessly track student orders and pantry items. Each pantry item can be scanned in using a barcode or item name. This will can greater sense of anonymity and reach more students at the University. 
    
 ## Test Plan
+<object data="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+### Results
+#### Test 1-14
+I am going to summarize the testing plan and the results. The group used puppeteer as the API for testing. Puppeteer allowed the group simulate basic functionality as if a user went through and manually ran each test. Each of the test past on final execution of the program without any issues. We tested the program through unit testing and preventing edge cases. Are testing plan is detailed above in the attachment attached to our report.
+
+
 
 
 ## Final Expo Poster
 ![](https://i.ibb.co/KW5YVty/Poster.jpg)
-## Overall Test Plan & Results
-
-
 
 
 
