@@ -19,7 +19,7 @@
 ## Test Plan
 <object data="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf">Download PDF</a>.</p>
+        <p>This browser does not support PDFs. Please download the PDF to view the groups test plan: <a href="https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
