@@ -3,8 +3,9 @@
 
 ## Table of Contents 
 1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
-2. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
-3. [Overall Test Plan](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
+2. [Test Plan & Results](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
+3. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
+4. [Overall Test Plan](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
 5. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
 6. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
 
@@ -14,7 +15,8 @@
    In this project we created a web application to function as a 'virtual pantry' for University of Cincinnati. This allows students that are unable to afford food to get the necessary food they will need through the website. This website gives students the ability to add food items to their shopping cart and checkout these items. Once a checkout is completed an email will be sent to the student as well as the pantry notifying them of their order. The pantry has admin tools that they can use upon logging into the website. 
 
    Originally, the Bearcat Pantry manually kept track of Students and Inventory. As a result, Students using this service must call in to learn about the inventory of the food pantry. With the new website it allows to effortlessly track student orders and pantry items. Each pantry item can be scanned in using a barcode or item name. This will can greater sense of anonymity and reach more students at the University. 
-
+   
+## Test Plan
 
 
 ## Final Expo Poster
