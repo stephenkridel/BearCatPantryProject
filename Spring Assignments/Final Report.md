@@ -27,15 +27,6 @@
 #### Test 1-14
 I am going to summarize the testing plan and the results. The group used puppeteer as the API for testing. Puppeteer allowed the group to simulate basic functionality as if a user went through and manually ran each test. Each of the test past on final execution of the program without any issues. We tested the program through unit testing and preventing edge cases. Are testing plan is detailed above in the attachment attached to our report.
 
-
-
-
-## Final Expo Poster
-![](https://i.ibb.co/KW5YVty/Poster.jpg)
-
-
-
-
 # User Manual
 ## Table of Contents for User MManual
 * [Bearcat Pantry Users](#bearcat-pantry-users)
@@ -140,6 +131,15 @@ Items can be edited within the "Edit Existing Items" tab on the "Manage Pantry I
 Upon clicking the "Edit" button located at the top of an item, a popup will appear prompting volunteers to edit the item's name, list of barcodes (comma separated), the total item quantity in the pantry, and the item's weight/cost. Changes can be saved by selecting the "Save" button at the bottom of the popup. Note: If manually adding barcodes, be careful not to add the same barcode to multiple items. 
 
 Volunteers also have the option of deleting the item by clicking the "Delete" button at the bottom of the popup.
+
+
+
+## Final Expo Poster
+![](https://i.ibb.co/KW5YVty/Poster.jpg)
+
+
+
+
 
 ## Spring Presenatation
 ![](https://i.ibb.co/GvqXbc4/Slide1.jpg)
