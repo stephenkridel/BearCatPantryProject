@@ -5,9 +5,9 @@
 1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
 2. [Test Plan & Results](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
 3. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
-4. [Overall Test Plan](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
-5. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
-6. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
+4. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
+5. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
+6. [Assessments]
 
 ## Project Description
 
@@ -132,15 +132,6 @@ Upon clicking the "Edit" button located at the top of an item, a popup will appe
 
 Volunteers also have the option of deleting the item by clicking the "Delete" button at the bottom of the popup.
 
-
-
-## Final Expo Poster
-![](https://i.ibb.co/KW5YVty/Poster.jpg)
-
-
-
-
-
 ## Spring Presenatation
 ![](https://i.ibb.co/GvqXbc4/Slide1.jpg)
 ![](https://i.ibb.co/vX8BMyp/Slide2.jpg)
@@ -151,6 +142,14 @@ Volunteers also have the option of deleting the item by clicking the "Delete" bu
 ![](https://i.ibb.co/37Gb0cd/Slide7.jpg)
 ![](https://i.ibb.co/8D6KXm0/Slide8.jpg)
 ![](https://i.ibb.co/W0Dn0HG/Slide9.jpg)
+
+## Final Expo Poster
+![](https://i.ibb.co/KW5YVty/Poster.jpg)
+
+
+## Assessments
+### Inital Self-Assessments
+
 
 
 
