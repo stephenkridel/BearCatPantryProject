@@ -28,7 +28,7 @@
 I am going to summarize the testing plan and the results. The group used puppeteer as the API for testing. Puppeteer allowed the group to simulate basic functionality as if a user went through and manually ran each test. Each of the test past on final execution of the program without any issues. We tested the program through unit testing and preventing edge cases. Are testing plan is detailed above in the attachment attached to our report.
 
 # User Manual
-## Table of Contents for User MManual
+## Table of Contents for User Manual
 * [Bearcat Pantry Users](#bearcat-pantry-users)
     * [Browsing items](#browsing-items)
     * [Checking out items](#checking-out-items)
