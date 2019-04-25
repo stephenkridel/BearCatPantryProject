@@ -8,7 +8,7 @@
 4. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
 5. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
 6. [Assessments](##Assessments)
-7. [Summary of Hours and Justification](##Summary of Hours and Justification)
+7. [Summary of Hours and Justification](##Summary)
 
 
 ## Project Description
@@ -192,4 +192,4 @@ Overall, i learned much about web development and javascript programming, as i h
 ##### Fall Assessment
 
 
-## Summary of Hours and Justification ##
+## Summary ##
