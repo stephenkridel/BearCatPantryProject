@@ -190,8 +190,7 @@ Overall, i learned much about web development and javascript programming, as i h
 
 
 ##### Fall Assessment
-## Summary ##
-### Andrew Kumps Hours
+
 
 
 ## Summary ##
