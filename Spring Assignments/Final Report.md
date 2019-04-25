@@ -190,15 +190,34 @@ Overall, i learned much about web development and javascript programming, as i h
 
 
 ##### Fall Assessment
-
-https://i.imgur.com/TKITDvE.png
-
-https://i.imgur.com/TKITDvE.png
 ## Summary ##
 ### Andrew Kumps Hours
 
+
+## Summary ##
+### Andrew Kumps Hours
 | Day           | Hours         | Task  |
 | ------------- |:-------------:| -----:|
-| 1/5           | 10            | Initial Setup of Express web server, MongoDB, and Skeleton Website |
+| 1/5           | 10            | Initial setup of Express web server, MongoDB, and skeleton website |
 | 1/10          | 2             | Styling Changes |
 | 1/13          | 2             | Team Meeting   |
+| 1/20          | 5             | Utilizing Web Pack   |
+| 1/27          | 4             | Shopping cart inital setup|
+| 1/28          | 3             | Testing framework setup|
+| 1/30          | 2             | Team Meeting   |
+| 2/2           | 3             | Rearchitected code   |
+| 2/10          | 3             | Form Validation|
+| 2/11          | 5             | Styling Changes|
+| 2/16          | 3             | Created Order Schema which cart schema utilizes|
+| 3/2           | 3             | Order creation use case   |
+| 3/2           | 3             | Styling Changes|
+| 3/10          | 2             | Team Meeting |
+| 3/17          | 2             | Team Meeting   |
+| 3/31          | 4             | Login System|
+| 4/1           | 2             | Login Security |
+| 4/3           | 2             | Team Meeting   |
+| 4/7           | 3             | Restyling of home page|
+| 4/10          | 2             | Defect Fixing |
+| 4/14          | 4             | Defect Fixing|
+| 4/10          | 4             | Senior Design Expo |
+| Total         | 72             |                   |
