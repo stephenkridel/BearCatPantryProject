@@ -213,7 +213,7 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/7           | 3             | Restyling of home page|
 | 4/10          | 2             | Defect Fixing |
 | 4/14          | 4             | Defect Fixing|
-| 4/10          | 4             | Senior Design Expo |
+| 4/15          | 4             | Senior Design Expo |
 | Total         | 72             |                   |
 ### Adam Kowalski Hours
 | Day           | Hours         | Task  |
@@ -239,4 +239,5 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/7           | 3             | Login Security & Interface Changes|
 | 4/10          | 2             | Form Validation & Pagination |
 | 4/14          | 4             | Testing & Fixing Defects|
-| Total         | 76             |                   |
+| 4/15          | 4             | Senior Design Expo |
+| Total         | 80             |                   |
