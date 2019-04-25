@@ -133,14 +133,23 @@ Upon clicking the "Edit" button located at the top of an item, a popup will appe
 Volunteers also have the option of deleting the item by clicking the "Delete" button at the bottom of the popup.
 
 ## Spring Presenatation
+### Slide 1
 ![](https://i.ibb.co/GvqXbc4/Slide1.jpg)
+### Slide 2
 ![](https://i.ibb.co/vX8BMyp/Slide2.jpg)
+### Slide 3
 ![](https://i.ibb.co/51br4f3/Slide3.jpg)
+### Slide 4
 ![](https://i.ibb.co/25hQGz0/Slide4.jpg)
+### Slide 5
 ![](https://i.ibb.co/jg9j0tX/Slide5.jpg)
+### Slide 6
 ![](https://i.ibb.co/sHgyX9Z/Slide6.jpg)
+### Slide 7
 ![](https://i.ibb.co/37Gb0cd/Slide7.jpg)
+### Slide 8
 ![](https://i.ibb.co/8D6KXm0/Slide8.jpg)
+### Slide 9
 ![](https://i.ibb.co/W0Dn0HG/Slide9.jpg)
 
 ## Final Expo Poster
@@ -156,12 +165,12 @@ Volunteers also have the option of deleting the item by clicking the "Delete" bu
 
 #### Adam Kowalski
 ##### Fall Assessment
-I contributed to the task of barcode scanning, user interface design, login-system, unit testing, integration testing, form validation, pagination, and database development. In the initial fall semester, I wanted to build upon and showcase my experience of multiple software languages. I wanted to have a project that showcased my experience among web, server, front-end, and app development. I got to show case my experience on front-end and web server as well as learned new web development skills. 
-
-My previous co-ops are not web development positions and I have not had previous experience in JavaScript. I showcased my experience to adapt and overcome programming in new languages. I first started out working on the barcode scanning portion of the project. I had to utilize different API’s to get barcode working as anticipated and learn the syntax for JavaScript. I than worked on form validation which is preventing bad inputs from the users. I wrote many JavaScript functions which would prevent inputs based on length and characters. After working on form validation, I helped with testing. I utilized the API puppeteer which I have not had any previous exposure to. I wrote all the test for our test plan as well as documented the results. On the project most of my task are successes. The only obstacle I had was incorporating UC’s authentication into our project. Based on time constraints we decided as a team to use google authentication instead. I incorporated google authentication over a couple of days as well as established security around our login system using cookies. 
+ 
 
 ##### Spring Assessment
+I contributed to the task of barcode scanning, user interface design, login-system, unit testing, integration testing, form validation, pagination, and database development. In the initial fall semester, I wanted to build upon and showcase my experience of multiple software languages. I wanted to have a project that showcased my experience among web, server, front-end, and app development. I got to show case my experience on front-end and web server as well as learned new web development skills. 
 
+My previous co-ops are not web development positions and I have not had previous experience in JavaScript. I showcased my experience to adapt and overcome programming in new languages. I first started out working on the barcode scanning portion of the project. I had to utilize different API’s to get barcode working as anticipated and learn the syntax for JavaScript. I than worked on form validation which is preventing bad inputs from the users. I wrote many JavaScript functions which would prevent inputs based on length and characters. After working on form validation, I helped with testing. I utilized the API puppeteer which I have not had any previous exposure to. I wrote all the test for our test plan as well as documented the results. On the project most of my task are successes. The only obstacle I had was incorporating UC’s authentication into our project. Based on time constraints we decided as a team to use google authentication instead. I incorporated google authentication over a couple of days as well as established security around our login system using cookies.
 #### Andrew Kump
 ##### Fall Assessment
 ##### Spring Assessment
