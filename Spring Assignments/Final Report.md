@@ -191,7 +191,7 @@ Overall, i learned much about web development and javascript programming, as i h
 ## Summary ##
 ### Andrew Kumps Hours
 | Day           | Hours         | Task  |
-| ------------- |:-------------| -----|
+| :-------------: |:-------------:|:-----:|
 | 1/5           | 10            | Initial setup of Express web server, MongoDB, and skeleton website |
 | 1/10          | 2             | Styling Changes |
 | 1/13          | 2             | Team Meeting   |
@@ -217,7 +217,7 @@ Overall, i learned much about web development and javascript programming, as i h
 | Total         | 72             |                   |
 ### Adam Kowalski Hours
 | Day           | Hours         | Task  |
-| ------------- |:-------------:| -----:|
+| :-------------: |:-------------:| :-----:|
 | 1/5           | 2           | Team Meeting |
 | 1/10          | 2             | Login System Research |
 | 1/13          | 2             | Team Meeting  |
