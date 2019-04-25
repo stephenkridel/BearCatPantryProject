@@ -191,9 +191,10 @@ Overall, i learned much about web development and javascript programming, as i h
 
 ##### Fall Assessment
 
-
+https://i.imgur.com/TKITDvE.png
 ## Summary ##
 ### Andrew Kumps Hours
+
 | Day           | Hours         | Task  |
 | ------------- |:-------------:| -----:|
 | 1/5           | 10            | Initial Setup of Express web server, MongoDB, and Skeleton Website |
