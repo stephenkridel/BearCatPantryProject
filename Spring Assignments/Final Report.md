@@ -188,11 +188,6 @@ Next semester i envision being much different, as we begin the project. As such 
 My contribution to my group’s senior design project was programming of various elements for the pantry website. Specifically, I am responsible for the pagination of the website, the search-bar, the admin menu, work with the university to attempt to get the website hosted, as well as working with other group members to resolve issues they were facing. Among the skills identified last semester, not many transferred to this project. My experience in the workforce has almost entirely been scripting and back-end development, whereas this project is mostly node.js web development, which are two things i had no experience in whatsoever. Among my contributions, the pagination proved to be by far the most difficult, as there was no documentation that I could find in regards to pagination with handlebars js, within node.js. To accomplish this task, i had a laundry list of issues to figure out, such as how to use mongodb, how to pass url parameters, how to pass variables to a handlebars html file, and every single possible use case that pagination would require to operate bug free. Additionally, I also worked on the searchbar and the admin menu, both of which took significantly less time than pagination. The search bar was a textfield that passed a url parameter to pagination which queried the mongodb database for the searchterm. The admin menu was a menu that housed all the admin pages. I volunteered to try to work with the university to 
 Overall, i learned much about web development and javascript programming, as i had no experience from the start. Of the items assigned to me for development, i successfully completed them all without bugs for the final product. The obstacles i faced during the project were mostly my inexperience with the language, as well as the difference between coding backend for a .net program and a browser based website. Additionally, the largest obstacle i faced during the project was the lack of communication from the university about a project we were asked for. 
 
-
-##### Fall Assessment
-
-
-
 ## Summary ##
 ### Andrew Kumps Hours
 | Day           | Hours         | Task  |
@@ -220,3 +215,28 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/14          | 4             | Defect Fixing|
 | 4/10          | 4             | Senior Design Expo |
 | Total         | 72             |                   |
+### Adam Kowalski Hours
+| Day           | Hours         | Task  |
+| ------------- |:-------------:| -----:|
+| 1/5           | 2           | Team Meeting |
+| 1/10          | 2             | Login System Research |
+| 1/13          | 2             | Team Meeting  |
+| 1/20          | 4             | Team Meeting   |
+| 1/27          | 10            | Barcode Scanning Setup|
+| 1/28          | 4             | Testing Barcode Scanner|
+| 1/30          | 4             | Item Validation   |
+| 2/2           | 4             | Inventory Validation   |
+| 2/10          | 2             | Team Meeting|
+| 2/11          | 5             | Unit Testing|
+| 2/16          | 4             |  Writing Test Plan|
+| 3/2           | 6             | Unit Testing and Stress Testing  |
+| 3/2           | 3             | Fixing Bugs|
+| 3/10          | 2             | Team Meeting |
+| 3/17          | 2             | Team Meeting   |
+| 3/31          | 6             | Login System Research and Creation|
+| 4/1           | 3             | Login System Fixes |
+| 4/3           | 2             | Token Validation Setup   |
+| 4/7           | 3             | Login Security & Interface Changes|
+| 4/10          | 2             | Form Validation & Pagination |
+| 4/14          | 4             | Testing & Fixing Defects|
+| Total         | 76             |                   |
