@@ -7,8 +7,8 @@
 3. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 4. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
 5. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
-6. [Assessments](#Assessments)
-7. [Summary of Hours and Justification]
+6. [Assessments](##Assessments)
+7. [Summary of Hours and Justification](##Summary of Hours and Justification)
 
 
 ## Project Description
@@ -158,7 +158,7 @@ Volunteers also have the option of deleting the item by clicking the "Delete" bu
 ![](https://i.ibb.co/KW5YVty/Poster.jpg)
 
 
-# Assessments #
+## Assessments ##
 ### Inital Self-Assessments
 
 #### Christian Davidson
@@ -192,4 +192,4 @@ Overall, i learned much about web development and javascript programming, as i h
 ##### Fall Assessment
 
 
-## Summary of Hours & Justification
+## Summary of Hours and Justification ##
