@@ -241,3 +241,29 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/14          | 4             | Testing & Fixing Defects|
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 80             |                   |
+### Will Severson Hours
+| Day           | Hours         | Task  |
+| :-------------: |:-------------:| :-----:|
+| 1/5           | 2             | Team Meeting |
+| 1/10          | 2             | Login System Research |
+| 1/13          | 2             | Team Meeting  |
+| 1/20          | 4             | Team Meeting   |
+| 1/27          | 8             | Shibboleth Testing |
+| 1/28          | 4             | Shibboleth Testing | 
+| 1/30          | 4             | Shibboleth Testing |
+| 2/2           | 4             | Shibboleth Testing |
+| 2/10          | 2             | Team Meeting|
+| 2/11          | 4             | Shibboleth Testing |
+| 2/16          | 4             | Search bar |
+| 3/2           | 12            | Search Bar & admin menu & pagination |
+| 3/2           | 3             | Fixing Bugs|
+| 3/10          | 2             | Team Meeting & pagination |
+| 3/17          | 2             | Team Meeting & pagination |
+| 3/31          | 6             | Pagination |
+| 4/1           | 3             | Pagination |
+| 4/3           | 2             | Pagination |
+| 4/8           | 3             | Form Validation |
+| 4/10          | 2             | Form Validation & Pagination |
+| 4/14          | 8             | Testing & Fixing Defects |
+| 4/15          | 4             | Senior Design Expo |
+| Total         | 87            |                   |
