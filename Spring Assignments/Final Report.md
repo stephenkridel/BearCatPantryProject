@@ -194,7 +194,7 @@ Overall, i learned much about web development and javascript programming, as i h
 
 ## Summary ##
 ### Andrew Kumps Hours
-| Day           | Hours         | Task  |
+| Day           | Hours         | Justification   |
 | :-------------: |:-------------:|:-----:|
 | 1/5           | 10            | Initial setup of Express web server, MongoDB, and skeleton website |
 | 1/10          | 2             | Styling Changes |
@@ -220,7 +220,7 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 72             |                   |
 ### Adam Kowalski Hours
-| Day           | Hours         | Task  |
+| Day           | Hours         | Justification   |
 | :-------------: |:-------------:| :-----:|
 | 1/5           | 2           | Team Meeting |
 | 1/10          | 2             | Login System Research |
@@ -246,7 +246,7 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 80             |                   |
 ### Will Severson Hours
-| Day           | Hours         | Task  |
+| Day           | Hours         | Justification   |
 | :-------------: |:-------------:| :-----:|
 | 1/5           | 2             | Team Meeting |
 | 1/10          | 2             | Login System Research |
@@ -272,7 +272,7 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 87            |                   |
 ### Christian Davidson Hours
-| Day           | Hours         | Task  |
+| Day           | Hours         | Justification   |
 | :-------------: |:-------------:| :-----:|
 | 1/5           | 2           | Team Meeting |
 | 1/10          | 4             | Login Research and Interface Changes |
