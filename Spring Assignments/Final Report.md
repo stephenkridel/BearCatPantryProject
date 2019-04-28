@@ -297,3 +297,5 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/14          | 6             | Defect Fixes |
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 83             |                   |
+| Total Hours for Team         | 322             |                   |
+
