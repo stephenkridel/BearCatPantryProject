@@ -2,7 +2,7 @@
 # Bearcat Pantry Project
 
 ## Table of Contents 
-1. [Project Description](# Project Description)
+1. [Project Description](#project-description)
 2. [Test Plan & Results](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
 3. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 4. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
