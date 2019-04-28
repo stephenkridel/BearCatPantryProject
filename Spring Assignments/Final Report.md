@@ -2,13 +2,13 @@
 # Bearcat Pantry Project
 
 ## Table of Contents 
-1. [Project Description](#project-description)
+1. [Project Description](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Fall%202018%20Assignments/Project%20Description%20.md)
 2. [Test Plan & Results](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Overall%20Test%20Plan.pdf)
 3. [User Manual](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/User%20Guide.md)
 4. [Spring Final Powerpoint Presentation](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Senior%20Design.pptx)
 5. [Final Expo Poster](https://github.uc.edu/severswa/BearCatPantryProject/blob/master/Spring%20Assignments/Expo%20Poster.pdf)
-6. [Assessments](#Assessments)
-7. [Summary of Hours and Justification](#Summary)
+6. [Assessments](##Assessments)
+7. [Summary of Hours and Justification](##Summary)
 
 
 ## Project Description
@@ -165,6 +165,10 @@ Volunteers also have the option of deleting the item by clicking the "Delete" bu
 ##### Fall Assessment
 To me, the Bearcat Pantry project is about two things: growth and community. From my standpoint as a student in the computer science program, there’s a ton of opportunity to learn new things about software development. One of the requested features is a website, which means interface and web design will be required skills. Another feature is an app, something else which will require a skill set to be developed so that the appropriate code can be implemented. But above all of that, one of the most exciting things about this project is its potential to aid the student community. As a student of the University of Cincinnati, not just of computer science, the idea that my work might actuallysee use from a group within the university trying to make life better for a group of underprivileged students is something exciting in its own right.As far as how the college curriculum will benefit my project, there’s several examples. One of these is the User Interface1 (CS 5167)class I took a few semesters ago. The work done in this class has provided me with a basic understanding of good interface design, something that will be incredibly important if actual students will be using the software we design someday. Another exampleis Software Engineering(EECE 3093). Software Engineering will help guide the processes we go through in order to design and implement our project, as well as the documentation we create, in order to make sure the project runs smoothly and efficiently. Lastly, Android Development (IT 1046) will supply me with a basic knowledge of Android app development should we wind up actually creating an app as part of the project.Moving on, my co-op experience will also benefit the project in multiple ways. Some of the ways these experiences will assist my work is in the area of soft skills. On all of my co-ops, both at Siemens PLM and Rockwell automation, I attended various meetings for project updates, demos, and progress reporting. This will all be necessary for our project which is being overseen in some part by a board constructed to guide the work we do. Of course, technical skills developed are also important. At Siemens PLM, during one semester I was tasked with creating a web interface and server to communicate with each other. Learning how to do this will give me a starting point for the web work required for our project.All in all, I’m really excited to start making headway with this project. As mentioned before, the idea of a project that is both beneficial to me as well as the school, on top of being a project that is expected to actually see use one day, is a huge motivation boost. Not only that, but being able to work on such a project with people I know and can trust will work as hard as I am, that is a one of a kind experience I am glad I will be a part of. Going even further, a well done senior design project is something that will look great to prospective employers. Though it may be a required project in the end, it’s one I’m looking towards with high hopes. As far as our preliminary approach, we know what’s expected of us and plan to go from there. An app and a website, whichcan be used by Bearcat Pantry for inventory or relevant students for checking out what goods are available, and a server tohouse an inventory database. As such, our expected results at this point are a website, an android app, and a server for the database and website. Our goals might shift somewhat as expectations/deadlines are decided, but those are what we are ultimately shooting for. As far as evaluating our contributions, we’ll know we’re done when we’re told our done for the most part. As long as we keep features realistic and don’t let our requirements balloon, the board overseeing the project should have a good idea onwhat is needed from us. As such, we’ll know we’ve done a good job if they decided to actually use our work to run their program, something I personally would love to see happen.
 ##### Spring Assessment
+My individual contribution was broad this semester with brief periods of focus. For example, a lot of my effort went towards things such as specific elements within the "Shopping Cart" page, refactoring the system used to add items to the Bearcat Pantry's stock to make it more user friendly, lending my web/javascript experience to others to help debug their issues and provide opinions to how certain workflows should work, etc. 
+Most of the skills identified last semester were expanded upon. I learned a lot of elements of web development I had little experience with prior, such as database management/querying. However, one skill that was not utilized was app development, since the app idea was ultimately cut from the project in order to make the website the best that it could be. My prior experience working with nodejs, javascript, html, etc. wound up indispensable to both my work and the work of my teammates, and in the end. I learned how to deal with databases, workflows necessary to proper and secure login systems (in this case utilizing google's authentication services), and improved my existing skills in areas like user interface design and general javascript implementation. I would say my successes were as an information resource to the less experienced members of my team as well as individual achievement improving/implementing areas of our website such as item adding and item management.
+Overall, our group accomplished a fairly robust website with hopes of it being utilized by the Bearcat Pantry group. It contains, what I believe to be, all major features necessary to the pantry's use (though some of these features could've ultimately been improved further with proper support by university groups such as IT and the Bearcat Pantry board of staff). Though some features may need tweaking depending on what database/hosting platform the pantry might go with, the system was designed in a way that should make any minor shifts in design like this fairly easy. 
+As far as group work, I learned how necessary an individual can be to a project's completion. One member of a group can hold a project back, but at the same time the hard work of one member can become one of the greatest boons to the project's completion. In general, all aspects of our teamwork were successful. We met regularly, worked hard and mostly at the same time in order to provide feedback to one another, and got our work done. The only thing that could be seen as a small failure is that at rare times nobody would find the motivation to work and so we'd have periods where progress wasn't as consistent as it could have been. I think I, as well as all my teammates, carried our own weight in the end. While we all found our different areas of focus and specialty, we all did our best to make sure we all did our fair share. If anyone deserves special recognition, though, it's Adam Kowalski. If it wasn't for him, I don't know if we'd have made it through the last few weeks of crunch. The project definitely wouldn't have wound up with as much polish as it did without his encouragement.
 
 #### Adam Kowalski
 ##### Fall Assessment
@@ -267,3 +271,29 @@ Overall, i learned much about web development and javascript programming, as i h
 | 4/14          | 8             | Testing & Fixing Defects |
 | 4/15          | 4             | Senior Design Expo |
 | Total         | 87            |                   |
+### Christian Davidson Hours
+| Day           | Hours         | Task  |
+| :-------------: |:-------------:| :-----:|
+| 1/5           | 2           | Team Meeting |
+| 1/10          | 4             | Login Research and Interface Changes |
+| 1/13          | 2             | Team Meeting  |
+| 1/20          | 4             | Team Meeting   |
+| 1/27          | 6            | Editing Cart Item Quantity/Removing Cart Items |
+| 1/28          | 2             | Cont. |
+| 1/30          | 7             | Refactoring Item Adding System |
+| 2/2           | 4             | Split Item Adding Into Adding by Barcode or Item Name  |
+| 2/10          | 2             | Team Meeting|
+| 2/11          | 3             | Cont |
+| 2/16          | 4             | List Item by Multiple barcodes|
+| 3/2           | 4             | Fixing Bugs Found Due to Previous Changes |
+| 3/2           | 4             | Bulk Edit Multiple Barcodes on Items/ Implement "Bearcat Bucks" |
+| 3/10          | 2             | Team Meeting |
+| 3/17          | 2             | Team Meeting   |
+| 3/31          | 3             | Assisting with Login Implementation/Debugging Implementation|
+| 4/1           | 2             | Cont |
+| 4/3           | 5             | Refactoring Browse Page Item Card Layout |
+| 4/7           | 5             | Interface Changes/Refactor Home PAge|
+| 4/10          | 6             | Assisting Others with Bug Fixes Across Multiple Systems |
+| 4/14          | 6             | Defect Fixes |
+| 4/15          | 4             | Senior Design Expo |
+| Total         | 83             |                   |
