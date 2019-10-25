@@ -12,7 +12,7 @@ Open command prompt and head to your documents using `cd` ie. "C:\Users\Andrew\D
 
 `cd git`
 
-`git clone https://github.uc.edu/severswa/BearCatPantryProject.git`
+`git clone https://github.com/stephenkridel/BearCatPantryProject`
 
 `cd BearCatPantryProject`
 
